@@ -1,0 +1,266 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace ERP
+{
+    public partial class frmChartOfAccount : Form
+    {
+        public DataTable dt = new DataTable();
+        public frmChartOfAccount()
+        {
+            InitializeComponent();
+        }
+        string rights;
+        private void frmChartOfAccount_Load(object sender, EventArgs e)
+        {
+            rights = "P";
+            if (rights == "N")
+            {
+                this.Close();
+                MessageBox.Show("You have no rights in this form..!");
+                return;
+            }
+            StatusUser.Text = "User Name : " + Variable.User;
+            StatusTeminalID.Text = "";
+            StatusDateTime.Text = "Login Time : " + Variable.UserDateTime;
+            if (Variable.Privillages == "Admin")
+            {
+                StatusRights.Text = "Rights= Admin";
+            }
+            else
+            {
+                if (Variable.FormRights == "V") StatusRights.Text = "Rights=Read Only";
+                else if (Variable.FormRights == "S") StatusRights.Text = "Rights=Save Only";
+                else if (Variable.FormRights == "P") StatusRights.Text = "Rights=Post Only";
+            }
+            this.Text = Variable.Version;
+            Variable.flags = Animate.AW_ACTIVATE | Animate.AW_CENTER;
+            Animate.AnimateWindow(this.Handle, Variable.animationTime, Variable.flags);
+            FillChartofAccounts();
+        }
+
+
+        private void tvChartOfAcc_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            try
+            {
+                DataRow dr = dt.Rows.Find(tvChartOfAcc.SelectedNode.Name);
+                lblLevel.Text = (tvChartOfAcc.SelectedNode.Level).ToString();
+                lblParentAcc.Text = dr["ParentaccountId"].ToString();
+                lblSelected.Text = tvChartOfAcc.SelectedNode.Name + "     " + tvChartOfAcc.SelectedNode.Text;
+                lblSelected.ForeColor = tvChartOfAcc.SelectedNode.ForeColor;
+                lblType.Text = dr["Control"].ToString();
+            }
+            catch
+            {
+                lblLevel.Text = "0";
+                lblParentAcc.Text = "None";
+                lblSelected.Text = tvChartOfAcc.SelectedNode.Text;
+                lblType.Text = "-";
+            }
+        }
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rights == "S" || rights == "P")
+                {
+                    if (tvChartOfAcc.SelectedNode != tvChartOfAcc.Nodes[0])
+                    {
+                        frmEditDialog ed = new frmEditDialog();
+                        ed.Text = "Create Account";
+                        ed.lblAcc.Text = tvChartOfAcc.SelectedNode.Name + (tvChartOfAcc.SelectedNode.GetNodeCount(false) + 1).ToString("D3");
+                        ed.rbParent.Checked = true;
+                        frmEditDialog.ParentId = tvChartOfAcc.SelectedNode.Name;
+                        if (Variable.UserId == "Admin")
+                            frmEditDialog.Status = 0;
+                        else
+                            frmEditDialog.Status = 2;
+                        ed.lblParent.Text = tvChartOfAcc.SelectedNode.Name + "   " + tvChartOfAcc.SelectedNode.Text;
+                        frmEditDialog.Level = int.Parse(lblLevel.Text) + 1;
+                        ed.ShowDialog();
+                        if (ed.DialogResult == DialogResult.Yes)
+                        {
+                            FillChartofAccounts();
+                            tvChartOfAcc.SelectedNode = tvChartOfAcc.Nodes.Find(ed.lblAcc.Text, true).FirstOrDefault();
+                            tvChartOfAcc.SelectedNode.Expand();
+
+                        }
+                    }
+                }
+                else
+                    MessageBox.Show("You have no rights to change this...!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                Errors.writeline(ex.Message.ToString(), "frmChartOfAccount addToolStripMenuItem_Click");
+                this.Close();
+            }
+        }
+        private void FillChartofAccounts()
+        {
+
+            tvChartOfAcc.Nodes.Clear();
+            tvChartOfAcc.Nodes.Add("0", "Chart Of Account");
+
+            dt = Query.ChartofAccounts();
+            dt.PrimaryKey = new DataColumn[] { dt.Columns["AccountId"] };
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                if (dt.Rows[i]["acLevel"].ToString() == "1")
+                {
+                    TreeNode tnadd = tvChartOfAcc.Nodes[0].Nodes.Add(dt.Rows[i]["AccountId"].ToString(), dt.Rows[i]["accounttitle"].ToString());
+                    if (dt.Rows[i]["status"].ToString() == "2")
+                        tnadd.ForeColor = Color.IndianRed;
+                    else if (dt.Rows[i]["status"].ToString() == "1")
+                        tnadd.ForeColor = Color.LightGray;
+                    
+                }
+                else
+                {
+                    TreeNode[] tn = tvChartOfAcc.Nodes.Find(dt.Rows[i]["parentaccountid"].ToString(), true);
+                    tvChartOfAcc.SelectedNode = tn.SingleOrDefault();
+
+                    TreeNode tnadd = tvChartOfAcc.SelectedNode.Nodes.Add(dt.Rows[i]["AccountId"].ToString(), dt.Rows[i]["accounttitle"].ToString());
+                    if (dt.Rows[i]["status"].ToString() == "2")
+                        tnadd.ForeColor = Color.IndianRed;
+                    else if (dt.Rows[i]["status"].ToString() == "1")
+                    {
+                        tnadd.ForeColor = Color.LightGray;
+                        tnadd.BackColor = Color.Red;
+
+                    }
+                }
+            }
+            tvChartOfAcc.CollapseAll();
+            tvChartOfAcc.Nodes[0].Expand();
+        }
+        private void changeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rights == "S" || rights == "P")
+                {
+                    if (tvChartOfAcc.SelectedNode != tvChartOfAcc.Nodes[0])
+                    {
+                        frmEditDialog ed = new frmEditDialog();
+                        ed.lblAcc.Text = tvChartOfAcc.SelectedNode.Name;
+                        ed.txtTitle.Text = tvChartOfAcc.SelectedNode.Text;
+                        DataRow dr = dt.Rows.Find(tvChartOfAcc.SelectedNode.Name);
+                        if (dr["Control"].ToString() == "Control")
+                            ed.rbParent.Checked = true;
+                        else if (dr["Control"].ToString() == "Detail")
+                            ed.rbDetail.Checked = true;
+                        frmEditDialog.ParentId = lblParentAcc.Text;
+                        if (Variable.UserId == "Admin")
+                            frmEditDialog.Status = 0;
+                        else
+                            frmEditDialog.Status = 2;
+                        ed.lblParent.Text = tvChartOfAcc.SelectedNode.Parent.Name + "   " + tvChartOfAcc.SelectedNode.Parent.Text;
+                        frmEditDialog.Level = int.Parse(lblLevel.Text);
+                        ed.ShowDialog();
+                        if (ed.DialogResult == DialogResult.Yes)
+                        {
+                            FillChartofAccounts();
+                            tvChartOfAcc.SelectedNode = tvChartOfAcc.Nodes.Find(ed.lblAcc.Text, true).FirstOrDefault();
+                            tvChartOfAcc.SelectedNode.Expand();
+                        }
+                    }
+                }
+                else
+                    MessageBox.Show("You have no rights to change this...!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                Errors.writeline(ex.Message.ToString(), "frmChartOfAccount changeToolStripMenuItem_Click");
+                this.Close();
+            }
+        }
+        private void tvChartOfAcc_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            try
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    tvChartOfAcc.SelectedNode = e.Node;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                Errors.writeline(ex.Message.ToString(), "frmChartOfAccount tvChartOfAcc_NodeMouseClick");
+                this.Close();
+            }
+        }
+        private void tvChartOfAcc_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                    changeToolStripMenuItem_Click(null, null);
+                else if (e.KeyCode == Keys.Insert)
+                    addToolStripMenuItem_Click(null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                Errors.writeline(ex.Message.ToString(), "frmChartOfAccount tvChartOfAcc_KeyDown");
+                this.Close();
+            }
+        }
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rights == "S" || rights == "P")
+                {
+                    if (tvChartOfAcc.SelectedNode != tvChartOfAcc.Nodes[0])
+                    {
+                        DataRow dr = dt.Rows.Find(tvChartOfAcc.SelectedNode.Name);
+                        if (dr["Control"].ToString() == "Control")
+                        {
+                            MessageBox.Show("You can't Delete Control Accounts....!");
+                            return;
+                        }
+                        frmEditDialog ed = new frmEditDialog();
+                        ed.Text = "Delete Account";
+                        ed.btnSave.Text = "&Delete";
+                        ed.lblAcc.Text = tvChartOfAcc.SelectedNode.Name;
+                        ed.txtTitle.Text = tvChartOfAcc.SelectedNode.Text;
+                        if (dr["Control"].ToString() == "Control")
+                            ed.rbParent.Checked = true;
+                        else if (dr["Control"].ToString() == "Detail")
+                            ed.rbDetail.Checked = true;
+                        frmEditDialog.ParentId = lblParentAcc.Text;
+                        frmEditDialog.Status = 1;
+                        ed.lblParent.Text = tvChartOfAcc.SelectedNode.Parent.Name + "   " + tvChartOfAcc.SelectedNode.Parent.Text;
+                        frmEditDialog.Level = int.Parse(lblLevel.Text);
+                        ed.ShowDialog();
+                        if (ed.DialogResult == DialogResult.Yes)
+                        {
+                            FillChartofAccounts();
+                            tvChartOfAcc.SelectedNode = tvChartOfAcc.Nodes.Find(ed.lblAcc.Text, true).FirstOrDefault();
+                            tvChartOfAcc.SelectedNode.Expand();
+                        }
+                    }
+                }
+                else
+                    MyMessageBox.ShowBox("You have no rights to delete this...!", Variable.Version, 1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                Errors.writeline(ex.Message.ToString(), "frmChartOfAccount deleteToolStripMenuItem_Click");
+                this.Close();
+            }
+        }
+    }
+}

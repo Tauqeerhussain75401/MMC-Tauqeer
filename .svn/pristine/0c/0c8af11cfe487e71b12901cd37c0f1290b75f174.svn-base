@@ -1,0 +1,367 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+using Oracle.DataAccess.Client;
+using System.Globalization;
+
+
+
+namespace ERP
+{
+    public partial class frmConsultantInfo : Form
+    {
+        public frmConsultantInfo()
+        {
+            InitializeComponent();
+            FillControls.FillcmbTestCatagory(cmbType);
+
+        }
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+            FillQuery();
+            cmbCharges.Enabled = false;
+            fillSurgery();
+            
+
+
+        }
+
+        private void btnsave_Click(object sender, EventArgs e)
+        {
+            if (txtConsultantName.Text == "" || numConsultantCharges.Value <= 0 || cmbType.SelectedValue == null)
+            {
+                MessageBox.Show("Please Enter Fields");
+                return;
+            }
+            if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                foreach (DataGridViewRow row in dgvSurgery.Rows)
+                {
+                    bool isSelected = Convert.ToBoolean(row.Cells[clnChk.Index].Value);
+                    if (isSelected)
+                    {
+                        DML.addSurgeryDetails(txtConsultantid.Text, Convert.ToString(row.Cells[clnIdSurgery.Index].Value), Convert.ToString(row.Cells[clnConsultantShare.Index].Value), Convert.ToString(row.Cells[clnHospCharges.Index].Value));
+                    }
+
+                }
+
+                string RetId = txtConsultantid.Text;
+                DML.consultant_add_edit(txtConsultantid.Text, txtConsultantName.Text, txtAddress.Text,
+                                        txtTelephone.Text, txtFax.Text, txtMobilenumber.Text,
+                                        txtEmail.Text, numConsultantCharges.Text, txtDegrees.Text, //nudHosInPatient
+                                        txtTiming.Text, txtFaculty.Text, cmbType.SelectedValue.ToString(),
+                                        nudHosOutPatient.Value.ToString(), nudConOutPatient.Value.ToString(),
+                                        nudConInPatient.Value.ToString(), nudHosInPatient.Value.ToString(),
+                                        chkDeactivate.Checked == true ? "1" : "0", ref RetId);
+                DataTable dt = Query.ConsultantDetail(RetId);
+                DataRow dr = dtQuery.Select("id = '" + dt.Rows[0]["id"].ToString() + "'").FirstOrDefault();
+                if (dr != null)
+                    dtQuery.Rows.Remove(dr);
+                dtQuery.ImportRow(dt.Rows[0]);
+            }
+            MessageBox.Show("Record Successfully Saved..!");
+            btnNew.Focus();
+        }
+
+        DataTable dtQuery;
+        DataTable dtSurgery;
+        void FillQuery()
+        {
+            dgvDetail.Rows.Clear();
+            dgvDetail.AutoGenerateColumns = false;
+            dtQuery = Query.ConsultantIndexAll();
+            dtSurgery = Query.surgeryAll();
+            dgvDetail.Columns[clnID.Index].DataPropertyName = "id";
+            dgvDetail.Columns[clnName.Index].DataPropertyName = "name";
+            dgvDetail.Columns[clnMobile.Index].DataPropertyName = "mobile";
+            dgvDetail.Columns[clnHospitalRate.Index].DataPropertyName = "hospitalrate";
+            dgvDetail.Columns[clnDegrees.Index].DataPropertyName = "degrees";
+            dgvDetail.Columns[clnTimings.Index].DataPropertyName = "timings";
+            dgvDetail.Columns[clnFaculty.Index].DataPropertyName = "faculty";
+            dgvDetail.Columns[clnisDeactivate.Index].DataPropertyName = "isdeactivate";
+            dgvDetail.DataSource = dtQuery;
+            cmbConsultant.DataSource = dtQuery;
+            cmbConsultant.DisplayMember = "name";
+            cmbConsultant.ValueMember = "id";
+
+            cmbSurgery.DataSource = dtSurgery;
+            cmbSurgery.DisplayMember = "packagename_name";
+            cmbSurgery.ValueMember = "package_id";
+
+            cmbCharges.DataSource = dtSurgery;
+            cmbCharges.DisplayMember = "amount";
+            cmbCharges.ValueMember = "package_id";
+
+
+        }
+
+        void fillSurgery()
+        {
+          //  dgvSurgery.Rows.Clear();
+            dgvSurgery.AutoGenerateColumns = false;
+
+            dtSurgery = Query.surgeryAll();
+            dgvSurgery.Columns[clnIdSurgery.Index].DataPropertyName = "package_id";
+            dgvSurgery.Columns[clnSurgeryName.Index].DataPropertyName = "packagename_name";
+            dgvSurgery.Columns[clnAmount.Index].DataPropertyName = "amount";
+            dgvSurgery.DataSource = dtSurgery;
+
+        }
+
+
+        internal void FillDetail(string ID)
+        {
+           
+            DataTable dt;
+            dt = Query.ConsultantDetail(ID);
+            /////////////////////
+            txtConsultantid.Text = ID;
+            if (dt.Rows.Count > 0)
+            {
+                // cmbCatagory.SelectedValue = dt.Rows[0]["TesttypeId"].ToString();
+                chkDeactivate.Checked = dt.Rows[0]["isdeactivate"].ToString() == "0" ? false : true;
+                txtConsultantName.Text = dt.Rows[0]["name"].ToString();
+                txtDegrees.Text = dt.Rows[0]["degrees"].ToString();
+                txtTiming.Text = dt.Rows[0]["timings"].ToString();
+                txtFaculty.Text = dt.Rows[0]["faculty"].ToString();
+                txtAddress.Text = dt.Rows[0]["address"].ToString();
+                txtMobilenumber.Text = dt.Rows[0]["mobile"].ToString();
+                txtMobilenumber.Text = dt.Rows[0]["tel"].ToString();
+                txtTelephone.Text = dt.Rows[0]["tel"].ToString();
+                txtFax.Text = dt.Rows[0]["fax"].ToString();
+                txtEmail.Text = dt.Rows[0]["email"].ToString();
+                numConsultantCharges.Value = (Decimal)dt.Rows[0]["hospitalrate"];
+                nudConInPatient.Value = Convert.ToDecimal(dt.Rows[0]["consultantshareindoor"]);
+                nudConOutPatient.Value = Convert.ToDecimal(dt.Rows[0]["consultantshareoutdoor"]);
+                nudHosInPatient.Value = Convert.ToDecimal(dt.Rows[0]["hospitalshareindoor"]);
+                nudHosOutPatient.Value = Convert.ToDecimal(dt.Rows[0]["hospitalshareoutdoor"]);
+                cmbType.SelectedValue = Convert.ToDecimal(dt.Rows[0]["testtypeid"]);
+
+                if(dt.Rows[0]["package_id"] ==  DBNull.Value || dt.Rows[0]["package_id"] == null || String.IsNullOrWhiteSpace(dt.Rows[0]["package_id"].ToString()))
+                {
+                    fillSurgery();
+                }
+                else
+                {
+                    dgvSurgery.AutoGenerateColumns = false;
+                    dgvSurgery.DataSource = dt;
+                    dgvSurgery.Columns[clnIdSurgery.Index].DataPropertyName = "package_id";
+                    dgvSurgery.Columns[clnChk.Index].DataPropertyName = "surExist";
+                    dgvSurgery.Columns[clnSurgeryName.Index].DataPropertyName = "packagename_name";
+                    dgvSurgery.Columns[clnAmount.Index].DataPropertyName = "amount";
+                    dgvSurgery.Columns[clnConsultantShare.Index].DataPropertyName = "consulShare";
+                    dgvSurgery.Columns[clnHospCharges.Index].DataPropertyName = "hospShare";
+ 
+                }
+              
+
+
+
+
+
+            }
+        }
+
+
+        private void dgvDetail_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+                FillDetail(dgvDetail.Rows[e.RowIndex].Cells[clnID.Index].Value.ToString());
+        }
+
+        private void numConsultantCharges_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            Validation.Clear(this);
+        }
+        string cmbshare;
+        double consShare;
+        double hospShare;
+        double percent;
+        double percentAmount;
+        double percentHospShare;
+        public void CalCoNshare()
+        {
+            consShare = Convert.ToDouble(cmbshare) * 0.75;
+
+        }
+        public void HospShare()
+        {
+            hospShare = Convert.ToDouble(cmbshare) - Convert.ToDouble(txtShare.Text);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+            //if(txtShare.Text=="")
+            //{
+            //    txtShare.Text = "0";
+            //}
+            try
+            {
+                if (rdoAmount.Checked == true)
+                {
+
+                    CalCoNshare();
+                    HospShare();
+                    txtHospShare.Text = Convert.ToString(hospShare);
+                    if (Convert.ToDouble(txtShare.Text) > consShare)
+                    {
+                        MessageBox.Show("Consultant share cannot exceed 75%", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtShare.Text = "";
+                        txtHospShare.Text = "";
+                    }
+                }
+                if (rdoPercent.Checked == true)
+                {
+                    if (Convert.ToDouble(txtShare.Text) > 75)
+                    {
+                        MessageBox.Show("Consultant share cannot exceed 75%", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtShare.Text = "";
+                        txtHospShare.Text = "";
+                    }
+                    else
+                    {
+                        percent = Convert.ToDouble(txtShare.Text) / 100;
+                        percentAmount = Convert.ToDouble(cmbshare) * percent;
+                        percentHospShare = Convert.ToDouble(cmbshare) - percentAmount;
+                        txtHospShare.Text = Convert.ToString(percentHospShare);
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+                txtShare.Text = "";
+                txtHospShare.Text = "";
+            }
+        }
+
+        private void cmbCharges_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbshare = cmbCharges.Text;
+
+        }
+
+        private void rdoPercent_CheckedChanged(object sender, EventArgs e)
+        {
+            txtShare.Clear();
+            txtHospShare.Clear();
+        }
+
+        private void rdoAmount_CheckedChanged(object sender, EventArgs e)
+        {
+            txtShare.Clear();
+            txtHospShare.Clear();
+        }
+
+        private void dgvSurgery_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            var textbox = e.Control as TextBox;
+
+            textbox.KeyPress += new KeyPressEventHandler(textbox_KeyPress);
+            textbox.Validated += new EventHandler(textbox_Validated);
+
+        }
+        void textbox_Validated(object sender, EventArgs e)
+        {
+            try { 
+            if (dgvSurgery.CurrentRow.Cells[dgvSurgery.CurrentCell.ColumnIndex].Value.ToString().Contains("%"))
+            {
+                double newValue = Convert.ToDouble(dgvSurgery.CurrentRow.Cells[dgvSurgery.CurrentCell.ColumnIndex].Value.ToString().Replace("%", ""));
+                if (newValue > 75)
+                {
+                    MessageBox.Show("Error ");
+                    dgvSurgery.CurrentRow.Cells[dgvSurgery.CurrentCell.ColumnIndex].Value = "";
+                }
+                else
+                {
+                  //  double withoutPercent = Convert.ToDouble(dgvSurgery.CurrentRow.Cells[dgvSurgery.CurrentCell.ColumnIndex].Value);
+                    double percentValue = newValue / 100;
+                    double calcPercentamt = Convert.ToDouble(dgvSurgery.CurrentRow.Cells[2].Value) * percentValue;
+                    dgvSurgery.CurrentRow.Cells[5].Value = Convert.ToDouble(dgvSurgery.CurrentRow.Cells[3].Value) - calcPercentamt;
+
+                    //  Convert.ToDouble(dgvSurgery.CurrentRow.Cells[4].Value) = Convert.ToDouble(dgvSurgery.CurrentRow.Cells[2].Value)
+
+                    //percent = Convert.ToDouble(txtShare.Text) / 100;
+                    //percentAmount = Convert.ToDouble(cmbshare) * percent;
+                    //percentHospShare = Convert.ToDouble(cmbshare) - percentAmount;
+                }
+            }
+            else
+            {
+                double amount = Convert.ToDouble(dgvSurgery.CurrentRow.Cells[3].Value);
+                string abc = Convert.ToString(dgvSurgery.CurrentRow.Cells[dgvSurgery.CurrentCell.ColumnIndex].Value);
+                double calcAmount = amount * 0.75;
+                if (Convert.ToDouble(dgvSurgery.CurrentRow.Cells[dgvSurgery.CurrentCell.ColumnIndex].Value) > calcAmount)
+                {
+                    MessageBox.Show("Error");
+                    dgvSurgery.CurrentRow.Cells[dgvSurgery.CurrentCell.ColumnIndex].Value = "";
+                    return;
+                }
+                else
+                {
+                    dgvSurgery.CurrentRow.Cells[5].Value = amount - Convert.ToDouble(abc);
+                }
+            }
+
+                }
+            catch
+            {
+
+            }
+
+
+
+            }
+        void textbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //if ((e.KeyChar < 48 || e.KeyChar > 57 || e.KeyChar == 37) && e.KeyChar != 8 &&
+
+            //                e.KeyChar != 44 && e.KeyChar != 46 && e.KeyChar != 13 &&
+
+            //                e.KeyChar != 9)
+            //{
+            //    MessageBox.Show("Invalid character '" + e.KeyChar +
+
+            //        "' Only keys 0 to 9 and . are valid for this field!!");
+
+            //    e.Handled = true;
+            //}
+        }
+
+
+        private void txtShare_Validated(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtShare_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void chkShowAllSurgery_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkShowAllSurgery.Checked == true)
+            {
+                fillSurgery();
+            }
+        }
+    }
+}

@@ -1,0 +1,232 @@
+12/17/2021 6:57:14 PM(frmGeneralVoucher frmGeneralVoucher_Load)ORA-00942: table or view does not exist
+===============================================
+12/17/2021 6:57:22 PM(frmGeneralVoucher frmGeneralVoucher_Load)ORA-00942: table or view does not exist
+===============================================
+12/17/2021 7:00:41 PM(frmGeneralVoucher frmGeneralVoucher_Load)ORA-00942: table or view does not exist
+===============================================
+12/17/2021 7:11:24 PM(frmGeneralVoucher _btnNew_Click)Value of '1/1/0001 12:00:00 AM' is not valid for 'Value'. 'Value' should be between 'MinDate' and 'MaxDate'.
+Parameter name: Value
+===============================================
+12/17/2021 7:11:37 PM(frmGeneralVoucher _btnNew_Click)Value of '1/1/0001 12:00:00 AM' is not valid for 'Value'. 'Value' should be between 'MinDate' and 'MaxDate'.
+Parameter name: Value
+===============================================
+12/17/2021 7:13:03 PM(frmGeneralVoucher _btnNew_Click)Value of '1/1/0001 12:00:00 AM' is not valid for 'Value'. 'Value' should be between 'MinDate' and 'MaxDate'.
+Parameter name: Value
+===============================================
+12/17/2021 7:14:02 PM(frmGeneralVoucher _btnNew_Click)Value of '1/1/0001 12:00:00 AM' is not valid for 'Value'. 'Value' should be between 'MinDate' and 'MaxDate'.
+Parameter name: Value
+===============================================
+12/17/2021 7:16:18 PM(frmGeneralVoucher _btnNew_Click)Value of '1/1/0001 12:00:00 AM' is not valid for 'Value'. 'Value' should be between 'MinDate' and 'MaxDate'.
+Parameter name: Value
+===============================================
+12/17/2021 7:17:35 PM(frmGeneralVoucher _btnNew_Click)Value of '1/1/0001 12:00:00 AM' is not valid for 'Value'. 'Value' should be between 'MinDate' and 'MaxDate'.
+Parameter name: Value
+===============================================
+12/17/2021 7:28:08 PM(frmGeneralVoucher _btnNew_Click)Field called accounttitle does not exist.
+===============================================
+12/17/2021 8:26:54 PM(Query_ PaymentFilter)ORA-00904: "GET_CLIENTTITLE": invalid identifier
+===============================================
+12/17/2021 8:27:03 PM(Payment_ btnSave_Click)There is no row at position 0.
+===============================================
+12/17/2021 8:31:48 PM(frmGeneralVoucher _btnNew_Click)Value of '1/1/0001 12:00:00 AM' is not valid for 'Value'. 'Value' should be between 'MinDate' and 'MaxDate'.
+Parameter name: Value
+===============================================
+12/17/2021 8:40:22 PM(Query_ PaymentFilter)ORA-00904: "GET_CLIENTTITLE": invalid identifier
+===============================================
+12/17/2021 8:40:25 PM(JournAL dgvQuery_CellDoubleClick)There is no row at position 0.
+===============================================
+12/17/2021 8:40:28 PM(Query_ PaymentFilter)ORA-00904: "GET_CLIENTTITLE": invalid identifier
+===============================================
+12/17/2021 8:40:32 PM(JournAL dgvQuery_CellDoubleClick)There is no row at position 0.
+===============================================
+12/20/2021 5:06:26 PM(MSP_ Change_GL_status)ORA-06550: line 1, column 7:
+PLS-00201: identifier 'CHANGE_GL_STATUS' must be declared
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+1/25/2022 12:21:12 PM(Query_Rep_Voucher)ORA-06550: line 1, column 7:
+PLS-00905: object HMS.REP_VOUCHERDETAIL1 is invalid
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+1/25/2022 12:25:59 PM(Query_Rep_Voucher)ORA-06550: line 1, column 7:
+PLS-00905: object HMS.REP_VOUCHERDETAIL1 is invalid
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+2/2/2022 11:27:56 AM(Query_Rep_TrialBalance)ORA-06550: line 1, column 7:
+PLS-00201: identifier 'PKG_REP_ACCOUNTS.REP_TRIALBALANCE' must be declared
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+4/14/2022 12:46:04 PM(Query_ get_ChartOfAcc)ORA-00904: "PER": invalid identifier
+===============================================
+7/5/2022 11:00:05 AM(Query_CountryIndex)ORA-00942: table or view does not exist
+===============================================
+7/5/2022 11:03:22 AM(Query_CountryIndex)ORA-00942: table or view does not exist
+===============================================
+7/5/2022 11:09:21 AM(Query_CountryIndex)ORA-00942: table or view does not exist
+===============================================
+7/7/2022 12:10:27 PM(Query_CountryIndex)ORA-00942: table or view does not exist
+===============================================
+7/7/2022 12:29:06 PM(Query_Rep_TrialBalance)ORA-06550: line 1, column 7:
+PLS-00201: identifier 'PKG_REP_ACCOUNTS.REP_TRIALBALANCE' must be declared
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+7/13/2022 12:57:02 PM(Query_Rep_TrialBalance)ORA-06550: line 1, column 7:
+PLS-00201: identifier 'PKG_REP_ACCOUNTS.REP_TRIALBALANCE' must be declared
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+7/13/2022 12:57:17 PM(Query_Rep_TrialBalance)ORA-06550: line 1, column 7:
+PLS-00201: identifier 'PKG_REP_ACCOUNTS.REP_TRIALBALANCE' must be declared
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+7/13/2022 4:05:25 PM(Query_ get_ChartOfAcc)ORA-00904: "PER": invalid identifier
+===============================================
+8/3/2022 10:59:58 AM(Query_ PaymentFilter)ORA-00904: "GET_CLIENTTITLE": invalid identifier
+===============================================
+8/30/2022 3:18:59 PM(Query_ PaymentFilter)ORA-00904: "GET_CLIENTTITLE": invalid identifier
+===============================================
+8/30/2022 3:19:05 PM(Payment_ btnSave_Click)There is no row at position 0.
+===============================================
+8/30/2022 4:07:25 PM(Query_ PaymentFilter)ORA-00904: "GET_CLIENTTITLE": invalid identifier
+===============================================
+8/30/2022 4:07:28 PM(Receipt_ btnSave_Click)There is no row at position 0.
+===============================================
+8/30/2022 4:07:58 PM(Query_ PaymentFilter)ORA-00904: "GET_CLIENTTITLE": invalid identifier
+===============================================
+8/30/2022 4:15:25 PM(Receipt_ btnSave_Click)There is no row at position 0.
+===============================================
+8/30/2022 4:16:03 PM(Receipt_ btnSave_Click)Object reference not set to an instance of an object.
+===============================================
+8/30/2022 4:30:42 PM(Receipt_ btnSave_Click)Object reference not set to an instance of an object.
+===============================================
+8/30/2022 4:41:22 PM(Payment_ btnSave_Click)Object reference not set to an instance of an object.
+===============================================
+8/30/2022 4:42:05 PM(Payment_ btnSave_Click)Object reference not set to an instance of an object.
+===============================================
+8/30/2022 4:46:16 PM(Payment_ btnSave_Click)Object reference not set to an instance of an object.
+===============================================
+8/30/2022 5:09:41 PM(Payment_ btnSave_Click)Column 'beneficiary' does not belong to table .
+===============================================
+8/30/2022 5:14:12 PM(Receipt_ btnSave_Click)Object reference not set to an instance of an object.
+===============================================
+8/31/2022 4:48:13 PM(Payment_ btnSave_Click)Column 'beneficiary' does not belong to table .
+===============================================
+8/31/2022 4:49:24 PM(JournAL dgvQuery_CellDoubleClick)Column 'beneficiary' does not belong to table .
+===============================================
+8/31/2022 4:49:27 PM(JournAL dgvQuery_CellDoubleClick)Column 'beneficiary' does not belong to table .
+===============================================
+8/31/2022 5:03:15 PM(JournAL dgvQuery_CellDoubleClick)Column 'beneficiary' does not belong to table .
+===============================================
+8/31/2022 5:03:50 PM(Payment_ btnSave_Click)Column 'beneficiary' does not belong to table .
+===============================================
+8/31/2022 5:06:13 PM(Query_Rep_TrialBalance)ORA-06550: line 1, column 7:
+PLS-00201: identifier 'PKG_REP_ACCOUNTS.REP_TRIALBALANCE' must be declared
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+8/31/2022 5:10:25 PM(JournAL dgvQuery_CellDoubleClick)Column 'beneficiary' does not belong to table .
+===============================================
+8/31/2022 5:12:45 PM(Payment_ btnSave_Click)Column 'beneficiary' does not belong to table .
+===============================================
+8/31/2022 5:37:31 PM(Query_Rep_TrialBalance)ORA-06550: line 1, column 7:
+PLS-00201: identifier 'PKG_REP_ACCOUNTS.REP_TRIALBALANCE' must be declared
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+9/1/2022 11:29:11 AM(Query_Rep_TrialBalance)ORA-06550: line 1, column 7:
+PLS-00201: identifier 'PKG_REP_ACCOUNTS.REP_TRIALBALANCE' must be declared
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+9/1/2022 1:58:48 PM(Query_CountryIndex)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 2:02:26 PM(Query_CityIndex)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 2:06:49 PM(Query_ BankFacilities)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 2:06:51 PM(Query_ BankMargin)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 2:08:11 PM(Query_ BankFacilities)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 2:08:14 PM(Query_ BankMargin)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 2:08:41 PM(Query_ BankFacilities)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 2:08:43 PM(Query_ BankMargin)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 2:09:36 PM(Query_ BankFacilities)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 2:09:38 PM(Query_ BankMargin)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 2:09:45 PM(Query_ BankFacilities)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 2:09:47 PM(Query_ BankMargin)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 2:10:13 PM(Query_ BankFacilities)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 2:10:15 PM(Query_ BankMargin)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 2:10:44 PM(Query_ BankFacilities)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 2:10:46 PM(Query_ BankMargin)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 3:06:48 PM(Query_ BankFacilities)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 3:06:50 PM(Query_ BankMargin)ORA-00942: table or view does not exist
+===============================================
+9/1/2022 4:07:52 PM(Query_Rep_TrialBalance)ORA-06550: line 1, column 7:
+PLS-00201: identifier 'PKG_REP_ACCOUNTS.REP_TRIALBALANCE' must be declared
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+9/1/2022 4:27:08 PM(Query_Rep_TrialBalance)ORA-06550: line 1, column 7:
+PLS-00201: identifier 'PKG_REP_ACCOUNTS.REP_TRIALBALANCE' must be declared
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+9/2/2022 4:49:17 PM(Query_ get_ChartOfAcc)ORA-00904: "PER": invalid identifier
+===============================================
+9/2/2022 5:05:37 PM(Query_ get_ChartOfAcc)ORA-00904: "PER": invalid identifier
+===============================================
+9/2/2022 5:06:08 PM(Query_ get_ChartOfAcc)ORA-00904: "PER": invalid identifier
+===============================================
+10-Oct-22 9:18:11 AM(Query_Rep_TrialBalance)ORA-06550: line 1, column 7:
+PLS-00201: identifier 'PKG_REP_ACCOUNTS.REP_TRIALBALANCE' must be declared
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+10-Oct-22 9:28:34 AM(Query_Rep_TrialBalance)ORA-06550: line 1, column 7:
+PLS-00201: identifier 'PKG_REP_ACCOUNTS.REP_TRIALBALANCE' must be declared
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+10-Oct-22 9:58:10 AM(Query_Rep_TrialBalance)ORA-06550: line 1, column 7:
+PLS-00201: identifier 'PKG_REP_ACCOUNTS.REP_TRIALBALANCE' must be declared
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+17-Oct-22 2:06:44 PM(Query_Rep_LevelWiseBalance)ORA-01403: no data found
+ORA-06512: at "HMS.PKG_REP_ACCOUNTS", line 19
+ORA-06512: at line 1
+===============================================
+24-Oct-22 10:47:38 PM(Query_Rep_TrialBalance)ORA-06550: line 1, column 7:
+PLS-00905: object HMS.REP_TRIALBALANCE is invalid
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+25-Oct-22 12:01:45 PM(Query_Rep_TrialBalance)ORA-06550: line 1, column 7:
+PLS-00905: object HMS.REP_TRIALBALANCE is invalid
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+===============================================
+25-Oct-22 7:25:47 PM(Query_Rep_AccountStatement)ORA-00933: SQL command not properly ended
+===============================================
+27-Oct-22 12:52:47 PM(Query_ PaymentFilter)ORA-00904: "GET_TRADEACCTITLE": invalid identifier
+===============================================
+27-Oct-22 9:28:08 PM(Query_ PaymentFilter)ORA-00909: invalid number of arguments
+===============================================

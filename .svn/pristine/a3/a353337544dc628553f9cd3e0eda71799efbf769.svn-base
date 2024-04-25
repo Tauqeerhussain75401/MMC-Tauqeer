@@ -1,0 +1,1137 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using AForge.Video;
+using AForge.Video.DirectShow;
+using System.IO;
+namespace ERP
+{
+    public partial class frmPVoucherNew : Form
+    {
+        
+        DataTable dtPayment = new DataTable();
+        DataTable dtquery = new DataTable();
+        DataTable dtClients = new DataTable();
+        DataTable dtEmployees = new DataTable();
+        DataTable dtdirector = new DataTable();
+        DataTable dtDealer = new DataTable();
+        DataTable dtBank = new DataTable();
+        public string Documentid = "0";
+        string VNO = "";
+        bool FLogIn = true;
+        double   dtrowCount;
+        double  dgRowCount = 0;
+
+
+        public bool SaveRight;
+        public bool DeleteRight;
+
+        double newValue;
+        double oldValue;
+
+        public frmPVoucherNew()
+        {
+            InitializeComponent();
+        }
+        private int currentRow;
+        private bool resetRow = false;
+        void Fillquery()
+        {
+             
+            dgvQuery.Rows.Clear();
+            for (int i = 0; i < dtquery.Rows.Count; i++)
+            {
+
+
+
+
+                DataTable dtstatus = Query.getData("select status from voucherdetail where status!=1 and vtype='PV'and  vno='" + dtquery.Rows[i]["VNO"].ToString() + "'");
+                if (dtstatus.Rows[0]["status"].ToString() == "0")
+                {
+                    dgvQuery.Rows.Add(Convert.ToDateTime(dtquery.Rows[i]["VDate"]).ToString("dd MMM yyyy"),
+                        "PV-" + dtquery.Rows[i]["VNO"].ToString(),
+                        dtquery.Rows[i]["Narration"],
+                        dtquery.Rows[i]["Amount"],
+                        dtquery.Rows[i]["VNO"]
+                        );
+                    dgvQuery.Rows[i].DefaultCellStyle = new DataGridViewCellStyle() { SelectionForeColor = Color.Black, SelectionBackColor = Color.White, BackColor = Color.White };
+                }
+                else if (dtstatus.Rows[0]["status"].ToString() == "0" && dtstatus.Rows[0]["status"].ToString() == "2")
+                {
+                    dgvQuery.Rows.Add(Convert.ToDateTime(dtquery.Rows[i]["VDate"]).ToString("dd MMM yyyy"),
+                        "PV-" + dtquery.Rows[i]["VNO"].ToString(),
+                        dtquery.Rows[i]["Narration"],
+                        dtquery.Rows[i]["Amount"],
+                        dtquery.Rows[i]["VNO"]
+                        );
+                    dgvQuery.Rows[i].DefaultCellStyle = new DataGridViewCellStyle() { SelectionForeColor = Color.Black, SelectionBackColor = Color.Orange, BackColor = Color.Orange };
+                }
+                else
+                {
+                    dgvQuery.Rows.Add(Convert.ToDateTime(dtquery.Rows[i]["VDate"]).ToString("dd MMM yyyy"),
+                        "PV-" + dtquery.Rows[i]["VNO"].ToString(),
+                        dtquery.Rows[i]["Narration"],
+                        dtquery.Rows[i]["Amount"],
+                        dtquery.Rows[i]["VNO"]
+                        );
+                    dgvQuery.Rows[i].DefaultCellStyle = new DataGridViewCellStyle() { SelectionForeColor = Color.Black, SelectionBackColor = Color.Gainsboro, BackColor = Color.Gainsboro };
+                }
+
+                //DataTable dtEdit = Query.GetData("select editby from voucherdetail where status!=1 and vtype='PV'and  vno='" + dtquery.Rows[i]["VNO"].ToString() + "'");
+                //if (dtEdit.Rows[0]["editby"].ToString() != null)
+                //{
+                //    dgvQuery.Rows.Add(Convert.ToDateTime(dtquery.Rows[i]["VDate"]).ToString("dd MMM yyyy"),
+                //        "PV-" + dtquery.Rows[i]["VNO"].ToString(),
+                //        dtquery.Rows[i]["Narration"],
+                //        dtquery.Rows[i]["Amount"],
+                //        dtquery.Rows[i]["VNO"]
+                //        );
+                //    dgvQuery.Rows[i].DefaultCellStyle = new DataGridViewCellStyle() { SelectionForeColor = Color.Black, SelectionBackColor = Color.DarkOrange, BackColor = Color.DarkOrange };
+                //}
+            }
+        }
+
+    
+       //private void OnRowNumberChanged()
+       // {
+            
+       //     RowCount = dgvAccount.Rows.Count;
+       // }
+
+    
+        public void FillDetail(string Vno)
+        {
+            
+
+            SupportDocuments = new FrmSupportDocuments();
+            SupportDocuments.doucmentname = "Payment.tiff";
+            if (File.Exists("Payment.tiff")) File.Delete("Payment.tiff");
+            dgvAccount.Rows.Clear();
+            DataTable dt = Query.Voucher(Vno, Variable.BranchCode, "PV");
+
+            dtrowCount = dt.Rows.Count;
+
+            //txtJVNum.Tag = dt.Rows.Cast<DataRow>().Where(w => Convert.ToDecimal(w["cr"]) > 0).ToArray()[0]["vseq"].ToString();
+            //txtBankDesc.Text = dt.Select("vseq = '" + Convert.ToString(txtJVNum.Tag) + "'")[0]["description"].ToString();
+            //dt.Rows.RemoveAt(dt.Rows.Cast<DataRow>().Where(w => Convert.ToDecimal(w["cr"]) > 0).Select((s, index) => new { index = dt.Rows.IndexOf(s) }).ToArray()[0].index);
+            dt.Rows.Cast<DataRow>().Where(w => Convert.ToDecimal(w["cr"]) > 0).ToList().ForEach(fe => dt.Rows.RemoveAt(dt.Rows.IndexOf(fe)));
+            txtJVNum.Text = dt.Rows[0]["VNO"].ToString();
+            dgvAccount.Rows.Clear();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                int Index = dgvAccount.Rows.Add(dt.Rows[i]["Vseq"].ToString(), dt.Rows[i]["fkaccountid"].ToString(), null, dt.Rows[i]["description"].ToString(),
+                    ((decimal)dt.Rows[i]["dr"]).ToString("N2"), dt.Rows[i]["chequeno"].ToString(), dt.Rows[i]["status"].ToString(),dt.Rows[i]["beneficiary"].ToString());
+                SubAccountDataSource(Index);
+                dgvAccount.Rows[Index].Cells[clnSubAccountDetail.Index].Value = dt.Rows[i]["fkaccountid"].ToString() == AccountHead.ClientAccount ? dt.Rows[i]["fkclientcode"].ToString() :
+                                                                                dt.Rows[i]["fkaccountid"].ToString() == AccountHead.EmployeeAccount ? dt.Rows[i]["fkhrid"].ToString() :
+                                                                                dt.Rows[i]["fkaccountid"].ToString() == AccountHead.DirectorAccount ? dt.Rows[i]["fkdirectorid"].ToString() :
+                                                                                dt.Rows[i]["fkaccountid"].ToString() == AccountHead.DealerAccount ? dt.Rows[i]["fkdealercode"].ToString() : null;
+            }
+
+
+
+            dgvAccount.Rows.Add();
+            Calculate();
+            txtStatus.Text = dt.Rows[0]["status"].ToString();
+            txtCreatedBy.Text = dt.Rows[0]["createdby"].ToString();
+            txtEditBy.Text = dt.Rows[0]["editby"].ToString();
+            txtApprovedBy.Text = dt.Rows[0]["approvedby"].ToString();
+            cmbTransCode.SelectedValue = dt.Rows[0]["fktransactionid"].ToString();
+            cmbBankName.SelectedValue = dt.Rows[0]["fkbankid"].ToString();
+            rdoCheque.Checked = (cmbBankName.SelectedValue != null ? true : false);
+            rdoCash.Checked = !rdoCheque.Checked;
+            cmbBankName.SelectedValue = dt.Rows[0]["fkbankid"].ToString();
+            Documentid = dt.Rows[0]["fkdocumentid"].ToString();
+            lblImage.Text = dt.Rows[0]["fkdocumentid"].ToString();
+            dtpDate.Value = (DateTime)dt.Rows[0]["Vdate"]; //beneficiary
+            txtBeneficiary.Text = dt.Rows[0]["beneficiary"].ToString();
+            DocumentChanged = "1";
+        }
+        void FillNarration()
+        {
+            DataTable dtTransCode = Query.NarrationIndex();
+            dtTransCode.Rows.RemoveAt(dtTransCode.Rows.Cast<DataRow>().Where(w => w[0].ToString() == "CLS-0001").Select((s, index) => new { s = s, index = dtTransCode.Rows.IndexOf(s) }).ToArray()[0].index);
+            cmbTransCode.DataSource = dtTransCode;
+            cmbTransCode.DisplayMember = "narrationtitle";
+            cmbTransCode.ValueMember = "narrationcode";
+        }
+        void FillcmbBank()
+        {
+            dtBank = Query.BankIndex();
+            dtBank.PrimaryKey = new DataColumn[] { dtBank.Columns["Bankcode"] };
+            cmbBankName.DataSource = dtBank;
+            cmbBankName.DisplayMember = "BankName";
+            cmbBankName.ValueMember = "Bankcode";
+            cmbBankName.SelectedIndex = -1;
+        }
+        DataTable dtAcc;
+        void FillcmbToPay()
+        {
+            dtAcc = Query.DetailAccounts();
+            clnTitleofAccount.DataSource = dtAcc;
+            clnTitleofAccount.DisplayMember = "accounttitle";
+            clnTitleofAccount.ValueMember = "AccountId";
+
+
+        }
+        void FillFilterNarration()
+        {
+            DataTable dtFilterNarration = Query.NarrationIndex();
+            DataRow dr = dtFilterNarration.NewRow();
+            dr["narrationcode"] = "ALL";
+            dr["narrationtitle"] = "ALL";
+            dtFilterNarration.Rows.InsertAt(dr, 0);
+            cmbFilterNarration.DataSource = dtFilterNarration;
+            cmbFilterNarration.DisplayMember = "narrationtitle";
+            cmbFilterNarration.ValueMember = "narrationcode";
+        }
+        bool Calculate()
+        {
+            decimal Dr = 0, Cr = 0;
+            for (int i = 0; i < dgvAccount.Rows.Count; i++)
+            {
+                if (dgvAccount.Rows[i].Cells[clnDebit.Index].Value != null && dgvAccount.Rows[i].Visible == true && dgvAccount.Rows[i].Cells[clnTitleofAccount.Index].Value != null)
+                    Dr += decimal.Parse(dgvAccount.Rows[i].Cells[clnDebit.Index].Value.ToString());
+                //if (dgvAccount.Rows[i].Cells[clnCredit.Index].Value != null && dgvAccount.Rows[i].Visible == true && dgvAccount.Rows[i].Cells[clnTitleofAccount.Index].Value != null)
+                //    Cr += decimal.Parse(dgvAccount.Rows[i].Cells[clnCredit.Index].Value.ToString());
+            }
+            txtTotalDebit.Text = Dr.ToString("N2");
+            //txtTotalCredit.Text = Cr.ToString();
+            return (Dr == Cr ? true : false);
+        }
+        void Clear()
+        {
+            txtJVNum.Text = "";
+            txtCreatedBy.Text = Variable.User;
+            txtEditBy.Text = "";
+            txtApprovedBy.Text = "";
+
+
+            dgvAccount.Rows.Clear();
+            dtpDate.Value = SoftwareInfo.ServerDate;
+
+        }
+        void AllowNewRow()
+        {
+            if (dgvAccount.CurrentRow.Index == dgvAccount.Rows[dgvAccount.Rows.Count - 1].Index)
+            {
+                if (dgvAccount.CurrentRow.Cells[clnTitleofAccount.Index].Value != null &&
+                    (dgvAccount.CurrentRow.Cells[clnDebit.Index].Value != null
+                    //|| dgvAccount.CurrentRow.Cells[clnCredit.Index].Value != null
+                    ))
+                    dgvAccount.Rows.Add();
+
+            }
+            if (Convert.ToString(dgvAccount.CurrentRow.Cells[clnChequeNo.Index].Value) != "" && rdoCheque.Checked)
+            {
+                if (dgvAccount.CurrentRow.Index + 1 < dgvAccount.Rows.Count)
+                {
+                    dgvAccount.Rows[dgvAccount.CurrentRow.Index + 1].Cells[clnChequeNo.Index].Value = Convert.ToInt32(dgvAccount.CurrentRow.Cells[clnChequeNo.Index].Value) + 1;
+                }
+            }
+        }
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                Errors.writeline(ex.Message.ToString(), "frmGeneralVoucher  btnCancel_Click");
+            }
+        }
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                if (MessageBox.Show("Do you wan't to save changes?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    List<int> Seq = new List<int>();
+                    List<string> Account = new List<string>();
+                    List<string> Descr = new List<string>();
+                    List<decimal> dr = new List<decimal>();
+                    List<decimal> cr = new List<decimal>();
+                    List<string> SubAccount = new List<string>();
+                    List<int> Status = new List<int>();
+                   // List<int> Flag = new List<int>();
+
+                    List<string> ChequeNo = new List<string>();
+                    List<string> SlipNo = new List<string>();
+                    //Seq.Add(txtJVNum.Text == "" ? 0 : Convert.ToInt32(txtJVNum.Tag));
+                    //Account.Add(rdoCash.Checked == true ? Convert.ToString(rdoCash.Tag) : AccountHead.CashInBank);
+                    //Descr.Add(txtBankDesc.Text);
+                    //dr.Add(0);
+                    //cr.Add(dgvAccount.Rows.Cast<DataGridViewRow>().Sum(s => Convert.ToDecimal(s.Cells[clnDebit.Index].Value)));
+                    //SubAccount.Add(Convert.ToString(cmbBankName.SelectedValue));
+                    //Status.Add(0);
+                    //ChequeNo.Add("");
+                    if (Convert.ToString(cmbTransCode.SelectedValue) == "")
+                    {
+                        cmbTransCode.Focus();
+                        MessageBox.Show("Transaction Narration required...!");
+                        return;
+                    }
+                    if (rdoCheque.Checked && Convert.ToString(cmbBankName.SelectedValue) == "")
+                    {
+                        cmbBankName.Focus();
+                        MessageBox.Show("Bank Name required...!");
+                        return;
+                    }
+                    for (int i = 0; i < dgvAccount.Rows.Count; i++)
+                    {
+                        if (dgvAccount[clnTitleofAccount.Index, i].Value != null && dgvAccount[clnDebit.Index, i].Value != null /*&& dgvAccount[clnCredit.Index, i].Value != null*/)
+                        {
+                            if (((string)dgvAccount[clnTitleofAccount.Index, i].Value == AccountHead.ClientAccount ||
+                                (string)dgvAccount[clnTitleofAccount.Index, i].Value == AccountHead.DirectorAccount ||
+                                (string)dgvAccount[clnTitleofAccount.Index, i].Value == AccountHead.EmployeeAccount) &&
+                                (dgvAccount[clnSubAccountDetail.Index, i].Value == null))
+                            {
+                                dgvAccount.CurrentCell = dgvAccount.Rows[i].Cells[clnSubAccountDetail.Index];
+                                MessageBox.Show("Sub Account required...!");
+                                return;
+                            }
+                            if (rdoCheque.Checked && Convert.ToString(dgvAccount[clnChequeNo.Index, i].Value) == "")
+                            {
+                                dgvAccount.CurrentCell = dgvAccount.Rows[i].Cells[clnChequeNo.Index];
+                                MessageBox.Show("Cheque No. required...!");
+                                return;
+                            }
+                            Seq.Add((Convert.ToInt16(dgvAccount[clnVseq.Index, i].Value) > 0 ? -1 : 0) + Convert.ToInt16(dgvAccount[clnVseq.Index, i].Value));
+                            Account.Add(rdoCash.Checked == true ? Convert.ToString(rdoCash.Tag) : AccountHead.CashInBank);
+                            Descr.Add((string)dgvAccount[clnDescription.Index, i].Value);
+                            dr.Add(Convert.ToDecimal(0.00m));
+                            cr.Add(Convert.ToDecimal(dgvAccount[clnDebit.Index, i].Value.ToString()));
+                            SubAccount.Add(Convert.ToString(cmbBankName.SelectedValue));
+                            Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
+                            //Status.Add(2);
+                            ChequeNo.Add(Convert.ToString(dgvAccount[clnChequeNo.Index, i].Value.ToString()));
+                            SlipNo.Add("");
+
+                            Seq.Add(Convert.ToInt16(dgvAccount[clnVseq.Index, i].Value.ToString()));
+                            Account.Add((string)dgvAccount[clnTitleofAccount.Index, i].Value);
+                            Descr.Add((string)dgvAccount[clnDescription.Index, i].Value);
+                            dr.Add(Convert.ToDecimal(dgvAccount[clnDebit.Index, i].Value.ToString()));
+                            cr.Add(Convert.ToDecimal(0.00m));
+                            SubAccount.Add((string)dgvAccount[clnSubAccountDetail.Index, i].Value);
+                            Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
+
+                            //  Status.Add(2);
+                            ChequeNo.Add(Convert.ToString(dgvAccount[clnChequeNo.Index, i].Value.ToString()));
+                            SlipNo.Add("");
+                        }
+                    }
+
+                    if (dr.Sum() != cr.Sum())
+                    {
+                        MessageBox.Show("Debit And Credit not equal...");
+                        return;
+                    }
+
+                    string Vno = MSP.Voucher_post1("PV", txtJVNum.Text, dtpDate.Value, cmbTransCode.SelectedValue.ToString(), UserInfo.UserId, Variable.BranchCode , Convert.ToString(cmbBankName.SelectedValue), Seq, Account, Descr, dr, cr, SubAccount, Status, ChequeNo, SlipNo, DocumentChanged, Documentid, (File.Exists("Payment.tiff") ? Scanner.FileToArray("Payment.tiff") : null), txtBeneficiary.Text);
+                    MessageBox.Show("Record Successfully Saved...!");
+                    try
+                    {
+
+
+                        //Clear();
+                        //dgvAccount.Rows.Add();
+                        //Documentid = "0";
+                        //dtpDate.Focus();
+                        //lblImage.Text = "0";
+
+                    }
+
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                        Errors.writeline(ex.Message.ToString(), "frmGeneralVoucher _btnNew_Click");
+                    }
+                    if (Vno != "")
+                    {
+                        FillDetail(Vno);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You have no rights to save this...!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                Errors.writeline(ex.Message.ToString(), "Payment_ btnSave_Click");
+                this.Close();
+            }
+        }
+        private void fillBankBal()
+        {
+            if (!FLogIn)
+            {
+                decimal bal = Query.BankBal(cmbBankName.SelectedValue.ToString());
+                txtBalance.Text = (bal >= 0 ? bal : -bal).ToString();
+                txtDrCr.Text = (bal >= 0 ? "Dr" : "Cr").ToString();
+            }
+        }
+        private void fillCashBal()
+        {
+            if (!FLogIn)
+            {
+                decimal bal = Query.CashBal();
+                txtBalance.Text = (bal >= 0 ? bal : -bal).ToString();
+                txtDrCr.Text = (bal >= 0 ? "Dr" : "Cr").ToString();
+            }
+        }
+        private void frmGeneralVoucher_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Text = Variable.Version;
+                SupportDocuments = new FrmSupportDocuments();
+                SupportDocuments.doucmentname = "Payment.tiff";
+                if (File.Exists("Payment.tiff")) File.Delete("Payment.tiff");
+                FillcmbBank();
+                FillNarration();
+                //dtpDate.Value = null;
+                if (UserInfo.UserId == "Admin") pnlDate.Enabled = true;
+
+                dtClients = Query.ClientIndex();
+                FillcmbToPay();
+                statusUser.Text = "User Name: " + Variable.User;
+                statusDateTime.Text = "LogIn Time: " + Variable.UserDateTime;
+
+                FLogIn = false;
+                this.Text = Variable.Version;
+                btnNew_Click(null, null);
+                cmbFilter.SelectedIndex = 0;
+
+
+
+                Variable.flags = Animate.AW_ACTIVATE | Animate.AW_CENTER;
+                Animate.AnimateWindow(this.Handle, Variable.animationTime, Variable.flags);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                Errors.writeline(ex.Message.ToString(), "frmGeneralVoucher frmGeneralVoucher_Load");
+            }
+        }
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Clear();
+                dgvAccount.Rows.Add();
+                Documentid = "0";
+                dtpDate.Focus();
+                lblImage.Text = "0";
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                Errors.writeline(ex.Message.ToString(), "frmGeneralVoucher _btnNew_Click");
+            }
+        }
+        private void dgvQuery_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                FillDetail(dgvQuery.CurrentRow.Cells[PVNumberQ.Index].Value.ToString());
+                tabJournalQuery.SelectedTab = tabJournal;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                Errors.writeline(ex.Message.ToString(), "JournAL dgvQuery_CellDoubleClick");
+            }
+            Cursor.Current = Cursors.Default;
+        }
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //string filterQuery = "select convert(varchar, VDate, 103) as VDate,VNO,(select TransNarration from TransactionCode where ID = FK_Narration) as Narration,sum(debit) as Amount from [GL_2017-2018] where ( VDate between '" + dtpFrom.Value.ToString("MM/dd/yyyy 00:00:00:00") + "' and '" + dtpTo.Value.ToString("MM/dd/yyyy 00:00:00:00") + "') and FK_Narration = " + (cmbFilterNarration.Text != "ALL" ? "'" + cmbFilterNarration.SelectedValue.ToString() + "'" : "FK_Narration") + " and VNO = " + VNO + "  and Vtype = 'PV' and status = 0  group by convert(varchar, VDate, 103) ,VNO,FK_Narration";
+                dtquery = Query.PaymentFilter1New(dtpFrom.Value.ToString("dd MMM yyyy"), dtpTo.Value.ToString("dd MMM yyyy"),
+                    (cmbFilterNarration.Text != "ALL" ? "  and fktransactionid = '" + Convert.ToString(cmbFilterNarration.SelectedValue) + "'" : ""),
+                    (VNO != "" ? " and VNO = " + VNO : ""), cmbFilter.Text);
+                Fillquery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                Errors.writeline(ex.Message.ToString(), "Payment_btnFind_Click");
+            }
+        }
+
+        private void txtFilterVoucher_Validated(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtFilterVoucher.Text.Length == 8)
+                    VNO = (int.Parse(txtFilterVoucher.Text.Substring(3))).ToString();
+            }
+            catch
+            {
+                VNO = "VNO";
+                txtFilterVoucher.Text = "";
+            }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            if (txtJVNum.Text != "")
+            {
+                string voucherNum = txtJVNum.Text;
+                try
+                {
+
+                    string AcountClient = cmbTransCode.Text;
+                 //   frmReportView.ShowBox("Voucher", Convert.ToDateTime(dtpDate.Value).ToString("dd-MMM-yyyy"), "PV", int.Parse(voucherNum).ToString("D6"), "Journal Voucher", AcountClient, txtStatus.Text);
+
+                    //FrmReportView.ShowBox("Voucher", Convert.ToDateTime(dtpDate.Value).ToString("dd-MMM-yyyy"), "PV", int.Parse(voucherNum).ToString("D6"), "Journal Voucher", AcountClient);
+                }
+                catch
+                {
+                    MessageBox.Show("Invalid Voucher Number...!");
+                    return;
+                }
+            }
+            else
+                MessageBox.Show("Invalid Voucher Number...!");
+        }
+        public static string Remarks = "";
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtJVNum.Text != "")
+                {
+                    string tf = "";
+                    if (MessageBox.Show("Do you wan't to delete this?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        FrmRemarks frm = new FrmRemarks();
+                        frm.SetVoucherType = "Payment";
+                        frm.ShowDialog();
+
+                        if (Remarks != "")
+                        {
+                            Cursor.Current = Cursors.WaitCursor;
+
+                            string voucherNum = txtJVNum.Text;
+                            tf = MSP.Change_GL_status(voucherNum, "PV", "1", Remarks);
+
+                            Cursor.Current = Cursors.Default;
+                            if (tf == "True") MessageBox.Show("Record Successfully Deleted...!");
+                            btnNew_Click(null, null);
+                            btnFind_Click(null, null);
+                            Calculate();
+                            Remarks = "";
+                        }
+                    }
+                }
+                else
+                    MessageBox.Show("Record not Exist..!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                Errors.writeline(ex.Message.ToString(), "Payment_ btnDelete_Click");
+                this.Close();
+            }
+        }
+        bool Fquery = true;
+        private void tabJournalQuery_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Fquery) FillFilterNarration();
+            Fquery = false;
+        }
+
+        private Image SDImage;
+        private FrmSupportDocuments SupportDocuments = new FrmSupportDocuments();
+        string DocumentChanged = "1";
+        private void picDoucments_Click(object sender, EventArgs e)
+        {
+            picDoucments.Enabled = false;
+            SDImage = picDoucments.Image;
+            picDoucments.Image = Properties.Resources.loading;
+            backgroundWorker1.RunWorkerAsync();
+            picDoucments.Enabled = true;
+            DocumentChanged = "0";
+        }
+        delegate void Function();
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string doc = "";
+            this.Invoke(new Function(delegate ()
+            {
+                // doc = lblDoucmentNo.Text;
+                doc = Documentid;
+            }));
+            SupportDocuments.LockItem = false;
+            if (doc != "0") SupportDocuments.LockItem = true;
+            if (doc != "0" && (!File.Exists(SupportDocuments.doucmentname)))
+            {
+                DataTable DoucmentGenerate = new DataTable();
+                DoucmentGenerate = Query.CallInvDoucment(doc);
+                for (int ii = 0, cc = DoucmentGenerate.Rows.Count; ii < cc; ii++)
+                {
+                    if (DoucmentGenerate.Rows[ii][0] != DBNull.Value)
+                        Scanner.ArrayToFile((byte[])DoucmentGenerate.Rows[ii][0], SupportDocuments.doucmentname);
+                }
+
+            }
+            this.Invoke(new Function(delegate ()
+            {
+                SupportDocuments.ShowDialog();
+            }));
+        }
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            picDoucments.Image = SDImage;
+        }
+
+        private void dgvAccount_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == clnTitleofAccount.Index)
+            {
+                SubAccountDataSource(e.RowIndex);
+            }
+            if (e.ColumnIndex >= clnTitleofAccount.Index && e.ColumnIndex < clnDescription.Index)
+            {
+                if (FLogIn) return;
+                try
+                {
+                    string[] Account = new string[] { Convert.ToString(dgvAccount.Rows[e.RowIndex].Cells[clnTitleofAccount.Index].Value), Convert.ToString(dgvAccount.Rows[e.RowIndex].Cells[clnTitleofAccount.Index].FormattedValue) };
+                    string SubAccount = "";
+                    try
+                    {
+                        SubAccount = Convert.ToString(((DataGridViewComboBoxCell)dgvAccount.Rows[e.RowIndex].Cells[clnSubAccountDetail.Index]).Items.Cast<DataRowView>().Where(w => w[0].ToString() == Convert.ToString(dgvAccount.Rows[e.RowIndex].Cells[clnSubAccountDetail.Index].Value)).ToArray()[0][1].ToString());//[Account[0] == AccountHead.ClientAccount ? 3 : 1].ToString());
+                    }
+                    catch (Exception ee) { }
+                    if ((Account[0] == AccountHead.ClientAccount || Account[0] == AccountHead.DirectorAccount || Account[0] == AccountHead.EmployeeAccount) && SubAccount != "")
+                    {
+                        dgvAccount.Rows[e.RowIndex].Cells[clnDescription.Index].Value = "Payment to " + SubAccount;
+
+                    }
+                    else
+                    {
+                        dgvAccount.Rows[e.RowIndex].Cells[clnDescription.Index].Value = "Payment to " + Account[1];
+
+                    }
+
+                    for (int i = 0; i < dgvAccount.SelectedRows.Count; i++)
+                    {
+                        //do something
+                    }
+                    //txtBeneficiary.Text = Convert.ToString(dgvAccount.Rows[dgvAccount.CurrentCell.RowIndex].Cells[clnBeneficiary.Index].Value) == "" ?
+                    //   (SubAccount == "" ? Account[1] : SubAccount) : dgvAccount.Rows[dgvAccount.CurrentCell.RowIndex].Cells[clnBeneficiary.Index].Value.ToString();
+                    txtBeneficiary.Text = Convert.ToString(dgvAccount.Rows[0].Cells[clnSubAccountDetail.Index].EditedFormattedValue);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                    Errors.writeline(ex.Message.ToString(), "Payment_ cmbToPay_SelectedValueChanged");
+                }
+            }
+        }
+
+        private void SubAccountDataSource(int RowInd)
+        {
+            if (RowInd > -1)
+            {
+
+                if (FLogIn) return;
+                try
+                {
+                    DataGridViewComboBoxCell dgvcbc = new DataGridViewComboBoxCell();
+                    if (Convert.ToString(dgvAccount.Rows[RowInd].Cells[clnTitleofAccount.Index].Value) == AccountHead.ClientAccount)//Client
+                    {
+
+                        DataTable dt = new DataTable();
+                        dgvcbc.DataSource = dt;
+                        DataView SortingData = dtClients.DefaultView;
+                        SortingData.Sort = "clientid ASC";
+                        dtClients = SortingData.ToTable();
+                        dgvcbc.DataSource = dtClients;
+                        dgvcbc.DisplayMember = "clienttitle";
+                        dgvcbc.ValueMember = "clientid";
+                        dgvAccount[clnSubAccountDetail.Index, RowInd] = dgvcbc;
+                        dgvAccount[clnSubAccountDetail.Index, RowInd].ReadOnly = false;
+
+                    }
+                    else if (Convert.ToString(dgvAccount.Rows[RowInd].Cells[clnTitleofAccount.Index].Value) == AccountHead.DirectorAccount)//Director
+                    {
+                        DataTable dt = new DataTable();
+                        dgvcbc.DataSource = dt;
+                        dgvcbc.DataSource = dtdirector;
+                        dgvcbc.DisplayMember = "directorname";
+                        dgvcbc.ValueMember = "directorid";
+                        dgvAccount[clnSubAccountDetail.Index, RowInd] = dgvcbc;
+                        dgvAccount[clnSubAccountDetail.Index, RowInd].ReadOnly = false;
+                    }
+                    else if (Convert.ToString(dgvAccount.Rows[RowInd].Cells[clnTitleofAccount.Index].Value) == AccountHead.EmployeeAccount)//Employees
+                    {
+                        DataTable dt = new DataTable();
+                        dgvcbc.DataSource = dt;
+                        dgvcbc.DataSource = dtEmployees;
+                        dgvcbc.DisplayMember = "hrname";
+                        dgvcbc.ValueMember = "hrid";
+                        dgvAccount[clnSubAccountDetail.Index, RowInd] = dgvcbc;
+                        dgvAccount[clnSubAccountDetail.Index, RowInd].ReadOnly = false;
+                    }
+                    else
+                    {
+                        DataTable dt = new DataTable();
+                        dgvcbc.DataSource = dt;
+                        dgvAccount[clnSubAccountDetail.Index, RowInd].Value = null;
+                        dgvAccount[clnSubAccountDetail.Index, RowInd].ReadOnly = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                    Errors.writeline(ex.Message.ToString(), "Payment_ cmbDebit_SelectedIndexChanged");
+                }
+            }
+
+        }
+
+        private void dgvAccount_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.ThrowException = false;
+        }
+
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            txtJVNum.ReadOnly = false;
+            txtJVNum.Focus();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string msg = MessageBox.Show("Delete this transaction?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning).ToString();
+                if (msg == "Yes")
+                {
+                    if (txtJVNum.Text != "")
+                    {
+                        dgvAccount.Rows[dgvAccount.CurrentRow.Index].Cells[clnStatus.Index].Value = "1";
+                        dgvAccount.CurrentRow.Visible = false;
+                    }
+                    else
+                    {
+                        dgvAccount.Rows.RemoveAt(dgvAccount.CurrentRow.Index);
+                    }
+                    Calculate();
+                }
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Errors.writeline(er.Message.ToString(), "Form_ Frm_Voucher_ deleteToolStripMenuItem_Click");
+            }
+        }
+        private void dgvAccount_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                contextMenuStrip1.Show();
+            }
+        }
+
+        private void dgvAccount_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+
+            //int? rowIdx = e?.RowIndex;
+            //int? colIdx = e?.ColumnIndex;
+            //if (rowIdx.HasValue && colIdx.HasValue)
+            //{
+            //    var dgv = (DataGridView)sender;
+            //    var cell = dgv?.Rows?[rowIdx.Value]?.Cells?[colIdx.Value]?.Value;
+            //    if (dgv.Columns[colIdx.Value].Index == clnDebit.Index)
+            //    {
+            //        newValue = Convert.ToDouble(dgvAccount[colIdx.Value, rowIdx.Value].Value);
+            //        if (oldValue != newValue)
+            //        {
+            //            if (!string.IsNullOrEmpty(cell?.ToString()))
+            //            {
+            //                dgvAccount.Rows[e.RowIndex].Cells[clnStatus.Index].Value = "2";
+
+            //            };
+            //        }
+
+            //    };
+            //};
+
+            //a = txtBeneficiary.Text;
+
+            //b = Convert.ToString(dgvAccount.Rows[0].Cells[clnDebit.Index].Value);
+
+            //c = dtpDate.Value.ToString("ddMMyyyy");
+            //d = chkCrossCheque.Checked == true ? "0" : "1";
+            //f = cmbBankName.Text;
+            AllowNewRow();
+            resetRow = true;
+            currentRow = e.RowIndex;
+            if (e.RowIndex > -1 && e.ColumnIndex == clnDebit.Index)
+            {
+
+
+            }
+            //if (e.RowIndex > -1 && e.ColumnIndex == clnCredit.Index)
+            //{
+            //    dgvAccount[clnDebit.Index, e.RowIndex].Value = "0";
+            //}
+            Calculate();
+
+        }
+
+        private void dgvAccount_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+          
+            dgRowCount = dgvAccount.Rows.Count;
+          
+            if (dgvAccount.Rows[e.RowIndex].Cells[clnStatus.Index].Value == null)
+                dgvAccount.Rows[e.RowIndex].Cells[clnStatus.Index].Value = "2";
+
+            //if (dgvAccount.Rows.Count > 0)
+            //{
+            //    dgvAccount.Rows[e.RowIndex].Cells[clnFlag.Index].Value = "0";
+            //}
+            //else
+            //{
+            //    dgvAccount.Rows[e.RowIndex].Cells[clnFlag.Index].Value = "1";
+
+            //}
+            if (dgvAccount.Rows[e.RowIndex].Cells[clnVseq.Index].Value == null)
+                dgvAccount.Rows[e.RowIndex].Cells[clnVseq.Index].Value = "0";
+            dtpDate.Value = DateTime.Today;
+
+
+            //for (int i = 0; i < dgvAccount.RowCount; i++)
+            //{
+            //   string r= Convert.ToString(dgvAccount.Rows[i].Cells[clnDebit.Index].Value);
+            //}
+
+        }
+     
+        public void DgRowCount()
+        {
+            if (dgRowCount > dtrowCount)
+                dgvAccount.Rows[dgvAccount.CurrentCell.RowIndex].Cells[clnFlag.Index].Value = "0";
+
+
+        }
+       
+        private void dgvAccount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                SendKeys.Send("{tab}");
+            }
+            else if (e.KeyCode == Keys.F3)
+            {
+                if (dgvAccount.CurrentRow.Index > 0 && dgvAccount.CurrentCell.ReadOnly == false)
+                {
+                    int colIndex = dgvAccount.CurrentCell.ColumnIndex;
+                    dgvAccount.CurrentCell.Value = dgvAccount.Rows[dgvAccount.CurrentRow.Index - 1].Cells[colIndex].Value;
+                }
+            }
+            else if (e.KeyCode == Keys.F7 && dgvAccount.CurrentCell.ColumnIndex == clnTitleofAccount.Index)
+            {
+                frmAccountsSearching srch = new frmAccountsSearching();
+                srch.rdoGeneralAcc.Checked = true;
+                if (srch.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    dgvAccount.CurrentCell.Value = srch.SearchingCCode;
+                }
+            }
+        }
+
+        private void dgvAccount_SelectionChanged(object sender, EventArgs e)
+        {
+            if (resetRow)
+            {
+                resetRow = false;
+                dgvAccount.CurrentCell = dgvAccount.Rows[currentRow].Cells[dgvAccount.CurrentCell.ColumnIndex];
+            }
+        }
+
+        private void txtJVNum_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DataTable dt = Query.MasterQueryEC(@"select vd.*,get_accountitle_m(vd.fkaccountid,fkclientcode,fkdirectorid,fkhrid,fkbankid) AS title,
+                   (CASE WHEN  trunc(To_Date(vdate,'dd Mon yyyy')) = trunc(To_Date(SYSDATE,'dd Mon yyyy')) THEN 1 ELSE 0 END)  AS editable from Voucherdetail vd 
+                    where VNO = '" + txtJVNum.Text + "' AND fkbrcode = '" + Variable.BranchCode + "' AND vtype = 'PV' and status <> 1 AND cr = 0 ORDER BY vseq asc");
+                if (dt.Rows.Count > 0)
+                {
+                    dgvAccount.RowsAdded -= new DataGridViewRowsAddedEventHandler(dgvAccount_RowsAdded);
+                    dgvAccount.Rows.Clear();
+                    txtJVNum.Text = "";
+                    txtJVNum.ReadOnly = true;
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        int Index = dgvAccount.Rows.Add();
+                        dgvAccount.BeginEdit(true);
+                        dgvAccount.CurrentCell = dgvAccount.Rows[Index].Cells[clnTitleofAccount.Index];
+                        dgvAccount.Rows[Index].Cells[clnTitleofAccount.Index].Value = dt.Rows[i]["fkaccountid"];
+                        dgvAccount.Rows[Index].Cells[clnDescription.Index].Value = dt.Rows[i]["description"].ToString();
+                        dgvAccount.Rows[Index].Cells[clnDebit.Index].Value = (dt.Rows[i]["dr"] == DBNull.Value ? null : dt.Rows[i]["dr"].ToString());
+                        dgvAccount.Rows[Index].Cells[clnVseq.Index].Value = "0";
+                        dgvAccount.CurrentCell = dgvAccount.Rows[Index].Cells[clnVseq.Index];
+                        dgvAccount.Rows[Index].Cells[clnSubAccountDetail.Index].Value =
+                            (Convert.ToString(dt.Rows[i]["fkaccountid"]) == AccountHead.ClientAccount ? dt.Rows[i]["fkclientcode"].ToString() :
+                            (Convert.ToString(dt.Rows[i]["fkaccountid"]) == AccountHead.EmployeeAccount ? dt.Rows[i]["fkhrid"].ToString() :
+                            (Convert.ToString(dt.Rows[i]["fkaccountid"]) == AccountHead.DirectorAccount ? dt.Rows[i]["fkdirectorid"].ToString() : "")));
+                        dgvAccount.Rows[Index].Cells[clnStatus.Index].Value = "0";
+                        dgvAccount.EndEdit();
+                    }
+                    cmbBankName.SelectedValue = Convert.ToString(dt.Rows[0]["fkbankid"]);
+                    rdoCheque.Checked = (cmbBankName.SelectedValue != null ? true : false);
+                    rdoCash.Checked = !rdoCheque.Checked;
+                    cmbTransCode.SelectedValue = dt.Rows[0]["fktransactionid"].ToString();
+                    //Calculate();
+                    //dgvAccount.Rows[dgvAccount.Rows.Count - 1].Cells[clnVseq.Index].Value = dgvAccount.Rows.Count.ToString();
+                    dgvAccount.RowsAdded += new DataGridViewRowsAddedEventHandler(dgvAccount_RowsAdded);
+                    dgvAccount.Rows.Add();
+                }
+                else
+                {
+                    MessageBox.Show("Voucher Number not found...!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void txtJVNum_Leave(object sender, EventArgs e)
+        {
+            txtJVNum.Text = "";
+            txtJVNum.ReadOnly = true;
+        }
+
+        private void cmbBankName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!FLogIn && cmbBankName.SelectedValue != null && rdoCheque.Checked == true)
+                {
+                    fillBankBal();
+                    DataRowView dr = (DataRowView)cmbBankName.SelectedItem;
+                    txtBranch.Text = dr["branchname"].ToString();
+                    txtIBAN.Text = dr["iban"].ToString();
+                }
+                else if (rdoCash.Checked == true)
+                {
+                    fillCashBal();
+                    txtBranch.Text = "";
+                    txtIBAN.Text = "";
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void rdoCash_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rdoCash.Checked == true)
+                {
+                    cmbBankName.Enabled = false;
+                    cmbBankName.SelectedIndex = -1;
+                    cmbBankName.SelectedValue = "";
+                    dgvAccount.Rows.Cast<DataGridViewRow>().ToList().ForEach(fe => fe.Cells[clnChequeNo.Index].Value = "");
+                }
+                else
+                {
+                    cmbBankName.Enabled = true;
+                    cmbBankName.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                Errors.writeline(ex.Message.ToString(), "Payment_rdoCash_CheckedChanged");
+            }
+            //cmbBankName_SelectedIndexChanged(null, null);
+        }
+
+        private void dgvAccount_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            //if (dgvAccount.Rows[e.RowIndex].Cells[e.ColumnIndex].ReadOnly == true)
+            //    SendKeys.Send("{tab}");
+
+
+            ////string value1 = dgvAccount.CurrentRow.Cells[0].Value != null ? dgvAccount.CurrentRow.Cells[0].Value.ToString() : "";
+            ////txtBeneficiary.Text = value1;
+
+
+            //List<string> listNames;
+            //listNames = new List<string>();
+            //foreach (DataGridViewRow row in dgvAccount.Rows)
+            //{
+            //    dgvAccount.Rows[0].Cells[6].Value = txtBeneficiary.Text;
+            //    foreach (DataGridViewCell cell in row.Cells)
+            //    {
+            //        if (cell.ColumnIndex == 4) //SET YOUR PARTICULAR COLUMN INDEX HERE!!
+            //        {
+
+            //            if (cell.FormattedValue != String.Empty)
+            //                //add a name from 1st column (column with index 0):
+            //                listNames.Add(cell.Value.ToString());
+            //        }
+            //    }
+
+            //    //show ann the names from the list:
+            //    string strNames = null;
+            //    foreach (string name in listNames)
+            //        strNames += name + Environment.NewLine;
+            //    string n = strNames;
+            //    //dgvAccount.Columns["clnBeneficiary"].Visible = true;
+            //}
+
+        }
+
+        private void dgvAccount_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (dgvAccount.CurrentCell.ColumnIndex == clnTitleofAccount.Index)
+                ((ComboBox)e.Control).KeyDown += new KeyEventHandler(frmPVoucherNew_KeyDown);
+            else if (e.Control is ComboBox)
+                ((ComboBox)e.Control).KeyDown -= new KeyEventHandler(frmPVoucherNew_KeyDown);
+        }
+        //string KeyDown = "";
+        void frmPVoucherNew_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter && !dgvAccount.Focused)
+                    SendKeys.Send("{tab}");
+            }
+            catch
+            { }
+        }
+
+        private void dgvAccount_EditingControlShowing_1(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            var comboBox = e.Control as DataGridViewComboBoxEditingControl;
+            if (comboBox != null)
+            {
+                comboBox.DropDownStyle = ComboBoxStyle.DropDown;
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+                comboBox.Validated += new EventHandler(comboBox_Validated);
+
+
+
+            }
+        }
+
+
+
+        void comboBox_Validated(object sender, EventArgs e)
+        {
+            dgvAccount.CurrentRow.Cells[dgvAccount.CurrentCell.ColumnIndex].Value = (sender as ComboBox).SelectedValue.ToString();
+        }
+        double amount = 0;
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            for (int i = 0; i < dgvAccount.Rows.Count - 1; i++)
+            {
+                amount = Convert.ToDouble(dgvAccount.Rows[i].Cells[clnDebit.Index].Value);
+                string name = Convert.ToString(dgvAccount.Rows[i].Cells[clnBeneficiary.Index].Value);
+                string date = dtpDate.Value.ToString("ddMMyyyy");
+                string ACpayee = chkCrossCheque.Checked == true ? "0" : "1";
+                string bnkName = cmbBankName.Text;
+
+              //  frmReportView.ShowBox("Cheque Print PV", name, amount.ToString(), date, ACpayee, bnkName);
+
+
+            }
+            //foreach (DataGridViewRow row in dgvAccount.Rows)
+            //{
+            //    string a = txtBeneficiary.Text;
+            //    string b = Convert.ToString(dgvAccount.Rows[0].Cells[clnDebit.Index].Value);
+            //    string c = dtpDate.Value.ToString("ddMMyyyy");
+            //    string d = chkCrossCheque.Checked == true ? "0" : "1";
+            //    string f = cmbBankName.Text;
+
+            //    FrmReportView.ShowBox("Cheque Print PV", a, b, c, d, f);
+
+            //}
+            //   FrmReportView.ShowBox("Cheque Print PV", txtBeneficiary.Text, Convert.ToString(dgvAccount.Rows[0].Cells[clnDebit.Index].Value), dtpDate.Value.ToString("ddMMyyyy"), chkCrossCheque.Checked == true ? "0" : "1", cmbBankName.Text);
+
+            Clear();
+            txtBeneficiary.Text = "";
+            cmbBankName.SelectedIndex = -1;
+            txtBranch.Text = "";
+            dgvAccount.Rows.Add();
+            Documentid = "0";
+            dtpDate.Focus();
+            lblImage.Text = "0";
+
+        }
+        private void dgvAccount_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvAccount_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void txtBeneficiary_Leave(object sender, EventArgs e)
+        {
+
+            if (dgvAccount.CurrentCell.RowIndex > -1)
+                dgvAccount.Rows[dgvAccount.CurrentCell.RowIndex].Cells[clnBeneficiary.Index].Value = txtBeneficiary.Text;
+        }
+
+        private void dgvAccount_RowLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            //txtBeneficiary.Text = Convert.ToString(dgvAccount.Rows[dgvAccount.CurrentCell.RowIndex].Cells[clnBeneficiary.Index].Value) == "" ?
+            //   (SubAccount == "" ? Account[1] : SubAccount) : dgvAccount.Rows[dgvAccount.CurrentCell.RowIndex].Cells[clnBeneficiary.Index].Value.ToString() ;
+            // txtBeneficiary.Text = Convert.ToString(dgvAccount.Rows[0].Cells[clnTitleofAccount.Index].EditedFormattedValue);
+
+        }
+
+        private void dgvAccount_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvQuery_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        {
+
+        }
+
+        private void dgvAccount_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            int? rowIdx = e?.RowIndex;
+            int? colIdx = e?.ColumnIndex;
+            // var dgv = (DataGridView)sender;
+
+            if (dgvAccount.Columns[colIdx.Value].Index == clnDebit.Index)
+            {
+                oldValue = Convert.ToDouble(dgvAccount[colIdx.Value, rowIdx.Value].Value);
+            }
+
+
+        }
+    }
+}

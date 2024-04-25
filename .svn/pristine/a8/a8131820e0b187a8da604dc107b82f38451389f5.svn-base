@@ -1,0 +1,321 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Data;
+namespace ERP
+
+{
+    class FillControls
+    {
+       internal static void FillcmbPartyAcc(ComboBox cmb)
+        {
+            cmb.DataSource = Query.DetailAccounts();
+            cmb.DisplayMember = "title";
+            cmb.ValueMember = "account";
+            cmb.SelectedIndex = -1;
+        }
+       internal static void FillcmbAreaIndex(ComboBox cmb)
+       {
+           cmb.DataSource = Query.getAreaIndex();
+           cmb.DisplayMember = "Name";
+           cmb.ValueMember = "Id";
+           cmb.SelectedIndex = -1;
+       }
+       internal static void FillcmbAccounts(ComboBox cmb)
+       {
+           cmb.DataSource = Query.Accounts();
+           cmb.DisplayMember = "accounttitle";
+           cmb.ValueMember = "accountid";
+           cmb.SelectedIndex = -1;
+       }
+       internal static void FillcmbTest(ComboBox cmb, int id)
+       {
+           cmb.DataSource = Query.TestIndex(id);
+           cmb.DisplayMember = "Title";
+           cmb.ValueMember = "Id";
+           cmb.SelectedIndex = 0;
+          
+       }
+       internal static void FillcmbAccLvl4Heads(ComboBox cmb)
+       {
+           cmb.DataSource = Query.AccountsLvl4Head();
+           cmb.DisplayMember = "title";
+           cmb.ValueMember = "account";
+           cmb.SelectedIndex = -1;
+       }   
+       internal static void  FillcmbNarration(ComboBox cmb)
+        {
+            cmb.DataSource = Query.NarrationIndex();
+            cmb.DisplayMember = "Title";
+            cmb.ValueMember = "Code";
+            cmb.SelectedIndex = -1;
+        }
+       internal static void FillcmbCashAndBankAcc(ComboBox cmb)
+       {
+           cmb.DataSource = Query.CashBanks();
+           cmb.DisplayMember = "title";
+           cmb.ValueMember = "account";
+           cmb.SelectedIndex = -1;
+       }
+       internal static void FillcmbPackage(ComboBox cmb)
+       {
+           cmb.DataSource = Query.PackageIndex();
+           cmb.DisplayMember = "packagename_name";
+           cmb.ValueMember = "package_id";
+           cmb.SelectedIndex = -1;
+       }
+       internal static void FillcmbCunsultant(ComboBox cmb)
+       {
+           cmb.DataSource = Query.ConsultantIndex();
+           cmb.DisplayMember = "Name";
+           cmb.ValueMember = "Id";
+           cmb.SelectedIndex = 0;
+       }
+       internal static void FillcmbTemplateIndex(ComboBox cmb)
+       {
+           cmb.DataSource = Query.TemplateIndex();
+           cmb.DisplayMember = "TemplateName";
+           cmb.ValueMember = "Id";
+           cmb.SelectedIndex = -1;
+       }
+       internal static void FillcmbTestCatagory(ComboBox cmb)
+       {
+            cmb.DataSource = Query.TestCatagoryIndex();
+
+
+
+            cmb.DisplayMember = "Title";
+            cmb.ValueMember = "Id";
+            cmb.SelectedIndex = -1;
+       }
+       internal static void FillcmbIPDTestCatagory(ComboBox cmb)
+       {
+           cmb.DataSource = Query.IPDTestCatagoryIndex();
+
+
+
+           cmb.DisplayMember = "Title";
+           cmb.ValueMember = "Id";
+           cmb.SelectedIndex = -1;
+       }
+       internal static void FillcmbTestCatagoryForOPD(ComboBox[] cmbArr)
+       {
+           DataTable dt = Query.TestCatagoryIndexForOPD();
+           foreach (ComboBox  cmb in cmbArr)
+           {
+               cmb.DataSource = dt;
+               cmb.DisplayMember = "Title";
+               cmb.ValueMember = "Id";
+               cmb.SelectedIndex = -1;    
+           }
+           
+       }
+       internal static void FillcmbPatientCatagory(ComboBox cmb)
+       {
+           cmb.DataSource = Query.PatientCatagory ();
+           cmb.DisplayMember = "Title";
+           cmb.ValueMember = "Id";
+           cmb.SelectedIndex = 0;
+       }
+       internal static void FillcmbLabTest(ComboBox cmb)
+       {
+           cmb.DataSource = Query.LabTest();
+           cmb.DisplayMember = "Title";
+           cmb.ValueMember = "Id";
+           cmb.SelectedIndex = 0;
+       }
+       internal static void FillcmbLabDepartment(ComboBox cmb)
+       {
+           cmb.DataSource = Query.DepartmentIndex ();
+           cmb.DisplayMember = "Title";
+           cmb.ValueMember = "Id";
+           cmb.SelectedIndex = 0;
+       }
+       internal static void FillcmbMember(ComboBox cmb)
+       {
+           cmb.DataSource = Query.MemberIndex();
+           cmb.DisplayMember = "name";
+           cmb.ValueMember = "newno";
+           cmb.SelectedIndex = 1;
+       }
+       internal static void FillReferenceIndex(ComboBox cmb)
+       {
+           cmb.DataSource = Query.ReferenceIndex ();
+           cmb.DisplayMember = "name";
+           cmb.ValueMember = "id";
+           cmb.SelectedIndex = -1;
+       }
+       internal static void FillcmbUser(ComboBox cmb)
+       {
+           cmb.DataSource = Query.UserIndex();
+           cmb.DisplayMember = "UserId";
+           cmb.ValueMember = "Userid";
+           cmb.SelectedIndex = -1;
+       }
+       internal static void FillcmbRoomindex(ComboBox cmb)
+       {
+           cmb.DataSource = Query.RoomCharges();
+           cmb.DisplayMember = "fullname";
+           cmb.ValueMember = "id";
+           cmb.SelectedIndex = -1;
+       }
+       internal static void FillcmbDepartmentIndex(ComboBox cmb)
+       {
+           cmb.DataSource = Query.DepartmentIndex();
+           cmb.DisplayMember = "title";
+           cmb.ValueMember = "id";
+           cmb.SelectedIndex = -1;
+       }
+       internal static void FillUserLevelIndex(ComboBox cmb)
+       {
+           cmb.DataSource = Query.UserlevelIndex();
+           cmb.DisplayMember = "designation";
+           cmb.ValueMember = "designation";
+           cmb.SelectedIndex = -1;
+       }
+       internal static void FillUSer(ComboBox cmb)
+       {
+           DataTable Users = new DataTable();
+           Users = Query.UserLoginIndex();
+           cmb.DataSource = Users;
+
+           DataRow rw = Users.NewRow();
+           rw["userid"] = "All";
+           Users.Rows.InsertAt(rw, 0);
+
+           cmb.DisplayMember = "userid";
+           cmb.ValueMember = "userid";
+           cmb.SelectedValue = "All";
+       }
+
+       //BASIT 28-07-2020
+       //internal static void FillcmbCatagoryTest(ComboBox cmb)
+       //{
+       //    cmb.DataSource = Query.CatagoryTestIndex();
+       //    cmb.DisplayMember = "Title";
+       //    cmb.ValueMember = "Id";
+       //    cmb.SelectedIndex = -1;
+
+       //}
+       internal static void FillcmbCatagoryTest(ComboBox cmb, string id)
+       {
+
+           DataTable dtCataGoryTest = new DataTable();
+           cmb.DataSource = dtCataGoryTest;
+           if (id == "All")
+           {
+
+               dtCataGoryTest.Columns.Add("Title", typeof(String));
+               dtCataGoryTest.Columns.Add("Id", typeof(String));
+               DataRow rw = dtCataGoryTest.NewRow();
+               rw["Title"] = "All";
+               rw["Id"] = "All";
+               dtCataGoryTest.Rows.InsertAt(rw, 0);
+             } 
+           else
+           {
+               dtCataGoryTest = Query.TestTypeId(id);
+               DataRow rw = dtCataGoryTest.NewRow();
+               rw["Title"] = "All";
+               rw["Id"] = "All";
+               dtCataGoryTest.Rows.InsertAt(rw, 0);
+           
+           }
+
+           cmb.DataSource = dtCataGoryTest;
+           cmb.DisplayMember = "Title";
+           cmb.ValueMember = "Id";
+       }
+
+       internal static void FillcmbAllTestCatagory(ComboBox cmb)
+       {
+           DataTable dtAllCataGory = new DataTable();
+           cmb.DataSource = dtAllCataGory;
+
+           dtAllCataGory = Query.TestCatagoryIndex();
+
+           DataRow rw = dtAllCataGory.NewRow();
+           rw["Title"] = "All";
+           rw["Id"] = "All";
+           dtAllCataGory.Rows.InsertAt(rw, 0);
+
+           cmb.DataSource = dtAllCataGory;
+           cmb.DisplayMember = "Title";
+           cmb.ValueMember = "Id";
+       }
+
+
+       internal static void FillcmBLocation(ComboBox cmb)
+       {
+           cmb.DataSource = Query.LocationIndex();
+           cmb.DisplayMember = "Location";
+           cmb.ValueMember = "Location";
+           cmb.SelectedIndex = -1;
+       }
+
+
+
+       internal static void FillcmbTest(ComboBox cmb)
+       {
+           cmb.DataSource = Query.cmbTestIndex();
+           cmb.DisplayMember = "Title";
+           cmb.ValueMember = "Id";
+           cmb.SelectedIndex = -1;
+       }
+
+
+       internal static void FillcmbTestID(ComboBox cmb, string id)
+       {
+
+           DataTable dtCataGoryTest = new DataTable();           
+           dtCataGoryTest = Query.TestTypeId(id);           
+           cmb.DataSource = dtCataGoryTest;
+           cmb.DisplayMember = "Title";
+           cmb.ValueMember = "Id";
+           cmb.SelectedIndex = -1;
+       }
+
+
+
+       internal static void FillcmbZakatReference(ComboBox cmb)
+       {
+           DataTable dt = new DataTable();
+           cmb.DataSource = dt;
+
+           dt = Query.ZakatRecipient();
+           
+           DataRow rw = dt.NewRow();
+           rw["name"] = "All";
+           rw["id"] = "All";
+           dt.Rows.InsertAt(rw, 0);
+
+           cmb.DataSource = dt;
+           cmb.DisplayMember = "name";
+           cmb.ValueMember = "id";
+           cmb.SelectedIndex = 0;
+       }
+
+
+       internal static void FillBMGMember(ComboBox cmb)
+       {
+           DataTable dt = new DataTable();
+           cmb.DataSource = dt;
+
+           dt = Query.MBGMember();
+         
+           DataRow rw = dt.NewRow();
+           rw["name"] = "All";
+           rw["newno"] = "All";
+           dt.Rows.InsertAt(rw, 0);
+
+           cmb.DataSource = dt;
+           cmb.DisplayMember = "name";
+           cmb.ValueMember = "newno";
+           cmb.SelectedIndex = 0;
+       }
+
+
+    }
+}

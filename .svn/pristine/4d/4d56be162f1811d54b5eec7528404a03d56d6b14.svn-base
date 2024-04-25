@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<configuration>
+  <configSections>
+  </configSections>
+  <connectionStrings>
+      <add name="cnnStr" providerName="System.Data.OleDb" connectionString="Data Source=192.168.1.101\SQLEXPRESS;Persist Security Info=True;Password=mutahhar11;User ID=mutahhar;Initial Catalog=Bakery"/>
+    <add name="OracleConnection"  connectionString="user id=hms;password=Nubit@101171;Pooling=true;Min Pool Size=0;Max Pool Size=100;validate connection=true;Connection Lifetime=0;Connection Timeout=0;data source=(DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=MyIP)(PORT=39493))(CONNECT_DATA=(SERVICE_NAME=xe)))"/>
+    </connectionStrings>
+<startup><supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.0"/></startup>
+  <startup useLegacyV2RuntimeActivationPolicy="true">
+    <supportedRuntime version="v4.0"/>
+  </startup>
+  
+</configuration>

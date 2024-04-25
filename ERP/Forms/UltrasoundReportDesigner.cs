@@ -1,0 +1,399 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Windows.Controls;
+
+namespace ERP.Forms
+{
+    public partial class UltrasoundReportDesigner : Form
+    {
+        public UltrasoundReportDesigner()
+        {
+            InitializeComponent();
+            FillControls.FillcmbTemplateIndex(cmbTemplate);            
+            
+        }
+        string ConsultantId = "";
+
+        string statusSlip = "";
+        void LoadPatientInfoOPD()
+        {
+            
+            DataTable dt = Query.OPDReceiptDetail(txtSlipNo.Text);
+            if (dt.Rows .Count > 0)
+            {
+                
+                    txtReportNo.Text = "";
+                    txtSlipDate.Text = ((DateTime)dt.Rows[0]["Vdate"]).ToString("dd-MMM-yyyy");
+                    txtPatientName.Text = dt.Rows[0]["patienttitle"].ToString() + dt.Rows[0]["patientname"].ToString();
+                    txtAge.Text = dt.Rows[0]["age"].ToString() + " " + dt.Rows[0]["ageunit"].ToString();
+                    txtGender.Text = dt.Rows[0]["gender"].ToString();
+                    txtcontact.Text = dt.Rows[0]["contactno"].ToString();
+                    ConsultantId = dt.Rows[0]["contactno"].ToString();
+                    
+                     statusSlip = dt.Rows[0]["status"].ToString();
+                     if (statusSlip == "1")
+                     {
+                         lblSlipCancel.Visible = true;
+                     }
+                     else
+                     {
+                         lblSlipCancel.Visible = false;
+                     }
+
+            }
+        }
+        void LoadPatientInfoIPD()
+        {
+
+            DataTable dt = Query.IPDAdmissioninfo(txtSlipNo.Text);
+            if (dt.Rows.Count > 0)
+            {
+                txtReportNo.Text = "";
+                txtSlipDate.Text = ((DateTime)dt.Rows[0]["receiptdate"]).ToString("dd-MMM-yyyy");
+                txtPatientName.Text = dt.Rows[0]["title"].ToString() + dt.Rows[0]["patientname"].ToString();
+                txtAge.Text = dt.Rows[0]["age"].ToString() + " " + dt.Rows[0]["ymd"].ToString();
+                txtGender.Text = dt.Rows[0]["gender"].ToString();
+                txtcontact.Text = dt.Rows[0]["mobile"].ToString();
+                
+            }
+        }
+        bool FillDetail(string ReportNo, string SlipNo,string IPD_OPD)
+        {
+            string q = "select * from testreportdoc where (SlipNo = '" + SlipNo + "' AND ipdopd='" + IPD_OPD + "') or ReportNo = '" + ReportNo + "'";
+            DataTable dt = Query.getData(q);
+                Validation.Clear(tabpgDetail);
+            if (dt.Rows.Count > 0 )
+            {
+                txtReportNo.Text = dt.Rows[0]["ReportNo"].ToString();
+                txtSlipNo.Text = dt.Rows[0]["SlipNo"].ToString();
+                dtpIssueDate.Value = (DateTime)dt.Rows[0]["issuedate"];
+                txtSlipDate.Text = dt.Rows[0]["slipdate"].ToString();
+                txtPatientName.Text = dt.Rows[0]["patientname"].ToString() ;
+                txtAge.Text = dt.Rows[0]["age"].ToString() ;
+                txtGender.Text = dt.Rows[0]["gender"].ToString();
+                txtcontact.Text = dt.Rows[0]["contact"].ToString();
+                txtRefPhysician.Text = dt.Rows[0]["refphysician"].ToString();
+                txtClinicalDiags.Text = dt.Rows[0]["clinicaldiagnosis"].ToString();
+                rtxtDoc.Rtf = dt.Rows[0]["document"].ToString();
+                rtxtDoc2.Rtf = dt.Rows[0]["document1"].ToString();
+                rtxtDoc3.Rtf = dt.Rows[0]["document2"].ToString();
+                txtPara.Text = dt.Rows[0]["Para"].ToString();
+                txtLMP .Text  = dt.Rows[0]["LMP"].ToString();
+                txtCO.Text = dt.Rows[0]["CO"].ToString();
+                return true;
+            }
+            return false;
+        }
+        bool FillDetailIPD(string serialno)
+        {
+            DataTable dt = Query.getData("SELECT inptestid,receiptdate,patientname,age,gender,mobile FROM inptestcharges left JOIN admissioninfo ON inptestcharges.serialno=admissioninfo.serialno  WHERE testtypeid='5' AND serialno='"+serialno+"'");
+            Validation.Clear(tabpgDetail);
+            if (dt.Rows.Count > 0)
+            {
+                txtReportNo.Text = dt.Rows[0]["serialno"].ToString();
+                //txtSlipNo.Text = dt.Rows[0]["SlipNo"].ToString();
+                //dtpIssueDate.Value = (DateTime)dt.Rows[0]["issuedate"];
+                txtSlipDate.Text = dt.Rows[0]["receiptdate"].ToString();
+                txtPatientName.Text = dt.Rows[0]["patientname"].ToString();
+                txtAge.Text = dt.Rows[0]["age"].ToString();
+                txtGender.Text = dt.Rows[0]["gender"].ToString();
+                txtcontact.Text = dt.Rows[0]["mobile"].ToString();
+                //txtRefPhysician.Text = dt.Rows[0]["refphysician"].ToString();
+                //txtClinicalDiags.Text = dt.Rows[0]["clinicaldiagnosis"].ToString();
+                //rtxtDoc.Rtf = dt.Rows[0]["document"].ToString();
+                //rtxtDoc2.Rtf = dt.Rows[0]["document1"].ToString();
+                //rtxtDoc3.Rtf = dt.Rows[0]["document2"].ToString();
+                //txtPara.Text = dt.Rows[0]["Para"].ToString();
+                //txtLMP.Text = dt.Rows[0]["LMP"].ToString();
+                //txtCO.Text = dt.Rows[0]["CO"].ToString();
+                return true;
+            }
+            return false;
+        }
+        
+        private void btnSaveInWord_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog file = new SaveFileDialog();
+            if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                rtxtDoc.SaveFile(file.FileName, RichTextBoxStreamType.RichText);
+                System.Diagnostics.Process.Start(file.FileName);
+            }
+            
+         
+        }
+        private void btnLoadFromWord_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            file.Filter = "";
+            if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                rtxtDoc.LoadFile(file .FileName );
+            }
+        }
+
+        
+        
+        private void UltrasoundReportDesigner_Load(object sender, EventArgs e)
+        {
+            cmbIpdOpd.SelectedIndex = 1;
+            SelectionFont = rtxtDoc.SelectionFont;
+            
+        }
+
+
+        private void btnFontStyle_Click(object sender, EventArgs e)
+        {
+
+            FontDialog FontDlg = new FontDialog();
+            if (FontDlg.ShowDialog() == DialogResult.OK)
+            {
+                (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont = FontDlg.Font;
+            }
+            SelectionFont = (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont;
+            (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).Focus();
+        }
+
+        private void btnFontColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog ColorDlg = new ColorDialog();
+            if (ColorDlg.ShowDialog() == DialogResult.OK)
+            {
+                (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionColor = ColorDlg.Color;
+            }
+        }
+        void LoadTemplate()
+        {
+           
+            string Id = (string)cmbTemplate.SelectedValue;  
+            DataTable dt = Query.getData("SELECT templatedoc FROM DocTemplate WHERE id = '"+Id +"'");
+            if (dt.Rows .Count > 0)
+            {
+                if(tabControl1 .SelectedTab == PgDoc1 )
+                 rtxtDoc.Rtf = dt.Rows[0][0].ToString();
+                else if (tabControl1.SelectedTab == PgDoc2)
+                    rtxtDoc2.Rtf = dt.Rows[0][0].ToString();
+                else
+                    rtxtDoc3.Rtf = dt.Rows[0][0].ToString();
+            }
+        }
+        private void btnLoadTemplate_Click(object sender, EventArgs e)
+        {
+           
+            LoadTemplate();
+            
+        }
+
+        private void txtSlipNo_Validated(object sender, EventArgs e)
+        {
+            if (cmbIpdOpd.SelectedIndex == 1)
+            {
+                if (!FillDetail("", txtSlipNo.Text,"OPD")) LoadPatientInfoOPD();
+            }
+            else  if (cmbIpdOpd.SelectedIndex == 0)
+                {
+                    if (!FillDetail("", txtSlipNo.Text, "IPD")) LoadPatientInfoIPD();
+                }
+
+        }
+        Font SelectionFont;
+        private void btnBold_Click(object sender, EventArgs e)
+        {
+
+            FontStyle style = (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont.Style;
+            if ((tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont.Bold)
+            {
+                style &= ~FontStyle.Bold;
+                btnBold.BackColor = Color.LightGray;
+            }
+            else
+            {
+                style |= FontStyle.Bold;
+                btnBold.BackColor = Color.DarkGray;
+            }
+            (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont = new Font((tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont, style);
+            SelectionFont = (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont;
+            (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).Focus();
+        }
+
+        private void btnItalic_Click(object sender, EventArgs e)
+        {
+            FontStyle style = (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont.Style;
+            if ((tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont.Italic)
+            {
+                style &= ~FontStyle.Italic;
+                btnItalic.BackColor = Color.LightGray;
+            }
+            else
+            {
+                style |= FontStyle.Italic;
+                btnItalic.BackColor = Color.DarkGray;
+            }
+            (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont = new Font((tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont, style);
+            SelectionFont = (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont;
+            (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).Focus();
+        }
+
+        private void btnUnderline_Click(object sender, EventArgs e)
+        {
+            FontStyle style = (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont.Style;
+            if ((tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont.Underline)
+            {
+                style &= ~FontStyle.Underline;
+                btnUnderline.BackColor = Color.LightGray;
+            }
+            else
+            {
+                style |= FontStyle.Underline;
+                btnUnderline.BackColor = Color.DarkGray;
+            }
+            (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont = new Font((tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont, style);
+            SelectionFont = (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionFont;
+            (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).Focus();
+        }
+
+        private void btnLeft_Click(object sender, EventArgs e)
+        {
+            btnLeft.BackColor = Color.LightGray;
+            btnCentre.BackColor = Color.LightGray;
+            btnRight.BackColor = Color.LightGray;
+            if ((tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionAlignment != HorizontalAlignment.Left)
+            {
+                btnLeft.BackColor = Color.LightGray;
+            }
+            else
+            {
+                btnLeft.BackColor = Color.DarkGray;
+            }
+            (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionAlignment = HorizontalAlignment.Left;
+            (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).Focus();
+        }
+        
+        private void btnCentre_Click(object sender, EventArgs e)
+        {
+            if ((tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionAlignment != HorizontalAlignment.Center)
+            {
+                btnCentre.BackColor = Color.LightGray;
+            }
+            else
+            {
+                btnCentre.BackColor = Color.DarkGray;
+            }
+            (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionAlignment = HorizontalAlignment.Center;
+            (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).Focus();
+        }
+
+        private void btnRight_Click(object sender, EventArgs e)
+        {
+
+            if ((tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionAlignment != HorizontalAlignment.Right)
+            {
+                btnCentre.BackColor = Color.LightGray;
+            }
+            else
+            {
+                btnCentre.BackColor = Color.DarkGray;
+            }
+            (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).SelectionAlignment = HorizontalAlignment.Right;
+            (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).Focus();
+        }
+
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmReportView frm = new frmReportView();
+            Reports.ReportDocument rpt = new Reports.ReportDocument();            
+            //(tabControl1.SelectedTab == PgDoc1 ? rtxtDoc : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2 : rtxtDoc3).Text = (tabControl1.SelectedTab == PgDoc1 ? rtxtDoc.Text : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2.Text : rtxtDoc3.Text).TrimEnd(  '\n' );
+            rpt.SetParameterValue("@DocText",(tabControl1.SelectedTab == PgDoc1 ? rtxtDoc.Rtf : tabControl1.SelectedTab == PgDoc2 ? rtxtDoc2.Rtf : rtxtDoc3.Rtf) );
+            rpt.SetParameterValue("@ReportDate", dtpIssueDate .Value);
+            rpt.SetParameterValue("@ReportNo", txtSlipNo.Text);
+            rpt.SetParameterValue("@PatientName", txtPatientName.Text);
+            rpt.SetParameterValue("@Gender", txtGender.Text + " / " +  txtAge.Text);
+            rpt.SetParameterValue("@ClinicalDiagnosis", txtClinicalDiags.Text);
+            rpt.SetParameterValue("@RefPhysician", txtRefPhysician.Text  );
+            rpt.SetParameterValue("@opd_ipd", cmbIpdOpd.Text);
+            rpt.SetParameterValue("@Number", txtcontact.Text);
+            frm.rptViewer.ReportSource = rpt;
+            frm.Show();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (cmbIpdOpd.Text == "") 
+            {
+                MessageBox.Show("Select IPD or OPD");
+                cmbIpdOpd.Focus();
+                    return;
+            }
+            else
+                if(txtSlipNo.Text=="")
+                {
+                    MessageBox.Show("Field is required");
+                    return;
+                }
+                if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    string ReportNo = "";
+                    //if (rtxtDoc.Text != "")
+                    // {
+                    DML.ReportDocument_Add_Edit(txtReportNo.Text, txtSlipNo.Text, dtpIssueDate.Value, txtSlipDate.Text, txtPatientName.Text, txtAge.Text, txtGender.Text, txtcontact.Text,
+                        txtClinicalDiags.Text, txtRefPhysician.Text, rtxtDoc.Rtf, rtxtDoc2.Rtf, rtxtDoc3.Rtf, txtPara.Text, txtLMP.Text, txtCO.Text, "0",(string)cmbIpdOpd.Text, ref ReportNo);
+                    FillDetail("",txtSlipNo.Text,cmbIpdOpd.Text) ;
+                    
+                    MessageBox.Show("Record Successfully Saved..!");
+
+                    //                }
+                }
+            }
+            
+            
+            
+        
+        void FillQuery()
+        {
+            dgvQuery.Rows.Clear();
+            DataTable dtQuery = Query.getData("select ReportNo,SlipNo,IssueDate,PatientName from TestReportDoc where STATUS = 0 and createdby = '"+UserInfo.UserId  +"'");  
+            for (int i = 0; i < dtQuery.Rows.Count; i++)
+            {
+                int ind = dgvQuery.Rows.Add(dtQuery.Rows[i]["ReportNo"].ToString(), 
+                    dtQuery.Rows[i]["SlipNo"].ToString(),
+                    ((DateTime)dtQuery.Rows[i]["IssueDate"]),
+                      dtQuery.Rows[i]["PatientName"].ToString());               
+            }
+            lblTotRecordsFetched.Text = "Total Records : " + dtQuery.Rows.Count.ToString("N0");
+        }
+       
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            FillQuery(); 
+        }
+
+        private void UltrasoundReportDesigner_KeyDown(object sender, KeyEventArgs e)
+        
+        {
+            if (e.KeyCode == Keys.Enter && !rtxtDoc.Focused && !rtxtDoc2.Focused && !rtxtDoc3.Focused)
+            {
+                SendKeys.Send("{tab}");
+                
+               
+            }
+
+        }
+
+       
+       
+
+        
+       
+
+     
+
+    }
+}
