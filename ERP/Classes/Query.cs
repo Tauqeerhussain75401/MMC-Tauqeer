@@ -43,6 +43,9 @@ namespace ERP
             return dtQr;
         }
 
+
+
+
         private static Bitmap GetLogo(string QRimagePath)
         {
             
@@ -1532,20 +1535,37 @@ CROSS JOIN (
             DataSet ds = new DataSet();
             try
             {
+                //Tauqeer comments change vdate
+                //string addsql = "";
+                //if (AcCode == "001001005002001")
+                //     addsql = "and fkbankid='"+bankcode+"' ";
+
+                //string appendsqlcond = "";// AcCode == "001001002001001" ? " AND  fkclientcode  = '" + ClientCode + "' " : (AcCode == "001001005002001" ? " AND fkbankid = '" + ClientCode + "'" : "");
+                //string sql = "";
+                //sql = "SELECT ";
+                //sql += "null FKVNo,NULL AS refno,Max(regexp_substr(createdby,'[^|]+',1,2)) AS VDate,null AS FKTransactionID,null AS FCDR,(case when (Sum(dr) - Sum(cr)) > 0 then (Sum(dr) - Sum(cr)) else 0 end) AS DR,null AS FCCR,(case when (Sum(dr) - Sum(cr)) < 0 then -(Sum(dr) - Sum(cr)) else 0 end) AS CR,'B/F' AS Description ";
+                //sql += "FROM voucherdetail WHERE status = 0 and  fkaccountid = '" + AcCode + "' AND Trunc(vdate) < '" + dtFrom + "' " +addsql+ appendsqlcond;
+                //sql += "GROUP BY fkaccountid";
+                //sql += " UNION ALL ";
+                //sql += "SELECT  ";
+                //sql += "vtype || '-' || vno AS FKVNo,nvl(refrmk || case when refno is not null then '-' else null end  ||  refno,chequeno ||'/'||slipno),regexp_substr(createdby,'[^|]+',1,2) AS VDate,fktransactionid AS FKTransactionID,fcdr AS FCDR,dr AS DR,fccr AS FCCR,cr AS CR,description AS Description ";
+                //sql += "FROM voucherdetail WHERE status = 0 and fkaccountid = '" + AcCode + "' AND Trunc(vdate) BETWEEN '" + dtFrom + "'  AND '" + dtTo + "' " +addsql+ appendsqlcond + " ORDER BY vdate,FKVNo,cr";
+
+
                 string addsql = "";
                 if (AcCode == "001001005002001")
-                     addsql = "and fkbankid='"+bankcode+"' ";
+                    addsql = "and fkbankid='" + bankcode + "' ";
 
-                string appendsqlcond = "";// AcCode == "001001002001001" ? " AND  fkclientcode  = '" + ClientCode + "' " : (AcCode == "001001005002001" ? " AND fkbankid = '" + ClientCode + "'" : "");
+                string appendsqlcond = ""; // AcCode == "001001002001001" ? " AND  fkclientcode  = '" + ClientCode + "' " : (AcCode == "001001005002001" ? " AND fkbankid = '" + ClientCode + "'" : "");
                 string sql = "";
                 sql = "SELECT ";
-                sql += "null FKVNo,NULL AS refno,Max(regexp_substr(createdby,'[^|]+',1,2)) AS VDate,null AS FKTransactionID,null AS FCDR,(case when (Sum(dr) - Sum(cr)) > 0 then (Sum(dr) - Sum(cr)) else 0 end) AS DR,null AS FCCR,(case when (Sum(dr) - Sum(cr)) < 0 then -(Sum(dr) - Sum(cr)) else 0 end) AS CR,'B/F' AS Description ";
-                sql += "FROM voucherdetail WHERE status = 0 and  fkaccountid = '" + AcCode + "' AND Trunc(vdate) < '" + dtFrom + "' " +addsql+ appendsqlcond;
+                sql += "null FKVNo,NULL AS refno,Max(vdate) AS VDate,null AS FKTransactionID,null AS FCDR,(case when (Sum(dr) - Sum(cr)) > 0 then (Sum(dr) - Sum(cr)) else 0 end) AS DR,null AS FCCR,(case when (Sum(dr) - Sum(cr)) < 0 then -(Sum(dr) - Sum(cr)) else 0 end) AS CR,'B/F' AS Description ";
+                sql += "FROM voucherdetail WHERE status = 0 and  fkaccountid = '" + AcCode + "' AND Trunc(vdate) < '" + dtFrom + "' " + addsql + appendsqlcond;
                 sql += "GROUP BY fkaccountid";
                 sql += " UNION ALL ";
                 sql += "SELECT  ";
-                sql += "vtype || '-' || vno AS FKVNo,nvl(refrmk || case when refno is not null then '-' else null end  ||  refno,chequeno ||'/'||slipno),regexp_substr(createdby,'[^|]+',1,2) AS VDate,fktransactionid AS FKTransactionID,fcdr AS FCDR,dr AS DR,fccr AS FCCR,cr AS CR,description AS Description ";
-                sql += "FROM voucherdetail WHERE status = 0 and fkaccountid = '" + AcCode + "' AND Trunc(vdate) BETWEEN '" + dtFrom + "'  AND '" + dtTo + "' " +addsql+ appendsqlcond + " ORDER BY vdate,FKVNo,cr";
+                sql += "vtype || '-' || vno AS FKVNo,nvl(refrmk || case when refno is not null then '-' else null end  ||  refno,chequeno ||'/'||slipno),vdate AS VDate,fktransactionid AS FKTransactionID,fcdr AS FCDR,dr AS DR,fccr AS FCCR,cr AS CR,description AS Description ";
+                sql += "FROM voucherdetail WHERE status = 0 and fkaccountid = '" + AcCode + "' AND Trunc(vdate) BETWEEN '" + dtFrom + "'  AND '" + dtTo + "' " + addsql + appendsqlcond + " ORDER BY vdate,FKVNo,cr";
 
 
 
@@ -1811,8 +1831,6 @@ CROSS JOIN (
             DataTable dt = new DataTable();
             try
             {
-
-
                 string sql = @" SELECT ch.lvl1Title lvl1,ch.lvl2Title lvl2,ch.lvl3Title lvl3,ch.lvl4Title lvl4,fkbankid,title ||' '|| get_banktitle(fkbankid) ||' '||  get_clienttitle(fkclientcode)  title,
                             Sum(opn) opn, Sum(dr) dr, Sum(cr) cr, Sum(curr) curr,fkaccountid accountid FROM
                            (SELECT CASE 

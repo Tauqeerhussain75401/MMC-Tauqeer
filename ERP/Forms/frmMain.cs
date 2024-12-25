@@ -1457,6 +1457,46 @@ namespace ERP
             frm.Show();
         }
 
+        private void oPDFundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.MdiParent = this;
+            frm.Reportname = "OPD Fund Utilization Report";
+            frm.Show();
+        }
+
+        private void iPDFunToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.MdiParent = this;
+            frm.Reportname = "IPD Fund Utilization Report";
+            frm.Show();
+        }
+
+        private void oPDCashInHandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.MdiParent = this;
+            frm.Reportname = "OPD Cash In Hand";
+            frm.Show();
+        }
+
+        private void toolStripMenuItem5_Click_1(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.MdiParent = this;
+            frm.Reportname = "IPD Cash In Hand";
+            frm.Show();
+        }
+
+        private void OPDCashInHandToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.MdiParent = this;
+            frm.Reportname = "OPD Cash In Hand";
+            frm.Show();
+        }
+
 
 
 

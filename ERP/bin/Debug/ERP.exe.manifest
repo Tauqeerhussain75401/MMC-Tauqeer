@@ -610,14 +610,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ERP.exe" size="20021248">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ERP.exe" size="31638528">
       <assemblyIdentity name="ERP" version="1.0.1.60" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>8Ey/MMMvM5qu6Lfo+8sqmwypy6UoUsjySm5KLjoWj/I=</dsig:DigestValue>
+        <dsig:DigestValue>aBX5YVdDQyZjjDCAvjHPXy1ca81guy7caEiV0vFulf0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1733,7 +1733,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>NGSyUKDwHfWcdYhJdzJjbAcp9c74jyhJBapDjQaCyzw=</dsig:DigestValue>
+        <dsig:DigestValue>qZdNuF9XlGXGyrx0dAiBU6krqg1vU+h+vx56yAsLSho=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1773,13 +1773,37 @@
       </hash>
     </dependentAssembly>
   </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="zxing.dll" size="445952">
+      <assemblyIdentity name="zxing" version="0.16.5.0" publicKeyToken="4E88037AC681FE60" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>VheDpDWLQiCXRSSC1ZT6FFBfjJRVVqYwAIrB7KwNR0U=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="zxing.presentation.dll" size="19456">
+      <assemblyIdentity name="zxing.presentation" version="0.16.5.0" publicKeyToken="4E88037AC681FE60" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>h4mnP9rMw99TI/rFEjc6gfyu3fspUxhvBrXGzx41110=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
   <file name="ERP.exe.config" size="1778">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>nSSWt05IgyEo4SfQMmGybqA/QnTBGDMgCdQz1TPtBcQ=</dsig:DigestValue>
+      <dsig:DigestValue>Jg4mXvGhYyQdvMyd+xriB9KbamVDlpUPpmG+47HQ1CI=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Nubit.ico" size="148326">

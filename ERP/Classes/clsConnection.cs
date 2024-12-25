@@ -24,7 +24,7 @@ namespace ERP
             //IPList.Add("192.168.10.100");
 
             try
-            {    
+            {
                 string connection = System.Configuration.ConfigurationManager.ConnectionStrings["OracleConnection"].ToString().Replace("MyIP", IPList[0]);
                 OpenConnection(connection);
                 Host = IPList[0];

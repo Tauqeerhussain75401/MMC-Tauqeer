@@ -130,12 +130,27 @@ namespace ERP
         internal static void FillcmbTestCatagory(ComboBox cmb)
         {
             cmb.DataSource = Query.TestCatagoryIndex();
-
-
-
             cmb.DisplayMember = "Title";
             cmb.ValueMember = "Id";
             cmb.SelectedIndex = -1;
+        }
+
+        internal static void FillcmbTestCatagoryALL(ComboBox cmb)
+        {
+
+            DataTable dtAllCataGory = new DataTable();
+            cmb.DataSource = dtAllCataGory;
+
+            dtAllCataGory = Query.TestCatagoryIndex();
+
+            DataRow rw = dtAllCataGory.NewRow();
+            rw["Title"] = "ALL";
+            rw["id"] = "ALL";
+            dtAllCataGory.Rows.InsertAt(rw, 0);
+
+            cmb.DataSource = dtAllCataGory;
+            cmb.DisplayMember = "Title";
+            cmb.ValueMember = "id";
         }
         internal static void FillcmbIPDTestCatagory(ComboBox cmb)
         {

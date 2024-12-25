@@ -31,28 +31,27 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBankToBank));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabPayQuery = new System.Windows.Forms.TabControl();
             this.tabPayment = new System.Windows.Forms.TabPage();
-            this.dtpDate = new ERP.NullableDateTimePicker();
+            this.status = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.grpAmount = new System.Windows.Forms.GroupBox();
             this.lblAmount = new System.Windows.Forms.Label();
             this.btnPlus = new System.Windows.Forms.Button();
-            this.txtAmount = new ERP.DecimalBox();
             this.lblBalance = new System.Windows.Forms.Label();
             this.picDoucments = new System.Windows.Forms.PictureBox();
             this.grpPaymentDetail = new System.Windows.Forms.GroupBox();
@@ -69,8 +68,6 @@
             this.label24 = new System.Windows.Forms.Label();
             this.textBox18 = new System.Windows.Forms.TextBox();
             this.lblBankName = new System.Windows.Forms.Label();
-            this.cmbBankName = new ERP.MultiColumnComboBox();
-            this.txtBalance = new ERP.NumericTextBox();
             this.txtTotalCredit = new System.Windows.Forms.TextBox();
             this.txtTotalDebit = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -80,7 +77,6 @@
             this.txtToIBAN = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.mcbToBank = new ERP.MultiColumnComboBox();
             this.richtxtToBankDesc = new System.Windows.Forms.RichTextBox();
             this.txtBankDesc = new System.Windows.Forms.RichTextBox();
             this.txtChequeNo = new System.Windows.Forms.TextBox();
@@ -103,27 +99,8 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.dgvAccount = new System.Windows.Forms.DataGridView();
-            this.clnTitleofAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnDebit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnCredit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Created = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Edit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Approved = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PVNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnCheque = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BankID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Vseq = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Editable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvQuery = new System.Windows.Forms.DataGridView();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VoucherNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TransNarrationQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PVNumberQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnFind = new System.Windows.Forms.Button();
@@ -158,13 +135,36 @@
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtpDate = new ERP.NullableDateTimePicker();
+            this.txtAmount = new ERP.DecimalBox();
+            this.cmbBankName = new ERP.MultiColumnComboBox();
+            this.txtBalance = new ERP.NumericTextBox();
+            this.mcbToBank = new ERP.MultiColumnComboBox();
+            this.clnTitleofAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnDebit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCredit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Created = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Edit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Approved = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PVNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCheque = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BankID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Vseq = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Editable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VoucherNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TransNarrationQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PVNumberQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.TextBox();
             this.tabPayQuery.SuspendLayout();
             this.tabPayment.SuspendLayout();
             this.grpAmount.SuspendLayout();
@@ -218,16 +218,14 @@
             this.tabPayment.Text = "Payment";
             this.tabPayment.UseVisualStyleBackColor = true;
             // 
-            // dtpDate
+            // status
             // 
-            this.dtpDate.CustomFormat = "dd-MMM-yyyy";
-            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDate.Location = new System.Drawing.Point(114, 177);
-            this.dtpDate.Margin = new System.Windows.Forms.Padding(2);
-            this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(216, 22);
-            this.dtpDate.TabIndex = 1;
-            this.dtpDate.Value = new System.DateTime(2018, 7, 11, 11, 36, 32, 285);
+            this.status.Enabled = false;
+            this.status.Location = new System.Drawing.Point(702, 553);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(21, 22);
+            this.status.TabIndex = 295;
+            this.status.Visible = false;
             // 
             // label2
             // 
@@ -277,17 +275,6 @@
             this.btnPlus.UseVisualStyleBackColor = false;
             this.btnPlus.Visible = false;
             this.btnPlus.Click += new System.EventHandler(this.btnPlus_Click);
-            // 
-            // txtAmount
-            // 
-            this.txtAmount.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.txtAmount.Location = new System.Drawing.Point(71, 18);
-            this.txtAmount.Margin = new System.Windows.Forms.Padding(2);
-            this.txtAmount.Name = "txtAmount";
-            this.txtAmount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtAmount.Size = new System.Drawing.Size(161, 23);
-            this.txtAmount.TabIndex = 1;
-            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             // 
             // lblBalance
             // 
@@ -482,31 +469,6 @@
             this.lblBankName.TabIndex = 2;
             this.lblBankName.Text = "Bank Name :";
             // 
-            // cmbBankName
-            // 
-            this.cmbBankName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbBankName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbBankName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cmbBankName.Location = new System.Drawing.Point(112, 40);
-            this.cmbBankName.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbBankName.Name = "cmbBankName";
-            this.cmbBankName.Size = new System.Drawing.Size(207, 23);
-            this.cmbBankName.TabIndex = 3;
-            this.cmbBankName.Tag = "UnLock";
-            this.cmbBankName.SelectedIndexChanged += new System.EventHandler(this.cmbBankName_SelectedIndexChanged);
-            this.cmbBankName.SelectedValueChanged += new System.EventHandler(this.cmbBankName_SelectedValueChanged);
-            this.cmbBankName.Validated += new System.EventHandler(this.cmbBankName_Validated);
-            // 
-            // txtBalance
-            // 
-            this.txtBalance.Location = new System.Drawing.Point(112, 115);
-            this.txtBalance.Margin = new System.Windows.Forms.Padding(2);
-            this.txtBalance.Name = "txtBalance";
-            this.txtBalance.ReadOnly = true;
-            this.txtBalance.Size = new System.Drawing.Size(149, 22);
-            this.txtBalance.TabIndex = 9;
-            this.txtBalance.TabStop = false;
-            // 
             // txtTotalCredit
             // 
             this.txtTotalCredit.Enabled = false;
@@ -605,26 +567,12 @@
             this.label13.TabIndex = 4;
             this.label13.Text = "Bank Name :";
             // 
-            // mcbToBank
-            // 
-            this.mcbToBank.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.mcbToBank.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.mcbToBank.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.mcbToBank.Location = new System.Drawing.Point(118, 80);
-            this.mcbToBank.Margin = new System.Windows.Forms.Padding(2);
-            this.mcbToBank.Name = "mcbToBank";
-            this.mcbToBank.Size = new System.Drawing.Size(260, 23);
-            this.mcbToBank.TabIndex = 5;
-            this.mcbToBank.Tag = "UnLock";
-            this.mcbToBank.SelectedIndexChanged += new System.EventHandler(this.mcbToBank_SelectedIndexChanged);
-            this.mcbToBank.Validated += new System.EventHandler(this.mcbToBank_Validated);
-            // 
             // richtxtToBankDesc
             // 
             this.richtxtToBankDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richtxtToBankDesc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richtxtToBankDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richtxtToBankDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richtxtToBankDesc.Location = new System.Drawing.Point(118, 134);
             this.richtxtToBankDesc.Name = "richtxtToBankDesc";
             this.richtxtToBankDesc.Size = new System.Drawing.Size(259, 50);
@@ -638,7 +586,7 @@
             this.txtBankDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBankDesc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBankDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBankDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBankDesc.Location = new System.Drawing.Point(118, 197);
             this.txtBankDesc.Name = "txtBankDesc";
             this.txtBankDesc.Size = new System.Drawing.Size(259, 50);
@@ -733,10 +681,10 @@
             this.txtEditBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEditBy.Enabled = false;
-            this.txtEditBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEditBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEditBy.Location = new System.Drawing.Point(106, 38);
             this.txtEditBy.Name = "txtEditBy";
-            this.txtEditBy.Size = new System.Drawing.Size(213, 23);
+            this.txtEditBy.Size = new System.Drawing.Size(213, 20);
             this.txtEditBy.TabIndex = 3;
             this.txtEditBy.TabStop = false;
             // 
@@ -746,9 +694,9 @@
             this.lblPreparedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPreparedBy.Location = new System.Drawing.Point(11, 17);
             this.lblPreparedBy.Name = "lblPreparedBy";
-            this.lblPreparedBy.Size = new System.Drawing.Size(90, 16);
+            this.lblPreparedBy.Size = new System.Drawing.Size(73, 16);
             this.lblPreparedBy.TabIndex = 0;
-            this.lblPreparedBy.Text = "Prepared By :";
+            this.lblPreparedBy.Text = "Create By :";
             // 
             // lblApprovedBy
             // 
@@ -787,10 +735,10 @@
             this.txtPreparedBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPreparedBy.Enabled = false;
-            this.txtPreparedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPreparedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPreparedBy.Location = new System.Drawing.Point(106, 15);
             this.txtPreparedBy.Name = "txtPreparedBy";
-            this.txtPreparedBy.Size = new System.Drawing.Size(213, 23);
+            this.txtPreparedBy.Size = new System.Drawing.Size(213, 20);
             this.txtPreparedBy.TabIndex = 1;
             this.txtPreparedBy.TabStop = false;
             // 
@@ -909,135 +857,6 @@
             this.dgvAccount.TabIndex = 0;
             this.dgvAccount.SelectionChanged += new System.EventHandler(this.dgvAccount_SelectionChanged);
             // 
-            // clnTitleofAccount
-            // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clnTitleofAccount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.clnTitleofAccount.HeaderText = "Bank Title";
-            this.clnTitleofAccount.MinimumWidth = 220;
-            this.clnTitleofAccount.Name = "clnTitleofAccount";
-            this.clnTitleofAccount.ReadOnly = true;
-            this.clnTitleofAccount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clnTitleofAccount.Width = 220;
-            // 
-            // clnDescription
-            // 
-            this.clnDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.clnDescription.DefaultCellStyle = dataGridViewCellStyle3;
-            this.clnDescription.HeaderText = "Description";
-            this.clnDescription.MinimumWidth = 220;
-            this.clnDescription.Name = "clnDescription";
-            this.clnDescription.ReadOnly = true;
-            this.clnDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clnDebit
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.clnDebit.DefaultCellStyle = dataGridViewCellStyle4;
-            this.clnDebit.HeaderText = "Debit";
-            this.clnDebit.MinimumWidth = 150;
-            this.clnDebit.Name = "clnDebit";
-            this.clnDebit.ReadOnly = true;
-            this.clnDebit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clnDebit.Width = 150;
-            // 
-            // clnCredit
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.clnCredit.DefaultCellStyle = dataGridViewCellStyle5;
-            this.clnCredit.HeaderText = "Credit";
-            this.clnCredit.MinimumWidth = 150;
-            this.clnCredit.Name = "clnCredit";
-            this.clnCredit.ReadOnly = true;
-            this.clnCredit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clnCredit.Width = 150;
-            // 
-            // Amount
-            // 
-            this.Amount.HeaderText = "Amount";
-            this.Amount.Name = "Amount";
-            this.Amount.ReadOnly = true;
-            this.Amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Amount.Visible = false;
-            // 
-            // Created
-            // 
-            this.Created.HeaderText = "Created";
-            this.Created.Name = "Created";
-            this.Created.ReadOnly = true;
-            this.Created.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Created.Visible = false;
-            // 
-            // Edit
-            // 
-            this.Edit.HeaderText = "Edit";
-            this.Edit.Name = "Edit";
-            this.Edit.ReadOnly = true;
-            this.Edit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Edit.Visible = false;
-            // 
-            // Approved
-            // 
-            this.Approved.HeaderText = "Approved";
-            this.Approved.Name = "Approved";
-            this.Approved.ReadOnly = true;
-            this.Approved.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Approved.Visible = false;
-            // 
-            // clnAccount
-            // 
-            this.clnAccount.HeaderText = "Account";
-            this.clnAccount.Name = "clnAccount";
-            this.clnAccount.ReadOnly = true;
-            this.clnAccount.Visible = false;
-            // 
-            // PVNumber
-            // 
-            this.PVNumber.HeaderText = "PV Number";
-            this.PVNumber.Name = "PVNumber";
-            this.PVNumber.ReadOnly = true;
-            this.PVNumber.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.PVNumber.Visible = false;
-            // 
-            // clnCheque
-            // 
-            this.clnCheque.HeaderText = "Cheque";
-            this.clnCheque.Name = "clnCheque";
-            this.clnCheque.ReadOnly = true;
-            this.clnCheque.Visible = false;
-            // 
-            // BankID
-            // 
-            this.BankID.HeaderText = "BankID";
-            this.BankID.Name = "BankID";
-            this.BankID.ReadOnly = true;
-            this.BankID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.BankID.Visible = false;
-            // 
-            // Vseq
-            // 
-            this.Vseq.HeaderText = "Vseq";
-            this.Vseq.Name = "Vseq";
-            this.Vseq.ReadOnly = true;
-            this.Vseq.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Vseq.Visible = false;
-            // 
-            // Editable
-            // 
-            this.Editable.HeaderText = "Editable";
-            this.Editable.Name = "Editable";
-            this.Editable.ReadOnly = true;
-            this.Editable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Editable.Visible = false;
-            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.dgvQuery);
@@ -1086,45 +905,6 @@
             this.dgvQuery.Size = new System.Drawing.Size(714, 425);
             this.dgvQuery.TabIndex = 43;
             this.dgvQuery.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuery_CellDoubleClick);
-            // 
-            // Date
-            // 
-            dataGridViewCellStyle9.Format = "dd-MMM-yyyy";
-            dataGridViewCellStyle9.NullValue = null;
-            this.Date.DefaultCellStyle = dataGridViewCellStyle9;
-            this.Date.HeaderText = "Date";
-            this.Date.Name = "Date";
-            this.Date.ReadOnly = true;
-            // 
-            // VoucherNum
-            // 
-            this.VoucherNum.HeaderText = "Voucher Number";
-            this.VoucherNum.MinimumWidth = 100;
-            this.VoucherNum.Name = "VoucherNum";
-            this.VoucherNum.ReadOnly = true;
-            // 
-            // TransNarrationQ
-            // 
-            this.TransNarrationQ.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TransNarrationQ.HeaderText = "Narration";
-            this.TransNarrationQ.MinimumWidth = 100;
-            this.TransNarrationQ.Name = "TransNarrationQ";
-            this.TransNarrationQ.ReadOnly = true;
-            // 
-            // AmountQ
-            // 
-            this.AmountQ.HeaderText = "Amount";
-            this.AmountQ.MinimumWidth = 130;
-            this.AmountQ.Name = "AmountQ";
-            this.AmountQ.ReadOnly = true;
-            this.AmountQ.Width = 130;
-            // 
-            // PVNumberQ
-            // 
-            this.PVNumberQ.HeaderText = "PVNumberQ";
-            this.PVNumberQ.Name = "PVNumberQ";
-            this.PVNumberQ.ReadOnly = true;
-            this.PVNumberQ.Visible = false;
             // 
             // groupBox2
             // 
@@ -1234,7 +1014,7 @@
             this.statusUserName,
             this.statusRight,
             this.statusDateTime});
-            this.statusStrip2.Location = new System.Drawing.Point(0, 723);
+            this.statusStrip2.Location = new System.Drawing.Point(0, 721);
             this.statusStrip2.Name = "statusStrip2";
             this.statusStrip2.Size = new System.Drawing.Size(735, 24);
             this.statusStrip2.TabIndex = 2;
@@ -1270,7 +1050,7 @@
             this.statusDateTime.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner;
             this.statusDateTime.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusDateTime.Name = "statusDateTime";
-            this.statusDateTime.Size = new System.Drawing.Size(92, 19);
+            this.statusDateTime.Size = new System.Drawing.Size(91, 19);
             this.statusDateTime.Text = "LoginDateTime";
             // 
             // picPaymentLogo
@@ -1460,6 +1240,235 @@
             this.dataGridViewTextBoxColumn19.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.dataGridViewTextBoxColumn19.Visible = false;
             // 
+            // dtpDate
+            // 
+            this.dtpDate.CustomFormat = "dd-MMM-yyyy";
+            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDate.Location = new System.Drawing.Point(114, 177);
+            this.dtpDate.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(216, 22);
+            this.dtpDate.TabIndex = 1;
+            this.dtpDate.Value = new System.DateTime(2018, 7, 11, 11, 36, 32, 285);
+            // 
+            // txtAmount
+            // 
+            this.txtAmount.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.txtAmount.Location = new System.Drawing.Point(71, 18);
+            this.txtAmount.Margin = new System.Windows.Forms.Padding(2);
+            this.txtAmount.Name = "txtAmount";
+            this.txtAmount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.txtAmount.Size = new System.Drawing.Size(161, 23);
+            this.txtAmount.TabIndex = 1;
+            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
+            // 
+            // cmbBankName
+            // 
+            this.cmbBankName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbBankName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbBankName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbBankName.Location = new System.Drawing.Point(112, 40);
+            this.cmbBankName.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbBankName.Name = "cmbBankName";
+            this.cmbBankName.Size = new System.Drawing.Size(207, 23);
+            this.cmbBankName.TabIndex = 3;
+            this.cmbBankName.Tag = "UnLock";
+            this.cmbBankName.SelectedIndexChanged += new System.EventHandler(this.cmbBankName_SelectedIndexChanged);
+            this.cmbBankName.SelectedValueChanged += new System.EventHandler(this.cmbBankName_SelectedValueChanged);
+            this.cmbBankName.Validated += new System.EventHandler(this.cmbBankName_Validated);
+            // 
+            // txtBalance
+            // 
+            this.txtBalance.Location = new System.Drawing.Point(112, 115);
+            this.txtBalance.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBalance.Name = "txtBalance";
+            this.txtBalance.ReadOnly = true;
+            this.txtBalance.Size = new System.Drawing.Size(149, 22);
+            this.txtBalance.TabIndex = 9;
+            this.txtBalance.TabStop = false;
+            // 
+            // mcbToBank
+            // 
+            this.mcbToBank.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.mcbToBank.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.mcbToBank.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.mcbToBank.Location = new System.Drawing.Point(118, 80);
+            this.mcbToBank.Margin = new System.Windows.Forms.Padding(2);
+            this.mcbToBank.Name = "mcbToBank";
+            this.mcbToBank.Size = new System.Drawing.Size(260, 23);
+            this.mcbToBank.TabIndex = 5;
+            this.mcbToBank.Tag = "UnLock";
+            this.mcbToBank.SelectedIndexChanged += new System.EventHandler(this.mcbToBank_SelectedIndexChanged);
+            this.mcbToBank.Validated += new System.EventHandler(this.mcbToBank_Validated);
+            // 
+            // clnTitleofAccount
+            // 
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clnTitleofAccount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.clnTitleofAccount.HeaderText = "Bank Title";
+            this.clnTitleofAccount.MinimumWidth = 220;
+            this.clnTitleofAccount.Name = "clnTitleofAccount";
+            this.clnTitleofAccount.ReadOnly = true;
+            this.clnTitleofAccount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clnTitleofAccount.Width = 220;
+            // 
+            // clnDescription
+            // 
+            this.clnDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.clnDescription.DefaultCellStyle = dataGridViewCellStyle3;
+            this.clnDescription.HeaderText = "Description";
+            this.clnDescription.MinimumWidth = 220;
+            this.clnDescription.Name = "clnDescription";
+            this.clnDescription.ReadOnly = true;
+            this.clnDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // clnDebit
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.clnDebit.DefaultCellStyle = dataGridViewCellStyle4;
+            this.clnDebit.HeaderText = "Debit";
+            this.clnDebit.MinimumWidth = 150;
+            this.clnDebit.Name = "clnDebit";
+            this.clnDebit.ReadOnly = true;
+            this.clnDebit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clnDebit.Width = 150;
+            // 
+            // clnCredit
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.clnCredit.DefaultCellStyle = dataGridViewCellStyle5;
+            this.clnCredit.HeaderText = "Credit";
+            this.clnCredit.MinimumWidth = 150;
+            this.clnCredit.Name = "clnCredit";
+            this.clnCredit.ReadOnly = true;
+            this.clnCredit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clnCredit.Width = 150;
+            // 
+            // Amount
+            // 
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
+            this.Amount.ReadOnly = true;
+            this.Amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Amount.Visible = false;
+            // 
+            // Created
+            // 
+            this.Created.HeaderText = "Created";
+            this.Created.Name = "Created";
+            this.Created.ReadOnly = true;
+            this.Created.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Created.Visible = false;
+            // 
+            // Edit
+            // 
+            this.Edit.HeaderText = "Edit";
+            this.Edit.Name = "Edit";
+            this.Edit.ReadOnly = true;
+            this.Edit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Edit.Visible = false;
+            // 
+            // Approved
+            // 
+            this.Approved.HeaderText = "Approved";
+            this.Approved.Name = "Approved";
+            this.Approved.ReadOnly = true;
+            this.Approved.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Approved.Visible = false;
+            // 
+            // clnAccount
+            // 
+            this.clnAccount.HeaderText = "Account";
+            this.clnAccount.Name = "clnAccount";
+            this.clnAccount.ReadOnly = true;
+            this.clnAccount.Visible = false;
+            // 
+            // PVNumber
+            // 
+            this.PVNumber.HeaderText = "PV Number";
+            this.PVNumber.Name = "PVNumber";
+            this.PVNumber.ReadOnly = true;
+            this.PVNumber.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.PVNumber.Visible = false;
+            // 
+            // clnCheque
+            // 
+            this.clnCheque.HeaderText = "Cheque";
+            this.clnCheque.Name = "clnCheque";
+            this.clnCheque.ReadOnly = true;
+            this.clnCheque.Visible = false;
+            // 
+            // BankID
+            // 
+            this.BankID.HeaderText = "BankID";
+            this.BankID.Name = "BankID";
+            this.BankID.ReadOnly = true;
+            this.BankID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.BankID.Visible = false;
+            // 
+            // Vseq
+            // 
+            this.Vseq.HeaderText = "Vseq";
+            this.Vseq.Name = "Vseq";
+            this.Vseq.ReadOnly = true;
+            this.Vseq.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Vseq.Visible = false;
+            // 
+            // Editable
+            // 
+            this.Editable.HeaderText = "Editable";
+            this.Editable.Name = "Editable";
+            this.Editable.ReadOnly = true;
+            this.Editable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Editable.Visible = false;
+            // 
+            // Date
+            // 
+            dataGridViewCellStyle9.Format = "dd-MMM-yyyy";
+            dataGridViewCellStyle9.NullValue = null;
+            this.Date.DefaultCellStyle = dataGridViewCellStyle9;
+            this.Date.HeaderText = "Date";
+            this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
+            // 
+            // VoucherNum
+            // 
+            this.VoucherNum.HeaderText = "Voucher Number";
+            this.VoucherNum.MinimumWidth = 100;
+            this.VoucherNum.Name = "VoucherNum";
+            this.VoucherNum.ReadOnly = true;
+            // 
+            // TransNarrationQ
+            // 
+            this.TransNarrationQ.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TransNarrationQ.HeaderText = "Narration";
+            this.TransNarrationQ.MinimumWidth = 100;
+            this.TransNarrationQ.Name = "TransNarrationQ";
+            this.TransNarrationQ.ReadOnly = true;
+            // 
+            // AmountQ
+            // 
+            this.AmountQ.HeaderText = "Amount";
+            this.AmountQ.MinimumWidth = 130;
+            this.AmountQ.Name = "AmountQ";
+            this.AmountQ.ReadOnly = true;
+            this.AmountQ.Width = 130;
+            // 
+            // PVNumberQ
+            // 
+            this.PVNumberQ.HeaderText = "PVNumberQ";
+            this.PVNumberQ.Name = "PVNumberQ";
+            this.PVNumberQ.ReadOnly = true;
+            this.PVNumberQ.Visible = false;
+            // 
             // dataGridViewTextBoxColumn20
             // 
             this.dataGridViewTextBoxColumn20.HeaderText = "Voucher Number";
@@ -1513,21 +1522,12 @@
             this.dataGridViewTextBoxColumn25.ReadOnly = true;
             this.dataGridViewTextBoxColumn25.Visible = false;
             // 
-            // status
-            // 
-            this.status.Enabled = false;
-            this.status.Location = new System.Drawing.Point(702, 553);
-            this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(21, 22);
-            this.status.TabIndex = 295;
-            this.status.Visible = false;
-            // 
             // frmBankToBank
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(735, 747);
+            this.ClientSize = new System.Drawing.Size(735, 745);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.tabPayQuery);
             this.Controls.Add(this.picPaymentLogo);

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.grpBasicInfo = new System.Windows.Forms.GroupBox();
+            this.txtsearchbillno = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtType = new System.Windows.Forms.TextBox();
             this.txtSlipDate = new System.Windows.Forms.TextBox();
@@ -146,8 +148,6 @@
             this.AppBox = new System.Windows.Forms.GroupBox();
             this.lastAppdate = new System.Windows.Forms.Label();
             this.lastapplable = new System.Windows.Forms.Label();
-            this.txtsearchbillno = new System.Windows.Forms.TextBox();
-            this.label36 = new System.Windows.Forms.Label();
             this.grpBasicInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ntxtRegNo)).BeginInit();
             this.grpHosCharges.SuspendLayout();
@@ -221,6 +221,28 @@
             this.grpBasicInfo.TabStop = false;
             this.grpBasicInfo.Text = "Basic Info";
             this.grpBasicInfo.Enter += new System.EventHandler(this.grpBasicInfo_Enter);
+            // 
+            // txtsearchbillno
+            // 
+            this.txtsearchbillno.Location = new System.Drawing.Point(254, 16);
+            this.txtsearchbillno.Margin = new System.Windows.Forms.Padding(4);
+            this.txtsearchbillno.Name = "txtsearchbillno";
+            this.txtsearchbillno.ReadOnly = true;
+            this.txtsearchbillno.Size = new System.Drawing.Size(89, 22);
+            this.txtsearchbillno.TabIndex = 240;
+            this.txtsearchbillno.TabStop = false;
+            this.txtsearchbillno.Validated += new System.EventHandler(this.txtsearchbillno_Validated);
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Location = new System.Drawing.Point(203, 19);
+            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(50, 16);
+            this.label36.TabIndex = 241;
+            this.label36.Text = "Bill No.";
             // 
             // label2
             // 
@@ -1126,7 +1148,7 @@
             this.pnlDiscount.Controls.Add(this.zakatDtp);
             this.pnlDiscount.Location = new System.Drawing.Point(31, 415);
             this.pnlDiscount.Name = "pnlDiscount";
-            this.pnlDiscount.Size = new System.Drawing.Size(280, 71);
+            this.pnlDiscount.Size = new System.Drawing.Size(330, 71);
             this.pnlDiscount.TabIndex = 242;
             // 
             // chkSysdate
@@ -1144,7 +1166,7 @@
             // 
             this.ntxtDiscount.Enabled = false;
             this.ntxtDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ntxtDiscount.Location = new System.Drawing.Point(97, 4);
+            this.ntxtDiscount.Location = new System.Drawing.Point(95, 4);
             this.ntxtDiscount.Margin = new System.Windows.Forms.Padding(4);
             this.ntxtDiscount.Maximum = new decimal(new int[] {
             10000000,
@@ -1153,7 +1175,7 @@
             0});
             this.ntxtDiscount.Name = "ntxtDiscount";
             this.ntxtDiscount.ReadOnly = true;
-            this.ntxtDiscount.Size = new System.Drawing.Size(95, 30);
+            this.ntxtDiscount.Size = new System.Drawing.Size(85, 30);
             this.ntxtDiscount.TabIndex = 0;
             this.ntxtDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ntxtDiscount.ValueChanged += new System.EventHandler(this.ntxtDiscount_ValueChanged);
@@ -1460,17 +1482,17 @@
             // 
             // txtdischargeRemrks
             // 
-            this.txtdischargeRemrks.Location = new System.Drawing.Point(446, 419);
+            this.txtdischargeRemrks.Location = new System.Drawing.Point(479, 419);
             this.txtdischargeRemrks.Multiline = true;
             this.txtdischargeRemrks.Name = "txtdischargeRemrks";
-            this.txtdischargeRemrks.Size = new System.Drawing.Size(298, 61);
+            this.txtdischargeRemrks.Size = new System.Drawing.Size(270, 61);
             this.txtdischargeRemrks.TabIndex = 254;
             // 
             // label32
             // 
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.Location = new System.Drawing.Point(375, 422);
+            this.label32.Location = new System.Drawing.Point(408, 422);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(64, 17);
             this.label32.TabIndex = 255;
@@ -1705,7 +1727,7 @@
             this.lastAppdate.AutoSize = true;
             this.lastAppdate.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lastAppdate.ForeColor = System.Drawing.Color.Red;
-            this.lastAppdate.Location = new System.Drawing.Point(339, 472);
+            this.lastAppdate.Location = new System.Drawing.Point(372, 472);
             this.lastAppdate.Name = "lastAppdate";
             this.lastAppdate.Size = new System.Drawing.Size(95, 16);
             this.lastAppdate.TabIndex = 266;
@@ -1717,34 +1739,12 @@
             this.lastapplable.AutoSize = true;
             this.lastapplable.Font = new System.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
             this.lastapplable.ForeColor = System.Drawing.Color.Red;
-            this.lastapplable.Location = new System.Drawing.Point(328, 456);
+            this.lastapplable.Location = new System.Drawing.Point(361, 456);
             this.lastapplable.Name = "lastapplable";
             this.lastapplable.Size = new System.Drawing.Size(115, 12);
             this.lastapplable.TabIndex = 267;
             this.lastapplable.Text = "Last Appointment Date";
             this.lastapplable.Visible = false;
-            // 
-            // txtsearchbillno
-            // 
-            this.txtsearchbillno.Location = new System.Drawing.Point(254, 16);
-            this.txtsearchbillno.Margin = new System.Windows.Forms.Padding(4);
-            this.txtsearchbillno.Name = "txtsearchbillno";
-            this.txtsearchbillno.ReadOnly = true;
-            this.txtsearchbillno.Size = new System.Drawing.Size(89, 22);
-            this.txtsearchbillno.TabIndex = 240;
-            this.txtsearchbillno.TabStop = false;
-            this.txtsearchbillno.Validated += new System.EventHandler(this.txtsearchbillno_Validated);
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(203, 19);
-            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(50, 16);
-            this.label36.TabIndex = 241;
-            this.label36.Text = "Bill No.";
             // 
             // frmIPDBilling
             // 

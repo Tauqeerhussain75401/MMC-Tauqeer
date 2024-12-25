@@ -12,14 +12,15 @@ namespace ERP
     {
         internal  static DataTable OPDReceipt(string ReceiptNo)
         {
-            string sql = "SELECT tokenno,vdate,get_OPDCatagory(catagoryid) CatagoryTitle  ,get_opdcatagoryReportType(catagoryid) ReportType ,get_ConsultantName(consultantid) ConsultantName,memberid,gender,patienttitle || patientname  patientname,age||' '||ageunit age,netamount,contactno,get_patienttype(patienttype) patienttype,get_ReferenceName(referenceid) ReferenceName,remarks,grossamount,discount,netamount,partialamount,netbalance,ispartial,createdby,createdtime,electricitycharges FROM opdreceipt WHERE receiptno = '" + ReceiptNo + "'";
+            string sql = "SELECT tokenno,vdate,get_OPDCatagory(catagoryid) CatagoryTitle  ,get_opdcatagoryReportType(catagoryid) ReportType ,get_ConsultantName(consultantid) ConsultantName,memberid,gender,patienttitle || patientname  patientname,age||' '||ageunit age,netamount,contactno,get_patienttype(patienttype) patienttype,get_ReferenceName(referenceid) ReferenceName,remarks,grossamount,discount,netamount,partialamount,netbalance,ispartial,createdby,createdtime,electricitycharges,get_ConsultantName(laboratoryConsultantid) laboratoryConsultantName  FROM opdreceipt WHERE receiptno = '" + ReceiptNo + "'";
             DataTable dt = Query.getData(sql);
             return dt;
         }
         internal static DataTable LabReportResult(string SlipNo,string DepartmentId)
         {
 
-            string sql = "SELECT res.title test, res.result, res.unit, res.approxresult NormalRange,res.ipdopd as IO FROM labreportresult res WHERE res.reportno = '" + SlipNo + "' AND res.departmentid = '" + DepartmentId + "' and status = 0  order by To_number(testid)";
+            ///AND Trunc(createdtime) > '22 july 2020 ' -- Tauqeer 
+            string sql = "SELECT res.title test, res.result, res.unit, res.approxresult NormalRange,res.ipdopd as IO FROM labreportresult res WHERE res.reportno = '" + SlipNo + "' AND res.departmentid = '" + DepartmentId + "' and status = 0 AND Trunc(createdtime) > '22 july 2020 ' order by To_number(testid)";
             DataTable dt = Query.getData(sql);
             return dt;
         }
@@ -98,16 +99,29 @@ namespace ERP
             comm.Parameters.Add("VTdate", OracleDbType.Date).Value = TDate;
             comm.Parameters.Add("VReferenceId", OracleDbType.Varchar2).Value = ReferenceId;
             comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
-            //comm.Parameters["retval"].Direction = ParameterDirection.Output;
-
-
             OracleDataAdapter adapter = new OracleDataAdapter();
-            adapter.SelectCommand = comm;// new OracleCommand(sql, Connection.Conn_ecyear);
+            adapter.SelectCommand = comm;
             adapter.Fill(dt);
             adapter.Dispose();
             return dt;
-
         }
+
+        internal static DataTable rep_referenceinvoices1_Same(DateTime FDate, DateTime TDate, string ReferenceId)
+        {
+            DataTable dt = new DataTable();
+            OracleCommand comm = new OracleCommand("rep_referenceinvoices1_Same", clsConnection.con);
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.Add("VFdate", OracleDbType.Date).Value = FDate;
+            comm.Parameters.Add("VTdate", OracleDbType.Date).Value = TDate;
+            comm.Parameters.Add("VReferenceId", OracleDbType.Varchar2).Value = ReferenceId;
+            comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = comm;
+            adapter.Fill(dt);
+            adapter.Dispose();
+            return dt;
+        }
+
         internal static DataTable IPD_OPD_IncomeSummary(DateTime FDate, DateTime TDate)
         {
             DataTable dt = new DataTable();
@@ -162,6 +176,64 @@ namespace ERP
             comm.Parameters.Add("vfromdate", OracleDbType.Date).Value = FDate;
             comm.Parameters.Add("vtodate", OracleDbType.Date).Value = TDate;
             comm.Parameters.Add("vpackageid", OracleDbType.Varchar2).Value = package == "All" ? "0" : package;
+            comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = comm;// new OracleCommand(sql, Connection.Conn_ecyear);
+            adapter.Fill(dt);
+            adapter.Dispose();
+            return dt;
+        }
+        internal static DataTable OPD_FundUtilization(DateTime FDate, DateTime TDate)
+        {
+            DataTable dt = new DataTable();
+            OracleCommand comm = new OracleCommand("OPD_FundUtilization", clsConnection.con);
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.Add("vfromdate", OracleDbType.Date).Value = FDate;
+            comm.Parameters.Add("vtodate", OracleDbType.Date).Value = TDate;
+            comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = comm;// new OracleCommand(sql, Connection.Conn_ecyear);
+            adapter.Fill(dt);
+            adapter.Dispose();
+            return dt;
+        }
+        internal static DataTable IPD_FundUtilization(DateTime FDate, DateTime TDate)
+        {
+            DataTable dt = new DataTable();
+            OracleCommand comm = new OracleCommand("IPD_FundUtilization", clsConnection.con);
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.Add("vfromdate", OracleDbType.Date).Value = FDate;
+            comm.Parameters.Add("vtodate", OracleDbType.Date).Value = TDate;
+            comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = comm;// new OracleCommand(sql, Connection.Conn_ecyear);
+            adapter.Fill(dt);
+            adapter.Dispose();
+            return dt;
+        }
+
+        internal static DataTable OPD_CashInHand(DateTime FDate, DateTime TDate)
+        {
+            DataTable dt = new DataTable();
+            OracleCommand comm = new OracleCommand("opd_cashinhand", clsConnection.con);
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.Add("vfromdate", OracleDbType.Date).Value = FDate;
+            comm.Parameters.Add("vtodate", OracleDbType.Date).Value = TDate;
+            comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = comm;// new OracleCommand(sql, Connection.Conn_ecyear);
+            adapter.Fill(dt);
+            adapter.Dispose();
+            return dt;
+        }
+
+        internal static DataTable IPD_CashInHand(DateTime FDate, DateTime TDate)
+        {
+            DataTable dt = new DataTable();
+            OracleCommand comm = new OracleCommand("ipd_cashinhand", clsConnection.con);
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.Add("vfromdate", OracleDbType.Date).Value = FDate;
+            comm.Parameters.Add("vtodate", OracleDbType.Date).Value = TDate;
             comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
             OracleDataAdapter adapter = new OracleDataAdapter();
             adapter.SelectCommand = comm;// new OracleCommand(sql, Connection.Conn_ecyear);
@@ -917,6 +989,24 @@ namespace ERP
             string tdate = Convert.ToDateTime(TDate).ToString("dd MMM yyyy");
             DataTable dt = new DataTable();
             OracleCommand comm = new OracleCommand("getspd_zf", clsConnection.con);
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.Add("fdate", OracleDbType.Varchar2).Value = fdate;
+            comm.Parameters.Add("tdate", OracleDbType.Varchar2).Value = tdate;
+            comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = comm;
+            adapter.Fill(dt);
+            adapter.Dispose();
+            return dt;
+
+        }
+
+        internal static DataTable getTrailBalance(string FDate, string TDate)
+        {
+            string fdate = Convert.ToDateTime(FDate).ToString("dd MMM yyyy");
+            string tdate = Convert.ToDateTime(TDate).ToString("dd MMM yyyy");
+            DataTable dt = new DataTable();
+            OracleCommand comm = new OracleCommand("getTrailBalance", clsConnection.con);
             comm.CommandType = CommandType.StoredProcedure;
             comm.Parameters.Add("fdate", OracleDbType.Varchar2).Value = fdate;
             comm.Parameters.Add("tdate", OracleDbType.Varchar2).Value = tdate;

@@ -230,3 +230,7 @@ PL/SQL: Statement ignored
 ===============================================
 27-Oct-22 9:28:08 PM(Query_ PaymentFilter)ORA-00909: invalid number of arguments
 ===============================================
+10/26/2024 12:47:13 PM(Query_ Rep_TrialBalance)ORA-00911: invalid character
+===============================================
+10/29/2024 7:48:46 PM(Query_Rep_AccountStatement)ORA-01790: expression must have same datatype as corresponding expression
+===============================================

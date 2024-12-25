@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
 using System.IO;
+using System.Drawing.Printing;
+using ZXing;
 
 namespace ERP
 {
@@ -43,7 +45,7 @@ namespace ERP
         {
             dgvQuery.Rows.Clear();
 
-            if (GetAll) dtQuery = Query.OPDReceiptQuery(filter, (string)cmbOPDCatagory.SelectedValue == null ? "" : (string)cmbOPDCatagory.SelectedValue);
+            if (GetAll) dtQuery = Query.OPDReceiptQuery(filter, (string)cmbOPDCatagory.SelectedValue == null ? "3" : (string)cmbOPDCatagory.SelectedValue);
             for (int i = 0; i < dtQuery.Rows.Count; i++)
             {
                 int ind = dgvQuery.Rows.Add(dtQuery.Rows[i].ItemArray);
@@ -94,7 +96,16 @@ namespace ERP
                 }
                 dtpDate.Value = (DateTime)dt.Rows[0]["VDate"];
                 cmbOPDCatagory.SelectedValue = dt.Rows[0]["Catagoryid"];
-                cmbConsultant.SelectedValue = dt.Rows[0]["Consultantid"];
+                string category = dt.Rows[0]["Catagoryid"].ToString();
+
+                if (category == "2")
+                {
+                    cmbConsultant.SelectedValue = dt.Rows[0]["laboratoryConsultantid"];
+                }
+                else
+                {
+                    cmbConsultant.SelectedValue = dt.Rows[0]["Consultantid"];
+                }
                 cmbPatientType.SelectedValue = dt.Rows[0]["patienttype"];//.ToString();
                 cmbMembership.SelectedValue = dt.Rows[0]["memberid"];
                 cmbGender.Text = dt.Rows[0]["gender"].ToString();
@@ -173,16 +184,16 @@ namespace ERP
         private void frmReceipt_Load(object sender, EventArgs e)
         {
             cmbOPDCatagory.SelectedIndex = 1;
+            txtFdate.Text = SoftwareInfo.ServerDate.ToString("dd-MMM-yyyy");
             if (UserInfo.UserLevel == "Admin")
             {
-                txtFdate.Text = SoftwareInfo.ServerDate.ToString("dd-MMM-yyyy");
                 dtpDate.Enabled = true;
                 FillControls.FillcmbUser(cmbRefundUser);
                 cmbRefundUser.SelectedValue = UserInfo.UserId;
                 grpRefundInfo.Visible = true;
             }
             ///FillQuery(new string[]{} ,true );
-            //btnFind_Click(null, null);
+            btnFind_Click(null, null);
             btnNew_Click(null, null);
             FillSessionBalance();
             dtDependentEmpty = dtDependent.Copy();
@@ -407,7 +418,11 @@ namespace ERP
                     MessageBox.Show("Contact Number Required...!");
                     return false;
                 }
-
+            }
+            if (txtContactNo.Text.Length != 11)
+            {
+                MessageBox.Show("Please enter a valid contact number. It should be exactly 11 digits.");
+                return false;
             }
             if (ntxtAge.Value == 0)
             {
@@ -520,7 +535,7 @@ namespace ERP
 
                         }
                     }
-                    //FillReceipt(voucher);
+                   // FillReceipt(voucher);
                     // if (dtQuery.Select("ReceiptNo = '" + voucher + "'").Count() == 0)
                     // {
                     //     DataRow dr = dtQuery.NewRow();
@@ -837,11 +852,14 @@ namespace ERP
                 dgvExpenses.Visible = true;
                 dgvExpenses.Rows.Clear();
                 //string GetTest, GetRate;
-                FillcmbTest(dr["id"].ToString()/*, out GetTest, out GetRate*/);
+                if (dr != null)
+                {
+                    FillcmbTest(dr["id"].ToString()/*, out GetTest, out GetRate*/);
+                }
                 int ind = dgvExpenses.Rows.Add();
                 //dgvExpenses.Rows[0].Cells[clnTest.Index].Value = GetTest;
                 //dgvExpenses.Rows[0].Cells[clnAmount.Index].Value = GetRate;
-                if (dr["DefaultTestId"].ToString() != "")
+                            if (dr != null && dr["DefaultTestId"].ToString() != "")
                 {
                     dgvExpenses[clnTest.Index, ind].Value = dr["DefaultTestId"].ToString();
                     DataRow drTest = dtTest.Select("id = '" + dr["DefaultTestId"].ToString() + "'").FirstOrDefault();
@@ -881,7 +899,7 @@ namespace ERP
         {
             DataTable dt = new DataTable();
 
-            if (Id != "")
+            if (Id != "" && Id != "2")
                 dt = dtConsultant.Select("testtypeid = '" + Id + "'").Count() > 0 ? dtConsultant.Select("testtypeid = '" + Id + "'").CopyToDataTable() : new DataTable();
             else dt = dtConsultant;
 
@@ -929,12 +947,29 @@ namespace ERP
                 lblConsultantCharges.Text = dr["HospitalRate"].ToString();
                 for (int i = 0; i < dgvExpenses.Rows.Count; i++)
                 {
-                    if ((string)dgvExpenses[clnTest.Index, i].Value == "6")
+                    if ((string)dgvExpenses[clnTest.Index, i].Value == "6" || (string)dgvExpenses[clnTest.Index, i].Value == "1366" || (string)dgvExpenses[clnTest.Index, i].Value == "1368")
                     {
                         dgvExpenses[dgvExpclnAmount.Index, i].Value = dr["HospitalRate"].ToString();
                     }
                 }
             }
+
+            //DataRowView TokenStatus = (DataRowView)cmbOPDCatagory.SelectedItem;
+            //if (TokenStatus != null && cmbConsultant.SelectedValue  != null && TokenStatus["autotoken"].ToString() == "0" && TokenStatus["resforduptoken"].ToString() == "1")
+            //{
+            //    string q = @"SELECT tokenno FROM opdreceipt opdr WHERE consultantid = '" + cmbConsultant.SelectedValue.ToString() + "' AND catagoryid = '" + cmbOPDCatagory.SelectedValue.ToString() + "' AND vdate + (8/24) >= SYSDATE AND tokenno = '" + ntxtTokenNo.Value.ToString() + "'";
+            //    DataTable dt = Query.getData(q);
+            //    if (Convert.ToInt32(dt.Rows[0][0]) > 0)
+            //    {
+            //        if (dgvExpenses.Rows.Count > 0 && (string)dgvExpenses.Rows[0].Cells[clnTest.Index].Value == "6")
+            //        {
+            //            MessageBox.Show("This token number has already being issued. Please insert new number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //            return;
+            //        }
+            //    }
+            //}
+
+
 
 
         }
@@ -957,7 +992,7 @@ namespace ERP
 
         private bool Print(string voucher)
         {
-            // bool IsPrinted = false;
+            bool IsPrinted = false;
             try
             {
                 if (voucher != "")
@@ -973,19 +1008,29 @@ namespace ERP
                     DataRowView dr = (DataRowView)cmbOPDCatagory.SelectedItem;
                     if (dr != null && dr["PrintType"].ToString() != "CARD")
                     {
-                        Reports.OPDReceipt rpt = new Reports.OPDReceipt();
                         DataTable dt = ReportQuery.OPDReceipt(voucher);
-                        DataTable dtTest = ReportQuery.OPDTestReceipt(voucher);
-                        dtTest.Columns.Add("QRcode",typeof(byte[]));
-                        
-
-                        string VoucherNo = "OP-" + voucher;
-                        string QRimagePath = Application.StartupPath + "\\QRCode.jpeg";
-                        DataTable dtQRcode = Query.GenerateQRCode(VoucherNo, QRimagePath);
-                        foreach (DataRow dr2 in dtTest.Rows)
+                        string category = dt.Rows[0]["CatagoryTitle"].ToString();
+                        if (category == "Laboratory")
                         {
-                            dr2["QRcode"] = (byte[])dtQRcode.Rows[0]["Qrcode"];
+                            PrintHussainiLaboratory(voucher, dt);
+                           // PrintBarcode(dt, voucher);
+                            return true;
                         }
+
+                        Reports.OPDReceipt rpt = new Reports.OPDReceipt();
+                        DataTable dtTest = ReportQuery.OPDTestReceipt(voucher);
+                        dtTest.Columns.Add("QRcode", typeof(byte[]));
+
+
+                      //  string VoucherNo = "OP-" + voucher;
+                      // string QRimagePath = Application.StartupPath + "\\QRCode.jpeg";
+                      //  DataTable dtQRcode = Query.GenerateQRCode(VoucherNo, QRimagePath);
+                      // foreach (DataRow dr2 in dtTest.Rows)
+                      // {
+                      // dr2["QRcode"] = (byte[])dtQRcode.Rows[0]["Qrcode"];
+                      //}
+
+
 
                         rpt.SetDataSource(dtTest);
                         rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
@@ -1003,7 +1048,7 @@ namespace ERP
                         rpt.SetParameterValue("@Remarks", dt.Rows[0]["Remarks"].ToString());
                         rpt.SetParameterValue("@GrossAmount", dt.Rows[0]["GrossAmount"].ToString());
                         decimal NetAmouunt = Convert.ToDecimal(dt.Rows[0]["NetAmount"].ToString());
-                        decimal kECharges =Convert.ToDecimal(dt.Rows[0]["electricitycharges"].ToString());
+                        decimal kECharges = Convert.ToDecimal(dt.Rows[0]["electricitycharges"].ToString());
                         decimal Total = NetAmouunt + kECharges;
                         rpt.SetParameterValue("@NetAmount", NetAmouunt);
                         rpt.SetParameterValue("@electricitycharges", dt.Rows[0]["electricitycharges"].ToString());
@@ -1042,22 +1087,16 @@ namespace ERP
                             rpt.PrintToPrinter(1, true, 1, 9999);
                             Query.Execute("update opdreceipt set noofprint = nvl(noofprint,0) + 1 where receiptno = '" + voucher + "'");
                         }
-                        //if (dt.Rows[0]["electricitycharges"].ToString() != "0")
-                        //{
-                        //    rpt.ReportFooterSection20.SectionFormat.EnableSuppress = true;
-                        //}
-                       // else { rpt.ReportFooterSection20.SectionFormat.EnableSuppress = false; }
-
                     }
                     else
                     {
                         Reports.OPDCard rpt = new Reports.OPDCard();
                         DataTable dt = ReportQuery.OPDReceipt(voucher);
 
-                        string VoucherNo = "OP-" + voucher;
-                        string QRimagePath = Application.StartupPath + "\\QRCode.jpeg";
-                        DataTable dtQRcode = Query.GenerateQRCode(VoucherNo, QRimagePath);
-                        rpt.SetDataSource(dtQRcode);
+                        //string VoucherNo = "OP-" + voucher;
+                        //string QRimagePath = Application.StartupPath + "\\QRCode.jpeg";
+                        //DataTable dtQRcode = Query.GenerateQRCode(VoucherNo, QRimagePath);
+                        //rpt.SetDataSource(dtQRcode);
 
                         rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
                         rpt.SetParameterValue("@Contact", CompanyInfo.ContactHead);
@@ -1092,7 +1131,6 @@ namespace ERP
                         if (dt.Rows[0]["ReferenceName"].ToString() == "") rpt.ReportFooterSection5.SectionFormat.EnableSuppress = true;
                         if (dt.Rows[0]["memberid"].ToString() == "")
                         {
-
                             rpt.ReportFooterSection6.SectionFormat.EnableSuppress = true;
                         }
                         else
@@ -1254,6 +1292,11 @@ namespace ERP
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void tabDetailQuery_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (UserInfo.UserId != "Admin" && tabDetailQuery.SelectedTab == tpDetail)
@@ -1379,7 +1422,7 @@ namespace ERP
         }
         private void btnRefreshQuery_Click(object sender, EventArgs e)
         {
-            btnFind_Click(null, null);
+            btnFind_Click(null, null);      
         }
 
         private void txtContactNo_KeyDown(object sender, KeyEventArgs e)
@@ -1438,6 +1481,172 @@ namespace ERP
 
                 }
             }
+        }
+
+
+        void PrintBarcode12(DataTable dt,string voucher)
+        {
+            // Create and populate the DataTable
+            DataTable dtTest = new DataTable();
+            dtTest.Columns.Add("Barocode"); // This should match the field in your Crystal Report
+
+            // Example barcode data (1234567890)
+            DataRow row = dtTest.NewRow();
+            row["Barocode"] = "OP-" + voucher;
+            dtTest.Rows.Add(row);
+
+            // Load the report
+            Reports.test rpt1 = new Reports.test();
+            rpt1.SetDataSource(dtTest);
+            rpt1.SetParameterValue("@PatientName", dt.Rows[0]["patientName"].ToString());
+            rpt1.SetParameterValue("@OpNo", "OP-" + voucher);
+
+            frmReportView frm1 = new frmReportView();
+            frm1.rptViewer.ReportSource = rpt1;
+            frm1.Show();
+
+            // Specify the printer name
+            //string printerName = "ZDesigner ZD220-203dpi ZPL";
+
+            //// Check if the printer exists
+            //if (PrinterSettings.InstalledPrinters.Cast<string>().Contains(printerName))
+            //{
+            //    // Set the printer name for the report
+            //   // rpt1.PrintOptions.PrinterName = printerName;
+
+            //    // Print the report
+            //   // rpt1.PrintToPrinter(1, true, 1, 9999);
+            //}
+            //else
+            //{
+            //    Console.WriteLine("The specified printer was not found.");
+            //}
+        }
+
+
+
+        void PrintBarcode(DataTable dt, string voucher)
+        {
+            // Generate barcode using ZXing.Net
+            var barcodeWriter = new BarcodeWriter
+            {
+                Format = BarcodeFormat.CODE_128,
+                Options = new ZXing.Common.EncodingOptions
+                {
+                    Width = 150,  // Adjust to make the barcode narrower (e.g., 150 pixels)
+                    Height = 50  // Adjust to make the barcode shorter (e.g., 50 pixels)
+                   // PureBarcode = true  // Ensures no text is displayed below the barcode
+                }
+            };
+
+            Bitmap bitmap = barcodeWriter.Write("OP-" + voucher);
+
+            // Convert Bitmap to byte array to store in DataTable
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] imgData = ms.ToArray();
+
+                // Create and populate the DataTable
+                DataTable dtTest = new DataTable();
+                dtTest.Columns.Add("Barcode", typeof(byte[])); // Match this with the field in Crystal Report
+
+                DataRow row = dtTest.NewRow();
+                row["Barcode"] = imgData;
+                dtTest.Rows.Add(row);
+
+                // Load the report
+                Reports.test rpt1 = new Reports.test();
+                rpt1.SetDataSource(dtTest);
+                rpt1.SetParameterValue("@PatientName", dt.Rows[0]["patientName"].ToString());
+                rpt1.SetParameterValue("@OpNo", "OP-" + voucher);
+
+                // Export the report to PDF
+                string pdfPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "BarcodeReport.pdf");
+                rpt1.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, pdfPath);
+
+                // Open the PDF file
+                System.Diagnostics.Process.Start(pdfPath);
+
+                //frmReportView frm1 = new frmReportView();
+                //frm1.rptViewer.ReportSource = rpt1;
+                //frm1.Show();
+            }
+        }
+
+        void PrintHussainiLaboratory(string voucher, DataTable dt)
+        {
+            Reports.OPDReceipt_Laboratory rpt = new Reports.OPDReceipt_Laboratory();
+           // DataTable dt = ReportQuery.OPDReceipt(voucher);
+            DataTable dtTest = ReportQuery.OPDTestReceipt(voucher);
+            dtTest.Columns.Add("QRcode", typeof(byte[]));
+
+
+            // string VoucherNo = "OP-" + voucher;
+            // string QRimagePath = Application.StartupPath + "\\QRCode.jpeg";
+            //  DataTable dtQRcode = Query.GenerateQRCode(VoucherNo, QRimagePath);
+           
+            rpt.SetDataSource(dtTest);
+            rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
+            rpt.SetParameterValue("@Contact", CompanyInfo.ContactHead);
+            rpt.SetParameterValue("@Address", CompanyInfo.Address);
+            rpt.SetParameterValue("@Catagory", dt.Rows[0]["CatagoryTitle"].ToString());
+            rpt.SetParameterValue("@ReceiptNo", "OP-" + voucher);
+            rpt.SetParameterValue("@Date", (DateTime)dt.Rows[0]["Vdate"]);
+            rpt.SetParameterValue("@Patient", dt.Rows[0]["patientName"].ToString());
+            rpt.SetParameterValue("@Gender", dt.Rows[0]["Gender"].ToString());
+            rpt.SetParameterValue("@Consultant", dt.Rows[0]["laboratoryConsultantName"].ToString());
+            rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+            rpt.SetParameterValue("@User", UserInfo.UserName);
+            rpt.SetParameterValue("@Discount", dt.Rows[0]["Discount"].ToString());
+            rpt.SetParameterValue("@Remarks", dt.Rows[0]["Remarks"].ToString());
+            rpt.SetParameterValue("@GrossAmount", dt.Rows[0]["GrossAmount"].ToString());
+            decimal NetAmouunt = Convert.ToDecimal(dt.Rows[0]["NetAmount"].ToString());
+            decimal kECharges = Convert.ToDecimal(dt.Rows[0]["electricitycharges"].ToString());
+            decimal Total = NetAmouunt + kECharges;
+            rpt.SetParameterValue("@NetAmount", NetAmouunt);
+            rpt.SetParameterValue("@electricitycharges", dt.Rows[0]["electricitycharges"].ToString());
+            rpt.SetParameterValue("@DiscountName", dt.Rows[0]["patientType"].ToString());
+            rpt.SetParameterValue("@ReferenceName", dt.Rows[0]["ReferenceName"].ToString());
+            rpt.SetParameterValue("@MemberId", dt.Rows[0]["memberid"].ToString());
+            rpt.SetParameterValue("@TokenNo", dt.Rows[0]["TokenNo"].ToString());
+            rpt.SetParameterValue("@Age", dt.Rows[0]["Age"].ToString());
+            rpt.SetParameterValue("@CreatedBY", dt.Rows[0]["createdby"].ToString());
+            rpt.SetParameterValue("@phoneNo", dt.Rows[0]["contactno"].ToString());
+            rpt.SetParameterValue("@partialName", "Partial Payment");
+            rpt.SetParameterValue("@Partial", dt.Rows[0]["netbalance"].ToString());
+            rpt.SetParameterValue("@Createdtime", (DateTime)dt.Rows[0]["createdtime"]);
+            rpt.SetParameterValue("@PrintedBy", UserInfo.UserId);
+            rpt.SetParameterValue("@terminal", SoftwareInfo.Terminal);
+            rpt.SetParameterValue("@urcompanyname", CompanyInfo.UrCompanyName);
+            rpt.ReportFooterSection7.SectionFormat.EnableUnderlaySection = true;
+            if (dt.Rows[0]["Discount"].ToString() == "0") rpt.ReportFooterSection3.SectionFormat.EnableSuppress = true;
+            if (dt.Rows[0]["electricitycharges"].ToString() == "0") rpt.ReportFooterSection20.SectionFormat.EnableSuppress = true;
+            if (dt.Rows[0]["ispartial"].ToString() == "0") rpt.ReportFooterSection12.SectionFormat.EnableSuppress = true;
+            if (dt.Rows[0]["ReferenceName"].ToString() == "") rpt.ReportFooterSection5.SectionFormat.EnableSuppress = true;
+            if (dt.Rows[0]["memberid"].ToString() == "")
+            {
+                rpt.ReportFooterSection6.SectionFormat.EnableSuppress = true;
+                rpt.ReportFooterSection7.SectionFormat.EnableUnderlaySection = false;
+            }
+            if (dt.Rows[0]["tokenNo"].ToString() == "0") rpt.ReportFooterSection7.SectionFormat.EnableSuppress = true;
+            rpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
+            if (UserInfo.UserLevel == "Admin")
+            {
+                frmReportView frm = new frmReportView();
+                frm.rptViewer.ReportSource = rpt;
+                frm.Show();
+            }
+            else
+            {
+                rpt.PrintToPrinter(1, true, 1, 9999);
+                Query.Execute("update opdreceipt set noofprint = nvl(noofprint,0) + 1 where receiptno = '" + voucher + "'");
+            }
+
+            //foreach (DataRow dr2 in dtTest.Rows)
+            //{
+            //    PrintBarcode(dt, voucher);
+            //}
         }
     }
 }

@@ -214,7 +214,7 @@ namespace ERP
                     paramDiscreteValue.Value = clientexposure;
                     paramField.CurrentValues.Add(paramDiscreteValue);
                     parameters.Add(paramField);
-                    repv.PageHeaderSection2.SectionFormat.EnableSuppress = false;
+                    //repv.PageHeaderSection2.SectionFormat.EnableSuppress = false;
                     //---end---
                     //
                     rptViewer.ParameterFieldInfo = parameters;

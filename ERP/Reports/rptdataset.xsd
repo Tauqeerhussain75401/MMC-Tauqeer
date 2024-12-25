@@ -171,6 +171,7 @@
               <xs:element name="SPD" msprop:Generator_ColumnVarNameInTable="columnSPD" msprop:Generator_ColumnPropNameInRow="SPD" msprop:Generator_ColumnPropNameInTable="SPDColumn" msprop:Generator_UserColumnName="SPD" type="xs:decimal" minOccurs="0" />
               <xs:element name="ZF" msprop:Generator_ColumnVarNameInTable="columnZF" msprop:Generator_ColumnPropNameInRow="ZF" msprop:Generator_ColumnPropNameInTable="ZFColumn" msprop:Generator_UserColumnName="ZF" type="xs:decimal" minOccurs="0" />
               <xs:element name="patienttype" msprop:Generator_ColumnVarNameInTable="columnpatienttype" msprop:Generator_ColumnPropNameInRow="patienttype" msprop:Generator_ColumnPropNameInTable="patienttypeColumn" msprop:Generator_UserColumnName="patienttype" type="xs:string" minOccurs="0" />
+              <xs:element name="remarks" msprop:Generator_ColumnVarNameInTable="columnremarks" msprop:Generator_ColumnPropNameInRow="remarks" msprop:Generator_ColumnPropNameInTable="remarksColumn" msprop:Generator_UserColumnName="remarks" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -216,6 +217,7 @@
               <xs:element name="ZF" msprop:Generator_ColumnVarNameInTable="columnZF" msprop:Generator_ColumnPropNameInRow="ZF" msprop:Generator_ColumnPropNameInTable="ZFColumn" msprop:Generator_UserColumnName="ZF" type="xs:decimal" minOccurs="0" />
               <xs:element name="NetAmount" msprop:Generator_ColumnVarNameInTable="columnNetAmount" msprop:Generator_ColumnPropNameInRow="NetAmount" msprop:Generator_ColumnPropNameInTable="NetAmountColumn" msprop:Generator_UserColumnName="NetAmount" type="xs:decimal" minOccurs="0" />
               <xs:element name="ReferenceName" msprop:Generator_ColumnVarNameInTable="columnReferenceName" msprop:Generator_ColumnPropNameInRow="ReferenceName" msprop:Generator_ColumnPropNameInTable="ReferenceNameColumn" msprop:Generator_UserColumnName="ReferenceName" type="xs:string" minOccurs="0" />
+              <xs:element name="CategoryName" msprop:Generator_ColumnVarNameInTable="columnCategoryName" msprop:Generator_ColumnPropNameInRow="CategoryName" msprop:Generator_ColumnPropNameInTable="CategoryNameColumn" msprop:Generator_UserColumnName="CategoryName" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -969,6 +971,45 @@
               <xs:element name="surgery_name" msprop:Generator_ColumnVarNameInTable="columnsurgery_name" msprop:Generator_ColumnPropNameInRow="surgery_name" msprop:Generator_ColumnPropNameInTable="surgery_nameColumn" msprop:Generator_UserColumnName="surgery_name" type="xs:string" minOccurs="0" />
               <xs:element name="FileNo" msprop:Generator_ColumnVarNameInTable="columnFileNo" msprop:Generator_ColumnPropNameInRow="FileNo" msprop:Generator_ColumnPropNameInTable="FileNoColumn" msprop:Generator_UserColumnName="FileNo" type="xs:string" minOccurs="0" />
               <xs:element name="ROWNUM" msprop:Generator_ColumnVarNameInTable="columnROWNUM" msprop:Generator_ColumnPropNameInRow="ROWNUM" msprop:Generator_ColumnPropNameInTable="ROWNUMColumn" msprop:Generator_UserColumnName="ROWNUM" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Barcode" msprop:Generator_TableClassName="BarcodeDataTable" msprop:Generator_TableVarName="tableBarcode" msprop:Generator_RowChangedName="BarcodeRowChanged" msprop:Generator_TablePropName="Barcode" msprop:Generator_RowDeletingName="BarcodeRowDeleting" msprop:Generator_RowChangingName="BarcodeRowChanging" msprop:Generator_RowEvHandlerName="BarcodeRowChangeEventHandler" msprop:Generator_RowDeletedName="BarcodeRowDeleted" msprop:Generator_RowClassName="BarcodeRow" msprop:Generator_UserTableName="Barcode" msprop:Generator_RowEvArgName="BarcodeRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Barcode" msprop:Generator_ColumnVarNameInTable="columnBarcode" msprop:Generator_ColumnPropNameInRow="Barcode" msprop:Generator_ColumnPropNameInTable="BarcodeColumn" msprop:Generator_UserColumnName="Barcode" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="OPD_FundUtilization" msprop:Generator_TableClassName="OPD_FundUtilizationDataTable" msprop:Generator_TableVarName="tableOPD_FundUtilization" msprop:Generator_TablePropName="OPD_FundUtilization" msprop:Generator_RowDeletingName="OPD_FundUtilizationRowDeleting" msprop:Generator_RowChangingName="OPD_FundUtilizationRowChanging" msprop:Generator_RowEvHandlerName="OPD_FundUtilizationRowChangeEventHandler" msprop:Generator_RowDeletedName="OPD_FundUtilizationRowDeleted" msprop:Generator_UserTableName="OPD_FundUtilization" msprop:Generator_RowChangedName="OPD_FundUtilizationRowChanged" msprop:Generator_RowEvArgName="OPD_FundUtilizationRowChangeEvent" msprop:Generator_RowClassName="OPD_FundUtilizationRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="catagory" msprop:Generator_ColumnVarNameInTable="columncatagory" msprop:Generator_ColumnPropNameInRow="catagory" msprop:Generator_ColumnPropNameInTable="catagoryColumn" msprop:Generator_UserColumnName="catagory" type="xs:string" minOccurs="0" />
+              <xs:element name="vdate" msprop:Generator_ColumnVarNameInTable="columnvdate" msprop:Generator_ColumnPropNameInRow="vdate" msprop:Generator_ColumnPropNameInTable="vdateColumn" msprop:Generator_UserColumnName="vdate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="receiptno" msprop:Generator_ColumnVarNameInTable="columnreceiptno" msprop:Generator_ColumnPropNameInRow="receiptno" msprop:Generator_ColumnPropNameInTable="receiptnoColumn" msprop:Generator_UserColumnName="receiptno" type="xs:string" minOccurs="0" />
+              <xs:element name="patientname" msprop:Generator_ColumnVarNameInTable="columnpatientname" msprop:Generator_ColumnPropNameInRow="patientname" msprop:Generator_ColumnPropNameInTable="patientnameColumn" msprop:Generator_UserColumnName="patientname" type="xs:string" minOccurs="0" />
+              <xs:element name="gender" msprop:Generator_ColumnVarNameInTable="columngender" msprop:Generator_ColumnPropNameInRow="gender" msprop:Generator_ColumnPropNameInTable="genderColumn" msprop:Generator_UserColumnName="gender" type="xs:string" minOccurs="0" />
+              <xs:element name="zf" msprop:Generator_ColumnVarNameInTable="columnzf" msprop:Generator_ColumnPropNameInRow="zf" msprop:Generator_ColumnPropNameInTable="zfColumn" msprop:Generator_UserColumnName="zf" type="xs:decimal" minOccurs="0" />
+              <xs:element name="spd" msprop:Generator_ColumnVarNameInTable="columnspd" msprop:Generator_ColumnPropNameInRow="spd" msprop:Generator_ColumnPropNameInTable="spdColumn" msprop:Generator_UserColumnName="spd" type="xs:decimal" minOccurs="0" />
+              <xs:element name="bmj" msprop:Generator_ColumnVarNameInTable="columnbmj" msprop:Generator_ColumnPropNameInRow="bmj" msprop:Generator_ColumnPropNameInTable="bmjColumn" msprop:Generator_UserColumnName="bmj" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TotalAmount" msprop:Generator_ColumnVarNameInTable="columnTotalAmount" msprop:Generator_ColumnPropNameInRow="TotalAmount" msprop:Generator_ColumnPropNameInTable="TotalAmountColumn" msprop:Generator_UserColumnName="TotalAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Pub" msprop:Generator_ColumnVarNameInTable="columnPub" msprop:Generator_ColumnPropNameInRow="Pub" msprop:Generator_ColumnPropNameInTable="PubColumn" msprop:Generator_UserColumnName="Pub" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="IPD_FundYrilization" msprop:Generator_TableClassName="IPD_FundYrilizationDataTable" msprop:Generator_TableVarName="tableIPD_FundYrilization" msprop:Generator_TablePropName="IPD_FundYrilization" msprop:Generator_RowDeletingName="IPD_FundYrilizationRowDeleting" msprop:Generator_RowChangingName="IPD_FundYrilizationRowChanging" msprop:Generator_RowEvHandlerName="IPD_FundYrilizationRowChangeEventHandler" msprop:Generator_RowDeletedName="IPD_FundYrilizationRowDeleted" msprop:Generator_UserTableName="IPD_FundYrilization" msprop:Generator_RowChangedName="IPD_FundYrilizationRowChanged" msprop:Generator_RowEvArgName="IPD_FundYrilizationRowChangeEvent" msprop:Generator_RowClassName="IPD_FundYrilizationRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="fileno" msprop:Generator_ColumnVarNameInTable="columnfileno" msprop:Generator_ColumnPropNameInRow="fileno" msprop:Generator_ColumnPropNameInTable="filenoColumn" msprop:Generator_UserColumnName="fileno" type="xs:string" minOccurs="0" />
+              <xs:element name="admdate" msprop:Generator_ColumnVarNameInTable="columnadmdate" msprop:Generator_ColumnPropNameInRow="admdate" msprop:Generator_ColumnPropNameInTable="admdateColumn" msprop:Generator_UserColumnName="admdate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="dischargedate" msprop:Generator_ColumnVarNameInTable="columndischargedate" msprop:Generator_ColumnPropNameInRow="dischargedate" msprop:Generator_ColumnPropNameInTable="dischargedateColumn" msprop:Generator_UserColumnName="dischargedate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="patientname" msprop:Generator_ColumnVarNameInTable="columnpatientname" msprop:Generator_ColumnPropNameInRow="patientname" msprop:Generator_ColumnPropNameInTable="patientnameColumn" msprop:Generator_UserColumnName="patientname" type="xs:string" minOccurs="0" />
+              <xs:element name="gender" msprop:Generator_ColumnVarNameInTable="columngender" msprop:Generator_ColumnPropNameInRow="gender" msprop:Generator_ColumnPropNameInTable="genderColumn" msprop:Generator_UserColumnName="gender" type="xs:string" minOccurs="0" />
+              <xs:element name="TotalCharges" msprop:Generator_ColumnVarNameInTable="columnTotalCharges" msprop:Generator_ColumnPropNameInRow="TotalCharges" msprop:Generator_ColumnPropNameInTable="TotalChargesColumn" msprop:Generator_UserColumnName="TotalCharges" type="xs:decimal" minOccurs="0" />
+              <xs:element name="zf" msprop:Generator_ColumnVarNameInTable="columnzf" msprop:Generator_ColumnPropNameInRow="zf" msprop:Generator_ColumnPropNameInTable="zfColumn" msprop:Generator_UserColumnName="zf" type="xs:decimal" minOccurs="0" />
+              <xs:element name="spd" msprop:Generator_ColumnVarNameInTable="columnspd" msprop:Generator_ColumnPropNameInRow="spd" msprop:Generator_ColumnPropNameInTable="spdColumn" msprop:Generator_UserColumnName="spd" type="xs:decimal" minOccurs="0" />
+              <xs:element name="bmj" msprop:Generator_ColumnVarNameInTable="columnbmj" msprop:Generator_ColumnPropNameInRow="bmj" msprop:Generator_ColumnPropNameInTable="bmjColumn" msprop:Generator_UserColumnName="bmj" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Pub" msprop:Generator_ColumnVarNameInTable="columnPub" msprop:Generator_ColumnPropNameInRow="Pub" msprop:Generator_ColumnPropNameInTable="PubColumn" msprop:Generator_UserColumnName="Pub" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

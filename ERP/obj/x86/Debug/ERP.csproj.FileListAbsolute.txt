@@ -2854,3 +2854,399 @@ D:\101171-N\A-Working File NUBIT\HMS_ERP-MMC-- NC\ERP\obj\x86\Debug\ERP.exe.mani
 D:\101171-N\A-Working File NUBIT\HMS_ERP-MMC-- NC\ERP\obj\x86\Debug\ERP.application
 D:\101171-N\A-Working File NUBIT\HMS_ERP-MMC-- NC\ERP\obj\x86\Debug\ERP.exe
 D:\101171-N\A-Working File NUBIT\HMS_ERP-MMC-- NC\ERP\obj\x86\Debug\ERP.pdb
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ERP.exe
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\SqlServerTypes\x64\msvcr120.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\SqlServerTypes\x64\SqlServerSpatial140.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\SqlServerTypes\x86\msvcr120.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\SqlServerTypes\x86\SqlServerSpatial140.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ERP.exe.config
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ERP.exe.manifest
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ERP.application
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ERP.pdb
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.CrystalReports.Design.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.Data.AdoDotNetInterop.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportSource.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.Shared.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.Windows.Forms.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.ReportViewer.Common.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.ReportViewer.Design.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.ReportViewer.WebDesign.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.ReportViewer.WinForms.DLL
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.SqlServer.Types.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\QRCoder.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\VersionUpdater.exe
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zxing.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zxing.presentation.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.Web.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.DataDefModel.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.ClientDoc.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.Controllers.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.CommLayer.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.Prompting.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\EnvDTE.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.ReportViewer.WebForms.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.CommonControls.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\stdole.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.VisualStudio.VSHelp.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.VisualStudio.ComponentModelHost.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.VisualStudio.TemplateWizardInterface.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\EnvDTE80.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.Build.Tasks.Core.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\VSLangProj.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\VSLangProj80.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.VisualStudio.GraphModel.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.MSXML.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.Build.Utilities.Core.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.Build.Framework.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\VSLangProj2.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\VersionUpdater.pdb
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zxing.pdb
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zxing.xml
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zxing.presentation.pdb
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zxing.presentation.xml
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\EnvDTE.xml
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\Microsoft.VisualStudio.TemplateWizardInterface.xml
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\EnvDTE80.xml
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\VSLangProj.xml
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\VSLangProj80.xml
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\VSLangProj2.xml
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\de\Microsoft.ReportViewer.Common.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\es\Microsoft.ReportViewer.Common.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\fr\Microsoft.ReportViewer.Common.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\it\Microsoft.ReportViewer.Common.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ja\Microsoft.ReportViewer.Common.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ko\Microsoft.ReportViewer.Common.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\pt\Microsoft.ReportViewer.Common.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ru\Microsoft.ReportViewer.Common.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zh-CHS\Microsoft.ReportViewer.Common.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zh-CHT\Microsoft.ReportViewer.Common.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\de\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\es\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\fr\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\it\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ja\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ko\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\pt\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ru\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\de\Microsoft.ReportViewer.Design.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\es\Microsoft.ReportViewer.Design.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\fr\Microsoft.ReportViewer.Design.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\it\Microsoft.ReportViewer.Design.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ja\Microsoft.ReportViewer.Design.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ko\Microsoft.ReportViewer.Design.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\pt\Microsoft.ReportViewer.Design.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ru\Microsoft.ReportViewer.Design.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zh-CHS\Microsoft.ReportViewer.Design.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zh-CHT\Microsoft.ReportViewer.Design.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\de\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\es\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\fr\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\it\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ja\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ko\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\pt\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ru\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zh-CHS\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zh-CHT\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\de\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\es\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\fr\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\it\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ja\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ko\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\pt\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\ru\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zh-CHS\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\bin\Debug\zh-CHT\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Classes.customTextbox.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Component1.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Components.Customdgv.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.NullableDateTimePicker.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.DecimalTextbox.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.BankReconcilation.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmAccountsSearching.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.FrmBankDetail.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmBankReconciliation.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmBankToBank.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmChartOfAcc.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmCurrentCashStatus.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmCurRoom.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmGeneralVoucher2.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmLabReportEntry2.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmInPatientSearch.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmLabRemarks.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmbirthinfo.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmConsultantInfo.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmAddmissionInfo.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmDisputeInfo.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmHospitalCharges.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmIPDBilling.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmMemberInfo.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmPostPV.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmPVoucherNew.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmReference.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmRefundInformation.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.FrmRemarks.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmRoomInfo.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmRoomStatus.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmRVoucherNew.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmSearchHisByContactNo.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.FrmSupportDocuments.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmTemplateDesigner.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmTest.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmESSARegister.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.FrmConsultant.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmConsultantSetup.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmLabReportEntry.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmMasterHead.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmMasterRegister.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmTestCatagoryInfo.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmTestParameters.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmOPDReceipt.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmAuthentication.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmChangepassword.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmChartOfAccLvl5.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmBackup.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmConfiguration.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmCounterReceipt.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmPreLoader.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmUserInfo.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmUsersControl.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmUserSession.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmVersionUpdater.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.InRecieptSearch.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.MasterSetting.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmBankReconcilation.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmJournalVoucher.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmLogIn.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmOpeningBal.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmPayments.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmReportParameters.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmReportView.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmMain.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmNarration.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmReceipt.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.MyMessageBox.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.PartialPayInfo.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.PTPackages.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmPtAdvInfo.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.ReceiptSearch.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.UltrasoundReportDesigner.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.NumericTextbox.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.Properties.Resources.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.UserControl1.resources
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.csproj.GenerateResource.Cache
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.exe.manifest
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.application
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.exe
+D:\Nubit\Tauqeer\HRMS-MMC\ERP\obj\x86\Debug\ERP.pdb
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\SqlServerTypes\x64\msvcr120.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\SqlServerTypes\x64\SqlServerSpatial140.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\SqlServerTypes\x86\msvcr120.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\SqlServerTypes\x86\SqlServerSpatial140.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ERP.exe.config
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ERP.exe.manifest
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ERP.application
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ERP.exe
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ERP.pdb
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.CrystalReports.Design.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.Data.AdoDotNetInterop.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportSource.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.Shared.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.Windows.Forms.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.ReportViewer.Common.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.ReportViewer.Design.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.ReportViewer.WebDesign.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.ReportViewer.WinForms.DLL
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.SqlServer.Types.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\QRCoder.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\VersionUpdater.exe
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zxing.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zxing.presentation.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.Web.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.DataDefModel.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.ClientDoc.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.Controllers.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.CommLayer.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.Prompting.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\EnvDTE.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.ReportViewer.WebForms.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\CrystalDecisions.ReportAppServer.CommonControls.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\stdole.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.VisualStudio.VSHelp.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.VisualStudio.ComponentModelHost.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.VisualStudio.TemplateWizardInterface.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\EnvDTE80.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.Build.Tasks.Core.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\VSLangProj.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\VSLangProj80.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Newtonsoft.Json.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.VisualStudio.GraphModel.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.MSXML.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.Build.Utilities.Core.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.Build.Framework.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\VSLangProj2.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\VersionUpdater.pdb
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zxing.pdb
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zxing.xml
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zxing.presentation.pdb
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zxing.presentation.xml
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\EnvDTE.xml
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\Microsoft.VisualStudio.TemplateWizardInterface.xml
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\EnvDTE80.xml
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\VSLangProj.xml
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\VSLangProj80.xml
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\VSLangProj2.xml
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\de\Microsoft.ReportViewer.Common.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\es\Microsoft.ReportViewer.Common.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\fr\Microsoft.ReportViewer.Common.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\it\Microsoft.ReportViewer.Common.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ja\Microsoft.ReportViewer.Common.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ko\Microsoft.ReportViewer.Common.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\pt\Microsoft.ReportViewer.Common.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ru\Microsoft.ReportViewer.Common.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zh-CHS\Microsoft.ReportViewer.Common.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zh-CHT\Microsoft.ReportViewer.Common.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\de\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\es\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\fr\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\it\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ja\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ko\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\pt\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ru\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\de\Microsoft.ReportViewer.Design.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\es\Microsoft.ReportViewer.Design.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\fr\Microsoft.ReportViewer.Design.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\it\Microsoft.ReportViewer.Design.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ja\Microsoft.ReportViewer.Design.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ko\Microsoft.ReportViewer.Design.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\pt\Microsoft.ReportViewer.Design.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ru\Microsoft.ReportViewer.Design.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zh-CHS\Microsoft.ReportViewer.Design.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zh-CHT\Microsoft.ReportViewer.Design.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\de\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\es\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\fr\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\it\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ja\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ko\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\pt\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ru\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zh-CHS\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zh-CHT\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\de\Microsoft.ReportViewer.WebForms.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\es\Microsoft.ReportViewer.WebForms.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\fr\Microsoft.ReportViewer.WebForms.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\it\Microsoft.ReportViewer.WebForms.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ja\Microsoft.ReportViewer.WebForms.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ko\Microsoft.ReportViewer.WebForms.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\pt\Microsoft.ReportViewer.WebForms.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\ru\Microsoft.ReportViewer.WebForms.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zh-CHS\Microsoft.ReportViewer.WebForms.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\bin\Debug\zh-CHT\Microsoft.ReportViewer.WebForms.resources.dll
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.csprojResolveAssemblyReference.cache
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Classes.customTextbox.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Component1.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Components.Customdgv.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.NullableDateTimePicker.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.DecimalTextbox.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.BankReconcilation.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmAccountsSearching.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.FrmBankDetail.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmBankReconciliation.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmBankToBank.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmChartOfAcc.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmCurrentCashStatus.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmCurRoom.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmGeneralVoucher2.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmLabReportEntry2.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmInPatientSearch.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmLabRemarks.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmbirthinfo.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmConsultantInfo.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmAddmissionInfo.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmDisputeInfo.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmHospitalCharges.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmIPDBilling.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmMemberInfo.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmPostPV.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmPVoucherNew.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmReference.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmRefundInformation.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.FrmRemarks.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmRoomInfo.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmRoomStatus.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmRVoucherNew.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmSearchHisByContactNo.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.FrmSupportDocuments.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmTemplateDesigner.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmTest.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmESSARegister.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.FrmConsultant.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmConsultantSetup.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmLabReportEntry.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmMasterHead.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmMasterRegister.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmTestCatagoryInfo.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmTestParameters.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmOPDReceipt.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmAuthentication.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmChangepassword.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmChartOfAccLvl5.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmBackup.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmConfiguration.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmCounterReceipt.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmPreLoader.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmUserInfo.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmUsersControl.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmUserSession.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.frmVersionUpdater.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.InRecieptSearch.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.MasterSetting.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmBankReconcilation.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmJournalVoucher.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmLogIn.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmOpeningBal.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmPayments.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmReportParameters.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmReportView.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmMain.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmNarration.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmReceipt.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.MyMessageBox.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.PartialPayInfo.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.PTPackages.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.frmPtAdvInfo.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.ReceiptSearch.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Forms.UltrasoundReportDesigner.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.NumericTextbox.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.Properties.Resources.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.UserControl1.resources
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.csproj.GenerateResource.Cache
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.exe.manifest
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.application
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.exe
+D:\101171-N\Nubit Github Application\HRMS-MMC\ERP\obj\x86\Debug\ERP.pdb

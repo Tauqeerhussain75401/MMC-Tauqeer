@@ -51,10 +51,10 @@ namespace ERP.Forms
                     dt.Rows[i]["referencename"].ToString(),
                     //dt.Rows[i]["admittedfor"].ToString(),
                     dt.Rows[i]["emergency"].ToString(),
+                    dt.Rows[i]["createdby"].ToString(),
+                    dt.Rows[i]["CNIC"].ToString(),
+                    dt.Rows[i]["CnicRelation"].ToString()
 
-             
-                    dt.Rows[i]["createdby"].ToString()
-          
                     );
             }
 
@@ -87,6 +87,9 @@ namespace ERP.Forms
                 //cmbRelationType.Text = dt.Rows[0]["relation"].ToString();
                 txtRelation.Text = dtDetail.Rows[0]["relationname"].ToString();
                 cmbRelationType.Text = dtDetail.Rows[0]["relation"].ToString();
+
+                txtCnic.Text = dtDetail.Rows[0]["cnic"].ToString();
+                cmbCnicRelation.Text = dtDetail.Rows[0]["CnicRelation"].ToString();
 
                 cmbConsultant.SelectedValue = dtDetail.Rows[0]["consultantid"];
                 txtReason.Text = dtDetail.Rows[0]["admittedfor"].ToString();
@@ -197,7 +200,6 @@ namespace ERP.Forms
         private void frmAddmissionInfo_Load(object sender, EventArgs e)
         {
             CurrentDateTime();
-
             if (UserInfo.UserLevel != "Admin")
             {
                 //dtpDate.Value = DateTime.Now;
@@ -213,6 +215,7 @@ namespace ERP.Forms
             dtDependentEmpty.Rows.Clear();
             FLogIn = false;
             New();
+            cmbCnicRelation.SelectedIndex = 0;
         }
         private void dgvDetail_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -298,7 +301,7 @@ namespace ERP.Forms
                 getRegno();
                 DML.addmissionInfo_add_edit(txtSerialNo.Text, txtSerialNo.Text, txtRegAlpha.Text, ntxtRegNo.Text, dtpDate.Value, dtpTime.Value, RoomId, (string)cmbPatientType.SelectedValue,
                     Convert.ToString(cmbMembership.SelectedValue), cmbPatientTitle.Text, cmbPatientId.Text, txtRelation.Text, cmbRelationType.Text, ntxtAge.Text, cmbGender.Text, cmbAgeUnit.Text, (string)cmbConsultant.SelectedValue,
-                    (string)cmbReference.SelectedValue, cmbReference.Text, "", txtReason.Text, "0", (string)cmbArea.SelectedValue, txtAddress.Text, txtEmergency.Text, txtMobile.Text, txtOtherContact.Text, txtEmail.Text, txtRemarks.Text, "0", "0");
+                    (string)cmbReference.SelectedValue, cmbReference.Text, "", txtReason.Text, "0", (string)cmbArea.SelectedValue, txtAddress.Text, txtEmergency.Text, txtMobile.Text, txtOtherContact.Text, txtEmail.Text, txtRemarks.Text, "0", "0",txtCnic.Text,cmbCnicRelation.Text);
                 MessageBox.Show("Record Successfully Saved..!");
 
                 if (txtSerialNo.Text == "")
@@ -452,8 +455,12 @@ namespace ERP.Forms
             Reports.CrpInPAdmForm rpt = new Reports.CrpInPAdmForm();
             DataTable dt = ReportQuery.AddmissionForm(txtRegAlpha.Text + "-" + ntxtRegNo.Text);
             string DepositAmount = dt.Rows[0]["DepositAmount"].ToString();
+            string CNIC = dt.Rows[0]["Cnic"].ToString();
+            string CnicRelation = dt.Rows[0]["CnicRelation"].ToString();
             rpt.SetDataSource(dt);
             rpt.SetParameterValue("pDeposit", DepositAmount == "" ? "0" : DepositAmount);
+            rpt.SetParameterValue("pCnic", CNIC == "" ? "" : CNIC);
+            rpt.SetParameterValue("pCnicRelation", CnicRelation == "" ? "" : CnicRelation);
             if (DirectPrint == false)
             {
                 frmReportView frm = new frmReportView();
@@ -575,6 +582,18 @@ namespace ERP.Forms
             {
                 MessageBox.Show("Enter Reference Id..!!!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbMembership.Focus();
+                return false;
+            }
+            else if (txtCnic.Text == "")
+            {
+                MessageBox.Show("Enter the patient's CNIC Number..!!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtCnic.Focus();
+                return false;
+            }
+            else if (txtCnic.Text.Length != 15)
+            {
+                MessageBox.Show("Please enter the patient's CNIC number (13 digits, with dashes)..!!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtCnic.Focus();
                 return false;
             }
             
@@ -851,6 +870,9 @@ namespace ERP.Forms
             }
         }
 
-       
+        private void cmbRelationType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -37,6 +37,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dtpAsOn = new System.Windows.Forms.DateTimePicker();
             this.grpAccounts = new System.Windows.Forms.GroupBox();
+            this.lblbk = new System.Windows.Forms.Label();
+            this.cmbBank = new System.Windows.Forms.ComboBox();
             this.txtAccountCode = new System.Windows.Forms.TextBox();
             this.cmbAccount = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -136,10 +138,11 @@
             this.grpdate = new System.Windows.Forms.GroupBox();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.cmbBank = new System.Windows.Forms.ComboBox();
-            this.lblbk = new System.Windows.Forms.Label();
             this.cmbClients = new ERP.MultiColumnComboBox();
             this.mcbBankIndex = new ERP.MultiColumnComboBox();
+            this.grpAllFundType = new System.Windows.Forms.GroupBox();
+            this.cmbFundType = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.grpDateRange.SuspendLayout();
             this.grpAsOn.SuspendLayout();
             this.grpAccounts.SuspendLayout();
@@ -173,6 +176,7 @@
             this.grpdepartment.SuspendLayout();
             this.grpza.SuspendLayout();
             this.grpdate.SuspendLayout();
+            this.grpAllFundType.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpDateRange
@@ -277,6 +281,28 @@
             this.grpAccounts.TabStop = false;
             this.grpAccounts.Text = "Account ";
             this.grpAccounts.Visible = false;
+            // 
+            // lblbk
+            // 
+            this.lblbk.AutoSize = true;
+            this.lblbk.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblbk.Location = new System.Drawing.Point(11, 55);
+            this.lblbk.Name = "lblbk";
+            this.lblbk.Size = new System.Drawing.Size(83, 16);
+            this.lblbk.TabIndex = 202;
+            this.lblbk.Text = "Select Bank ";
+            this.lblbk.Visible = false;
+            // 
+            // cmbBank
+            // 
+            this.cmbBank.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbBank.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbBank.FormattingEnabled = true;
+            this.cmbBank.Location = new System.Drawing.Point(137, 51);
+            this.cmbBank.Name = "cmbBank";
+            this.cmbBank.Size = new System.Drawing.Size(258, 24);
+            this.cmbBank.TabIndex = 201;
+            this.cmbBank.Visible = false;
             // 
             // txtAccountCode
             // 
@@ -916,6 +942,7 @@
             this.cmbAllCatagory.Name = "cmbAllCatagory";
             this.cmbAllCatagory.Size = new System.Drawing.Size(211, 24);
             this.cmbAllCatagory.TabIndex = 200;
+            this.cmbAllCatagory.Text = "ALL";
             this.cmbAllCatagory.SelectedIndexChanged += new System.EventHandler(this.cmbAllCatagory_SelectedIndexChanged_1);
             this.cmbAllCatagory.Validated += new System.EventHandler(this.cmbAllCatagory_Validated);
             // 
@@ -1357,7 +1384,7 @@
             // 
             this.grpza.Controls.Add(this.checkBox1);
             this.grpza.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpza.Location = new System.Drawing.Point(716, 639);
+            this.grpza.Location = new System.Drawing.Point(956, 369);
             this.grpza.Name = "grpza";
             this.grpza.Size = new System.Drawing.Size(137, 52);
             this.grpza.TabIndex = 333;
@@ -1409,28 +1436,6 @@
             this.radioButton6.UseVisualStyleBackColor = true;
             this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
             // 
-            // cmbBank
-            // 
-            this.cmbBank.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.cmbBank.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbBank.FormattingEnabled = true;
-            this.cmbBank.Location = new System.Drawing.Point(137, 51);
-            this.cmbBank.Name = "cmbBank";
-            this.cmbBank.Size = new System.Drawing.Size(258, 24);
-            this.cmbBank.TabIndex = 201;
-            this.cmbBank.Visible = false;
-            // 
-            // lblbk
-            // 
-            this.lblbk.AutoSize = true;
-            this.lblbk.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblbk.Location = new System.Drawing.Point(11, 55);
-            this.lblbk.Name = "lblbk";
-            this.lblbk.Size = new System.Drawing.Size(83, 16);
-            this.lblbk.TabIndex = 202;
-            this.lblbk.Text = "Select Bank ";
-            this.lblbk.Visible = false;
-            // 
             // cmbClients
             // 
             this.cmbClients.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
@@ -1457,11 +1462,50 @@
             this.mcbBankIndex.TabIndex = 322;
             this.mcbBankIndex.Tag = "UnLock";
             // 
+            // grpAllFundType
+            // 
+            this.grpAllFundType.Controls.Add(this.cmbFundType);
+            this.grpAllFundType.Controls.Add(this.label17);
+            this.grpAllFundType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpAllFundType.Location = new System.Drawing.Point(774, 657);
+            this.grpAllFundType.Name = "grpAllFundType";
+            this.grpAllFundType.Size = new System.Drawing.Size(279, 55);
+            this.grpAllFundType.TabIndex = 206;
+            this.grpAllFundType.TabStop = false;
+            this.grpAllFundType.Text = "Select";
+            this.grpAllFundType.Visible = false;
+            // 
+            // cmbFundType
+            // 
+            this.cmbFundType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbFundType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbFundType.FormattingEnabled = true;
+            this.cmbFundType.Items.AddRange(new object[] {
+            "All",
+            "Full",
+            "Partial"});
+            this.cmbFundType.Location = new System.Drawing.Point(54, 22);
+            this.cmbFundType.Name = "cmbFundType";
+            this.cmbFundType.Size = new System.Drawing.Size(211, 24);
+            this.cmbFundType.TabIndex = 200;
+            this.cmbFundType.Text = "All";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(8, 26);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(40, 16);
+            this.label17.TabIndex = 201;
+            this.label17.Text = "Type";
+            // 
             // frmReportParameters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1137, 749);
+            this.Controls.Add(this.grpAllFundType);
             this.Controls.Add(this.grpdate);
             this.Controls.Add(this.grpAccounts);
             this.Controls.Add(this.grpza);
@@ -1568,6 +1612,8 @@
             this.grpza.PerformLayout();
             this.grpdate.ResumeLayout(false);
             this.grpdate.PerformLayout();
+            this.grpAllFundType.ResumeLayout(false);
+            this.grpAllFundType.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1687,5 +1733,8 @@
         private System.Windows.Forms.TextBox txtregno;
         private System.Windows.Forms.Label lblbk;
         private System.Windows.Forms.ComboBox cmbBank;
+        private System.Windows.Forms.GroupBox grpAllFundType;
+        private System.Windows.Forms.ComboBox cmbFundType;
+        private System.Windows.Forms.Label label17;
     }
 }

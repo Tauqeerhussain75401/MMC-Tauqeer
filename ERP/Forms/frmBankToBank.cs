@@ -8,8 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
-using AForge.Video;
-using AForge.Video.DirectShow;
 using System.IO;
 
 namespace ERP
@@ -153,7 +151,7 @@ namespace ERP
             try
             {
 
-                
+
                 this.Text = Variable.Version;
                 SupportDocuments = new FrmSupportDocuments();
                 SupportDocuments.doucmentname = "BankToBank.tiff";
@@ -167,7 +165,15 @@ namespace ERP
                 dtEmployees = Query.HRindex4();
                 dtdirector = Query.DirectorIndex();
                 dtpDate.Value = null;
-                //if (Variable.UserId == "Admin") pnlDate.Visible = true;
+                if (UserInfo.UserId == "Admin")
+                {
+
+                    dtpDate.Enabled = true;
+                }
+                else
+                {
+                    dtpDate.Enabled = false;
+                }
                 statusUserName.Text = "User Name: " + Variable.User;
                 statusDateTime.Text = "LogIn Time: " + Variable.UserDateTime;
                 FLogIn = false;
@@ -225,8 +231,8 @@ namespace ERP
 
                                 if (dgvAccount.Rows.Count == 0)
                                 {
-                                    dgvAccount.Rows.Add( cmbBankName.Text , txtBankDesc.Text, "0", txtAmount.Text, txtAmount.Text, Variable.UserId, (txtEditBy.Text == "" ? null : txtEditBy.Text), null, (cmbBankName.Text == "Cash On Hand" ? "001001005001001" : AccountHead.CashInBank  ), (txtPVNo.Text == "" ? null : txtPVNo.Text), (rdoCheque.Checked == true ? txtChequeNo.Text : null), (rdoCheque.Checked == true ? cmbBankName.SelectedValue : null), (dgvAccount.Rows.Count + 1).ToString(), 1);
-                                    dgvAccount.Rows.Add(mcbToBank.Text, richtxtToBankDesc.Text, txtAmount.Text, "0", txtAmount.Text, Variable.UserId, (txtEditBy.Text == "" ? null : txtEditBy.Text), null, (cmbBankName.Text == "Cash On Hand" ? "001001005001001" : AccountHead.CashInBank), (txtPVNo.Text == "" ? null : txtPVNo.Text), txtSlipNo.Text, mcbToBank.SelectedValue, (dgvAccount.Rows.Count + 1).ToString(), 1);
+                                    dgvAccount.Rows.Add(cmbBankName.Text, txtBankDesc.Text, "0", txtAmount.Text, txtAmount.Text, Variable.UserId, (txtEditBy.Text == "" ? null : txtEditBy.Text), null, (cmbBankName.Text == "Cash On Hand" ? "001001005001001" : AccountHead.CashInBank), (txtPVNo.Text == "" ? null : txtPVNo.Text), (rdoCheque.Checked == true ? txtChequeNo.Text : null), (rdoCheque.Checked == true ? cmbBankName.SelectedValue : null), (dgvAccount.Rows.Count + 1).ToString(), 1);
+                                    dgvAccount.Rows.Add(mcbToBank.Text, richtxtToBankDesc.Text, txtAmount.Text, "0", txtAmount.Text, Variable.UserId, (txtEditBy.Text == "" ? null : txtEditBy.Text), null, (mcbToBank.Text == "Cash On Hand" ? "001001005001001" : AccountHead.CashInBank), (txtPVNo.Text == "" ? null : txtPVNo.Text), txtSlipNo.Text, mcbToBank.SelectedValue, (dgvAccount.Rows.Count + 1).ToString(), 1);
                                 }
                                 decimal a = 0;
                                 if (dgvAccount.Rows.Count > 0)
@@ -347,10 +353,10 @@ namespace ERP
                             //btnFind_Click(null, null);
                             Calculate();
                         }
-                       
+
                     }
                 }
-                
+
             }
 
             catch (Exception ex)
@@ -477,7 +483,7 @@ namespace ERP
             try
             {
                 dtquery = DML.VoucherFilter(new string[] {
-                    "( trunc(VDate)   between TO_DATE('" + dtpFrom.Value.ToString("dd MMM yyyy")   + "', 'dd MON yyyy')  and TO_DATE('" + dtpTo.Value.ToString("dd MMM yyyy") + "', 'dd MON yyyy') ) " , 
+                    "( trunc(VDate)   between TO_DATE('" + dtpFrom.Value.ToString("dd MMM yyyy")   + "', 'dd MON yyyy')  and TO_DATE('" + dtpTo.Value.ToString("dd MMM yyyy") + "', 'dd MON yyyy') ) " ,
                 "fktransactionid =  'BTB-001'",
                 "Vtype = 'BT'"
                 });
@@ -654,7 +660,7 @@ namespace ERP
             }
         }
         public static string Remarks = "";
-        private void btnDelete_Click(object sender, EventArgs e)/*&& (dgvAccount.Rows[0].Cells[Editable.Index].Value.ToString() == "1"*/ 
+        private void btnDelete_Click(object sender, EventArgs e)/*&& (dgvAccount.Rows[0].Cells[Editable.Index].Value.ToString() == "1"*/
         {
             try
             {
@@ -698,7 +704,7 @@ namespace ERP
             try
             {
                 //frmReportView.ShowBox("Voucher", Convert.ToDateTime(dtpDate.Value).ToString("dd-MMM-yyyy"), "JV", int.Parse(voucherNum).ToString("D6"), "Journal Voucher", txtCreatedBy.Text, txtStatus.Text);
-                frmReportView.ShowBox("Voucher", Convert.ToDateTime(dtpDate.Value).ToString("dd-MMM-yyyy"), "BT", txtPVNo.Text.Substring(3), "Voucher","", status.Text);
+                frmReportView.ShowBox("Voucher", Convert.ToDateTime(dtpDate.Value).ToString("dd-MMM-yyyy"), "BT", txtPVNo.Text.Substring(3), "Voucher", "", status.Text);
             }
             catch
             {
@@ -728,7 +734,7 @@ namespace ERP
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             string doc = "";
-            this.Invoke(new Function(delegate()
+            this.Invoke(new Function(delegate ()
             {
                 // doc = lblDoucmentNo.Text;
                 doc = Documentid;
@@ -746,7 +752,7 @@ namespace ERP
                 }
 
             }
-            this.Invoke(new Function(delegate()
+            this.Invoke(new Function(delegate ()
             {
                 SupportDocuments.ShowDialog();
             }));
@@ -792,12 +798,12 @@ namespace ERP
             {
                 if (txtPVNo.Text != "" && /*dgvAccount.CurrentRow.Index != 0*/dgvAccount.SelectedRows.Count > 0)
                 {
-                    
+
                     txtAmount.Text = dgvAccount.Rows[dgvAccount.CurrentRow.Index].Cells[clnDebit.Index].Value.ToString();
                 }
                 else if (txtPVNo.Text != "" && dgvAccount.CurrentRow.Index == 0)
                 {
-                   
+
                     txtAmount.Text = dgvAccount.Rows[dgvAccount.CurrentRow.Index].Cells[clnCredit.Index].Value.ToString();
                 }
 

@@ -184,7 +184,8 @@ namespace ERP
                             dr.Add(Convert.ToDecimal(dgvAccount[clnDebit.Index, i].Value.ToString()));
                             cr.Add(Convert.ToDecimal(dgvAccount[clnCredit.Index, i].Value.ToString()));
                             SubAccount.Add((string)dgvAccount[clnSubAccountDetail.Index, i].Value);
-                            Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
+                            //Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
+                            Status.Add(0);
                         }
                     }
 

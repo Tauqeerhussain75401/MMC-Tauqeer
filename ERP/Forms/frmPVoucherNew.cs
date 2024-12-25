@@ -310,8 +310,8 @@ namespace ERP
                             dr.Add(Convert.ToDecimal(0.00m));
                             cr.Add(Convert.ToDecimal(dgvAccount[clnDebit.Index, i].Value.ToString()));
                             SubAccount.Add(Convert.ToString(cmbBankName.SelectedValue));
-                            Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
-                            //Status.Add(2);
+                            //Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
+                            Status.Add(0);
 
 
                             string hello = Convert.ToString(dgvAccount[clnChequeNo.Index, i].Value.ToString() == null ? "" : dgvAccount[clnChequeNo.Index, i].Value.ToString());
@@ -324,9 +324,9 @@ namespace ERP
                             dr.Add(Convert.ToDecimal(dgvAccount[clnDebit.Index, i].Value.ToString()));
                             cr.Add(Convert.ToDecimal(0.00m));
                             SubAccount.Add((string)dgvAccount[clnSubAccountDetail.Index, i].Value);
-                            Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
+                            //Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
 
-                            //  Status.Add(2);
+                            Status.Add(0);
                             ChequeNo.Add(Convert.ToString(dgvAccount[clnChequeNo.Index, i].Value.ToString()));
                             SlipNo.Add("");
                         }

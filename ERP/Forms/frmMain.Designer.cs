@@ -120,6 +120,13 @@
             this.trialBalanceToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dialysisPatientDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.partiallyPaymentPendingReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.surgeryReportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.surgeryWiseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.doctorWiseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.totalSurgeriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.oPDFundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iPDFunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OPDCashInHandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainsSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.SubMainbackup = new System.Windows.Forms.ToolStripMenuItem();
             this.SubMainrestore = new System.Windows.Forms.ToolStripMenuItem();
@@ -155,10 +162,7 @@
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.chkDate = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.surgeryReportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.surgeryWiseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.doctorWiseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.totalSurgeriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -566,7 +570,11 @@
             this.trialBalanceToolStripMenuItem1,
             this.dialysisPatientDetailsToolStripMenuItem,
             this.partiallyPaymentPendingReportToolStripMenuItem,
-            this.surgeryReportsToolStripMenuItem});
+            this.surgeryReportsToolStripMenuItem,
+            this.oPDFundToolStripMenuItem,
+            this.iPDFunToolStripMenuItem,
+            this.OPDCashInHandToolStripMenuItem,
+            this.toolStripMenuItem5});
             this.MainReports.Name = "MainReports";
             this.MainReports.Size = new System.Drawing.Size(59, 20);
             this.MainReports.Text = "Reports";
@@ -908,6 +916,58 @@
             this.partiallyPaymentPendingReportToolStripMenuItem.Text = "Partially Payment Pending Report";
             this.partiallyPaymentPendingReportToolStripMenuItem.Click += new System.EventHandler(this.partiallyPaymentPendingReportToolStripMenuItem_Click);
             // 
+            // surgeryReportsToolStripMenuItem
+            // 
+            this.surgeryReportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.surgeryWiseReportToolStripMenuItem,
+            this.doctorWiseToolStripMenuItem,
+            this.totalSurgeriesToolStripMenuItem});
+            this.surgeryReportsToolStripMenuItem.Name = "surgeryReportsToolStripMenuItem";
+            this.surgeryReportsToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+            this.surgeryReportsToolStripMenuItem.Text = "Surgery Reports";
+            // 
+            // surgeryWiseReportToolStripMenuItem
+            // 
+            this.surgeryWiseReportToolStripMenuItem.Name = "surgeryWiseReportToolStripMenuItem";
+            this.surgeryWiseReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.surgeryWiseReportToolStripMenuItem.Text = "Surgery Wise Details";
+            this.surgeryWiseReportToolStripMenuItem.Click += new System.EventHandler(this.surgeryWiseReportToolStripMenuItem_Click);
+            // 
+            // doctorWiseToolStripMenuItem
+            // 
+            this.doctorWiseToolStripMenuItem.Name = "doctorWiseToolStripMenuItem";
+            this.doctorWiseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.doctorWiseToolStripMenuItem.Text = "Doctor Wise";
+            this.doctorWiseToolStripMenuItem.Click += new System.EventHandler(this.doctorWiseToolStripMenuItem_Click);
+            // 
+            // totalSurgeriesToolStripMenuItem
+            // 
+            this.totalSurgeriesToolStripMenuItem.Name = "totalSurgeriesToolStripMenuItem";
+            this.totalSurgeriesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.totalSurgeriesToolStripMenuItem.Text = "Total Surgeries";
+            this.totalSurgeriesToolStripMenuItem.Click += new System.EventHandler(this.totalSurgeriesToolStripMenuItem_Click);
+            // 
+            // oPDFundToolStripMenuItem
+            // 
+            this.oPDFundToolStripMenuItem.Name = "oPDFundToolStripMenuItem";
+            this.oPDFundToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+            this.oPDFundToolStripMenuItem.Text = "OPD Fund Utilization";
+            this.oPDFundToolStripMenuItem.Click += new System.EventHandler(this.oPDFundToolStripMenuItem_Click);
+            // 
+            // iPDFunToolStripMenuItem
+            // 
+            this.iPDFunToolStripMenuItem.Name = "iPDFunToolStripMenuItem";
+            this.iPDFunToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+            this.iPDFunToolStripMenuItem.Text = "IPD Fund Utilization";
+            this.iPDFunToolStripMenuItem.Click += new System.EventHandler(this.iPDFunToolStripMenuItem_Click);
+            // 
+            // OPDCashInHandToolStripMenuItem
+            // 
+            this.OPDCashInHandToolStripMenuItem.Name = "OPDCashInHandToolStripMenuItem";
+            this.OPDCashInHandToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+            this.OPDCashInHandToolStripMenuItem.Text = "OPD Cash In Hand";
+            this.OPDCashInHandToolStripMenuItem.Click += new System.EventHandler(this.OPDCashInHandToolStripMenuItem_Click_1);
+            // 
             // MainsSetting
             // 
             this.MainsSetting.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1222,36 +1282,12 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "Read Dates from :";
             // 
-            // surgeryReportsToolStripMenuItem
+            // toolStripMenuItem5
             // 
-            this.surgeryReportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.surgeryWiseReportToolStripMenuItem,
-            this.doctorWiseToolStripMenuItem,
-            this.totalSurgeriesToolStripMenuItem});
-            this.surgeryReportsToolStripMenuItem.Name = "surgeryReportsToolStripMenuItem";
-            this.surgeryReportsToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
-            this.surgeryReportsToolStripMenuItem.Text = "Surgery Reports";
-            // 
-            // surgeryWiseReportToolStripMenuItem
-            // 
-            this.surgeryWiseReportToolStripMenuItem.Name = "surgeryWiseReportToolStripMenuItem";
-            this.surgeryWiseReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.surgeryWiseReportToolStripMenuItem.Text = "Surgery Wise Details";
-            this.surgeryWiseReportToolStripMenuItem.Click += new System.EventHandler(this.surgeryWiseReportToolStripMenuItem_Click);
-            // 
-            // doctorWiseToolStripMenuItem
-            // 
-            this.doctorWiseToolStripMenuItem.Name = "doctorWiseToolStripMenuItem";
-            this.doctorWiseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.doctorWiseToolStripMenuItem.Text = "Doctor Wise";
-            this.doctorWiseToolStripMenuItem.Click += new System.EventHandler(this.doctorWiseToolStripMenuItem_Click);
-            // 
-            // totalSurgeriesToolStripMenuItem
-            // 
-            this.totalSurgeriesToolStripMenuItem.Name = "totalSurgeriesToolStripMenuItem";
-            this.totalSurgeriesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.totalSurgeriesToolStripMenuItem.Text = "Total Surgeries";
-            this.totalSurgeriesToolStripMenuItem.Click += new System.EventHandler(this.totalSurgeriesToolStripMenuItem_Click);
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(251, 22);
+            this.toolStripMenuItem5.Text = "IPD Cash In Hand";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click_1);
             // 
             // frmMain
             // 
@@ -1421,5 +1457,9 @@
         private System.Windows.Forms.ToolStripMenuItem surgeryWiseReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem doctorWiseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem totalSurgeriesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oPDFundToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem iPDFunToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OPDCashInHandToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
     }
 }
