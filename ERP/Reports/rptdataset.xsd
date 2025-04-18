@@ -1013,6 +1013,39 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="Discrepancies_Voucher_x0020_" msprop:Generator_TableClassName="Discrepancies_Voucher_DataTable" msprop:Generator_TableVarName="tableDiscrepancies_Voucher_" msprop:Generator_RowChangedName="Discrepancies_Voucher_RowChanged" msprop:Generator_TablePropName="Discrepancies_Voucher_" msprop:Generator_RowDeletingName="Discrepancies_Voucher_RowDeleting" msprop:Generator_RowChangingName="Discrepancies_Voucher_RowChanging" msprop:Generator_RowEvHandlerName="Discrepancies_Voucher_RowChangeEventHandler" msprop:Generator_RowDeletedName="Discrepancies_Voucher_RowDeleted" msprop:Generator_RowClassName="Discrepancies_Voucher_Row" msprop:Generator_UserTableName="Discrepancies_Voucher " msprop:Generator_RowEvArgName="Discrepancies_Voucher_RowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="vdate" msprop:Generator_ColumnVarNameInTable="columnvdate" msprop:Generator_ColumnPropNameInRow="vdate" msprop:Generator_ColumnPropNameInTable="vdateColumn" msprop:Generator_UserColumnName="vdate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="vtype" msprop:Generator_ColumnVarNameInTable="columnvtype" msprop:Generator_ColumnPropNameInRow="vtype" msprop:Generator_ColumnPropNameInTable="vtypeColumn" msprop:Generator_UserColumnName="vtype" type="xs:string" minOccurs="0" />
+              <xs:element name="vno" msprop:Generator_ColumnVarNameInTable="columnvno" msprop:Generator_ColumnPropNameInRow="vno" msprop:Generator_ColumnPropNameInTable="vnoColumn" msprop:Generator_UserColumnName="vno" type="xs:string" minOccurs="0" />
+              <xs:element name="des" msprop:Generator_ColumnVarNameInTable="columndes" msprop:Generator_ColumnPropNameInRow="des" msprop:Generator_ColumnPropNameInTable="desColumn" msprop:Generator_UserColumnName="des" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="IPD_OPD_ClosingSummary" msprop:Generator_TableClassName="IPD_OPD_ClosingSummaryDataTable" msprop:Generator_TableVarName="tableIPD_OPD_ClosingSummary" msprop:Generator_RowChangedName="IPD_OPD_ClosingSummaryRowChanged" msprop:Generator_TablePropName="IPD_OPD_ClosingSummary" msprop:Generator_RowDeletingName="IPD_OPD_ClosingSummaryRowDeleting" msprop:Generator_RowChangingName="IPD_OPD_ClosingSummaryRowChanging" msprop:Generator_RowEvHandlerName="IPD_OPD_ClosingSummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="IPD_OPD_ClosingSummaryRowDeleted" msprop:Generator_RowClassName="IPD_OPD_ClosingSummaryRow" msprop:Generator_UserTableName="IPD_OPD_ClosingSummary" msprop:Generator_RowEvArgName="IPD_OPD_ClosingSummaryRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="opdcatagory" msprop:Generator_ColumnVarNameInTable="columnopdcatagory" msprop:Generator_ColumnPropNameInRow="opdcatagory" msprop:Generator_ColumnPropNameInTable="opdcatagoryColumn" msprop:Generator_UserColumnName="opdcatagory" type="xs:string" minOccurs="0" />
+              <xs:element name="totslips" msprop:Generator_ColumnVarNameInTable="columntotslips" msprop:Generator_ColumnPropNameInRow="totslips" msprop:Generator_ColumnPropNameInTable="totslipsColumn" msprop:Generator_UserColumnName="totslips" type="xs:int" minOccurs="0" />
+              <xs:element name="morning" msprop:Generator_ColumnVarNameInTable="columnmorning" msprop:Generator_ColumnPropNameInRow="morning" msprop:Generator_ColumnPropNameInTable="morningColumn" msprop:Generator_UserColumnName="morning" type="xs:decimal" minOccurs="0" />
+              <xs:element name="evening" msprop:Generator_ColumnVarNameInTable="columnevening" msprop:Generator_ColumnPropNameInRow="evening" msprop:Generator_ColumnPropNameInTable="eveningColumn" msprop:Generator_UserColumnName="evening" type="xs:decimal" minOccurs="0" />
+              <xs:element name="night" msprop:Generator_ColumnVarNameInTable="columnnight" msprop:Generator_ColumnPropNameInRow="night" msprop:Generator_ColumnPropNameInTable="nightColumn" msprop:Generator_UserColumnName="night" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Head" msprop:Generator_ColumnVarNameInTable="columnHead" msprop:Generator_ColumnPropNameInRow="Head" msprop:Generator_ColumnPropNameInTable="HeadColumn" msprop:Generator_UserColumnName="Head" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Less_UnPaid_Summary" msprop:Generator_TableClassName="Less_UnPaid_SummaryDataTable" msprop:Generator_TableVarName="tableLess_UnPaid_Summary" msprop:Generator_TablePropName="Less_UnPaid_Summary" msprop:Generator_RowDeletingName="Less_UnPaid_SummaryRowDeleting" msprop:Generator_RowChangingName="Less_UnPaid_SummaryRowChanging" msprop:Generator_RowEvHandlerName="Less_UnPaid_SummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="Less_UnPaid_SummaryRowDeleted" msprop:Generator_UserTableName="Less_UnPaid_Summary" msprop:Generator_RowChangedName="Less_UnPaid_SummaryRowChanged" msprop:Generator_RowEvArgName="Less_UnPaid_SummaryRowChangeEvent" msprop:Generator_RowClassName="Less_UnPaid_SummaryRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="category" msprop:Generator_ColumnVarNameInTable="columncategory" msprop:Generator_ColumnPropNameInRow="category" msprop:Generator_ColumnPropNameInTable="categoryColumn" msprop:Generator_UserColumnName="category" type="xs:string" minOccurs="0" />
+              <xs:element name="morning" msprop:Generator_ColumnVarNameInTable="columnmorning" msprop:Generator_ColumnPropNameInRow="morning" msprop:Generator_ColumnPropNameInTable="morningColumn" msprop:Generator_UserColumnName="morning" type="xs:decimal" minOccurs="0" />
+              <xs:element name="evening" msprop:Generator_ColumnVarNameInTable="columnevening" msprop:Generator_ColumnPropNameInRow="evening" msprop:Generator_ColumnPropNameInTable="eveningColumn" msprop:Generator_UserColumnName="evening" type="xs:decimal" minOccurs="0" />
+              <xs:element name="night" msprop:Generator_ColumnVarNameInTable="columnnight" msprop:Generator_ColumnPropNameInRow="night" msprop:Generator_ColumnPropNameInTable="nightColumn" msprop:Generator_UserColumnName="night" type="xs:decimal" minOccurs="0" />
+              <xs:element name="head" msprop:Generator_ColumnVarNameInTable="columnhead" msprop:Generator_ColumnPropNameInRow="head" msprop:Generator_ColumnPropNameInTable="headColumn" msprop:Generator_UserColumnName="head" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint11">

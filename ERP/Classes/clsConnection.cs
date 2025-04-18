@@ -9,19 +9,13 @@ namespace ERP
 {
     class clsConnection
     {
-        ////public static string Host = "59.103.166.184";
-         public static string Host = "209.209.40.85";
-       // public static string Host = "182.184.58.253";
-
+        public static string Host = "209.209.40.85";
         static  List<string> IPList = new List<string>();
         
         public static void Con()
         {
-            //IPList.Add("182.184.58.253");
-           /// IPList.Add("209.209.40.85"); 
-          /// IPList.Add("192.168.18.44");
              IPList.Add("192.168.2.1");
-            //IPList.Add("192.168.10.100");
+             //IPList.Add("192.168.2.10");
 
             try
             {

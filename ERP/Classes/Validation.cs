@@ -34,7 +34,7 @@ namespace ERP
                     }
                     else if (ctrl.GetType() == typeof(DataGridView))
                     {
-                        (ctrl as DataGridView).Rows.Clear();
+                        //(ctrl as DataGridView).Rows.Clear();
                         if ((ctrl as DataGridView).Rows.Count == 0)
                             (ctrl as DataGridView).Rows.Add();
                     }

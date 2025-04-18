@@ -90,7 +90,7 @@ namespace ERP.Forms
 
                 txtCnic.Text = dtDetail.Rows[0]["cnic"].ToString();
                 cmbCnicRelation.Text = dtDetail.Rows[0]["CnicRelation"].ToString();
-
+                txtCNICPerson.Text = dtDetail.Rows[0]["CNICPerson"].ToString();
                 cmbConsultant.SelectedValue = dtDetail.Rows[0]["consultantid"];
                 txtReason.Text = dtDetail.Rows[0]["admittedfor"].ToString();
                 cmbReference.SelectedValue = dtDetail.Rows[0]["referenceid"];
@@ -301,7 +301,8 @@ namespace ERP.Forms
                 getRegno();
                 DML.addmissionInfo_add_edit(txtSerialNo.Text, txtSerialNo.Text, txtRegAlpha.Text, ntxtRegNo.Text, dtpDate.Value, dtpTime.Value, RoomId, (string)cmbPatientType.SelectedValue,
                     Convert.ToString(cmbMembership.SelectedValue), cmbPatientTitle.Text, cmbPatientId.Text, txtRelation.Text, cmbRelationType.Text, ntxtAge.Text, cmbGender.Text, cmbAgeUnit.Text, (string)cmbConsultant.SelectedValue,
-                    (string)cmbReference.SelectedValue, cmbReference.Text, "", txtReason.Text, "0", (string)cmbArea.SelectedValue, txtAddress.Text, txtEmergency.Text, txtMobile.Text, txtOtherContact.Text, txtEmail.Text, txtRemarks.Text, "0", "0",txtCnic.Text,cmbCnicRelation.Text);
+                    (string)cmbReference.SelectedValue, cmbReference.Text, "", txtReason.Text, "0", (string)cmbArea.SelectedValue, txtAddress.Text, txtEmergency.Text, txtMobile.Text,
+                    txtOtherContact.Text, txtEmail.Text, txtRemarks.Text, "0", "0",txtCnic.Text,cmbCnicRelation.Text,txtCNICPerson.Text);
                 MessageBox.Show("Record Successfully Saved..!");
 
                 if (txtSerialNo.Text == "")
@@ -400,7 +401,7 @@ namespace ERP.Forms
             cmbPatientType.Enabled = true;
             cmbPatientId.Enabled = true;
             txtRemarks.Enabled = true;
-            txtReason.Enabled = true;
+            txtCNICPerson.Enabled = true;
             txtOtherContact.Enabled = true;
 
 
@@ -457,10 +458,13 @@ namespace ERP.Forms
             string DepositAmount = dt.Rows[0]["DepositAmount"].ToString();
             string CNIC = dt.Rows[0]["Cnic"].ToString();
             string CnicRelation = dt.Rows[0]["CnicRelation"].ToString();
+            string CNICPerson = dt.Rows[0]["CNICPerson"].ToString();
             rpt.SetDataSource(dt);
             rpt.SetParameterValue("pDeposit", DepositAmount == "" ? "0" : DepositAmount);
             rpt.SetParameterValue("pCnic", CNIC == "" ? "" : CNIC);
             rpt.SetParameterValue("pCnicRelation", CnicRelation == "" ? "" : CnicRelation);
+            rpt.SetParameterValue("pCNICPerson", CNICPerson == "" ? "" : CNICPerson);
+
             if (DirectPrint == false)
             {
                 frmReportView frm = new frmReportView();

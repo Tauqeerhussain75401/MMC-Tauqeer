@@ -483,27 +483,12 @@ namespace ERP
         internal static DataTable OPDReceiptQuery(string[] filter, string catagoryid)
         {
             string Filter = filter.Count() > 0 ? string.Join(" ", filter) : "";
-            //string sql = "SELECT receiptno,tokenNo, vdate, get_OPDcatagory(catagoryid) CatagoryTitle, Get_consultantName(consultantid) ConsultantName, get_PatientType(patienttype) patienttype, memberid, patientid, patienttitle, patientname, gender, contactno, age, ageunit, netamount, createdby, createdtime, editby, edittime,status,noofprint FROM OPDReceipt where ('" + UserInfo.UserLevel + "' = 'Admin' " + Filter + " ) or  (catagoryid = '" + catagoryid + "' and status = 0 and sessionid in  (select sessionid from usersession where status = 2 and userid = '" + UserInfo.UserId + "'))  order by ReceiptNo desc";
-            //            string sql = @"SELECT 'OP-' || receiptno AS receiptno,tokenNo, vdate, 
-            //                        get_OPDcatagory(catagoryid) CatagoryTitle, 
-            //                        Get_consultantName(consultantid) ConsultantName, 
-            //                        get_PatientType(patienttype) patienttype, 
-            //                        memberid, patientid, patienttitle, patientname, gender, contactno, age, ageunit, netamount, 
-            //                        createdby, createdtime, editby, edittime,
-            //                        status,noofprint FROM OPDReceipt opdr
-            //                        LEFT JOIN (select userid,sessionid from usersession where status = 2) us ON us.sessionid = opdr.sessionid 
-            //                        WHERE ( '" + UserInfo.UserLevel + "'= 'Admin' " + Filter + @") 
-            //                        or (catagoryid = '" + catagoryid + "' AND status = 0 AND us.userid = '" + UserInfo.UserId + @"')  
-            //                        order by ReceiptNo DESC";
             string sql = @"SELECT tokenNo,'OP-' || receiptno AS receiptno,vdate, 
                            get_OPDcatagory(catagoryid) CatagoryTitle, 
                            nvl(Get_consultantName(consultantid),' ') ConsultantName, 
                            get_PatientType(patienttype) patienttype, " +
-                           //memberid, patientid, patienttitle, 
-                           "patientname," +
-                           //gender, contactno, age, ageunit, 
+                           "patientname," + 
                            "netamount + electricitycharges AS netamount, " +
-                           //createdby, createdtime, editby, edittime,
                            @"createdby || '|' || To_Char(createdtime,'dd-Mon-yyyy HH:mm:ss am') AS createdby, Decode(editby, NULL, ' ', editby || '|' || To_Char(edittime,'dd-Mon-yyyy HH:mm:ss am')) AS editby,
                            status,noofprint FROM OPDReceipt opdr
                            LEFT JOIN (select userid,sessionid from usersession where status = 2) us ON us.sessionid = opdr.sessionid 
@@ -555,6 +540,12 @@ namespace ERP
         }
         internal static DataTable ConsultantDetail(string ID)
         {
+            //string sql = @"SELECT 1 As surExist,ct.*,cts.consulshare AS consulShare ,cts.hospshare hospShare,pi.amount AS amount,pi.packagename_name,
+            //             pi.package_id AS package_id FROM consultant ct left JOIN consultantsurgery  cts ON ct.id = cts.fkconsid
+            //             left JOIN packageindex pi ON pi.package_id = fkpkgid where ct.isdeactivate = 0 AND cts.status = 0 and ct.id = '" + ID + "'";
+            //DataTable dt = getData(sql);
+            //return dt;
+
             string sql = @"SELECT 1 As surExist,ct.*,cts.consulshare AS consulShare ,cts.hospshare hospShare,pi.amount AS amount,pi.packagename_name,
                          pi.package_id AS package_id FROM consultant ct left JOIN consultantsurgery  cts ON ct.id = cts.fkconsid
                          left JOIN packageindex pi ON pi.package_id = fkpkgid where ct.id = '" + ID + "'";
@@ -680,41 +671,40 @@ namespace ERP
 
         internal static DataTable SessionBalanceAddPartialPayment(string UserId)
         {
-          
             string sql = @"
-SELECT
-    netamount,
-    partial_amount,
-    netamount + partial_amount AS total_amount
-FROM (
-    SELECT
-        NVL(SUM(CASE WHEN memberid IS NOT NULL THEN 0 ELSE netamount + electricitycharges END), 0) AS netamount
-    FROM
-        opdreceipt
-    WHERE
-        status = 0
-        AND sessionid = (
-            SELECT sessionid
-            FROM usersession
-            WHERE userid = '" + UserId + @"'
-            AND status = 2
-        )
-) t1
-CROSS JOIN (
-    SELECT
-        NVL(SUM(partialamount), 0) AS partial_amount
-    FROM
-        Partialreceipt p
-    WHERE
-        p.status = 0
-        AND p.sessionid = (
-            SELECT sessionid
-            FROM usersession
-            WHERE userid = '" + UserId + @"'
-            AND status = 2
-        )
-) t2
-";
+                    SELECT
+                        netamount,
+                        partial_amount,
+                        netamount + partial_amount AS total_amount
+                    FROM (
+                        SELECT
+                            NVL(SUM(CASE WHEN memberid IS NOT NULL THEN 0 ELSE netamount + electricitycharges END), 0) AS netamount
+                        FROM
+                            opdreceipt
+                        WHERE
+                            status = 0
+                            AND sessionid = (
+                                SELECT sessionid
+                                FROM usersession
+                                WHERE userid = '" + UserId + @"'
+                                AND status = 2
+                            )
+                    ) t1
+                    CROSS JOIN (
+                        SELECT
+                            NVL(SUM(partialamount), 0) AS partial_amount
+                        FROM
+                            Partialreceipt p
+                        WHERE
+                            p.status = 0
+                            AND p.sessionid = (
+                                SELECT sessionid
+                                FROM usersession
+                                WHERE userid = '" + UserId + @"'
+                                AND status = 2
+                            )
+                    ) t2
+                    ";
 
             DataTable dt = getData(sql);
             return dt;

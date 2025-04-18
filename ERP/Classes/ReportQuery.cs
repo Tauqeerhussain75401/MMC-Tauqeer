@@ -121,7 +121,6 @@ namespace ERP
             adapter.Dispose();
             return dt;
         }
-
         internal static DataTable IPD_OPD_IncomeSummary(DateTime FDate, DateTime TDate)
         {
             DataTable dt = new DataTable();
@@ -130,16 +129,28 @@ namespace ERP
             comm.Parameters.Add("VFdate", OracleDbType.Date).Value = FDate;
             comm.Parameters.Add("VTdate", OracleDbType.Date).Value = TDate;
             comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
-            //comm.Parameters["retval"].Direction = ParameterDirection.Output;
-
-
             OracleDataAdapter adapter = new OracleDataAdapter();
-            adapter.SelectCommand = comm;// new OracleCommand(sql, Connection.Conn_ecyear);
+            adapter.SelectCommand = comm;
             adapter.Fill(dt);
             adapter.Dispose();
             return dt;
-
         }
+
+        internal static DataTable Ipd_opd_LessUnPaidsummary(DateTime FDate, DateTime TDate)
+        {
+            DataTable dt = new DataTable();
+            OracleCommand comm = new OracleCommand("ipd_opd_LessUnPaidsummary", clsConnection.con);
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.Add("VFdate", OracleDbType.Date).Value = FDate;
+            comm.Parameters.Add("VTdate", OracleDbType.Date).Value = TDate;
+            comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = comm;
+            adapter.Fill(dt);
+            adapter.Dispose();
+            return dt;
+        }
+
         internal static DataTable rep_consultantShareDetail(DateTime FDate, DateTime TDate)
         {
             DataTable dt = new DataTable();
@@ -227,6 +238,21 @@ namespace ERP
             return dt;
         }
 
+        internal static DataTable Ipd_Opd_ClosingSummary(DateTime FDate, DateTime TDate)
+        {
+            DataTable dt = new DataTable();
+            OracleCommand comm = new OracleCommand("Ipd_Opd_ClosingSummary", clsConnection.con);
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.Add("vfromdate", OracleDbType.Date).Value = FDate;
+            comm.Parameters.Add("vtodate", OracleDbType.Date).Value = TDate;
+            comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = comm;// new OracleCommand(sql, Connection.Conn_ecyear);
+            adapter.Fill(dt);
+            adapter.Dispose();
+            return dt;
+        }
+
         internal static DataTable IPD_CashInHand(DateTime FDate, DateTime TDate)
         {
             DataTable dt = new DataTable();
@@ -234,6 +260,19 @@ namespace ERP
             comm.CommandType = CommandType.StoredProcedure;
             comm.Parameters.Add("vfromdate", OracleDbType.Date).Value = FDate;
             comm.Parameters.Add("vtodate", OracleDbType.Date).Value = TDate;
+            comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = comm;// new OracleCommand(sql, Connection.Conn_ecyear);
+            adapter.Fill(dt);
+            adapter.Dispose();
+            return dt;
+        }
+
+        internal static DataTable Discrepancies_Voucher()
+        {
+            DataTable dt = new DataTable();
+            OracleCommand comm = new OracleCommand("rep_voucherdes", clsConnection.con);
+            comm.CommandType = CommandType.StoredProcedure;
             comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
             OracleDataAdapter adapter = new OracleDataAdapter();
             adapter.SelectCommand = comm;// new OracleCommand(sql, Connection.Conn_ecyear);

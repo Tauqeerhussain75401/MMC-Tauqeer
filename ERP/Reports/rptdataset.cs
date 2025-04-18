@@ -4,6 +4,18 @@
 
     public partial class rptdataset
     {
+        partial class Less_UnPaid_SummaryDataTable
+        {
+        }
+
+        partial class IPD_OPD_ClosingSummaryDataTable
+        {
+        }
+
+        partial class Discrepancies_Voucher_DataTable
+        {
+        }
+
         partial class Get_surgerygroupDataTable
         {
         }

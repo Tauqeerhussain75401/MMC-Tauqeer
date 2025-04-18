@@ -780,6 +780,12 @@
       <DependentUpon>Crp_IPD_Package.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\CrystalReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\dailyCashStatementAllUser.cs">
       <DependentUpon>dailyCashStatementAllUser.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -878,6 +884,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Detail Of In_patient Bill.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Discrepancies_Voucher.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Discrepancies_Voucher.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\IPDReceipt_Laboratory.cs">
       <DependentUpon>IPDReceipt_Laboratory.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -894,6 +906,24 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IPD_FundUtilization.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Ipd_Opd_ClosingSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ipd_Opd_ClosingSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IPD_OPD_IncomeSummary_Closing.cs">
+      <DependentUpon>IPD_OPD_IncomeSummary_Closing.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Less_UnPaid_Summary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Less_UnPaid_Summary.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\OPDReceipt_Laboratory.cs">
@@ -1545,6 +1575,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Crp_IPD_Package.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CrystalReport1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\dailyCashStatementAllUser.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>dailyCashStatementAllUser.cs</LastGenOutput>
@@ -1605,6 +1639,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>dailyCashStatement.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Discrepancies_Voucher.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Discrepancies_Voucher.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\IPDReceipt_Laboratory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>IPDReceipt_Laboratory.cs</LastGenOutput>
@@ -1616,6 +1654,18 @@
     <EmbeddedResource Include="Reports\IPD_FundUtilization.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>IPD_FundUtilization.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Ipd_Opd_ClosingSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Ipd_Opd_ClosingSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IPD_OPD_IncomeSummary_Closing.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IPD_OPD_IncomeSummary_Closing.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Less_UnPaid_Summary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Less_UnPaid_Summary.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\OPDReceipt_Laboratory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

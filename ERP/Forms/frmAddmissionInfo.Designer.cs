@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddmissionInfo));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label16 = new System.Windows.Forms.Label();
             this.grpContact = new System.Windows.Forms.GroupBox();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -57,6 +57,27 @@
             this.txtEmergency = new System.Windows.Forms.TextBox();
             this.cmbCity = new System.Windows.Forms.ComboBox();
             this.dgvDetail = new System.Windows.Forms.DataGridView();
+            this.clnReg = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Adm_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Adm_Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Bmj = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Patient_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Room = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ConsultantName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnRemarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Patient_Relaton = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.relationname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.age = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ymd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.referencename = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emergency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createdby = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CNIC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CnicRelation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnPreview = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
@@ -102,6 +123,7 @@
             this.label20 = new System.Windows.Forms.Label();
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
             this.grpBasicInfo = new System.Windows.Forms.GroupBox();
+            this.txtCnic = new System.Windows.Forms.MaskedTextBox();
             this.panel11 = new System.Windows.Forms.Panel();
             this.cmbCnicRelation = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -109,9 +131,8 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtRemarks = new System.Windows.Forms.TextBox();
-            this.txtReason = new System.Windows.Forms.TextBox();
+            this.txtCNICPerson = new System.Windows.Forms.TextBox();
             this.txtRelation = new System.Windows.Forms.TextBox();
-            this.txtCnic = new System.Windows.Forms.MaskedTextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -134,27 +155,9 @@
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnReg = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Adm_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Adm_Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Bmj = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Patient_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Room = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ConsultantName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnRemarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Patient_Relaton = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.relationname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.age = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ymd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.referencename = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emergency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.createdby = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CNIC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CnicRelation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txtReason = new System.Windows.Forms.TextBox();
             this.grpContact.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetail)).BeginInit();
             this.panel1.SuspendLayout();
@@ -423,15 +426,155 @@
             this.dgvDetail.Location = new System.Drawing.Point(21, 367);
             this.dgvDetail.Name = "dgvDetail";
             this.dgvDetail.ReadOnly = true;
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.SkyBlue;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvDetail.RowsDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SkyBlue;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvDetail.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDetail.Size = new System.Drawing.Size(996, 370);
             this.dgvDetail.TabIndex = 5;
             this.dgvDetail.Tag = "Lock";
             this.dgvDetail.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetail_CellDoubleClick);
+            // 
+            // clnReg
+            // 
+            this.clnReg.HeaderText = "Reg";
+            this.clnReg.Name = "clnReg";
+            this.clnReg.ReadOnly = true;
+            this.clnReg.Width = 60;
+            // 
+            // Adm_Date
+            // 
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            this.Adm_Date.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Adm_Date.HeaderText = "Adm Date";
+            this.Adm_Date.Name = "Adm_Date";
+            this.Adm_Date.ReadOnly = true;
+            this.Adm_Date.ToolTipText = "19/25/2019";
+            this.Adm_Date.Width = 80;
+            // 
+            // Adm_Time
+            // 
+            dataGridViewCellStyle2.Format = "t";
+            dataGridViewCellStyle2.NullValue = null;
+            this.Adm_Time.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Adm_Time.HeaderText = "Adm Time";
+            this.Adm_Time.Name = "Adm_Time";
+            this.Adm_Time.ReadOnly = true;
+            this.Adm_Time.Width = 80;
+            // 
+            // Bmj
+            // 
+            this.Bmj.HeaderText = "Bmj";
+            this.Bmj.Name = "Bmj";
+            this.Bmj.ReadOnly = true;
+            this.Bmj.Width = 60;
+            // 
+            // Title
+            // 
+            this.Title.HeaderText = "Title";
+            this.Title.Name = "Title";
+            this.Title.ReadOnly = true;
+            // 
+            // Patient_Name
+            // 
+            this.Patient_Name.HeaderText = "Patient_Name";
+            this.Patient_Name.Name = "Patient_Name";
+            this.Patient_Name.ReadOnly = true;
+            this.Patient_Name.Width = 150;
+            // 
+            // Room
+            // 
+            this.Room.HeaderText = "Room";
+            this.Room.Name = "Room";
+            this.Room.ReadOnly = true;
+            this.Room.Width = 80;
+            // 
+            // ConsultantName
+            // 
+            this.ConsultantName.HeaderText = "ConsultantName";
+            this.ConsultantName.Name = "ConsultantName";
+            this.ConsultantName.ReadOnly = true;
+            this.ConsultantName.Width = 150;
+            // 
+            // clnRemarks
+            // 
+            this.clnRemarks.HeaderText = "Remarks";
+            this.clnRemarks.Name = "clnRemarks";
+            this.clnRemarks.ReadOnly = true;
+            // 
+            // Relation
+            // 
+            this.Relation.HeaderText = "Relation";
+            this.Relation.Name = "Relation";
+            this.Relation.ReadOnly = true;
+            // 
+            // Patient_Relaton
+            // 
+            this.Patient_Relaton.HeaderText = "Patient_Relaton";
+            this.Patient_Relaton.Name = "Patient_Relaton";
+            this.Patient_Relaton.ReadOnly = true;
+            // 
+            // relationname
+            // 
+            this.relationname.HeaderText = "Relation Name";
+            this.relationname.Name = "relationname";
+            this.relationname.ReadOnly = true;
+            // 
+            // age
+            // 
+            this.age.HeaderText = "Age";
+            this.age.Name = "age";
+            this.age.ReadOnly = true;
+            // 
+            // ymd
+            // 
+            this.ymd.HeaderText = "YMD";
+            this.ymd.Name = "ymd";
+            this.ymd.ReadOnly = true;
+            // 
+            // gender
+            // 
+            this.gender.HeaderText = "Gender";
+            this.gender.Name = "gender";
+            this.gender.ReadOnly = true;
+            // 
+            // address
+            // 
+            this.address.HeaderText = "Address";
+            this.address.Name = "address";
+            this.address.ReadOnly = true;
+            // 
+            // referencename
+            // 
+            this.referencename.HeaderText = "Reference Name";
+            this.referencename.Name = "referencename";
+            this.referencename.ReadOnly = true;
+            // 
+            // emergency
+            // 
+            this.emergency.HeaderText = "Emergency";
+            this.emergency.Name = "emergency";
+            this.emergency.ReadOnly = true;
+            // 
+            // createdby
+            // 
+            this.createdby.HeaderText = "Create User";
+            this.createdby.Name = "createdby";
+            this.createdby.ReadOnly = true;
+            // 
+            // CNIC
+            // 
+            this.CNIC.HeaderText = "CNIC";
+            this.CNIC.Name = "CNIC";
+            this.CNIC.ReadOnly = true;
+            // 
+            // CnicRelation
+            // 
+            this.CnicRelation.HeaderText = "CNIC Relation";
+            this.CnicRelation.Name = "CnicRelation";
+            this.CnicRelation.ReadOnly = true;
             // 
             // panel1
             // 
@@ -963,9 +1106,9 @@
             this.label2.Location = new System.Drawing.Point(453, 131);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 17);
+            this.label2.Size = new System.Drawing.Size(97, 17);
             this.label2.TabIndex = 17;
-            this.label2.Text = "Reason :";
+            this.label2.Text = "CNIC Person :";
             // 
             // btnRoomSearch
             // 
@@ -1012,6 +1155,9 @@
             // 
             // grpBasicInfo
             // 
+            this.grpBasicInfo.Controls.Add(this.panel12);
+            this.grpBasicInfo.Controls.Add(this.label23);
+            this.grpBasicInfo.Controls.Add(this.txtReason);
             this.grpBasicInfo.Controls.Add(this.txtCnic);
             this.grpBasicInfo.Controls.Add(this.panel11);
             this.grpBasicInfo.Controls.Add(this.cmbCnicRelation);
@@ -1026,7 +1172,7 @@
             this.grpBasicInfo.Controls.Add(this.txtRemarks);
             this.grpBasicInfo.Controls.Add(this.label2);
             this.grpBasicInfo.Controls.Add(this.cmbRelationType);
-            this.grpBasicInfo.Controls.Add(this.txtReason);
+            this.grpBasicInfo.Controls.Add(this.txtCNICPerson);
             this.grpBasicInfo.Controls.Add(this.txtRegAlpha);
             this.grpBasicInfo.Controls.Add(this.ntxtRegNo);
             this.grpBasicInfo.Controls.Add(this.label21);
@@ -1062,6 +1208,14 @@
             this.grpBasicInfo.TabStop = false;
             this.grpBasicInfo.Text = "Basic Info";
             this.grpBasicInfo.Enter += new System.EventHandler(this.grpBasicInfo_Enter);
+            // 
+            // txtCnic
+            // 
+            this.txtCnic.Location = new System.Drawing.Point(566, 97);
+            this.txtCnic.Mask = "00000-0000000-0";
+            this.txtCnic.Name = "txtCnic";
+            this.txtCnic.Size = new System.Drawing.Size(253, 22);
+            this.txtCnic.TabIndex = 40;
             // 
             // panel11
             // 
@@ -1139,14 +1293,14 @@
             this.txtRemarks.Size = new System.Drawing.Size(419, 15);
             this.txtRemarks.TabIndex = 21;
             // 
-            // txtReason
+            // txtCNICPerson
             // 
-            this.txtReason.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtReason.Location = new System.Drawing.Point(566, 128);
-            this.txtReason.Margin = new System.Windows.Forms.Padding(4);
-            this.txtReason.Name = "txtReason";
-            this.txtReason.Size = new System.Drawing.Size(419, 15);
-            this.txtReason.TabIndex = 20;
+            this.txtCNICPerson.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtCNICPerson.Location = new System.Drawing.Point(566, 128);
+            this.txtCNICPerson.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCNICPerson.Name = "txtCNICPerson";
+            this.txtCNICPerson.Size = new System.Drawing.Size(419, 15);
+            this.txtCNICPerson.TabIndex = 20;
             // 
             // txtRelation
             // 
@@ -1156,14 +1310,6 @@
             this.txtRelation.Name = "txtRelation";
             this.txtRelation.Size = new System.Drawing.Size(251, 15);
             this.txtRelation.TabIndex = 13;
-            // 
-            // txtCnic
-            // 
-            this.txtCnic.Location = new System.Drawing.Point(566, 97);
-            this.txtCnic.Mask = "00000-0000000-0";
-            this.txtCnic.Name = "txtCnic";
-            this.txtCnic.Size = new System.Drawing.Size(253, 22);
-            this.txtCnic.TabIndex = 40;
             // 
             // contextMenuStrip1
             // 
@@ -1179,9 +1325,9 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle16.Format = "d";
-            dataGridViewCellStyle16.NullValue = null;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Format = "d";
+            dataGridViewCellStyle4.NullValue = null;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewTextBoxColumn2.HeaderText = "Num";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -1190,9 +1336,9 @@
             // 
             // dataGridViewTextBoxColumn3
             // 
-            dataGridViewCellStyle17.Format = "d";
-            dataGridViewCellStyle17.NullValue = null;
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle5.Format = "d";
+            dataGridViewCellStyle5.NullValue = null;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewTextBoxColumn3.HeaderText = "Adm Date";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
@@ -1201,9 +1347,9 @@
             // 
             // dataGridViewTextBoxColumn4
             // 
-            dataGridViewCellStyle18.Format = "t";
-            dataGridViewCellStyle18.NullValue = null;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle6.Format = "t";
+            dataGridViewCellStyle6.NullValue = null;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewTextBoxColumn4.HeaderText = "Adm Time";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
@@ -1314,145 +1460,33 @@
             this.dataGridViewTextBoxColumn21.HeaderText = "CNIC Relation";
             this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
             // 
-            // clnReg
+            // panel12
             // 
-            this.clnReg.HeaderText = "Reg";
-            this.clnReg.Name = "clnReg";
-            this.clnReg.ReadOnly = true;
-            this.clnReg.Width = 60;
+            this.panel12.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel12.Location = new System.Drawing.Point(107, 175);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(318, 2);
+            this.panel12.TabIndex = 43;
             // 
-            // Adm_Date
+            // label23
             // 
-            dataGridViewCellStyle13.Format = "d";
-            dataGridViewCellStyle13.NullValue = null;
-            this.Adm_Date.DefaultCellStyle = dataGridViewCellStyle13;
-            this.Adm_Date.HeaderText = "Adm Date";
-            this.Adm_Date.Name = "Adm_Date";
-            this.Adm_Date.ReadOnly = true;
-            this.Adm_Date.ToolTipText = "19/25/2019";
-            this.Adm_Date.Width = 80;
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(12, 159);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(63, 17);
+            this.label23.TabIndex = 41;
+            this.label23.Text = "Reason :";
             // 
-            // Adm_Time
+            // txtReason
             // 
-            dataGridViewCellStyle14.Format = "t";
-            dataGridViewCellStyle14.NullValue = null;
-            this.Adm_Time.DefaultCellStyle = dataGridViewCellStyle14;
-            this.Adm_Time.HeaderText = "Adm Time";
-            this.Adm_Time.Name = "Adm_Time";
-            this.Adm_Time.ReadOnly = true;
-            this.Adm_Time.Width = 80;
-            // 
-            // Bmj
-            // 
-            this.Bmj.HeaderText = "Bmj";
-            this.Bmj.Name = "Bmj";
-            this.Bmj.ReadOnly = true;
-            this.Bmj.Width = 60;
-            // 
-            // Title
-            // 
-            this.Title.HeaderText = "Title";
-            this.Title.Name = "Title";
-            this.Title.ReadOnly = true;
-            // 
-            // Patient_Name
-            // 
-            this.Patient_Name.HeaderText = "Patient_Name";
-            this.Patient_Name.Name = "Patient_Name";
-            this.Patient_Name.ReadOnly = true;
-            this.Patient_Name.Width = 150;
-            // 
-            // Room
-            // 
-            this.Room.HeaderText = "Room";
-            this.Room.Name = "Room";
-            this.Room.ReadOnly = true;
-            this.Room.Width = 80;
-            // 
-            // ConsultantName
-            // 
-            this.ConsultantName.HeaderText = "ConsultantName";
-            this.ConsultantName.Name = "ConsultantName";
-            this.ConsultantName.ReadOnly = true;
-            this.ConsultantName.Width = 150;
-            // 
-            // clnRemarks
-            // 
-            this.clnRemarks.HeaderText = "Remarks";
-            this.clnRemarks.Name = "clnRemarks";
-            this.clnRemarks.ReadOnly = true;
-            // 
-            // Relation
-            // 
-            this.Relation.HeaderText = "Relation";
-            this.Relation.Name = "Relation";
-            this.Relation.ReadOnly = true;
-            // 
-            // Patient_Relaton
-            // 
-            this.Patient_Relaton.HeaderText = "Patient_Relaton";
-            this.Patient_Relaton.Name = "Patient_Relaton";
-            this.Patient_Relaton.ReadOnly = true;
-            // 
-            // relationname
-            // 
-            this.relationname.HeaderText = "Relation Name";
-            this.relationname.Name = "relationname";
-            this.relationname.ReadOnly = true;
-            // 
-            // age
-            // 
-            this.age.HeaderText = "Age";
-            this.age.Name = "age";
-            this.age.ReadOnly = true;
-            // 
-            // ymd
-            // 
-            this.ymd.HeaderText = "YMD";
-            this.ymd.Name = "ymd";
-            this.ymd.ReadOnly = true;
-            // 
-            // gender
-            // 
-            this.gender.HeaderText = "Gender";
-            this.gender.Name = "gender";
-            this.gender.ReadOnly = true;
-            // 
-            // address
-            // 
-            this.address.HeaderText = "Address";
-            this.address.Name = "address";
-            this.address.ReadOnly = true;
-            // 
-            // referencename
-            // 
-            this.referencename.HeaderText = "Reference Name";
-            this.referencename.Name = "referencename";
-            this.referencename.ReadOnly = true;
-            // 
-            // emergency
-            // 
-            this.emergency.HeaderText = "Emergency";
-            this.emergency.Name = "emergency";
-            this.emergency.ReadOnly = true;
-            // 
-            // createdby
-            // 
-            this.createdby.HeaderText = "Create User";
-            this.createdby.Name = "createdby";
-            this.createdby.ReadOnly = true;
-            // 
-            // CNIC
-            // 
-            this.CNIC.HeaderText = "CNIC";
-            this.CNIC.Name = "CNIC";
-            this.CNIC.ReadOnly = true;
-            // 
-            // CnicRelation
-            // 
-            this.CnicRelation.HeaderText = "CNIC Relation";
-            this.CnicRelation.Name = "CnicRelation";
-            this.CnicRelation.ReadOnly = true;
+            this.txtReason.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtReason.Location = new System.Drawing.Point(107, 156);
+            this.txtReason.Margin = new System.Windows.Forms.Padding(4);
+            this.txtReason.Name = "txtReason";
+            this.txtReason.Size = new System.Drawing.Size(318, 15);
+            this.txtReason.TabIndex = 42;
             // 
             // frmAddmissionInfo
             // 
@@ -1582,7 +1616,7 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox txtRemarks;
-        private System.Windows.Forms.TextBox txtReason;
+        private System.Windows.Forms.TextBox txtCNICPerson;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.ComboBox cmbCnicRelation;
         private System.Windows.Forms.Label label9;
@@ -1611,5 +1645,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox txtReason;
     }
 }

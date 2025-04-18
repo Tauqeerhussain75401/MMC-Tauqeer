@@ -76,6 +76,7 @@
             this.currentCashStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainReports = new System.Windows.Forms.ToolStripMenuItem();
             this.accountStatementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.stockBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemLedgerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trialBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,6 +128,8 @@
             this.oPDFundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iPDFunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OPDCashInHandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.MainsSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.SubMainbackup = new System.Windows.Forms.ToolStripMenuItem();
             this.SubMainrestore = new System.Windows.Forms.ToolStripMenuItem();
@@ -162,7 +165,6 @@
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.chkDate = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -546,6 +548,7 @@
             // 
             this.MainReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.accountStatementToolStripMenuItem,
+            this.toolStripMenuItem4,
             this.stockBalanceToolStripMenuItem,
             this.itemLedgerToolStripMenuItem,
             this.trialBalanceToolStripMenuItem,
@@ -574,7 +577,8 @@
             this.oPDFundToolStripMenuItem,
             this.iPDFunToolStripMenuItem,
             this.OPDCashInHandToolStripMenuItem,
-            this.toolStripMenuItem5});
+            this.toolStripMenuItem5,
+            this.toolStripMenuItem6});
             this.MainReports.Name = "MainReports";
             this.MainReports.Size = new System.Drawing.Size(59, 20);
             this.MainReports.Text = "Reports";
@@ -586,6 +590,13 @@
             this.accountStatementToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
             this.accountStatementToolStripMenuItem.Text = "Account Statement";
             this.accountStatementToolStripMenuItem.Click += new System.EventHandler(this.accountStatementToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(251, 22);
+            this.toolStripMenuItem4.Text = "Discrepancies in vouchers";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click_1);
             // 
             // stockBalanceToolStripMenuItem
             // 
@@ -968,6 +979,21 @@
             this.OPDCashInHandToolStripMenuItem.Text = "OPD Cash In Hand";
             this.OPDCashInHandToolStripMenuItem.Click += new System.EventHandler(this.OPDCashInHandToolStripMenuItem_Click_1);
             // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(251, 22);
+            this.toolStripMenuItem5.Text = "IPD Cash In Hand";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click_1);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(251, 22);
+            this.toolStripMenuItem6.Text = "IPD / OPD Closing Summary";
+            this.toolStripMenuItem6.Visible = false;
+            this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click_1);
+            // 
             // MainsSetting
             // 
             this.MainsSetting.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1282,13 +1308,6 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "Read Dates from :";
             // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(251, 22);
-            this.toolStripMenuItem5.Text = "IPD Cash In Hand";
-            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click_1);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1461,5 +1480,7 @@
         private System.Windows.Forms.ToolStripMenuItem iPDFunToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem OPDCashInHandToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
     }
 }

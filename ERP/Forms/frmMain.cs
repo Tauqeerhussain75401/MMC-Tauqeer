@@ -1497,6 +1497,22 @@ namespace ERP
             frm.Show();
         }
 
+        private void toolStripMenuItem4_Click_1(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.MdiParent = this;
+            frm.Reportname = "Discrepancies in vouchers";
+            frm.Show();
+        }
+
+        private void toolStripMenuItem6_Click_1(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.MdiParent = this;
+            frm.Reportname = "IPD / OPD Closing Summary";
+            frm.Show();
+        }
+
 
 
 

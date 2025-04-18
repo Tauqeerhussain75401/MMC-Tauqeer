@@ -7,14 +7,14 @@
     <framework targetVersion="4.6" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="ERP.exe.manifest" size="111375">
+    <dependentAssembly dependencyType="install" codebase="ERP.exe.manifest" size="47856">
       <assemblyIdentity name="ERP.exe" version="1.1.1.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ddrsaMdajEzraKsJhokbp8jvFLO6yHwNEUaWimGRiTg=</dsig:DigestValue>
+        <dsig:DigestValue>Uppvron2ILeiDAjRpvaThNyES2WCxXFKiG8NQkXGelE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

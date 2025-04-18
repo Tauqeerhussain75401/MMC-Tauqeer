@@ -979,7 +979,33 @@ namespace ERP
                 rpt.SetParameterValue("@ReportHeader", Reportname);
                 frm.rptViewer.ReportSource = rpt;
             }
-
+            else if (Reportname == "Discrepancies in vouchers")
+            {
+                Reports.Discrepancies_Voucher rpt = new Reports.Discrepancies_Voucher();
+                DataTable dt = ReportQuery.Discrepancies_Voucher();
+                rpt.SetDataSource(dt);
+                rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
+                rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+                rpt.SetParameterValue("@User", UserInfo.UserName);
+                rpt.SetParameterValue("@ReportHeader", Reportname);
+                frm.rptViewer.ReportSource = rpt;
+            }
+            else if (Reportname == "IPD / OPD Closing Summary")
+            {
+                Reports.Ipd_Opd_ClosingSummary rpt = new Reports.Ipd_Opd_ClosingSummary();
+                DataTable dtCategory = ReportQuery.Ipd_Opd_ClosingSummary(dtpFDate.Value, dtpTDate.Value);
+                //DataTable dtSummary = ReportQuery.IPD_OPD_IncomeSummary(dtpFDate.Value, dtpTDate.Value);
+               DataTable dtLessUnPaid = ReportQuery.Ipd_opd_LessUnPaidsummary(dtpFDate.Value, dtpTDate.Value);
+                rpt.SetDataSource(dtCategory);
+                //rpt.Subreports["IncomeSummary"].SetDataSource(dtSummary);
+                rpt.Subreports["Less_UnPaid_Summary"].SetDataSource(dtLessUnPaid);
+                //rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
+                //rpt.SetParameterValue("@Fdate", dtpFDate.Value);
+                //rpt.SetParameterValue("@Tdate", dtpTDate.Value);
+                //rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+                //rpt.SetParameterValue("@User", UserInfo.UserName);
+                frm.rptViewer.ReportSource = rpt;
+            }
             #region
             else if (Reportname == "All Patient Detail")
             {
@@ -1312,6 +1338,10 @@ namespace ERP
             {
                 ManageControls(new Control[] { grpDateRange });
             }
+            else if (Reportname == "IPD / OPD Closing Summary")
+            {
+                ManageControls(new Control[] { grpDateRange });
+            }
             #endregion
             #region Net Income Summary
             else if (Reportname == "Net Income Summary")
@@ -1544,6 +1574,10 @@ namespace ERP
             else if (Reportname == "IPD Cash In Hand")
             {
                 ManageControls(new Control[] { grpDateRange});
+            }
+            else if (Reportname == "Discrepancies in vouchers")
+            {
+                ManageControls(new Control[] { });
             }
             #endregion
             #endregion

@@ -422,7 +422,7 @@ string Vipdopd)
         public static bool addmissionInfo_add_edit(string Vadmissionid, string Vserialno, string Vregnoalpha, string Vregnonumeric, DateTime Vadmdate, DateTime Vadmtime, string Vroomid, string Vpatienttype,
             string Vbmjnewno, string Vtitle, string Vpatientname, string Vrelationname, string Vrelation, string Vage, string Vgender, string Vymd, string Vconsultantid, string Vreferenceid, string Vreferencename,
             string Vreferenceeffectdate, string Vadmittedfor, string Vcityid, string Vareaid, string Vaddress, string Vemergency, string Vmobile, string Vothercontact, string Vemail, string Vremarks,
-            string Vdischargeyn, string Vstatus,string VCNIC,string VcnicRelation)
+            string Vdischargeyn, string Vstatus,string VCNIC,string VcnicRelation, string VCNICPerson)
         {
            
 
@@ -469,6 +469,7 @@ string Vipdopd)
             com.Parameters.Add("Vstatus", OracleDbType.Varchar2).Value = Vstatus;
             com.Parameters.Add("VCNIC", OracleDbType.Varchar2).Value = VCNIC;
             com.Parameters.Add("VcnicRelation", OracleDbType.Varchar2).Value = VcnicRelation;
+            com.Parameters.Add("VCNICPerson", OracleDbType.Varchar2).Value = VCNICPerson;
             com.Parameters.Add("Vsessionid", OracleDbType.Varchar2).Value = "0";
             //OracleParameter Retparam = com.Parameters.Add("RetReportNo", OracleDbType.Varchar2, 10);
 
@@ -1181,11 +1182,16 @@ string Vipdopd)
             Saved = true;
             return Saved;
         }
-        public static bool ipdbilling_add_edit(string Vserialno, string Vpharmacy, string Vdiscount, string Vdischarge, string Vremarks, string Vtotdiscount, DateTime Vdischargedate, string Vispackage, string Vpackageid, string Vpackageamount, string Vstatus, string zktDate, string zktaddedby, DateTime Vnextappointmentdate)
+        public static bool ipdbilling_add_edit(string Vserialno, string Vpharmacy, string Vdiscount, string Vdischarge, string Vremarks,
+            string Vtotdiscount, DateTime Vdischargedate, string Vispackage, string Vpackageid, string Vpackageamount, string Vstatus, 
+            string zktDate, string zktaddedby, DateTime Vnextappointmentdate,string discount2, string discount3)
         {
 
+            string zktaddedby2 = discount2 == "0" ? null : UserInfo.UserId;
+            string zktaddedby3 = discount3 == "0" ? null : UserInfo.UserId;
+
             bool Saved = false;
-            OracleCommand com = new OracleCommand("ipdbilling_add_edit1", clsConnection.con);
+            OracleCommand com = new OracleCommand("ipdbilling_add_edit_New", clsConnection.con);
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.Add("Vserialno", OracleDbType.Varchar2).Value = Vserialno;
             com.Parameters.Add("Vpharmacy", OracleDbType.Varchar2).Value = Vpharmacy;
@@ -1204,8 +1210,15 @@ string Vipdopd)
             com.Parameters.Add("VzakatAddBy", OracleDbType.Varchar2).Value = zktaddedby;
             com.Parameters.Add("Vnextappointmentdate", OracleDbType.Date).Value = Vnextappointmentdate;
 
-            com.ExecuteNonQuery();
+            com.Parameters.Add("VZakatdiscount2", OracleDbType.Varchar2).Value = discount2;
+            com.Parameters.Add("VZakatdate2", OracleDbType.Date).Value = discount2 == "0" ? DBNull.Value : (object)DateTime.Now;
+            com.Parameters.Add("VZakatby2", OracleDbType.Varchar2).Value = zktaddedby2;
 
+            com.Parameters.Add("VZakatdiscount3", OracleDbType.Varchar2).Value = discount3;
+            com.Parameters.Add("VZakatdate3", OracleDbType.Date).Value = discount3 == "0" ? DBNull.Value : (object)DateTime.Now;
+            com.Parameters.Add("VZakatby3", OracleDbType.Varchar2).Value = zktaddedby3;
+
+            com.ExecuteNonQuery();
             Saved = true;
             return Saved;
         }
