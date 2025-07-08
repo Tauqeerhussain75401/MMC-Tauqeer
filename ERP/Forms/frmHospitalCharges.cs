@@ -106,7 +106,8 @@ namespace ERP
             else if (HosCharges == "Consultant Charges")
             {
                 FillControls.FillcmbCunsultantHoscharges(cmbConsName);
-                ManageControls(new Control[] { pnlReceiptNo, pnlCname, pnlCharges, pnlVisits, pnlbtns });
+                FillControls.FillcmbCunsultantcategory(cmbCategory);
+                ManageControls(new Control[] { pnlReceiptNo,pnlCategory, pnlCname, pnlCharges, pnlVisits, pnlbtns });
                 InpConsultantInitialize();
                 ConsultantQuery(serialno);
             }
@@ -121,9 +122,9 @@ namespace ERP
             pnlVisits.Location = new Point(550, 40);
             pnlControls.Size = new Size(740, 80);
             dgvHosCharges.Location = new Point(10, 120);
-            dgvHosCharges.Size = new Size(740, 300);
+            dgvHosCharges.Size = new Size(920, 300);
             pnlbtns.Location = new Point(450, 430);
-            this.Size = new Size(780, 520);
+            this.Size = new Size(980, 520);
             pnlCname.Focus();
             cmbConsName.Focus();
             pnlCname.TabIndex = 1;
@@ -659,7 +660,7 @@ namespace ERP
         {
             DataTable dtQuery = Query.DeliverySearch(serialno);
             DataView view = new DataView(dtQuery);
-            dtQuery = view.ToTable(false, "vseq", "consultant", "Test", "charges", "lramount", "recoveryamount", "createdby", "createtime","editby", "edittime", "status");
+            dtQuery = view.ToTable(false, "vseq", "consultant", "Test", "charges", "lramount", "recoveryamount", "createdby", "createtime", "editby", "edittime", "status");
             dgvHosCharges.DataSource = dtQuery;
             dgvHosCharges.Columns["vseq"].Visible = false;
 
@@ -686,10 +687,11 @@ namespace ERP
         {
             DataTable dtQuery = Query.ConsultantSearch(serialno);
             DataView view = new DataView(dtQuery);
-            dtQuery = view.ToTable(false, "vseq", "consultant", "charges", "visits","total", "createdby", "createtime", "editby", "edittime", "status");
+            dtQuery = view.ToTable(false, "vseq", "consultant","category", "charges", "visits", "total", "createdby", "createtime", "editby", "edittime", "status");
             dgvHosCharges.DataSource = dtQuery;
             dgvHosCharges.Columns["vseq"].Visible = false;
             dgvHosCharges.Columns["consultant"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvHosCharges.Columns["category"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvHosCharges.Columns["createdby"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvHosCharges.Columns["createtime"].DefaultCellStyle.Format = "dd-MMM-yyyy hh:mm tt";
             dgvHosCharges.Columns["editby"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -711,7 +713,7 @@ namespace ERP
         {
             DataTable dtQuery = Query.MiscSearch(serialno);
             DataView view = new DataView(dtQuery);
-            dtQuery = view.ToTable(false, "vseq", "miscdesc", "charges", "createdby", "createtime", "editby","edittime", "status");
+            dtQuery = view.ToTable(false, "vseq", "miscdesc", "charges", "createdby", "createtime", "editby", "edittime", "status");
             dgvHosCharges.DataSource = dtQuery;
             dgvHosCharges.Columns["vseq"].Visible = false;
             dgvHosCharges.Columns["createdby"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -753,6 +755,21 @@ namespace ERP
                 }
                 else if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    if (HosCharges == "In-Patient Lab")
+                    {
+                        if (ReceiptNo != null)
+                        {
+                            dtQuery = Query.InPatientTestInfo(TestId.ToString(), ReceiptNo, serialno);
+                            bool testExists = dtQuery.AsEnumerable().Any(row => row["TestId"].ToString() == cmbTestName.SelectedValue.ToString());
+
+                            if (testExists)
+                            {
+                                MessageBox.Show("The selected test is already included in the list for this patient. Please review the test information to avoid duplicate entries.", "Duplicate Test", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                        }
+                    }
+
                     DML.inptestcharges_add_edit(ReceiptNo, txtSeq.Text, serialno.ToString(), dtpDate.Value, TestId.ToString(), cmbTestName.SelectedValue.ToString(), numCharges.Text, cmbConsName.SelectedValue.ToString(), "0", ref ReceiptNo);
                     ReceiptQuery(serialno, TestId.ToString(), ReceiptNo);
                     cmbTestName.Focus();
@@ -909,7 +926,7 @@ namespace ERP
 
             DataTable dtroom = Query.getData($"SELECT * FROM  roomindex where id = {dt.Rows[0]["roomid"]}");
 
-            string PatientName = dt.Rows[0]["title"].ToString()+""+dt.Rows[0]["patientname"].ToString();
+            string PatientName = dt.Rows[0]["title"].ToString() + "" + dt.Rows[0]["patientname"].ToString();
 
             rpt.SetParameterValue("@CompanyName", CompanyInfo.CompanyName);
             rpt.SetParameterValue("@Contact", CompanyInfo.Cell);
@@ -923,7 +940,7 @@ namespace ERP
             rpt.SetParameterValue("@phoneNo", dt.Rows[0]["emergency"].ToString());
             rpt.SetParameterValue("@User", UserInfo.UserId);
             rpt.SetParameterValue("@NetAmount", dtTest.Rows[0]["amount"].ToString());
-            rpt.SetParameterValue("@Age", dt.Rows[0]["age"].ToString() +" - "+ dt.Rows[0]["ymd"].ToString());
+            rpt.SetParameterValue("@Age", dt.Rows[0]["age"].ToString() + " - " + dt.Rows[0]["ymd"].ToString());
             rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
             rpt.SetParameterValue("@SlipNumber", SlipNumber);
             rpt.SetParameterValue("@Room", dtroom.Rows[0]["fullname"]);
@@ -948,7 +965,7 @@ namespace ERP
             }
         }
 
-        void PrintINPatientMMCReport(DataTable dtTest,DataTable dt,string currrcpt)
+        void PrintINPatientMMCReport(DataTable dtTest, DataTable dt, string currrcpt)
         {
             Reports.IPDReceipt rpt = new Reports.IPDReceipt();
             rpt.SetDataSource(dtTest);
@@ -1066,27 +1083,26 @@ namespace ERP
 
         private void cmbConsName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //try
-            //{
-
-
-                if (HosCharges == "Consultant Charges")
+            if (HosCharges == "Consultant Charges")
+            {
+                if (cmbConsName.SelectedIndex != -1)
                 {
-                    if (cmbConsName.SelectedIndex != -1)
+                    //if(consultant==t)   
+                    DataRowView dr = (DataRowView)cmbConsName.SelectedItem;
+                    //if (dr != null)
+                    //{
+                    //    numCharges.Value = (Decimal)dr["HospitalRate"];
+                    //}
+                    if (dr["HospitalRate"] != DBNull.Value)
                     {
-                        //if(consultant==t)   
-                        DataRowView dr = (DataRowView)cmbConsName.SelectedItem;
-                        if (dr != null)
-                        {
-                            numCharges.Value = (Decimal)dr["HospitalRate"];
-                        }
+                        numCharges.Value = Convert.ToDecimal(dr["HospitalRate"]);
                     }
-               // }
+                    else
+                    {
+                        numCharges.Value = 0; // or some default value
+                    }
+                }
             }
-            //catch(Exception ee)
-            //{
-
-            //}
         }
 
         private void frmHospitalCharges_KeyDown(object sender, KeyEventArgs e)
@@ -1229,7 +1245,7 @@ namespace ERP
                             }
                             else if (HosCharges == "Room Charges")
                             {
-                                Query.Execute("UPDATE  inproomcharges SET status ='1' , editby = '"+UserInfo.UserId+ "' , edittime = sysdate  WHERE   vseq  = '" + VSeqValue + "'");
+                                Query.Execute("UPDATE  inproomcharges SET status ='1' , editby = '" + UserInfo.UserId + "' , edittime = sysdate  WHERE   vseq  = '" + VSeqValue + "'");
                             }
                             else if (HosCharges == "Surgery Charges")
                             {
@@ -1336,6 +1352,19 @@ namespace ERP
         private void dgvHosCharges_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void cmbCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (HosCharges == "Consultant Charges")
+            {
+                if (cmbCategory.SelectedValue != null && cmbCategory.SelectedValue is string)
+                {
+                    int selectedIndex = cmbCategory.SelectedIndex;
+                    string selectedValue = cmbCategory.SelectedValue.ToString();
+                    FillControls.FillcmbCunsultantHoschargeByCategory(cmbConsName, selectedValue);
+                }
+            }
         }
     }
 }

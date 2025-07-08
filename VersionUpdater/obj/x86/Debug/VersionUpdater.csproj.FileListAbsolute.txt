@@ -116,6 +116,7 @@ D:\101171-N\Nubit Github Application\HRMS-MMC\VersionUpdater\obj\x86\Debug\Versi
 D:\Nubit Software\Nubit Github Application\HRMS-MMC\VersionUpdater\bin\Debug\VersionUpdater.exe.config
 D:\Nubit Software\Nubit Github Application\HRMS-MMC\VersionUpdater\bin\Debug\VersionUpdater.exe
 D:\Nubit Software\Nubit Github Application\HRMS-MMC\VersionUpdater\bin\Debug\VersionUpdater.pdb
-D:\Nubit Software\Nubit Github Application\HRMS-MMC\VersionUpdater\obj\x86\Debug\VersionUpdater.csprojResolveAssemblyReference.cache
+D:\Nubit Software\Nubit Github Application\HRMS-MMC\VersionUpdater\obj\x86\Debug\VersionUpdater.csproj.AssemblyReference.cache
+D:\Nubit Software\Nubit Github Application\HRMS-MMC\VersionUpdater\obj\x86\Debug\VersionUpdater.csproj.CoreCompileInputs.cache
 D:\Nubit Software\Nubit Github Application\HRMS-MMC\VersionUpdater\obj\x86\Debug\VersionUpdater.exe
 D:\Nubit Software\Nubit Github Application\HRMS-MMC\VersionUpdater\obj\x86\Debug\VersionUpdater.pdb

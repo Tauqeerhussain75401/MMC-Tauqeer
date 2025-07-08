@@ -132,13 +132,14 @@ namespace ERP
             else if (Reportname == "Member Invoice Detail")
             {
                 Reports.MemberInvoiceDetail rpt = new Reports.MemberInvoiceDetail();
-                DataTable dt = ReportQuery.MemberInvoiceDetail(dtpFDate.Value, dtpTDate.Value, txtMemberNo.Text, cmbStatus.Text);
+                DataTable dt = ReportQuery.MemberInvoiceDetail(dtpFDate.Value, dtpTDate.Value, txtMemberNo.Text, cmbStatus.Text,cmbgender.Text);
                 rpt.SetDataSource(dt);
                 rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
                 rpt.SetParameterValue("@Fdate", dtpFDate.Value);
                 rpt.SetParameterValue("@Tdate", dtpTDate.Value);
                 rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
                 rpt.SetParameterValue("@User", UserInfo.UserName);
+                rpt.SetParameterValue("@gender", cmbgender.Text);
 
                 frm.rptViewer.ReportSource = rpt;
 
@@ -269,7 +270,7 @@ namespace ERP
             else if (Reportname == "OPD Catagory Wise Detail")
             {
                 Reports.CatagoryWiseDetail rpt = new Reports.CatagoryWiseDetail();
-                DataTable dt = ReportQuery.OPDCatagoryWiseDetail(dtpFDate.Value, dtpTDate.Value, (string)cmbCatagory.SelectedValue);
+                DataTable dt = ReportQuery.OPDCatagoryWiseDetail(dtpFDate.Value, dtpTDate.Value, (string)cmbCatagory.SelectedValue, cmbgender.Text);
                 rpt.SetDataSource(dt);
                 rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
                 rpt.SetParameterValue("@Fdate", dtpFDate.Value);
@@ -277,6 +278,7 @@ namespace ERP
                 rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
                 rpt.SetParameterValue("@User", UserInfo.UserName);
                 rpt.SetParameterValue("@ReportHeader", cmbCatagory.Text);
+                rpt.SetParameterValue("@gender", cmbgender.Text == "All" ? "Both" : cmbgender.Text);
 
                 frm.rptViewer.ReportSource = rpt;
 
@@ -335,12 +337,23 @@ namespace ERP
             #region DETAIL OF IN-PATIENT BILL
             else if (Reportname == "DETAIL OF IN-PATIENT BILL")
             {
-
+                decimal totalChargesSum = 0;
                 ERP.Reports.CrpInpIncome2 rptCrpInpIncome2 = new ERP.Reports.CrpInpIncome2();
                 DataTable dt = ReportQuery.InPatientBill(dtpFDate.Value, dtpTDate.Value);
+                if (dt != null)
+                {
+                    DataRow[] filteredRows = dt.Select("bmjnewno IS NOT NULL");
+                    if (filteredRows.Length > 0)
+                    {
+                        DataTable dtBMJ = filteredRows.CopyToDataTable();
+                        totalChargesSum = dtBMJ.AsEnumerable()
+                            .Sum(row => row.Field<decimal>("balance"));
+                    }
+                }
                 rptCrpInpIncome2.SetDataSource(dt);
                 rptCrpInpIncome2.SetParameterValue("pDateFrom", dtpFDate.Value);
                 rptCrpInpIncome2.SetParameterValue("pDateTo", dtpTDate.Value);
+                rptCrpInpIncome2.SetParameterValue("BMJSum", totalChargesSum.ToString("N0"));
 
                 frm.rptViewer.ReportSource = rptCrpInpIncome2;
 
@@ -414,7 +427,7 @@ namespace ERP
             {
                 Cursor.Current = Cursors.WaitCursor;
                 Reports.CrpOPDReceipt rptcrpOPDreceipt = new Reports.CrpOPDReceipt();
-                DataTable dt = ReportQuery.DetailOPDReceipt(dtpFDate.Value, dtpTDate.Value, cmbAllCatagory.SelectedValue.ToString(), cmbTest.SelectedValue.ToString());
+                DataTable dt = ReportQuery.DetailOPDReceipt(dtpFDate.Value, dtpTDate.Value, cmbAllCatagory.SelectedValue.ToString(), cmbTest.SelectedValue.ToString(),cmbgender.Text);
                 rptcrpOPDreceipt.SetDataSource(dt);
                 rptcrpOPDreceipt.SetParameterValue("@FromDate", dtpFDate.Value);
                 rptcrpOPDreceipt.SetParameterValue("@ToDate", dtpTDate.Value);
@@ -422,6 +435,7 @@ namespace ERP
                 rptcrpOPDreceipt.SetParameterValue("@contacthead", CompanyInfo.ContactHead);
                 rptcrpOPDreceipt.SetParameterValue("@address", CompanyInfo.Address);
                 rptcrpOPDreceipt.SetParameterValue("@urcompanyname", CompanyInfo.UrCompanyName);
+                rptcrpOPDreceipt.SetParameterValue("@gender", cmbgender.Text == "All" ? "Both" : cmbgender.Text);
                 Cursor.Current = Cursors.Default;
                 frm.rptViewer.ReportSource = rptcrpOPDreceipt;
 
@@ -458,7 +472,7 @@ namespace ERP
                 {
                     Reports.rptBMJMember1 RPBMJ = new Reports.rptBMJMember1();
                     DataTable DTBMJ = ReportQuery.GetBMJMember(cmbBMGMember.SelectedValue.ToString(),
-                    rdoActive.Checked == true ? "0" : rdoUnActive.Checked == true ? "1" : "0", chkWithFamily.Checked == true ? "1" : "0");
+                    rdoActive.Checked == true ? "0" : rdoUnActive.Checked == true ? "1" : "0", chkWithFamily.Checked == true ? "1" : "0",cmbgender.Text);
 
                     RPBMJ.SetDataSource(DTBMJ);
 
@@ -470,7 +484,7 @@ namespace ERP
                 {
                     Reports.rptBMJMember RPBMJ = new Reports.rptBMJMember();
                     DataTable DTBMJ = ReportQuery.GetBMJMember(cmbBMGMember.SelectedValue.ToString(),
-                    rdoActive.Checked == true ? "0" : rdoUnActive.Checked == true ? "1" : "0", chkWithFamily.Checked == true ? "1" : "0");
+                    rdoActive.Checked == true ? "0" : rdoUnActive.Checked == true ? "1" : "0", chkWithFamily.Checked == true ? "1" : "0", cmbgender.Text);
 
                     RPBMJ.SetDataSource(DTBMJ);
 
@@ -603,13 +617,15 @@ namespace ERP
             {
 
                 Reports.IPDTestSummary rpt = new Reports.IPDTestSummary();
-                DataTable dt = ReportQuery.rep_ipd_testSummary(dtpFDate.Value.ToString("dd-MMM-yyyy"), dtpTDate.Value.ToString("dd-MMM-yyyy"), cmbAllCatagory.SelectedValue.ToString(), cmbTest.SelectedValue.ToString());
+                DataTable dt = ReportQuery.rep_ipd_testSummary(dtpFDate.Value.ToString("dd-MMM-yyyy"), dtpTDate.Value.ToString("dd-MMM-yyyy"),
+                    cmbAllCatagory.SelectedValue.ToString(), cmbTest.SelectedValue.ToString(),cmbgender.Text);
                 rpt.SetDataSource(dt);
                 rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
                 rpt.SetParameterValue("@Vfrom", dtpFDate.Value.ToString("dd-MMM-yyyy"));
                 rpt.SetParameterValue("@Vtodate", dtpTDate.Value.ToString("dd-MMM-yyyy"));
                 rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
                 rpt.SetParameterValue("@User", UserInfo.UserName);
+                rpt.SetParameterValue("@gender", cmbgender.Text == "All" ? "Both" : cmbgender.Text);
                 //   rpt.SetParameterValue("@VUser", cmbUser.Text);
 
                 frm.rptViewer.ReportSource = rpt;
@@ -1244,7 +1260,7 @@ namespace ERP
             #region Member Invoice Detail
             else if (Reportname == "Member Invoice Detail")
             {
-                ManageControls(new Control[] { grpDateRange, grpMember, grpActiveStatus });
+                ManageControls(new Control[] { grpDateRange, grpMember, grpActiveStatus ,grpGender});
                 cmbStatus.SelectedIndex = 0;
             }
             #endregion
@@ -1317,7 +1333,7 @@ namespace ERP
             else if (Reportname == "IPD Test Summary")
             {
 
-                ManageControls(new Control[] { grpDateRange, grpAllCatagory, grpCatagoryTest });
+                ManageControls(new Control[] { grpDateRange, grpAllCatagory, grpCatagoryTest,grpGender });
                 FillControls.FillcmbAllTestCatagory(cmbAllCatagory);
                 FillControls.FillcmbTest(cmbTest, "All");
                 cmbAllCatagory.Text = "All";
@@ -1358,7 +1374,7 @@ namespace ERP
             #region OPD Catagory Wise Detail
             else if (Reportname == "OPD Catagory Wise Detail")
             {
-                ManageControls(new Control[] { grpDateRange, grpCatagory });
+                ManageControls(new Control[] { grpDateRange, grpCatagory, grpGender });
                 FillControls.FillcmbTestCatagoryALL(cmbCatagory);
             }
             #endregion
@@ -1466,7 +1482,7 @@ namespace ERP
             #region BMG MEMBER
             else if (Reportname == "BMG Member")
             {
-                ManageControls(new Control[] { grpActiveUnActive, grpBMGmember });
+                ManageControls(new Control[] { grpActiveUnActive, grpBMGmember,grpGender });
                 FillControls.FillBMGMember(cmbBMGMember);
             }
             #endregion
@@ -1482,7 +1498,7 @@ namespace ERP
             #region OPD Test Receipt Detail
             else if (Reportname == "OPD Test Receipt Detail")
             {
-                ManageControls(new Control[] { grpDateRange, grpAllCatagory, grpCatagoryTest });
+                ManageControls(new Control[] { grpDateRange, grpAllCatagory, grpCatagoryTest,grpGender });
                 FillControls.FillcmbAllTestCatagory(cmbAllCatagory);
                 FillControls.FillcmbCatagoryTest(cmbTest, "");
                 cmbAllCatagory.Text = "All";

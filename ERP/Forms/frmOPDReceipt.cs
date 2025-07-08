@@ -11,6 +11,7 @@ using System.IO;
 using System.Drawing.Printing;
 using ZXing;
 using System.Threading.Tasks;
+using ERP.Reports;
 
 namespace ERP
 {
@@ -492,6 +493,27 @@ namespace ERP
                         }
                     }
 
+                    if (cmbOPDCatagory.SelectedValue.ToString() == "2")
+                    {
+                        string[] VfkTestId = fkTestId.ToArray();
+
+                        // Check for duplicates
+                        var duplicateTestIds = VfkTestId
+                            .GroupBy(id => id)
+                            .Where(g => g.Count() > 1)
+                            .Select(g => g.Key)
+                            .ToList();
+
+                        if (duplicateTestIds.Any())
+                        {
+                            MessageBox.Show("A duplicate test has been selected in the list for this patient. Please review the test information to avoid duplicate entries.",
+                            "Duplicate Test",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                    }
 
                     DML.OPDReceipt_Add_Edit(voucher, ntxtTokenNo.Value, dtpDate.Value, cmbOPDCatagory.SelectedValue.ToString(), cmbConsultant.SelectedValue, cmbPatientType.SelectedValue, cmbMembership.SelectedValue,
                         cmbPatientId.SelectedValue, cmbPatientTitle.Text, cmbPatientId.Text, cmbGender.Text, txtContactNo.Text, ntxtAge.Value.ToString(), cmbAgeUnit.Text, (string)cmbReference.SelectedValue, txtRemarks.Text,
@@ -646,7 +668,7 @@ namespace ERP
             DataTable Lastentry = Query.getData(
                         "SELECT patientname, grossamount FROM (" +
                         " SELECT patientname, grossamount FROM opdreceipt " +
-                        " WHERE createdby = '" + UserInfo.UserId + "' " +
+                        " WHERE Trunc(vdate) >= Trunc(SYSDATE - 50) AND createdby = '" + UserInfo.UserId + "' " +
                         " ORDER BY TO_NUMBER(receiptno) DESC" +
                         ") WHERE ROWNUM = 1"
                     );
@@ -672,7 +694,7 @@ namespace ERP
             dtpDate.Value = SoftwareInfo.ServerDate;
             cmbConsultant.SelectedIndex = ConsultIndex;
             cmbOPDCatagory.Focus();
-            //FillLastIssuedSlip(); Tauqeer
+            FillLastIssuedSlip(); //Tauqeer
             txtRSearch.Clear();
             txtContactNo.Clear();
         }
@@ -728,7 +750,7 @@ namespace ERP
 
         private void deleteRecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (UserInfo.UserLevel == "Admin")
+            if (UserInfo.UserLevel == "Admin" && txtVoucherNo.Text != "")
             {
                 if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to Delete this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
@@ -737,13 +759,24 @@ namespace ERP
 
                         if (txtVoucherNo.Text != "")
                         {
-
                             DML.OPDReceiptTestDetail_Add_Edit(1, Enumerable.Repeat(txtVoucherNo.Text.Replace("OP-", ""), 1).ToArray(),
                                 Enumerable.Repeat(dgvExpenses.CurrentRow.Cells[clnTest.Index].Value.ToString(), 1).ToArray(),
                                 Enumerable.Repeat(Convert.ToDecimal(dgvExpenses.CurrentRow.Cells[dgvExpclnAmount.Index].Value.ToString()), 1).ToArray(),
                                 Enumerable.Repeat("1", 1).ToArray(), Enumerable.Repeat((string)dgvExpenses.CurrentRow.Cells[clnRowId.Index].Value, 1).ToArray());
 
                         }
+                        dgvExpenses.Rows.RemoveAt(dgvExpenses.CurrentRow.Index);
+                        CalcTotAmount();
+                        MessageBox.Show("Record Successfully Deleted..!");
+                    }
+                }
+            }
+            else if (txtVoucherNo.Text == "")
+            {
+                if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to Delete this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if (dgvExpenses[clnTest.Index, dgvExpenses.CurrentRow.Index].Value != null)
+                    {
                         dgvExpenses.Rows.RemoveAt(dgvExpenses.CurrentRow.Index);
                         CalcTotAmount();
                         MessageBox.Show("Record Successfully Deleted..!");
@@ -1003,8 +1036,22 @@ namespace ERP
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            //frmReportView frm = new frmReportView();
-            Print(VoucherNum);
+            if (UserInfo.UserLevel == "Admin")
+            {
+                Print(VoucherNum);
+            }
+            else
+            {
+                DataTable dt = ReportQuery.OPDReceipt(VoucherNum);
+                if (dt.Rows[0]["noofPrint"].ToString() == "0")
+                {
+                    Print(VoucherNum);
+                }
+                else
+                {
+                    MessageBox.Show("You do not have permission to print this document again.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
 
         private bool Print(string voucher)
@@ -1313,10 +1360,8 @@ namespace ERP
         //BASIT 4/3/2020
         private void dgvExpenses_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
-
             if (e.ColumnIndex == clnTest.Index && e.RowIndex > -1)
             {
-
                 string name = (string)dgvExpenses.Rows[e.RowIndex].Cells[clnTest.Index].Value;
                 if (name != null)
                 {

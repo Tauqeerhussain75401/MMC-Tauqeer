@@ -120,9 +120,45 @@ namespace ERP
             cmb.ValueMember = "Id";
             cmb.SelectedIndex = 0;
         }
+
+        internal static void FillcmbCunsultantHoschargeByCategory(ComboBox cmb, string categoryId)
+        {
+            if (categoryId == null)
+                return;
+
+            int categoryId1 = Convert.ToInt32(categoryId);
+            DataTable dt = Query.ConsultantIndex(); 
+            DataRow[] filteredRows = dt.Select("TestTypeID = " + categoryId1);
+            DataTable filteredDt = dt.Clone();
+            foreach (DataRow row in filteredRows)
+            {
+                filteredDt.ImportRow(row);
+            }
+            cmb.DataSource = filteredDt;
+            cmb.DisplayMember = "Name";
+            cmb.ValueMember = "Id";
+            cmb.SelectedIndex = (filteredDt.Rows.Count > 0) ? 0 : -1;
+        }
+
+        internal static void FillcmbCunsultantcategory(ComboBox cmb)
+        {
+            cmb.DataSource = Query.TestCatagoryIndex();
+            cmb.DisplayMember = "title";
+            cmb.ValueMember = "id";
+            cmb.SelectedValue = 3;
+        }
+
         internal static void FillcmbTemplateIndex(ComboBox cmb)
         {
             cmb.DataSource = Query.TemplateIndex();
+            cmb.DisplayMember = "TemplateName";
+            cmb.ValueMember = "Id";
+            cmb.SelectedIndex = -1;
+        }
+
+        internal static void FillcmbTemplateIndexEcho(ComboBox cmb)
+        {
+            cmb.DataSource = Query.TemplateIndexEcho();
             cmb.DisplayMember = "TemplateName";
             cmb.ValueMember = "Id";
             cmb.SelectedIndex = -1;

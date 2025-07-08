@@ -12,7 +12,7 @@ namespace ERP
     {
         internal  static DataTable OPDReceipt(string ReceiptNo)
         {
-            string sql = "SELECT tokenno,vdate,get_OPDCatagory(catagoryid) CatagoryTitle  ,get_opdcatagoryReportType(catagoryid) ReportType ,get_ConsultantName(consultantid) ConsultantName,memberid,gender,patienttitle || patientname  patientname,age||' '||ageunit age,netamount,contactno,get_patienttype(patienttype) patienttype,get_ReferenceName(referenceid) ReferenceName,remarks,grossamount,discount,netamount,partialamount,netbalance,ispartial,createdby,createdtime,electricitycharges,get_ConsultantName(laboratoryConsultantid) laboratoryConsultantName  FROM opdreceipt WHERE receiptno = '" + ReceiptNo + "'";
+            string sql = "SELECT tokenno,vdate,get_OPDCatagory(catagoryid) CatagoryTitle  ,get_opdcatagoryReportType(catagoryid) ReportType ,get_ConsultantName(consultantid) ConsultantName,memberid,gender,patienttitle || patientname  patientname,age||' '||ageunit age,netamount,contactno,get_patienttype(patienttype) patienttype,get_ReferenceName(referenceid) ReferenceName,remarks,grossamount,discount,netamount,partialamount,netbalance,ispartial,createdby,createdtime,electricitycharges,get_ConsultantName(laboratoryConsultantid) laboratoryConsultantName,noofPrint  FROM opdreceipt WHERE receiptno = '" + ReceiptNo + "'";
             DataTable dt = Query.getData(sql);
             return dt;
         }
@@ -67,7 +67,7 @@ namespace ERP
             return dt;
 
         }
-        internal static DataTable MemberInvoiceDetail(DateTime FDate, DateTime TDate,string MemberId,string status)
+        internal static DataTable MemberInvoiceDetail(DateTime FDate, DateTime TDate,string MemberId,string status,string Vgender)
         {
             DataTable dt = new DataTable();
             OracleCommand comm = new OracleCommand("rep_MemberInvoices", clsConnection.con);
@@ -76,6 +76,7 @@ namespace ERP
             comm.Parameters.Add("VTdate", OracleDbType.Date).Value = TDate ;
             comm.Parameters.Add("VMemberId", OracleDbType.Varchar2).Value = MemberId;
             comm.Parameters.Add("VStatus", OracleDbType.Varchar2).Value = status ;
+            comm.Parameters.Add("Vgender", OracleDbType.Varchar2).Value = Vgender;
 
             comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
             //comm.Parameters["retval"].Direction = ParameterDirection.Output;
@@ -353,7 +354,7 @@ namespace ERP
             return dt;
 
         }
-        internal static DataTable OPDCatagoryWiseDetail(DateTime FDate, DateTime TDate,string Catagory)
+        internal static DataTable OPDCatagoryWiseDetail(DateTime FDate, DateTime TDate,string Catagory,string Vgender)
         {
             DataTable dt = new DataTable();
             OracleCommand comm = new OracleCommand("rep_opdCatagorywisedetail", clsConnection.con);
@@ -361,6 +362,7 @@ namespace ERP
             comm.Parameters.Add("VFdate", OracleDbType.Date).Value = FDate;
             comm.Parameters.Add("VTdate", OracleDbType.Date).Value = TDate;
             comm.Parameters.Add("VCatagory", OracleDbType.Varchar2).Value = Catagory ;
+            comm.Parameters.Add("Vgender", OracleDbType.Varchar2).Value = Vgender;
             comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
             //comm.Parameters["retval"].Direction = ParameterDirection.Output;
 
@@ -680,15 +682,16 @@ namespace ERP
         }
 
         //30-07-2020 basit
-        internal static DataTable DetailOPDReceipt(DateTime datefrom, DateTime dateto,string cmbCatagory,string cmbtest)
+        internal static DataTable DetailOPDReceipt(DateTime datefrom, DateTime dateto,string cmbCatagory,string cmbtest,string Vgender)
         {
             DataTable dt = new DataTable("opdtestreceippt");
-            OracleCommand comm = new OracleCommand("rep_opdtestreport", clsConnection.con);
+            OracleCommand comm = new OracleCommand("rep_opdtestreport_New", clsConnection.con);
             comm.CommandType = CommandType.StoredProcedure;
             comm.Parameters.Add("VDateFrom", OracleDbType.Date).Value = datefrom;
             comm.Parameters.Add("VDateTo", OracleDbType.Date).Value = dateto;
             comm.Parameters.Add("Vcatagoryid", OracleDbType.Varchar2).Value = cmbCatagory;
             comm.Parameters.Add("Vtestid", OracleDbType.Varchar2).Value = cmbtest;
+            comm.Parameters.Add("Vgender", OracleDbType.Varchar2).Value = Vgender;
             comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
 
             OracleDataAdapter adapter = new OracleDataAdapter();
@@ -754,7 +757,7 @@ namespace ERP
         }
 
 
-        internal static DataTable GetBMJMember(string BMJMemberNo,string Active_UnActive,string Wfamily)
+        internal static DataTable GetBMJMember(string BMJMemberNo,string Active_UnActive,string Wfamily,string Vgender)
         {
             DataTable dt = new DataTable("rptMBJMember");
             OracleCommand comm = new OracleCommand("REP_BMJMember", clsConnection.con);
@@ -762,6 +765,7 @@ namespace ERP
             comm.Parameters.Add("Vbmjnumber", OracleDbType.Varchar2).Value = BMJMemberNo;
             comm.Parameters.Add("VWfamily", OracleDbType.Varchar2).Value = Wfamily;
             comm.Parameters.Add("VActiveUnActive", OracleDbType.Varchar2).Value = Active_UnActive;
+            comm.Parameters.Add("Vgender", OracleDbType.Varchar2).Value = Vgender;
 
             comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
 
@@ -936,16 +940,17 @@ namespace ERP
         }
 
 
-        internal static DataTable rep_ipd_testSummary(string VFromDate, string VToDate,string Vdepartment,string Vtest)
+        internal static DataTable rep_ipd_testSummary(string VFromDate, string VToDate,string Vdepartment,string Vtest,string Vgender)
         {
             DataTable dt = new DataTable();
-            OracleCommand comm = new OracleCommand("rep_testSummary", clsConnection.con);
+            OracleCommand comm = new OracleCommand("rep_testsummary_New", clsConnection.con);
             comm.CommandType = CommandType.StoredProcedure;
 
             comm.Parameters.Add("Vfrom", OracleDbType.Varchar2).Value = VFromDate;
             comm.Parameters.Add("Vtodate", OracleDbType.Varchar2).Value = VToDate;
             comm.Parameters.Add("Vdepartment", OracleDbType.Varchar2).Value = Vdepartment;
             comm.Parameters.Add("Vtest", OracleDbType.Varchar2).Value = Vtest;
+            comm.Parameters.Add("Vgender", OracleDbType.Varchar2).Value = Vgender;
 
 
             comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;

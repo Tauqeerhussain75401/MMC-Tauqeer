@@ -284,18 +284,47 @@ namespace ERP
         {
             try
             {
-                //string filterQuery = "select convert(varchar, VDate, 103) as VDate,VNO,(select TransNarration from TransactionCode where ID = FK_Narration) as Narration,sum(debit) as Amount from [GL_2017-2018] where ( VDate between '" + dtpFrom.Value.ToString("MM/dd/yyyy 00:00:00:00") + "' and '" + dtpTo.Value.ToString("MM/dd/yyyy 00:00:00:00") + "') and FK_Narration = " + (cmbFilterNarration.Text != "ALL" ? "'" + cmbFilterNarration.SelectedValue.ToString() + "'" : "FK_Narration") + " and VNO = " + VNO + "  and Vtype = 'PV' and status = 0  group by convert(varchar, VDate, 103) ,VNO,FK_Narration";
-                dtquery = Query.JournalFilter(dtpFrom.Value.ToString("dd MMM yyyy"), dtpTo.Value.ToString("dd MMM yyyy"),
-                    (cmbFilterNarration.Text != "ALL" ? "  and fktransactionid = '" + Convert.ToString(cmbFilterNarration.SelectedValue) + "'" : ""),
-                    (VNO != "" ? " and VNO = " + VNO : ""));
+                string narration = cmbFilterNarration.Text != "ALL" ? Convert.ToString(cmbFilterNarration.SelectedValue) : "ALL";
+                string vno = txtFilterVoucher.Text.Trim();
+
+                // ✅ Validate VNO is numeric
+                if (!string.IsNullOrWhiteSpace(vno) && !vno.All(char.IsDigit))
+                {
+                    MessageBox.Show("Only numbers are allowed in JV No.");
+                    return;
+                }
+
+                dtquery = Query.JournalFilter(
+                    dtpFrom.Value.ToString("dd MMM yyyy"),
+                    dtpTo.Value.ToString("dd MMM yyyy"),
+                    narration,
+                    vno);
+
                 Fillquery();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show(ex.Message);
                 Errors.writeline(ex.Message.ToString(), "Payment_btnFind_Click");
             }
         }
+
+
+        //private void btnFind_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dtquery = Query.JournalFilter(dtpFrom.Value.ToString("dd MMM yyyy"), dtpTo.Value.ToString("dd MMM yyyy"),
+        //            (cmbFilterNarration.Text != "ALL" ? "  and fktransactionid = '" + Convert.ToString(cmbFilterNarration.SelectedValue) + "'" : ""),
+        //            (VNO != "" ? " and VNO = " + VNO : ""));
+        //        Fillquery();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message.ToString());
+        //        Errors.writeline(ex.Message.ToString(), "Payment_btnFind_Click");
+        //    }
+        //}
 
         private void txtFilterVoucher_Validated(object sender, EventArgs e)
         {

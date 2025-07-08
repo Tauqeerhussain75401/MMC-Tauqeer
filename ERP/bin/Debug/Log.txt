@@ -234,3 +234,15 @@ PL/SQL: Statement ignored
 ===============================================
 10/29/2024 7:48:46 PM(Query_Rep_AccountStatement)ORA-01790: expression must have same datatype as corresponding expression
 ===============================================
+4/19/2025 1:35:08 PM(Query_Rep_AccountStatement)ORA-00911: invalid character
+===============================================
+4/19/2025 1:36:01 PM(Query_Rep_AccountStatement)ORA-00911: invalid character
+===============================================
+4/19/2025 1:36:27 PM(Query_Rep_AccountStatement)ORA-00911: invalid character
+===============================================
+5/4/2025 9:28:21 PM(Query_ PaymentFilter)ORA-00904: "PV": invalid identifier
+===============================================
+5/4/2025 9:28:24 PM(Query_ PaymentFilter)ORA-00904: "PV": invalid identifier
+===============================================
+5/4/2025 9:29:01 PM(Query_ PaymentFilter)ORA-00904: "PV": invalid identifier
+===============================================

@@ -166,8 +166,6 @@ namespace ERP.Forms
                     }
                     else
                         zakatDtp.Enabled = false;
-
-
                 }
                 else
                     if (dt.Rows[0]["patienttype"].ToString() == "SPD")
@@ -335,11 +333,11 @@ namespace ERP.Forms
                 txtZF2AddBy.Text = dt.Rows[0]["zakatby2"].ToString() + "  " + dt.Rows[0]["zakatdate2"].ToString();
                 txtZP3AddBy.Text = dt.Rows[0]["zakatby3"].ToString() + "  " + dt.Rows[0]["zakatdate3"].ToString();
 
-                string discount = dt.Rows[0]["discount"].ToString();
+                    string discount = dt.Rows[0]["discount"].ToString();
                 ntxtDiscount.Value = discount == "" ? 0 : (Decimal)dt.Rows[0]["discount"];
                 txtdischargeRemrks.Text = dt.Rows[0]["remarks"].ToString();
                 RefundAmount = Convert.ToDecimal(Validation.DBNullTo(dt.Rows[0]["refundamount"], 0));
-
+                txtrefunded.Value = RefundAmount;
                 chkPackage.Checked = dt.Rows[0]["ispackage"].ToString() == "1" ? true : false;
 
                 //FillControls.FillcmbPackageAll(cmbpackages);

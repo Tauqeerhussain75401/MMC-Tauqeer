@@ -263,6 +263,18 @@
     <Compile Include="Forms\BankReconcilation.Designer.cs">
       <DependentUpon>BankReconcilation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\EchoCardioGraphy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EchoCardioGraphy.Designer.cs">
+      <DependentUpon>EchoCardioGraphy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EchoTemplateDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EchoTemplateDesigner.Designer.cs">
+      <DependentUpon>EchoTemplateDesigner.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmAccountsSearching.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -890,6 +902,12 @@
       <DependentUpon>Discrepancies_Voucher.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Echocardiography.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Echocardiography.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\IPDReceipt_Laboratory.cs">
       <DependentUpon>IPDReceipt_Laboratory.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1297,6 +1315,12 @@
     <EmbeddedResource Include="Forms\BankReconcilation.resx">
       <DependentUpon>BankReconcilation.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EchoCardioGraphy.resx">
+      <DependentUpon>EchoCardioGraphy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EchoTemplateDesigner.resx">
+      <DependentUpon>EchoTemplateDesigner.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmAccountsSearching.resx">
       <DependentUpon>frmAccountsSearching.cs</DependentUpon>
     </EmbeddedResource>
@@ -1642,6 +1666,10 @@
     <EmbeddedResource Include="Reports\Discrepancies_Voucher.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Discrepancies_Voucher.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Echocardiography.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Echocardiography.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\IPDReceipt_Laboratory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

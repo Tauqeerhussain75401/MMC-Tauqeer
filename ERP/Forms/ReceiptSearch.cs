@@ -52,7 +52,7 @@ namespace ERP
             string BMJMember = !rdbMemberAll.Checked ? " and memberid = '" + cmbMember.SelectedValue.ToString() + "'" : "";
             string Gender = !rdbGenderAll.Checked ? " and gender = '" + cmbGender.Text + "'" : "";
             string Consultant = !rdbConsultantAll.Checked ? " and consultantid = '" + (string)cmbConsultant.SelectedValue + "'" : "";
-            string User = !rdbUserAll.Checked ? " and createdby = '" + cmbUser.Text + "'" : "";
+            string User = !rdbUserAll.Checked ? " and pr.createdby = '" + cmbUser.Text + "'" : "";
             string Reference = !rdbReferenceAll.Checked ? " and referenceid = '" + (string)cmbReference.SelectedValue + "'" : "";
             string CreateDateRange = !rdbCreadtedByDateAll.Checked ? " and trunc(createdtime) between '" + dtpCreatedByDateFrom.Value.ToDBFormat() + "' and '" + dtpCreatedByDateTo.Value.ToDBFormat() + "'" : "";
             string Token = txtToken.Text != "" ? " and tokenno = '" + txtToken.Text + "'" : "";
@@ -382,7 +382,7 @@ namespace ERP
             {
                 for (int i = 0; i < dgvQuery.Rows.Count; i++)
                 {
-                    Print(dgvQuery.Rows[i].Cells[clnVoucherNum.Index].Value.ToString());
+                    PrintNew(dgvQuery.Rows[i].Cells[clnVoucherNum.Index].Value.ToString());
                 }
             }
         }
@@ -408,6 +408,232 @@ namespace ERP
         private void dgvQuery_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+
+        private bool PrintNew(string voucher)
+        {
+            bool IsPrinted = false;
+            try
+            {
+                if (voucher != "")
+                {
+                    DataTable dt = ReportQuery.OPDReceipt(voucher);
+                    if (dt.Rows[0]["ReportType"].ToString() != "CARD")
+                    {
+                        
+                        string category = dt.Rows[0]["CatagoryTitle"].ToString();
+                        if (category == "Laboratory")
+                        {
+                            PrintHussainiLaboratory(voucher, dt);
+                            return true;
+                        }
+
+                        Reports.OPDReceipt rpt = new Reports.OPDReceipt();
+                        DataTable dtTest = ReportQuery.OPDTestReceipt(voucher);
+                        dtTest.Columns.Add("QRcode", typeof(byte[]));
+
+
+                        //  string VoucherNo = "OP-" + voucher;
+                        // string QRimagePath = Application.StartupPath + "\\QRCode.jpeg";
+                        //  DataTable dtQRcode = Query.GenerateQRCode(VoucherNo, QRimagePath);
+                        // foreach (DataRow dr2 in dtTest.Rows)
+                        // {
+                        // dr2["QRcode"] = (byte[])dtQRcode.Rows[0]["Qrcode"];
+                        //}
+
+
+
+                        rpt.SetDataSource(dtTest);
+                        rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
+                        rpt.SetParameterValue("@Contact", CompanyInfo.ContactHead);
+                        rpt.SetParameterValue("@Address", CompanyInfo.Address);
+                        rpt.SetParameterValue("@Catagory", dt.Rows[0]["CatagoryTitle"].ToString());
+                        rpt.SetParameterValue("@ReceiptNo", "OP-" + voucher);
+                        rpt.SetParameterValue("@Date", (DateTime)dt.Rows[0]["Vdate"]);
+                        rpt.SetParameterValue("@Patient", dt.Rows[0]["patientName"].ToString());
+                        rpt.SetParameterValue("@Gender", dt.Rows[0]["Gender"].ToString());
+                        rpt.SetParameterValue("@Consultant", dt.Rows[0]["ConsultantName"].ToString());
+                        rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+                        rpt.SetParameterValue("@User", UserInfo.UserName);
+                        rpt.SetParameterValue("@Discount", dt.Rows[0]["Discount"].ToString());
+                        rpt.SetParameterValue("@Remarks", dt.Rows[0]["Remarks"].ToString());
+                        rpt.SetParameterValue("@GrossAmount", dt.Rows[0]["GrossAmount"].ToString());
+                        decimal NetAmouunt = Convert.ToDecimal(dt.Rows[0]["NetAmount"].ToString());
+                        decimal kECharges = Convert.ToDecimal(dt.Rows[0]["electricitycharges"].ToString());
+                        decimal Total = NetAmouunt + kECharges;
+                        rpt.SetParameterValue("@NetAmount", NetAmouunt);
+                        rpt.SetParameterValue("@electricitycharges", dt.Rows[0]["electricitycharges"].ToString());
+                        rpt.SetParameterValue("@DiscountName", dt.Rows[0]["patientType"].ToString());
+                        rpt.SetParameterValue("@ReferenceName", dt.Rows[0]["ReferenceName"].ToString());
+                        rpt.SetParameterValue("@MemberId", dt.Rows[0]["memberid"].ToString());
+                        rpt.SetParameterValue("@TokenNo", dt.Rows[0]["TokenNo"].ToString());
+                        rpt.SetParameterValue("@Age", dt.Rows[0]["Age"].ToString());
+                        rpt.SetParameterValue("@CreatedBY", dt.Rows[0]["createdby"].ToString());
+                        rpt.SetParameterValue("@partialName", "Partial Payment");
+                        rpt.SetParameterValue("@Partial", dt.Rows[0]["netbalance"].ToString());
+                        rpt.SetParameterValue("@Createdtime", (DateTime)dt.Rows[0]["createdtime"]);
+                        rpt.SetParameterValue("@PrintedBy", UserInfo.UserId);
+                        rpt.SetParameterValue("@terminal", SoftwareInfo.Terminal);
+                        rpt.SetParameterValue("@urcompanyname", CompanyInfo.UrCompanyName);
+                        rpt.SetParameterValue("@phoneNo", dt.Rows[0]["contactno"].ToString());
+                        rpt.ReportFooterSection7.SectionFormat.EnableUnderlaySection = true;
+                        if (dt.Rows[0]["Discount"].ToString() == "0") rpt.ReportFooterSection3.SectionFormat.EnableSuppress = true;
+                        if (dt.Rows[0]["electricitycharges"].ToString() == "0") rpt.ReportFooterSection20.SectionFormat.EnableSuppress = true;
+                        if (dt.Rows[0]["ispartial"].ToString() == "0") rpt.ReportFooterSection12.SectionFormat.EnableSuppress = true;
+                        if (dt.Rows[0]["ReferenceName"].ToString() == "") rpt.ReportFooterSection5.SectionFormat.EnableSuppress = true;
+                        if (dt.Rows[0]["memberid"].ToString() == "")
+                        {
+                            rpt.ReportFooterSection6.SectionFormat.EnableSuppress = true;
+                            rpt.ReportFooterSection7.SectionFormat.EnableUnderlaySection = false;
+                        }
+                        if (dt.Rows[0]["tokenNo"].ToString() == "0") rpt.ReportFooterSection7.SectionFormat.EnableSuppress = true;
+                        rpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
+                        rpt.PrintToPrinter(1, true, 1, 9999);
+                        //if (UserInfo.UserLevel == "Admin")
+                        //{
+                        //    frmReportView frm = new frmReportView();
+                        //    frm.rptViewer.ReportSource = rpt;
+                        //    frm.Show();
+                        //}
+                        //else
+                        //{
+                        //    rpt.PrintToPrinter(1, true, 1, 9999);
+                        //    Query.Execute("update opdreceipt set noofprint = nvl(noofprint,0) + 1 where receiptno = '" + voucher + "'");
+                        //}
+                    }
+                    else
+                    {
+                        Reports.OPDCard rpt = new Reports.OPDCard();
+                        rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
+                        rpt.SetParameterValue("@Contact", CompanyInfo.ContactHead);
+                        rpt.SetParameterValue("@Address", CompanyInfo.Address);
+                        rpt.SetParameterValue("@Catagory", dt.Rows[0]["CatagoryTitle"].ToString());
+                        rpt.SetParameterValue("@ReceiptNo", "OP-" + voucher);
+                        rpt.SetParameterValue("@Date", (DateTime)dt.Rows[0]["Vdate"]);
+                        rpt.SetParameterValue("@Patient", dt.Rows[0]["patientName"].ToString());
+                        rpt.SetParameterValue("@Gender", dt.Rows[0]["Gender"].ToString());
+                        rpt.SetParameterValue("@Consultant", dt.Rows[0]["ConsultantName"].ToString());
+                        rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+                        rpt.SetParameterValue("@User", dt.Rows[0]["createdby"].ToString());
+                        rpt.SetParameterValue("@Discount", dt.Rows[0]["Discount"].ToString());
+                        rpt.SetParameterValue("@Remarks", dt.Rows[0]["Remarks"].ToString());
+                        rpt.SetParameterValue("@GrossAmount", dt.Rows[0]["GrossAmount"].ToString());
+                        rpt.SetParameterValue("@NetAmount", dt.Rows[0]["NetAmount"].ToString());
+                        rpt.SetParameterValue("@DiscountName", dt.Rows[0]["patientType"].ToString() == "PUBLIC" ? "" : dt.Rows[0]["patientType"].ToString());
+                        rpt.SetParameterValue("@ReferenceName", dt.Rows[0]["ReferenceName"].ToString());
+                        rpt.SetParameterValue("@MemberId", dt.Rows[0]["memberid"].ToString());
+                        rpt.SetParameterValue("@TokenNo", dt.Rows[0]["TokenNo"].ToString());
+                        rpt.SetParameterValue("@Age", dt.Rows[0]["Age"].ToString());
+                        rpt.SetParameterValue("@CreatedBY", dt.Rows[0]["createdby"].ToString());
+                        rpt.SetParameterValue("@Createdtime", (DateTime)dt.Rows[0]["createdtime"]);
+                        rpt.SetParameterValue("@PrintedBy", UserInfo.UserId);
+                        rpt.SetParameterValue("@terminal", SoftwareInfo.Terminal);
+                        rpt.SetParameterValue("@urcompanyname", CompanyInfo.UrCompanyName);
+                        rpt.SetParameterValue("@phoneNo", dt.Rows[0]["contactno"].ToString());
+                        if (dt.Rows[0]["Discount"].ToString() == "0") rpt.ReportFooterSection3.SectionFormat.EnableSuppress = true;
+                        if (dt.Rows[0]["ReferenceName"].ToString() == "") rpt.ReportFooterSection5.SectionFormat.EnableSuppress = true;
+                        if (dt.Rows[0]["memberid"].ToString() == "")
+                        {
+                            rpt.ReportFooterSection6.SectionFormat.EnableSuppress = true;
+                        }
+                        else
+                        {
+                            rpt.ReportFooterSection1.SectionFormat.EnableUnderlaySection = true;
+                        }
+                        if (dt.Rows[0]["tokenNo"].ToString() == "0") rpt.ReportFooterSection7.SectionFormat.EnableSuppress = true;
+                        rpt.PrintToPrinter(1, true, 1, 9999);
+                        //if (UserInfo.UserLevel == "Admin")
+                        //{
+                        //    frmReportView frm = new frmReportView();
+                        //    frm.rptViewer.ReportSource = rpt;
+                        //    frm.Show();
+                        //}
+                        //else
+                        //{
+                        //    rpt.PrintToPrinter(1, true, 1, 9999);
+                        //    Query.Execute("update opdreceipt set noofprint = nvl(noofprint,0) + 1 where receiptno = '" + voucher + "'");
+                        //}
+
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+
+        void PrintHussainiLaboratory(string voucher, DataTable dt)
+        {
+            Reports.OPDReceipt_Laboratory rpt = new Reports.OPDReceipt_Laboratory();
+            DataTable dtTest = ReportQuery.OPDTestReceipt(voucher);
+            dtTest.Columns.Add("QRcode", typeof(byte[]));
+
+
+            // string VoucherNo = "OP-" + voucher;
+            // string QRimagePath = Application.StartupPath + "\\QRCode.jpeg";
+            //  DataTable dtQRcode = Query.GenerateQRCode(VoucherNo, QRimagePath);
+
+            rpt.SetDataSource(dtTest);
+            rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
+            rpt.SetParameterValue("@Contact", CompanyInfo.ContactHead);
+            rpt.SetParameterValue("@Address", CompanyInfo.Address);
+            rpt.SetParameterValue("@Catagory", dt.Rows[0]["CatagoryTitle"].ToString());
+            rpt.SetParameterValue("@ReceiptNo", "OP-" + voucher);
+            rpt.SetParameterValue("@Date", (DateTime)dt.Rows[0]["Vdate"]);
+            rpt.SetParameterValue("@Patient", dt.Rows[0]["patientName"].ToString());
+            rpt.SetParameterValue("@Gender", dt.Rows[0]["Gender"].ToString());
+            rpt.SetParameterValue("@Consultant", dt.Rows[0]["laboratoryConsultantName"].ToString());
+            rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+            rpt.SetParameterValue("@User", UserInfo.UserName);
+            rpt.SetParameterValue("@Discount", dt.Rows[0]["Discount"].ToString());
+            rpt.SetParameterValue("@Remarks", dt.Rows[0]["Remarks"].ToString());
+            rpt.SetParameterValue("@GrossAmount", dt.Rows[0]["GrossAmount"].ToString());
+            decimal NetAmouunt = Convert.ToDecimal(dt.Rows[0]["NetAmount"].ToString());
+            decimal kECharges = Convert.ToDecimal(dt.Rows[0]["electricitycharges"].ToString());
+            decimal Total = NetAmouunt + kECharges;
+            rpt.SetParameterValue("@NetAmount", NetAmouunt);
+            rpt.SetParameterValue("@electricitycharges", dt.Rows[0]["electricitycharges"].ToString());
+            rpt.SetParameterValue("@DiscountName", dt.Rows[0]["patientType"].ToString());
+            rpt.SetParameterValue("@ReferenceName", dt.Rows[0]["ReferenceName"].ToString());
+            rpt.SetParameterValue("@MemberId", dt.Rows[0]["memberid"].ToString());
+            rpt.SetParameterValue("@TokenNo", dt.Rows[0]["TokenNo"].ToString());
+            rpt.SetParameterValue("@Age", dt.Rows[0]["Age"].ToString());
+            rpt.SetParameterValue("@CreatedBY", dt.Rows[0]["createdby"].ToString());
+            rpt.SetParameterValue("@phoneNo", dt.Rows[0]["contactno"].ToString());
+            rpt.SetParameterValue("@partialName", "Partial Payment");
+            rpt.SetParameterValue("@Partial", dt.Rows[0]["netbalance"].ToString());
+            rpt.SetParameterValue("@Createdtime", (DateTime)dt.Rows[0]["createdtime"]);
+            rpt.SetParameterValue("@PrintedBy", UserInfo.UserId);
+            rpt.SetParameterValue("@terminal", SoftwareInfo.Terminal);
+            rpt.SetParameterValue("@urcompanyname", CompanyInfo.UrCompanyName);
+            rpt.ReportFooterSection7.SectionFormat.EnableUnderlaySection = true;
+            if (dt.Rows[0]["Discount"].ToString() == "0") rpt.ReportFooterSection3.SectionFormat.EnableSuppress = true;
+            if (dt.Rows[0]["electricitycharges"].ToString() == "0") rpt.ReportFooterSection20.SectionFormat.EnableSuppress = true;
+            if (dt.Rows[0]["ispartial"].ToString() == "0") rpt.ReportFooterSection12.SectionFormat.EnableSuppress = true;
+            if (dt.Rows[0]["ReferenceName"].ToString() == "") rpt.ReportFooterSection5.SectionFormat.EnableSuppress = true;
+            if (dt.Rows[0]["memberid"].ToString() == "")
+            {
+                rpt.ReportFooterSection6.SectionFormat.EnableSuppress = true;
+                rpt.ReportFooterSection7.SectionFormat.EnableUnderlaySection = false;
+            }
+            if (dt.Rows[0]["tokenNo"].ToString() == "0") rpt.ReportFooterSection7.SectionFormat.EnableSuppress = true;
+            rpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
+            rpt.PrintToPrinter(1, true, 1, 9999);
+            //if (UserInfo.UserLevel == "Admin")
+            //{
+            //    frmReportView frm = new frmReportView();
+            //    frm.rptViewer.ReportSource = rpt;
+            //    frm.Show();
+            //}
+            //else
+            //{
+            //    rpt.PrintToPrinter(1, true, 1, 9999);
+            //    Query.Execute("update opdreceipt set noofprint = nvl(noofprint,0) + 1 where receiptno = '" + voucher + "'");
+            //}
         }
     }
 }

@@ -331,14 +331,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ERP.exe" size="31796736">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ERP.exe" size="31926784">
       <assemblyIdentity name="ERP" version="1.0.1.60" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>WLEXLHiEVR5xZH7kbDojaogD62RE9Sk9cf6eMG0bnno=</dsig:DigestValue>
+        <dsig:DigestValue>0axGO+oQ/c3GLwrs3Plh8tojyOw126K3iRm61QB+2NY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -715,14 +715,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="VersionUpdater.exe" size="4608">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="VersionUpdater.exe" size="5120">
       <assemblyIdentity name="VersionUpdater" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lCjzyd7edap6ebtirt5fardoa0Zij3aKG78BaeHOfKM=</dsig:DigestValue>
+        <dsig:DigestValue>MuSAt52q8WwV4O/XqSw51riwEXwwSprrDnsiV2mQtn0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -756,7 +756,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>psY/RkGCEN6QZzXodRZeWPEX3475rvs7/IGB28t/etE=</dsig:DigestValue>
+      <dsig:DigestValue>fB2r+/FZp79Vxmlb+WZXTjdKaNkUfoIcm+k+SvBVr/Q=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Nubit.ico" size="148326">
