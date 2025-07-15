@@ -906,7 +906,11 @@ namespace ERP
             DataTable dt = Query.getData(q);
             string currrcpt = (string)dgvHosCharges.CurrentRow.Cells["ReceiptNo"].Value;
 
-            DataTable dtTest = Query.getData("Select isprinted,charges as amount,get_testtitle(testid) as testname,receiptdate,get_consultantname(consultantid) as consultantid from inptestcharges where serialno='" + serialno + "' AND testtypeid='" + TestId + "' and receiptno = '" + currrcpt + "' and status = 0 ");
+            DataTable dtTest = Query.getData("Select isprinted,charges as amount,get_testtitle(testid) as testname,receiptdate,get_consultantname(consultantid) as consultantid " +
+                "from inptestcharges where " +
+                "serialno='" + serialno + "' AND " +
+                "testtypeid='" + TestId + "' and " +
+                "receiptno = '" + currrcpt + "' and status = 0 ");
             string category = dt.Rows[0]["catagory"].ToString();
             if (category == "Laboratory")
             {
@@ -934,7 +938,7 @@ namespace ERP
             rpt.SetParameterValue("@Catagory", dt.Rows[0]["catagory"].ToString());
             rpt.SetParameterValue("@ReceiptNo", currrcpt);
             rpt.SetParameterValue("@Date", ((DateTime)dtTest.Rows[0]["receiptdate"]).ToString());
-            rpt.SetParameterValue("@Patient", PatientName);//dt.Rows[0]["patientname"].ToString());
+            rpt.SetParameterValue("@Patient", PatientName);
             rpt.SetParameterValue("@Gender", dt.Rows[0]["gender"].ToString());
             rpt.SetParameterValue("@Consultant", dtTest.Rows[0]["consultantid"].ToString());
             rpt.SetParameterValue("@phoneNo", dt.Rows[0]["emergency"].ToString());
@@ -954,7 +958,7 @@ namespace ERP
                 else
                 {
                     rpt.PrintToPrinter(1, false, 1, 9999);
-                    DataTable dt5 = Query.getData("update inptestcharges set isprinted='1' where serialno='" + serialno + "' AND testtypeid='" + TestId + "' ");
+                    DataTable dt5 = Query.getData("update inptestcharges set isprinted='1' where serialno='" + serialno + "' AND testtypeid='" + TestId + "' and receiptno = '" + currrcpt + "' and status = 0  ");
                 }
             }
             else
@@ -994,7 +998,7 @@ namespace ERP
                 else
                 {
                     rpt.PrintToPrinter(1, false, 1, 9999);
-                    DataTable dt5 = Query.getData("update inptestcharges set isprinted='1' where serialno='" + serialno + "' AND testtypeid='" + TestId + "' ");
+                    DataTable dt5 = Query.getData("update inptestcharges set isprinted='1' where serialno='" + serialno + "' AND testtypeid='" + TestId + "' and receiptno = '" + currrcpt + "' and status = 0  ");
                 }
             }
             else
