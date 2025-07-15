@@ -697,8 +697,6 @@ namespace ERP
             return dt;
         }
 
-
-
         internal static DataTable ZakatMemberInvoiceDetail(DateTime FDate, DateTime TDate, string MemberId, string status)
         {
             DataTable dt = new DataTable();
