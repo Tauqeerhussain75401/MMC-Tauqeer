@@ -75,7 +75,7 @@ namespace ERP
         }
         internal static void FillcmbCunsultant(ComboBox cmb)
         {
-             DataTable dtAllCataGory = new DataTable();
+            DataTable dtAllCataGory = new DataTable();
             cmb.DataSource = dtAllCataGory;
 
             dtAllCataGory = Query.ConsultantIndex();
@@ -89,7 +89,7 @@ namespace ERP
             cmb.DisplayMember = "name";
             cmb.ValueMember = "id";
         }
-      
+
         internal static void FillcmbPatient(ComboBox cmb)
         {
             DataTable dtAllCataGory = new DataTable();
@@ -127,7 +127,7 @@ namespace ERP
                 return;
 
             int categoryId1 = Convert.ToInt32(categoryId);
-            DataTable dt = Query.ConsultantIndex(); 
+            DataTable dt = Query.ConsultantIndex();
             DataRow[] filteredRows = dt.Select("TestTypeID = " + categoryId1);
             DataTable filteredDt = dt.Clone();
             foreach (DataRow row in filteredRows)
@@ -155,6 +155,16 @@ namespace ERP
             cmb.ValueMember = "Id";
             cmb.SelectedIndex = -1;
         }
+
+        internal static void FillcmbTemplateIndexEcho(ComboBox cmb)
+        {
+            cmb.DataSource = Query.TemplateIndexEcho();
+            cmb.DisplayMember = "TemplateName";
+            cmb.ValueMember = "Id";
+            cmb.SelectedIndex = -1;
+        }
+
+
         #region workeb by Usman To show the All option
         //internal static void FillcmbTestCatagory(ComboBox cmb)
         //{
@@ -167,7 +177,6 @@ namespace ERP
         internal static void FillcmbTestCatagory(ComboBox cmb)
         {
             DataTable dt = Query.TestCatagoryIndex();
-            dtAllCataGory = Query.TestCatagoryIndex();
 
             DataRow allRow = dt.NewRow();
             allRow["Title"] = "--All--";
@@ -177,7 +186,7 @@ namespace ERP
             cmb.DataSource = dt;
             cmb.DisplayMember = "Title";
             cmb.ValueMember = "Id";
-            cmb.SelectedIndex = -1; 
+            cmb.SelectedIndex = -1;
         }
         #endregion
         internal static void FillcmbIPDTestCatagory(ComboBox cmb)
@@ -236,7 +245,7 @@ namespace ERP
             cmb.ValueMember = "id";
             cmb.SelectedIndex = -1;
         }
-        internal static void FillpackageIndex(ComboBox cmb,string id)
+        internal static void FillpackageIndex(ComboBox cmb, string id)
         {
             //cmb.DataSource = Query.packageIndex();
             //cmb.DisplayMember = "packagename_name";

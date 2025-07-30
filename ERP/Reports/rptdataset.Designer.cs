@@ -1122,8 +1122,7 @@ namespace ERP.Reports {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-<<<<<<< HEAD
-=======
+
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public BarcodeDataTable Barcode {
@@ -1184,7 +1183,6 @@ namespace ERP.Reports {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
->>>>>>> Tauqeer_New
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -2519,8 +2517,6 @@ namespace ERP.Reports {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-<<<<<<< HEAD
-=======
         private bool ShouldSerializeBarcode() {
             return false;
         }
@@ -2557,7 +2553,6 @@ namespace ERP.Reports {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
->>>>>>> Tauqeer_New
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -6977,8 +6972,6 @@ namespace ERP.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-<<<<<<< HEAD
-=======
             public global::System.Data.DataColumn remarksColumn {
                 get {
                     return this.columnremarks;
@@ -6987,7 +6980,6 @@ namespace ERP.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
->>>>>>> Tauqeer_New
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -7023,11 +7015,7 @@ namespace ERP.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-<<<<<<< HEAD
-            public ReferenceInvoicesRow AddReferenceInvoicesRow(string ReferenceName, string Catagory, string ReceiptNo, System.DateTime VDate, string PatientName, string ConsultantName, string UserId, decimal SPD, decimal ZF, string patienttype) {
-=======
             public ReferenceInvoicesRow AddReferenceInvoicesRow(string ReferenceName, string Catagory, string ReceiptNo, System.DateTime VDate, string PatientName, string ConsultantName, string UserId, decimal SPD, decimal ZF, string patienttype, string remarks) {
->>>>>>> Tauqeer_New
                 ReferenceInvoicesRow rowReferenceInvoicesRow = ((ReferenceInvoicesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ReferenceName,
@@ -8066,8 +8054,6 @@ namespace ERP.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-<<<<<<< HEAD
-=======
             public global::System.Data.DataColumn CategoryNameColumn {
                 get {
                     return this.columnCategoryName;
@@ -8076,7 +8062,6 @@ namespace ERP.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
->>>>>>> Tauqeer_New
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -8112,11 +8097,8 @@ namespace ERP.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-<<<<<<< HEAD
-            public OPDConsultantWiseDetailRow AddOPDConsultantWiseDetailRow(string ConsultantName, string TestName, string ReceiptNo, System.DateTime Vdate, string PatientName, string Status, decimal Amount, decimal BMJ, decimal Cancel, decimal SPD, decimal ZF, decimal NetAmount, string ReferenceName) {
-=======
+
             public OPDConsultantWiseDetailRow AddOPDConsultantWiseDetailRow(string ConsultantName, string TestName, string ReceiptNo, System.DateTime Vdate, string PatientName, string Status, decimal Amount, decimal BMJ, decimal Cancel, decimal SPD, decimal ZF, decimal NetAmount, string ReferenceName, string CategoryName) {
->>>>>>> Tauqeer_New
                 OPDConsultantWiseDetailRow rowOPDConsultantWiseDetailRow = ((OPDConsultantWiseDetailRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ConsultantName,
@@ -30767,8 +30749,6 @@ namespace ERP.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-<<<<<<< HEAD
-=======
             public string remarks {
                 get {
                     try {
@@ -30785,7 +30765,6 @@ namespace ERP.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
->>>>>>> Tauqeer_New
             public bool IsReferenceNameNull() {
                 return this.IsNull(this.tableReferenceInvoices.ReferenceNameColumn);
             }
@@ -31567,8 +31546,6 @@ namespace ERP.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-<<<<<<< HEAD
-=======
             public string CategoryName {
                 get {
                     try {
@@ -31586,7 +31563,6 @@ namespace ERP.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
->>>>>>> Tauqeer_New
             public bool IsConsultantNameNull() {
                 return this.IsNull(this.tableOPDConsultantWiseDetail.ConsultantNameColumn);
             }
@@ -48426,8 +48402,6 @@ namespace ERP.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-<<<<<<< HEAD
-=======
             public global::System.Data.DataRowAction Action {
                 get {
                     return this.eventAction;
@@ -48632,7 +48606,6 @@ namespace ERP.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
->>>>>>> Tauqeer_New
             public global::System.Data.DataRowAction Action {
                 get {
                     return this.eventAction;

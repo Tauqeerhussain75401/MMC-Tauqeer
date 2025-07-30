@@ -711,7 +711,7 @@ namespace ERP
             #region Trial Balance
             else if (Reportname == "Trial Balance")
             {
-                Reports.TrialBalance rpt = new Reports.TrialBalance();
+                Reports.TrialBalance1 rpt = new Reports.TrialBalance1();
                 DataSet ds = new DataSet();
                 //DataTable dt = Query.Rep_TrialBalanceERP(dtpFDate.Value.ToString("dd-MMM-yyyy"), dtpTDate.Value.ToString("dd-MMM-yyyy"));
                 //rpt.SetDataSource(dt);
@@ -1375,7 +1375,7 @@ namespace ERP
             else if (Reportname == "OPD Catagory Wise Detail")
             {
                 ManageControls(new Control[] { grpDateRange, grpCatagory, grpGender });
-                FillControls.FillcmbTestCatagoryALL(cmbCatagory);
+                FillControls.FillcmbTestCatagory(cmbCatagory);
             }
             #endregion
             #region OPD Consultant Wise Detail

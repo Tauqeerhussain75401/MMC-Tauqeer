@@ -3377,3 +3377,11 @@ D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\ERP\obj\x
 D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\ERP\obj\x86\Debug\ERP.csproj.Up2Date
 D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\ERP\obj\x86\Debug\ERP.exe
 D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\ERP\obj\x86\Debug\ERP.pdb
+D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\ERP\obj\x86\Debug\ERP.Forms.EchoCardioGraphy.resources
+D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\ERP\obj\x86\Debug\ERP.Forms.EchoTemplateDesigner.resources
+D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\ERP\bin\Debug\zxing.dll
+D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\ERP\bin\Debug\zxing.presentation.dll
+D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\ERP\bin\Debug\zxing.pdb
+D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\ERP\bin\Debug\zxing.xml
+D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\ERP\bin\Debug\zxing.presentation.pdb
+D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\ERP\bin\Debug\zxing.presentation.xml

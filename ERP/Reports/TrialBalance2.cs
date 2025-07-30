@@ -15,16 +15,10 @@ namespace ERP.Reports {
     using CrystalDecisions.ReportSource;
     using CrystalDecisions.CrystalReports.Engine;
     
-    
-<<<<<<< HEAD
     public class TrialBalance1 : ReportClass {
         
         public TrialBalance1() {
-=======
-    public class TrialBalance : ReportClass {
-        
-        public TrialBalance() {
->>>>>>> Tauqeer_New
+
         }
         
         public override string ResourceName {
@@ -184,15 +178,10 @@ namespace ERP.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-<<<<<<< HEAD
     public class CachedTrialBalance1 : Component, ICachedReport {
         
         public CachedTrialBalance1() {
-=======
-    public class CachedTrialBalance : Component, ICachedReport {
-        
-        public CachedTrialBalance() {
->>>>>>> Tauqeer_New
+
         }
         
         [Browsable(false)]
@@ -229,7 +218,7 @@ namespace ERP.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            TrialBalance rpt = new TrialBalance();
+            TrialBalance1 rpt = new TrialBalance1();
             rpt.Site = this.Site;
             return rpt;
         }
