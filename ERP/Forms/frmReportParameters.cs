@@ -132,13 +132,14 @@ namespace ERP
             else if (Reportname == "Member Invoice Detail")
             {
                 Reports.MemberInvoiceDetail rpt = new Reports.MemberInvoiceDetail();
-                DataTable dt = ReportQuery.MemberInvoiceDetail(dtpFDate.Value, dtpTDate.Value, txtMemberNo.Text, cmbStatus.Text);
+                DataTable dt = ReportQuery.MemberInvoiceDetail(dtpFDate.Value, dtpTDate.Value, txtMemberNo.Text, cmbStatus.Text,cmbgender.Text);
                 rpt.SetDataSource(dt);
                 rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
                 rpt.SetParameterValue("@Fdate", dtpFDate.Value);
                 rpt.SetParameterValue("@Tdate", dtpTDate.Value);
                 rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
                 rpt.SetParameterValue("@User", UserInfo.UserName);
+                rpt.SetParameterValue("@gender", cmbgender.Text);
 
                 frm.rptViewer.ReportSource = rpt;
 
@@ -171,15 +172,33 @@ namespace ERP
             else if (Reportname == "OPD Reference Detail")
             {
                 Reports.ReferenceInoiceDetail rpt = new Reports.ReferenceInoiceDetail();
-                DataTable dt = ReportQuery.ReferenceInvoiceDetail(dtpFDate.Value, dtpTDate.Value, (string)cmbReference.SelectedValue);
+                DataTable dt = new DataTable();
+                //if (dtpFDate.Value == dtpTDate.Value)
+                //{
+                //    dt = ReportQuery.rep_referenceinvoices1_Same(dtpFDate.Value, dtpTDate.Value, (string)cmbReference.SelectedValue);
+                //}
+                //else
+                //{
+                   dt = ReportQuery.ReferenceInvoiceDetail(dtpFDate.Value, dtpTDate.Value, (string)cmbReference.SelectedValue);
+               // }
+                
                 rpt.SetDataSource(dt);
                 rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
                 rpt.SetParameterValue("@Fdate", dtpFDate.Value);
                 rpt.SetParameterValue("@Tdate", dtpTDate.Value);
                 rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
                 rpt.SetParameterValue("@User", UserInfo.UserName);
-
+                //DataTable dtCancel = ReportQuery.rep_OPDreference_Cancellation(dtpFDate.Value, dtpTDate.Value, (string)cmbReference.SelectedValue);
+                //if (dtCancel.Rows.Count > 0)
+                //{
+                //    rpt.SetParameterValue("@Fdate", dtpFDate.Value, "ReferenceInoiceDetailCancelReprot.rpt");
+                //    rpt.SetParameterValue("@Tdate", dtpTDate.Value, "ReferenceInoiceDetailCancelReprot.rpt");
+                //}
                 frm.rptViewer.ReportSource = rpt;
+
+            }
+            else if (Reportname == "OPD Reference Detail")
+            {
 
             }
             #endregion
@@ -251,7 +270,7 @@ namespace ERP
             else if (Reportname == "OPD Catagory Wise Detail")
             {
                 Reports.CatagoryWiseDetail rpt = new Reports.CatagoryWiseDetail();
-                DataTable dt = ReportQuery.OPDCatagoryWiseDetail(dtpFDate.Value, dtpTDate.Value, (string)cmbCatagory.SelectedValue);
+                DataTable dt = ReportQuery.OPDCatagoryWiseDetail(dtpFDate.Value, dtpTDate.Value, (string)cmbCatagory.SelectedValue, cmbgender.Text);
                 rpt.SetDataSource(dt);
                 rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
                 rpt.SetParameterValue("@Fdate", dtpFDate.Value);
@@ -259,6 +278,7 @@ namespace ERP
                 rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
                 rpt.SetParameterValue("@User", UserInfo.UserName);
                 rpt.SetParameterValue("@ReportHeader", cmbCatagory.Text);
+                rpt.SetParameterValue("@gender", cmbgender.Text == "All" ? "Both" : cmbgender.Text);
 
                 frm.rptViewer.ReportSource = rpt;
 
@@ -317,12 +337,23 @@ namespace ERP
             #region DETAIL OF IN-PATIENT BILL
             else if (Reportname == "DETAIL OF IN-PATIENT BILL")
             {
-
+                decimal totalChargesSum = 0;
                 ERP.Reports.CrpInpIncome2 rptCrpInpIncome2 = new ERP.Reports.CrpInpIncome2();
                 DataTable dt = ReportQuery.InPatientBill(dtpFDate.Value, dtpTDate.Value);
+                if (dt != null)
+                {
+                    DataRow[] filteredRows = dt.Select("bmjnewno IS NOT NULL");
+                    if (filteredRows.Length > 0)
+                    {
+                        DataTable dtBMJ = filteredRows.CopyToDataTable();
+                        totalChargesSum = dtBMJ.AsEnumerable()
+                            .Sum(row => row.Field<decimal>("balance"));
+                    }
+                }
                 rptCrpInpIncome2.SetDataSource(dt);
                 rptCrpInpIncome2.SetParameterValue("pDateFrom", dtpFDate.Value);
                 rptCrpInpIncome2.SetParameterValue("pDateTo", dtpTDate.Value);
+                rptCrpInpIncome2.SetParameterValue("BMJSum", totalChargesSum.ToString("N0"));
 
                 frm.rptViewer.ReportSource = rptCrpInpIncome2;
 
@@ -396,7 +427,7 @@ namespace ERP
             {
                 Cursor.Current = Cursors.WaitCursor;
                 Reports.CrpOPDReceipt rptcrpOPDreceipt = new Reports.CrpOPDReceipt();
-                DataTable dt = ReportQuery.DetailOPDReceipt(dtpFDate.Value, dtpTDate.Value, cmbAllCatagory.SelectedValue.ToString(), cmbTest.SelectedValue.ToString());
+                DataTable dt = ReportQuery.DetailOPDReceipt(dtpFDate.Value, dtpTDate.Value, cmbAllCatagory.SelectedValue.ToString(), cmbTest.SelectedValue.ToString(),cmbgender.Text);
                 rptcrpOPDreceipt.SetDataSource(dt);
                 rptcrpOPDreceipt.SetParameterValue("@FromDate", dtpFDate.Value);
                 rptcrpOPDreceipt.SetParameterValue("@ToDate", dtpTDate.Value);
@@ -404,6 +435,7 @@ namespace ERP
                 rptcrpOPDreceipt.SetParameterValue("@contacthead", CompanyInfo.ContactHead);
                 rptcrpOPDreceipt.SetParameterValue("@address", CompanyInfo.Address);
                 rptcrpOPDreceipt.SetParameterValue("@urcompanyname", CompanyInfo.UrCompanyName);
+                rptcrpOPDreceipt.SetParameterValue("@gender", cmbgender.Text == "All" ? "Both" : cmbgender.Text);
                 Cursor.Current = Cursors.Default;
                 frm.rptViewer.ReportSource = rptcrpOPDreceipt;
 
@@ -440,7 +472,7 @@ namespace ERP
                 {
                     Reports.rptBMJMember1 RPBMJ = new Reports.rptBMJMember1();
                     DataTable DTBMJ = ReportQuery.GetBMJMember(cmbBMGMember.SelectedValue.ToString(),
-                    rdoActive.Checked == true ? "0" : rdoUnActive.Checked == true ? "1" : "0", chkWithFamily.Checked == true ? "1" : "0");
+                    rdoActive.Checked == true ? "0" : rdoUnActive.Checked == true ? "1" : "0", chkWithFamily.Checked == true ? "1" : "0",cmbgender.Text);
 
                     RPBMJ.SetDataSource(DTBMJ);
 
@@ -452,7 +484,7 @@ namespace ERP
                 {
                     Reports.rptBMJMember RPBMJ = new Reports.rptBMJMember();
                     DataTable DTBMJ = ReportQuery.GetBMJMember(cmbBMGMember.SelectedValue.ToString(),
-                    rdoActive.Checked == true ? "0" : rdoUnActive.Checked == true ? "1" : "0", chkWithFamily.Checked == true ? "1" : "0");
+                    rdoActive.Checked == true ? "0" : rdoUnActive.Checked == true ? "1" : "0", chkWithFamily.Checked == true ? "1" : "0", cmbgender.Text);
 
                     RPBMJ.SetDataSource(DTBMJ);
 
@@ -585,13 +617,15 @@ namespace ERP
             {
 
                 Reports.IPDTestSummary rpt = new Reports.IPDTestSummary();
-                DataTable dt = ReportQuery.rep_ipd_testSummary(dtpFDate.Value.ToString("dd-MMM-yyyy"), dtpTDate.Value.ToString("dd-MMM-yyyy"), cmbAllCatagory.SelectedValue.ToString(), cmbTest.SelectedValue.ToString());
+                DataTable dt = ReportQuery.rep_ipd_testSummary(dtpFDate.Value.ToString("dd-MMM-yyyy"), dtpTDate.Value.ToString("dd-MMM-yyyy"),
+                    cmbAllCatagory.SelectedValue.ToString(), cmbTest.SelectedValue.ToString(),cmbgender.Text);
                 rpt.SetDataSource(dt);
                 rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
                 rpt.SetParameterValue("@Vfrom", dtpFDate.Value.ToString("dd-MMM-yyyy"));
                 rpt.SetParameterValue("@Vtodate", dtpTDate.Value.ToString("dd-MMM-yyyy"));
                 rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
                 rpt.SetParameterValue("@User", UserInfo.UserName);
+                rpt.SetParameterValue("@gender", cmbgender.Text == "All" ? "Both" : cmbgender.Text);
                 //   rpt.SetParameterValue("@VUser", cmbUser.Text);
 
                 frm.rptViewer.ReportSource = rpt;
@@ -679,7 +713,9 @@ namespace ERP
             {
                 Reports.TrialBalance rpt = new Reports.TrialBalance();
                 DataSet ds = new DataSet();
-                DataTable dt = Query.Rep_TrialBalanceERP(dtpFDate.Value.ToString("dd-MMM-yyyy"), dtpTDate.Value.ToString("dd-MMM-yyyy"));
+                //DataTable dt = Query.Rep_TrialBalanceERP(dtpFDate.Value.ToString("dd-MMM-yyyy"), dtpTDate.Value.ToString("dd-MMM-yyyy"));
+                //rpt.SetDataSource(dt);
+                DataTable dt = ReportQuery.getTrailBalance(Convert.ToString(dtpFDate.Value), Convert.ToString(dtpTDate.Value));
                 rpt.SetDataSource(dt);
                 rpt.SetParameterValue("@From", dtpFDate.Value.ToString("dd-MMM-yyyy"));
                 rpt.SetParameterValue("@To", dtpTDate.Value.ToString("dd-MMM-yyyy"));
@@ -823,8 +859,170 @@ namespace ERP
             }
             #endregion
 
-            #region
+            else if (Reportname == "OPD Fund Utilization Report")
+            {
+                DataTable dt = new DataTable();
+                string fundType = cmbFundType.Text;
+                Reports.OPD_FundUtilization rpt = new Reports.OPD_FundUtilization();
+                dt = ReportQuery.OPD_FundUtilization(dtpFDate.Value, dtpTDate.Value);
 
+                DataTable filteredDt = dt.Clone();
+                foreach (DataRow row in dt.Rows)
+                {
+                    DataRow newRow = filteredDt.NewRow();
+                    newRow["catagory"] = row["catagory"];
+                    newRow["receiptno"] = row["receiptno"];
+                    newRow["vdate"] = row["vdate"];
+                    newRow["patientname"] = row["patientname"];
+                    newRow["gender"] = row["gender"];
+                    newRow["TotalAmount"] = row["TotalAmount"];
+                    newRow["ZF"] = row["ZF"];
+                    newRow["SPD"] = row["SPD"];
+                    newRow["Bmj"] = row["Bmj"];
+
+                    if (fundType == "All")
+                    {
+                        filteredDt.Rows.Add(newRow);
+                    }
+                    else if (fundType == "Full")
+                    {
+                        decimal totalAmount = Convert.ToDecimal(newRow["TotalAmount"]);
+                        decimal Sum = Convert.ToDecimal(row["SPD"]) + Convert.ToDecimal(row["ZF"]) + Convert.ToDecimal(row["Bmj"]);
+                        if(totalAmount == Sum)
+                        {
+                            filteredDt.Rows.Add(newRow);
+                        }
+                    }
+                    else if (fundType == "Partial")
+                    {
+                        decimal totalAmount = Convert.ToDecimal(newRow["TotalAmount"]);
+                        decimal Sum = Convert.ToDecimal(row["SPD"]) + Convert.ToDecimal(row["ZF"]) + Convert.ToDecimal(row["Bmj"]);
+                        if (totalAmount != Sum)
+                        {
+                            filteredDt.Rows.Add(newRow);
+                        }
+                    }
+                }
+
+                rpt.SetDataSource(filteredDt);
+                rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
+                rpt.SetParameterValue("@Fdate", dtpFDate.Value);
+                rpt.SetParameterValue("@Tdate", dtpTDate.Value);
+                rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+                rpt.SetParameterValue("@User", UserInfo.UserName);
+                rpt.SetParameterValue("@ReportHeader", Reportname);
+                rpt.SetParameterValue("@Type", fundType);
+                frm.rptViewer.ReportSource = rpt;
+            }
+            else if (Reportname == "IPD Fund Utilization Report")
+            {
+                DataTable dt = new DataTable();
+                string fundType = cmbFundType.Text;
+                Reports.IPD_FundUtilization rpt = new Reports.IPD_FundUtilization();
+                dt = ReportQuery.IPD_FundUtilization(dtpFDate.Value, dtpTDate.Value);
+
+                DataTable filteredDt = dt.Clone();
+                foreach (DataRow row in dt.Rows)
+                {
+                    DataRow newRow = filteredDt.NewRow();
+                    newRow["fileno"] = row["fileno"];
+                    newRow["admdate"] = row["admdate"];
+                    newRow["dischargedate"] = row["dischargedate"];
+                    newRow["patientname"] = row["patientname"];
+                    newRow["gender"] = row["gender"];
+                    newRow["totalcharges"] = row["totalcharges"];
+                    newRow["ZF"] = row["ZF"];
+                    newRow["SPD"] = row["SPD"];
+                    newRow["Bmj"] = row["Bmj"];
+
+                    if (fundType == "All")
+                    {
+                        filteredDt.Rows.Add(newRow);
+                    }
+                    else if (fundType == "Full")
+                    {
+                        decimal totalAmount = Convert.ToDecimal(newRow["totalcharges"]);
+                        decimal Sum = Convert.ToDecimal(row["SPD"]) + Convert.ToDecimal(row["ZF"]) + Convert.ToDecimal(row["Bmj"]);
+                        if (totalAmount == Sum)
+                        {
+                            filteredDt.Rows.Add(newRow);
+                        }
+                    }
+                    else if (fundType == "Partial")
+                    {
+                        decimal totalAmount = Convert.ToDecimal(newRow["totalcharges"]);
+                        decimal Sum = Convert.ToDecimal(row["SPD"]) + Convert.ToDecimal(row["ZF"]) + Convert.ToDecimal(row["Bmj"]);
+                        if (totalAmount != Sum)
+                        {
+                            filteredDt.Rows.Add(newRow);
+                        }
+                    }
+                }
+
+                rpt.SetDataSource(filteredDt);
+                rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
+                rpt.SetParameterValue("@Fdate", dtpFDate.Value);
+                rpt.SetParameterValue("@Tdate", dtpTDate.Value);
+                rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+                rpt.SetParameterValue("@User", UserInfo.UserName);
+                rpt.SetParameterValue("@ReportHeader", Reportname);
+                rpt.SetParameterValue("@Type", fundType);
+                frm.rptViewer.ReportSource = rpt;
+            }
+            else if(Reportname == "OPD Cash In Hand")
+            {
+                Reports.OPD_CashInHand rpt = new Reports.OPD_CashInHand();
+                DataTable dt = ReportQuery.OPD_CashInHand(dtpFDate.Value, dtpTDate.Value);
+                rpt.SetDataSource(dt);
+                rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
+                rpt.SetParameterValue("@Fdate", dtpFDate.Value);
+                rpt.SetParameterValue("@Tdate", dtpTDate.Value);
+                rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+                rpt.SetParameterValue("@User", UserInfo.UserName);
+                rpt.SetParameterValue("@ReportHeader", Reportname);
+                frm.rptViewer.ReportSource = rpt;
+            }
+            else if (Reportname == "IPD Cash In Hand")
+            {
+                Reports.IPD_CashInHand rpt = new Reports.IPD_CashInHand();
+                DataTable dt = ReportQuery.IPD_CashInHand(dtpFDate.Value, dtpTDate.Value);
+                rpt.SetDataSource(dt);
+                rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
+                rpt.SetParameterValue("@Fdate", dtpFDate.Value);
+                rpt.SetParameterValue("@Tdate", dtpTDate.Value);
+                rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+                rpt.SetParameterValue("@User", UserInfo.UserName);
+                rpt.SetParameterValue("@ReportHeader", Reportname);
+                frm.rptViewer.ReportSource = rpt;
+            }
+            else if (Reportname == "Discrepancies in vouchers")
+            {
+                Reports.Discrepancies_Voucher rpt = new Reports.Discrepancies_Voucher();
+                DataTable dt = ReportQuery.Discrepancies_Voucher();
+                rpt.SetDataSource(dt);
+                rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
+                rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+                rpt.SetParameterValue("@User", UserInfo.UserName);
+                rpt.SetParameterValue("@ReportHeader", Reportname);
+                frm.rptViewer.ReportSource = rpt;
+            }
+            else if (Reportname == "IPD / OPD Closing Summary")
+            {
+                Reports.Ipd_Opd_ClosingSummary rpt = new Reports.Ipd_Opd_ClosingSummary();
+                DataTable dtCategory = ReportQuery.Ipd_Opd_ClosingSummary(dtpFDate.Value, dtpTDate.Value);
+                //DataTable dtSummary = ReportQuery.IPD_OPD_IncomeSummary(dtpFDate.Value, dtpTDate.Value);
+               DataTable dtLessUnPaid = ReportQuery.Ipd_opd_LessUnPaidsummary(dtpFDate.Value, dtpTDate.Value);
+                rpt.SetDataSource(dtCategory);
+                //rpt.Subreports["IncomeSummary"].SetDataSource(dtSummary);
+                rpt.Subreports["Less_UnPaid_Summary"].SetDataSource(dtLessUnPaid);
+                //rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
+                //rpt.SetParameterValue("@Fdate", dtpFDate.Value);
+                //rpt.SetParameterValue("@Tdate", dtpTDate.Value);
+                //rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+                //rpt.SetParameterValue("@User", UserInfo.UserName);
+                frm.rptViewer.ReportSource = rpt;
+            }
+            #region
             else if (Reportname == "All Patient Detail")
             {
                 #region commented code
@@ -1062,7 +1260,7 @@ namespace ERP
             #region Member Invoice Detail
             else if (Reportname == "Member Invoice Detail")
             {
-                ManageControls(new Control[] { grpDateRange, grpMember, grpActiveStatus });
+                ManageControls(new Control[] { grpDateRange, grpMember, grpActiveStatus ,grpGender});
                 cmbStatus.SelectedIndex = 0;
             }
             #endregion
@@ -1135,7 +1333,7 @@ namespace ERP
             else if (Reportname == "IPD Test Summary")
             {
 
-                ManageControls(new Control[] { grpDateRange, grpAllCatagory, grpCatagoryTest });
+                ManageControls(new Control[] { grpDateRange, grpAllCatagory, grpCatagoryTest,grpGender });
                 FillControls.FillcmbAllTestCatagory(cmbAllCatagory);
                 FillControls.FillcmbTest(cmbTest, "All");
                 cmbAllCatagory.Text = "All";
@@ -1156,6 +1354,10 @@ namespace ERP
             {
                 ManageControls(new Control[] { grpDateRange });
             }
+            else if (Reportname == "IPD / OPD Closing Summary")
+            {
+                ManageControls(new Control[] { grpDateRange });
+            }
             #endregion
             #region Net Income Summary
             else if (Reportname == "Net Income Summary")
@@ -1172,8 +1374,8 @@ namespace ERP
             #region OPD Catagory Wise Detail
             else if (Reportname == "OPD Catagory Wise Detail")
             {
-                ManageControls(new Control[] { grpDateRange, grpCatagory });
-                FillControls.FillcmbTestCatagory(cmbCatagory);
+                ManageControls(new Control[] { grpDateRange, grpCatagory, grpGender });
+                FillControls.FillcmbTestCatagoryALL(cmbCatagory);
             }
             #endregion
             #region OPD Consultant Wise Detail
@@ -1280,7 +1482,7 @@ namespace ERP
             #region BMG MEMBER
             else if (Reportname == "BMG Member")
             {
-                ManageControls(new Control[] { grpActiveUnActive, grpBMGmember });
+                ManageControls(new Control[] { grpActiveUnActive, grpBMGmember,grpGender });
                 FillControls.FillBMGMember(cmbBMGMember);
             }
             #endregion
@@ -1296,7 +1498,7 @@ namespace ERP
             #region OPD Test Receipt Detail
             else if (Reportname == "OPD Test Receipt Detail")
             {
-                ManageControls(new Control[] { grpDateRange, grpAllCatagory, grpCatagoryTest });
+                ManageControls(new Control[] { grpDateRange, grpAllCatagory, grpCatagoryTest,grpGender });
                 FillControls.FillcmbAllTestCatagory(cmbAllCatagory);
                 FillControls.FillcmbCatagoryTest(cmbTest, "");
                 cmbAllCatagory.Text = "All";
@@ -1372,6 +1574,26 @@ namespace ERP
             else if (Reportname == "Total Surgeries Report")
             {
                 ManageControls(new Control[] { grpDateRange});
+            }
+            else if (Reportname == "OPD Fund Utilization Report")
+            {
+                ManageControls(new Control[] { grpDateRange, grpAllFundType });
+            }
+            else if (Reportname == "IPD Fund Utilization Report")
+            {
+                ManageControls(new Control[] { grpDateRange, grpAllFundType });
+            }
+            else if (Reportname == "OPD Cash In Hand")
+            {
+                ManageControls(new Control[] { grpDateRange });
+            }
+            else if (Reportname == "IPD Cash In Hand")
+            {
+                ManageControls(new Control[] { grpDateRange});
+            }
+            else if (Reportname == "Discrepancies in vouchers")
+            {
+                ManageControls(new Control[] { });
             }
             #endregion
             #endregion

@@ -947,7 +947,7 @@ namespace ERP
                 SubMainLabTestRemarks.Visible = false;
                 SubMainTestParameters.Visible = false;
                 menuCatagoryInfo.Visible = false;
-
+                
 
 
             }
@@ -1020,6 +1020,53 @@ namespace ERP
                 SubMainTestParameters.Visible = false;
                 menuCatagoryInfo.Visible = false;
                 MainAccounts.Visible = true;
+            }
+
+            if (UserInfo.UserLevel == "Admin")
+            {
+                eCToolStripMenuItem.Visible = true;
+                echoTemplateDesignerToolStripMenuItem.Visible = true;
+            }
+
+            if (UserInfo.UserLevel == "Echo")
+            {
+                MainAccounts.Visible = false;
+
+                MainReports.Visible = false;
+                MainStatistics.Visible = false;
+                Mainlaboratory.Visible = false;
+
+
+                MainManagement.Visible = false;
+                SubMainReceipt.Visible = false;
+                SubMainbackup.Visible = false;
+                SubMainrestore.Visible = false;
+                SubMainconfiguration.Visible = false;
+                SubMaintest.Visible = false;
+                SubMainChartOfAccount.Visible = false;
+                SubMainDetailAccount.Visible = false;
+                SubMaincompanyInformation.Visible = false;
+                SubMainNarration.Visible = false;
+                SubMainConsultantInfo.Visible = false;
+                SubMainTestInformationToolStripMenuItem.Visible = false;
+                SubMainmemberInformationToolStripMenuItem.Visible = false;
+                userControlToolStripMenuItem.Visible = false;
+                securityLevelToolStripMenuItem.Visible = false;
+
+                roomSetupToolStripMenuItem.Visible = false;
+                packageInfoToolStripMenuItem.Visible = false;
+                referenceInfoToolStripMenuItem.Visible = false;
+                MainInPatient.Visible = false;
+                SubMainLabTestRemarks.Visible = false;
+                SubMainTestParameters.Visible = false;
+                menuCatagoryInfo.Visible = false;
+                MainUltraSound.Visible = false;
+                partialPaymentToolStripMenuItem.Visible = false;
+                bankAccountToolStripMenuItem.Visible = false;
+                SubMainReportDesigner.Visible = false;
+
+                eCToolStripMenuItem.Visible = true;
+                echoTemplateDesignerToolStripMenuItem.Visible = true;
             }
 
         }
@@ -1454,6 +1501,76 @@ namespace ERP
             frmReportParameters frm = new frmReportParameters();
             frm.MdiParent = this;
             frm.Reportname = "Total Surgeries Report";
+            frm.Show();
+        }
+
+        private void oPDFundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.MdiParent = this;
+            frm.Reportname = "OPD Fund Utilization Report";
+            frm.Show();
+        }
+
+        private void iPDFunToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.MdiParent = this;
+            frm.Reportname = "IPD Fund Utilization Report";
+            frm.Show();
+        }
+
+        private void oPDCashInHandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.MdiParent = this;
+            frm.Reportname = "OPD Cash In Hand";
+            frm.Show();
+        }
+
+        private void toolStripMenuItem5_Click_1(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.MdiParent = this;
+            frm.Reportname = "IPD Cash In Hand";
+            frm.Show();
+        }
+
+        private void OPDCashInHandToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.MdiParent = this;
+            frm.Reportname = "OPD Cash In Hand";
+            frm.Show();
+        }
+
+        private void toolStripMenuItem4_Click_1(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.MdiParent = this;
+            frm.Reportname = "Discrepancies in vouchers";
+            frm.Show();
+        }
+
+        private void toolStripMenuItem6_Click_1(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.MdiParent = this;
+            frm.Reportname = "IPD / OPD Closing Summary";
+            frm.Show();
+        }
+
+        private void echoCardioGraphyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.EchoCardioGraphy frm = new Forms.EchoCardioGraphy();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void echoTemplateDesignerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.EchoTemplateDesigner frm = new Forms.EchoTemplateDesigner();
+            frm.MdiParent = this;
             frm.Show();
         }
 

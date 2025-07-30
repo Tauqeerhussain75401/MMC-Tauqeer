@@ -152,7 +152,7 @@
             this.dtpDateTo.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDateTo.MaxDate = new System.DateTime(2060, 12, 31, 0, 0, 0, 0);
             this.dtpDateTo.Name = "dtpDateTo";
-            this.dtpDateTo.Size = new System.Drawing.Size(119, 20);
+            this.dtpDateTo.Size = new System.Drawing.Size(119, 23);
             this.dtpDateTo.TabIndex = 4;
             this.dtpDateTo.Value = new System.DateTime(2019, 11, 26, 0, 0, 0, 0);
             // 
@@ -163,7 +163,7 @@
             this.label2.Location = new System.Drawing.Point(351, 21);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(20, 13);
+            this.label2.Size = new System.Drawing.Size(25, 17);
             this.label2.TabIndex = 5;
             this.label2.Text = "To";
             // 
@@ -175,7 +175,7 @@
             this.rdbDateRangeFrom.Location = new System.Drawing.Point(89, 17);
             this.rdbDateRangeFrom.Margin = new System.Windows.Forms.Padding(4);
             this.rdbDateRangeFrom.Name = "rdbDateRangeFrom";
-            this.rdbDateRangeFrom.Size = new System.Drawing.Size(83, 17);
+            this.rdbDateRangeFrom.Size = new System.Drawing.Size(107, 21);
             this.rdbDateRangeFrom.TabIndex = 2;
             this.rdbDateRangeFrom.Text = "Range From";
             this.rdbDateRangeFrom.UseVisualStyleBackColor = true;
@@ -191,7 +191,7 @@
             this.dtpDateFrom.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDateFrom.MaxDate = new System.DateTime(2060, 12, 31, 0, 0, 0, 0);
             this.dtpDateFrom.Name = "dtpDateFrom";
-            this.dtpDateFrom.Size = new System.Drawing.Size(120, 20);
+            this.dtpDateFrom.Size = new System.Drawing.Size(120, 23);
             this.dtpDateFrom.TabIndex = 3;
             this.dtpDateFrom.Value = new System.DateTime(2019, 11, 20, 0, 0, 0, 0);
             // 
@@ -204,7 +204,7 @@
             this.rdbDateall.Location = new System.Drawing.Point(8, 17);
             this.rdbDateall.Margin = new System.Windows.Forms.Padding(4);
             this.rdbDateall.Name = "rdbDateall";
-            this.rdbDateall.Size = new System.Drawing.Size(36, 17);
+            this.rdbDateall.Size = new System.Drawing.Size(44, 21);
             this.rdbDateall.TabIndex = 0;
             this.rdbDateall.TabStop = true;
             this.rdbDateall.Text = "All";
@@ -235,7 +235,7 @@
             this.cmbCategory.Location = new System.Drawing.Point(203, 11);
             this.cmbCategory.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCategory.Name = "cmbCategory";
-            this.cmbCategory.Size = new System.Drawing.Size(279, 21);
+            this.cmbCategory.Size = new System.Drawing.Size(279, 25);
             this.cmbCategory.TabIndex = 7;
             this.cmbCategory.SelectedIndexChanged += new System.EventHandler(this.cmbCategory_SelectedIndexChanged);
             // 
@@ -248,7 +248,7 @@
             this.rdbCategoryAll.Location = new System.Drawing.Point(23, 17);
             this.rdbCategoryAll.Margin = new System.Windows.Forms.Padding(4);
             this.rdbCategoryAll.Name = "rdbCategoryAll";
-            this.rdbCategoryAll.Size = new System.Drawing.Size(36, 17);
+            this.rdbCategoryAll.Size = new System.Drawing.Size(44, 21);
             this.rdbCategoryAll.TabIndex = 6;
             this.rdbCategoryAll.TabStop = true;
             this.rdbCategoryAll.Text = "All";
@@ -263,7 +263,7 @@
             this.rdbCategoryIndi.Location = new System.Drawing.Point(101, 18);
             this.rdbCategoryIndi.Margin = new System.Windows.Forms.Padding(4);
             this.rdbCategoryIndi.Name = "rdbCategoryIndi";
-            this.rdbCategoryIndi.Size = new System.Drawing.Size(70, 17);
+            this.rdbCategoryIndi.Size = new System.Drawing.Size(88, 21);
             this.rdbCategoryIndi.TabIndex = 3;
             this.rdbCategoryIndi.Text = "Individual";
             this.rdbCategoryIndi.UseVisualStyleBackColor = true;
@@ -292,7 +292,7 @@
             this.cmbType.Location = new System.Drawing.Point(212, 15);
             this.cmbType.Margin = new System.Windows.Forms.Padding(4);
             this.cmbType.Name = "cmbType";
-            this.cmbType.Size = new System.Drawing.Size(137, 21);
+            this.cmbType.Size = new System.Drawing.Size(137, 25);
             this.cmbType.TabIndex = 7;
             // 
             // rdbTypeAll
@@ -304,7 +304,7 @@
             this.rdbTypeAll.Location = new System.Drawing.Point(8, 17);
             this.rdbTypeAll.Margin = new System.Windows.Forms.Padding(4);
             this.rdbTypeAll.Name = "rdbTypeAll";
-            this.rdbTypeAll.Size = new System.Drawing.Size(36, 17);
+            this.rdbTypeAll.Size = new System.Drawing.Size(44, 21);
             this.rdbTypeAll.TabIndex = 6;
             this.rdbTypeAll.TabStop = true;
             this.rdbTypeAll.Text = "All";
@@ -319,7 +319,7 @@
             this.rdbTypeIndi.Location = new System.Drawing.Point(89, 17);
             this.rdbTypeIndi.Margin = new System.Windows.Forms.Padding(4);
             this.rdbTypeIndi.Name = "rdbTypeIndi";
-            this.rdbTypeIndi.Size = new System.Drawing.Size(70, 17);
+            this.rdbTypeIndi.Size = new System.Drawing.Size(88, 21);
             this.rdbTypeIndi.TabIndex = 3;
             this.rdbTypeIndi.Text = "Individual";
             this.rdbTypeIndi.UseVisualStyleBackColor = true;
@@ -348,7 +348,7 @@
             this.cmbMember.Location = new System.Drawing.Point(172, 15);
             this.cmbMember.Margin = new System.Windows.Forms.Padding(4);
             this.cmbMember.Name = "cmbMember";
-            this.cmbMember.Size = new System.Drawing.Size(179, 21);
+            this.cmbMember.Size = new System.Drawing.Size(179, 25);
             this.cmbMember.TabIndex = 7;
             // 
             // rdbMemberAll
@@ -360,7 +360,7 @@
             this.rdbMemberAll.Location = new System.Drawing.Point(8, 17);
             this.rdbMemberAll.Margin = new System.Windows.Forms.Padding(4);
             this.rdbMemberAll.Name = "rdbMemberAll";
-            this.rdbMemberAll.Size = new System.Drawing.Size(36, 17);
+            this.rdbMemberAll.Size = new System.Drawing.Size(44, 21);
             this.rdbMemberAll.TabIndex = 6;
             this.rdbMemberAll.TabStop = true;
             this.rdbMemberAll.Text = "All";
@@ -375,7 +375,7 @@
             this.rdbMemberIndi.Location = new System.Drawing.Point(81, 17);
             this.rdbMemberIndi.Margin = new System.Windows.Forms.Padding(4);
             this.rdbMemberIndi.Name = "rdbMemberIndi";
-            this.rdbMemberIndi.Size = new System.Drawing.Size(70, 17);
+            this.rdbMemberIndi.Size = new System.Drawing.Size(88, 21);
             this.rdbMemberIndi.TabIndex = 3;
             this.rdbMemberIndi.Text = "Individual";
             this.rdbMemberIndi.UseVisualStyleBackColor = true;
@@ -407,7 +407,7 @@
             this.cmbGender.Location = new System.Drawing.Point(201, 11);
             this.cmbGender.Margin = new System.Windows.Forms.Padding(4);
             this.cmbGender.Name = "cmbGender";
-            this.cmbGender.Size = new System.Drawing.Size(77, 21);
+            this.cmbGender.Size = new System.Drawing.Size(77, 25);
             this.cmbGender.TabIndex = 7;
             // 
             // rdbGenderAll
@@ -419,7 +419,7 @@
             this.rdbGenderAll.Location = new System.Drawing.Point(28, 17);
             this.rdbGenderAll.Margin = new System.Windows.Forms.Padding(4);
             this.rdbGenderAll.Name = "rdbGenderAll";
-            this.rdbGenderAll.Size = new System.Drawing.Size(36, 17);
+            this.rdbGenderAll.Size = new System.Drawing.Size(44, 21);
             this.rdbGenderAll.TabIndex = 6;
             this.rdbGenderAll.TabStop = true;
             this.rdbGenderAll.Text = "All";
@@ -434,7 +434,7 @@
             this.rdbGenderIndi.Location = new System.Drawing.Point(100, 17);
             this.rdbGenderIndi.Margin = new System.Windows.Forms.Padding(4);
             this.rdbGenderIndi.Name = "rdbGenderIndi";
-            this.rdbGenderIndi.Size = new System.Drawing.Size(70, 17);
+            this.rdbGenderIndi.Size = new System.Drawing.Size(88, 21);
             this.rdbGenderIndi.TabIndex = 3;
             this.rdbGenderIndi.Text = "Individual";
             this.rdbGenderIndi.UseVisualStyleBackColor = true;
@@ -463,7 +463,7 @@
             this.cmbConsultant.Location = new System.Drawing.Point(212, 15);
             this.cmbConsultant.Margin = new System.Windows.Forms.Padding(4);
             this.cmbConsultant.Name = "cmbConsultant";
-            this.cmbConsultant.Size = new System.Drawing.Size(285, 21);
+            this.cmbConsultant.Size = new System.Drawing.Size(285, 25);
             this.cmbConsultant.TabIndex = 7;
             // 
             // rdbConsultantAll
@@ -475,7 +475,7 @@
             this.rdbConsultantAll.Location = new System.Drawing.Point(9, 17);
             this.rdbConsultantAll.Margin = new System.Windows.Forms.Padding(4);
             this.rdbConsultantAll.Name = "rdbConsultantAll";
-            this.rdbConsultantAll.Size = new System.Drawing.Size(36, 17);
+            this.rdbConsultantAll.Size = new System.Drawing.Size(44, 21);
             this.rdbConsultantAll.TabIndex = 6;
             this.rdbConsultantAll.TabStop = true;
             this.rdbConsultantAll.Text = "All";
@@ -490,7 +490,7 @@
             this.rdbConsultantIndi.Location = new System.Drawing.Point(89, 17);
             this.rdbConsultantIndi.Margin = new System.Windows.Forms.Padding(4);
             this.rdbConsultantIndi.Name = "rdbConsultantIndi";
-            this.rdbConsultantIndi.Size = new System.Drawing.Size(70, 17);
+            this.rdbConsultantIndi.Size = new System.Drawing.Size(88, 21);
             this.rdbConsultantIndi.TabIndex = 3;
             this.rdbConsultantIndi.Text = "Individual";
             this.rdbConsultantIndi.UseVisualStyleBackColor = true;
@@ -519,7 +519,7 @@
             this.cmbTest.Location = new System.Drawing.Point(227, 15);
             this.cmbTest.Margin = new System.Windows.Forms.Padding(4);
             this.cmbTest.Name = "cmbTest";
-            this.cmbTest.Size = new System.Drawing.Size(279, 21);
+            this.cmbTest.Size = new System.Drawing.Size(279, 25);
             this.cmbTest.TabIndex = 7;
             // 
             // rdbTestAll
@@ -531,7 +531,7 @@
             this.rdbTestAll.Location = new System.Drawing.Point(24, 17);
             this.rdbTestAll.Margin = new System.Windows.Forms.Padding(4);
             this.rdbTestAll.Name = "rdbTestAll";
-            this.rdbTestAll.Size = new System.Drawing.Size(36, 17);
+            this.rdbTestAll.Size = new System.Drawing.Size(44, 21);
             this.rdbTestAll.TabIndex = 6;
             this.rdbTestAll.TabStop = true;
             this.rdbTestAll.Text = "All";
@@ -546,7 +546,7 @@
             this.rdbTestIndi.Location = new System.Drawing.Point(113, 15);
             this.rdbTestIndi.Margin = new System.Windows.Forms.Padding(4);
             this.rdbTestIndi.Name = "rdbTestIndi";
-            this.rdbTestIndi.Size = new System.Drawing.Size(70, 17);
+            this.rdbTestIndi.Size = new System.Drawing.Size(88, 21);
             this.rdbTestIndi.TabIndex = 3;
             this.rdbTestIndi.Text = "Individual";
             this.rdbTestIndi.UseVisualStyleBackColor = true;
@@ -575,7 +575,7 @@
             this.cmbReference.Location = new System.Drawing.Point(227, 10);
             this.cmbReference.Margin = new System.Windows.Forms.Padding(4);
             this.cmbReference.Name = "cmbReference";
-            this.cmbReference.Size = new System.Drawing.Size(279, 21);
+            this.cmbReference.Size = new System.Drawing.Size(279, 25);
             this.cmbReference.TabIndex = 7;
             // 
             // rdbReferenceAll
@@ -587,7 +587,7 @@
             this.rdbReferenceAll.Location = new System.Drawing.Point(20, 16);
             this.rdbReferenceAll.Margin = new System.Windows.Forms.Padding(4);
             this.rdbReferenceAll.Name = "rdbReferenceAll";
-            this.rdbReferenceAll.Size = new System.Drawing.Size(36, 17);
+            this.rdbReferenceAll.Size = new System.Drawing.Size(44, 21);
             this.rdbReferenceAll.TabIndex = 6;
             this.rdbReferenceAll.TabStop = true;
             this.rdbReferenceAll.Text = "All";
@@ -602,7 +602,7 @@
             this.rdbReferenceIndi.Location = new System.Drawing.Point(113, 15);
             this.rdbReferenceIndi.Margin = new System.Windows.Forms.Padding(4);
             this.rdbReferenceIndi.Name = "rdbReferenceIndi";
-            this.rdbReferenceIndi.Size = new System.Drawing.Size(70, 17);
+            this.rdbReferenceIndi.Size = new System.Drawing.Size(88, 21);
             this.rdbReferenceIndi.TabIndex = 3;
             this.rdbReferenceIndi.Text = "Individual";
             this.rdbReferenceIndi.UseVisualStyleBackColor = true;
@@ -631,7 +631,7 @@
             this.cmbUser.Location = new System.Drawing.Point(212, 15);
             this.cmbUser.Margin = new System.Windows.Forms.Padding(4);
             this.cmbUser.Name = "cmbUser";
-            this.cmbUser.Size = new System.Drawing.Size(285, 21);
+            this.cmbUser.Size = new System.Drawing.Size(285, 25);
             this.cmbUser.TabIndex = 7;
             // 
             // rdbUserAll
@@ -643,7 +643,7 @@
             this.rdbUserAll.Location = new System.Drawing.Point(9, 20);
             this.rdbUserAll.Margin = new System.Windows.Forms.Padding(4);
             this.rdbUserAll.Name = "rdbUserAll";
-            this.rdbUserAll.Size = new System.Drawing.Size(36, 17);
+            this.rdbUserAll.Size = new System.Drawing.Size(44, 21);
             this.rdbUserAll.TabIndex = 6;
             this.rdbUserAll.TabStop = true;
             this.rdbUserAll.Text = "All";
@@ -658,41 +658,41 @@
             this.rdbUserIndi.Location = new System.Drawing.Point(89, 20);
             this.rdbUserIndi.Margin = new System.Windows.Forms.Padding(4);
             this.rdbUserIndi.Name = "rdbUserIndi";
-            this.rdbUserIndi.Size = new System.Drawing.Size(70, 17);
+            this.rdbUserIndi.Size = new System.Drawing.Size(88, 21);
             this.rdbUserIndi.TabIndex = 3;
             this.rdbUserIndi.Text = "Individual";
             this.rdbUserIndi.UseVisualStyleBackColor = true;
             // 
             // txtToken
             // 
-            this.txtToken.Location = new System.Drawing.Point(75, 284);
+            this.txtToken.Location = new System.Drawing.Point(75, 230);
             this.txtToken.Margin = new System.Windows.Forms.Padding(4);
             this.txtToken.Name = "txtToken";
-            this.txtToken.Size = new System.Drawing.Size(67, 23);
+            this.txtToken.Size = new System.Drawing.Size(67, 26);
             this.txtToken.TabIndex = 10;
             // 
             // txtReceipt
             // 
-            this.txtReceipt.Location = new System.Drawing.Point(227, 284);
+            this.txtReceipt.Location = new System.Drawing.Point(227, 230);
             this.txtReceipt.Margin = new System.Windows.Forms.Padding(4);
             this.txtReceipt.Name = "txtReceipt";
-            this.txtReceipt.Size = new System.Drawing.Size(81, 23);
+            this.txtReceipt.Size = new System.Drawing.Size(81, 26);
             this.txtReceipt.TabIndex = 11;
             // 
             // txtPName
             // 
-            this.txtPName.Location = new System.Drawing.Point(433, 284);
+            this.txtPName.Location = new System.Drawing.Point(433, 230);
             this.txtPName.Margin = new System.Windows.Forms.Padding(4);
             this.txtPName.Name = "txtPName";
-            this.txtPName.Size = new System.Drawing.Size(184, 23);
+            this.txtPName.Size = new System.Drawing.Size(184, 26);
             this.txtPName.TabIndex = 12;
             // 
             // txtConNo
             // 
-            this.txtConNo.Location = new System.Drawing.Point(731, 284);
+            this.txtConNo.Location = new System.Drawing.Point(731, 230);
             this.txtConNo.Margin = new System.Windows.Forms.Padding(4);
             this.txtConNo.Name = "txtConNo";
-            this.txtConNo.Size = new System.Drawing.Size(147, 23);
+            this.txtConNo.Size = new System.Drawing.Size(147, 26);
             this.txtConNo.TabIndex = 13;
             // 
             // btnSearch
@@ -720,40 +720,40 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 289);
+            this.label3.Location = new System.Drawing.Point(16, 235);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 17);
+            this.label3.Size = new System.Drawing.Size(54, 20);
             this.label3.TabIndex = 17;
             this.label3.Text = "Token";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(161, 289);
+            this.label4.Location = new System.Drawing.Point(161, 235);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 17);
+            this.label4.Size = new System.Drawing.Size(66, 20);
             this.label4.TabIndex = 18;
             this.label4.Text = "Receipt";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(331, 289);
+            this.label5.Location = new System.Drawing.Point(331, 235);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(93, 17);
+            this.label5.Size = new System.Drawing.Size(110, 20);
             this.label5.TabIndex = 19;
             this.label5.Text = "Patient Name";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(641, 289);
+            this.label6.Location = new System.Drawing.Point(641, 235);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 17);
+            this.label6.Size = new System.Drawing.Size(93, 20);
             this.label6.TabIndex = 20;
             this.label6.Text = "Contact No";
             // 
@@ -766,7 +766,7 @@
             this.groupBox10.Controls.Add(this.rdbCreadtedByDateAll);
             this.groupBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox10.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox10.Location = new System.Drawing.Point(16, 229);
+            this.groupBox10.Location = new System.Drawing.Point(13, 626);
             this.groupBox10.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Padding = new System.Windows.Forms.Padding(4);
@@ -774,6 +774,7 @@
             this.groupBox10.TabIndex = 21;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Created By Date";
+            this.groupBox10.Visible = false;
             // 
             // dtpCreatedByDateTo
             // 
@@ -784,7 +785,7 @@
             this.dtpCreatedByDateTo.Margin = new System.Windows.Forms.Padding(4);
             this.dtpCreatedByDateTo.MaxDate = new System.DateTime(2060, 12, 31, 0, 0, 0, 0);
             this.dtpCreatedByDateTo.Name = "dtpCreatedByDateTo";
-            this.dtpCreatedByDateTo.Size = new System.Drawing.Size(119, 20);
+            this.dtpCreatedByDateTo.Size = new System.Drawing.Size(119, 23);
             this.dtpCreatedByDateTo.TabIndex = 7;
             this.dtpCreatedByDateTo.Value = new System.DateTime(2019, 11, 26, 0, 0, 0, 0);
             // 
@@ -795,7 +796,7 @@
             this.label7.Location = new System.Drawing.Point(336, 21);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(20, 13);
+            this.label7.Size = new System.Drawing.Size(25, 17);
             this.label7.TabIndex = 8;
             this.label7.Text = "To";
             // 
@@ -809,7 +810,7 @@
             this.dtpCreatedByDateFrom.Margin = new System.Windows.Forms.Padding(4);
             this.dtpCreatedByDateFrom.MaxDate = new System.DateTime(2060, 12, 31, 0, 0, 0, 0);
             this.dtpCreatedByDateFrom.Name = "dtpCreatedByDateFrom";
-            this.dtpCreatedByDateFrom.Size = new System.Drawing.Size(120, 20);
+            this.dtpCreatedByDateFrom.Size = new System.Drawing.Size(120, 23);
             this.dtpCreatedByDateFrom.TabIndex = 6;
             this.dtpCreatedByDateFrom.Value = new System.DateTime(2019, 11, 20, 0, 0, 0, 0);
             // 
@@ -819,7 +820,7 @@
             this.rdbCreatedByDateRange.Location = new System.Drawing.Point(88, 18);
             this.rdbCreatedByDateRange.Margin = new System.Windows.Forms.Padding(4);
             this.rdbCreatedByDateRange.Name = "rdbCreatedByDateRange";
-            this.rdbCreatedByDateRange.Size = new System.Drawing.Size(83, 17);
+            this.rdbCreatedByDateRange.Size = new System.Drawing.Size(107, 21);
             this.rdbCreatedByDateRange.TabIndex = 1;
             this.rdbCreatedByDateRange.Text = "Range From";
             this.rdbCreatedByDateRange.UseVisualStyleBackColor = true;
@@ -831,7 +832,7 @@
             this.rdbCreadtedByDateAll.Location = new System.Drawing.Point(9, 18);
             this.rdbCreadtedByDateAll.Margin = new System.Windows.Forms.Padding(4);
             this.rdbCreadtedByDateAll.Name = "rdbCreadtedByDateAll";
-            this.rdbCreadtedByDateAll.Size = new System.Drawing.Size(36, 17);
+            this.rdbCreadtedByDateAll.Size = new System.Drawing.Size(44, 21);
             this.rdbCreadtedByDateAll.TabIndex = 0;
             this.rdbCreadtedByDateAll.TabStop = true;
             this.rdbCreadtedByDateAll.Text = "All";
@@ -865,28 +866,32 @@
             this.clnAmount,
             this.ClnCreatedby,
             this.clnEditby});
-            this.dgvQuery.Location = new System.Drawing.Point(13, 315);
+            this.dgvQuery.Location = new System.Drawing.Point(13, 264);
             this.dgvQuery.Margin = new System.Windows.Forms.Padding(4);
             this.dgvQuery.MultiSelect = false;
             this.dgvQuery.Name = "dgvQuery";
             this.dgvQuery.ReadOnly = true;
             this.dgvQuery.RowHeadersWidth = 30;
             this.dgvQuery.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQuery.Size = new System.Drawing.Size(1038, 319);
+            this.dgvQuery.Size = new System.Drawing.Size(1038, 370);
             this.dgvQuery.TabIndex = 165;
             this.dgvQuery.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuery_CellContentClick);
             // 
             // clnTokenNo
             // 
             this.clnTokenNo.HeaderText = "Token No";
+            this.clnTokenNo.MinimumWidth = 6;
             this.clnTokenNo.Name = "clnTokenNo";
             this.clnTokenNo.ReadOnly = true;
+            this.clnTokenNo.Width = 125;
             // 
             // clnVoucherNum
             // 
             this.clnVoucherNum.HeaderText = "Voucher #";
+            this.clnVoucherNum.MinimumWidth = 6;
             this.clnVoucherNum.Name = "clnVoucherNum";
             this.clnVoucherNum.ReadOnly = true;
+            this.clnVoucherNum.Width = 125;
             // 
             // clnDate
             // 
@@ -905,26 +910,34 @@
             // clnOPDCatagory
             // 
             this.clnOPDCatagory.HeaderText = "Catagory";
+            this.clnOPDCatagory.MinimumWidth = 6;
             this.clnOPDCatagory.Name = "clnOPDCatagory";
             this.clnOPDCatagory.ReadOnly = true;
+            this.clnOPDCatagory.Width = 125;
             // 
             // clnConsultant
             // 
             this.clnConsultant.HeaderText = "Consultant";
+            this.clnConsultant.MinimumWidth = 6;
             this.clnConsultant.Name = "clnConsultant";
             this.clnConsultant.ReadOnly = true;
+            this.clnConsultant.Width = 125;
             // 
             // clnPatientType
             // 
             this.clnPatientType.HeaderText = "Patient Type";
+            this.clnPatientType.MinimumWidth = 6;
             this.clnPatientType.Name = "clnPatientType";
             this.clnPatientType.ReadOnly = true;
+            this.clnPatientType.Width = 125;
             // 
             // clnPatientName
             // 
             this.clnPatientName.HeaderText = "PatientName";
+            this.clnPatientName.MinimumWidth = 6;
             this.clnPatientName.Name = "clnPatientName";
             this.clnPatientName.ReadOnly = true;
+            this.clnPatientName.Width = 125;
             // 
             // clnAmount
             // 
@@ -964,7 +977,7 @@
             this.label17.Location = new System.Drawing.Point(370, -1);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(323, 41);
+            this.label17.Size = new System.Drawing.Size(394, 51);
             this.label17.TabIndex = 219;
             this.label17.Text = "OPD RECEIPT SEARCH";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -994,14 +1007,18 @@
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.HeaderText = "Token No";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 125;
             // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.HeaderText = "Voucher #";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 125;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -1020,26 +1037,34 @@
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.HeaderText = "Catagory";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 125;
             // 
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.HeaderText = "Consultant";
+            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 125;
             // 
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.HeaderText = "Patient Type";
+            this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 125;
             // 
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.HeaderText = "PatientName";
+            this.dataGridViewTextBoxColumn7.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 125;
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -1073,7 +1098,7 @@
             // 
             // ReceiptSearch
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1063, 682);
             this.Controls.Add(this.btnAllReceipt);

@@ -49,6 +49,7 @@
             this.SubMainLabTestRemarks = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCatagoryInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.bankAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.echoTemplateDesignerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainAccounts = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentVoucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receiptVoucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,6 +77,7 @@
             this.currentCashStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainReports = new System.Windows.Forms.ToolStripMenuItem();
             this.accountStatementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.stockBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemLedgerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trialBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,6 +126,11 @@
             this.surgeryWiseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doctorWiseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.totalSurgeriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.oPDFundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iPDFunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OPDCashInHandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.MainsSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.SubMainbackup = new System.Windows.Forms.ToolStripMenuItem();
             this.SubMainrestore = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,6 +141,8 @@
             this.fileLoaderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainUltraSound = new System.Windows.Forms.ToolStripMenuItem();
             this.reportDesignerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.echoCardioGraphyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Mainlaboratory = new System.Windows.Forms.ToolStripMenuItem();
             this.labReortEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labReortEntryToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -181,6 +190,7 @@
             this.MainsSetting,
             this.mnSoftwareAdministrator,
             this.MainUltraSound,
+            this.eCToolStripMenuItem,
             this.Mainlaboratory,
             this.logoutToolStripMenuItem,
             this.existToolStripMenuItem});
@@ -211,139 +221,148 @@
             this.referenceInfoToolStripMenuItem,
             this.SubMainLabTestRemarks,
             this.menuCatagoryInfo,
-            this.bankAccountToolStripMenuItem});
+            this.bankAccountToolStripMenuItem,
+            this.echoTemplateDesignerToolStripMenuItem});
             this.MainSetup.Name = "MainSetup";
-            this.MainSetup.Size = new System.Drawing.Size(61, 24);
+            this.MainSetup.Size = new System.Drawing.Size(61, 26);
             this.MainSetup.Text = "Setup";
             this.MainSetup.Click += new System.EventHandler(this.MainSetup_Click);
             // 
             // SubMainChartOfAccount
             // 
             this.SubMainChartOfAccount.Name = "SubMainChartOfAccount";
-            this.SubMainChartOfAccount.Size = new System.Drawing.Size(244, 26);
+            this.SubMainChartOfAccount.Size = new System.Drawing.Size(253, 26);
             this.SubMainChartOfAccount.Text = "Chart Of Account";
             this.SubMainChartOfAccount.Click += new System.EventHandler(this.chartOfAccountToolStripMenuItem_Click);
             // 
             // SubMainDetailAccount
             // 
             this.SubMainDetailAccount.Name = "SubMainDetailAccount";
-            this.SubMainDetailAccount.Size = new System.Drawing.Size(244, 26);
+            this.SubMainDetailAccount.Size = new System.Drawing.Size(253, 26);
             this.SubMainDetailAccount.Text = "Detail Account";
             this.SubMainDetailAccount.Click += new System.EventHandler(this.chartOfAccountLevel5ToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(241, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(250, 6);
             // 
             // SubMaincompanyInformation
             // 
             this.SubMaincompanyInformation.Name = "SubMaincompanyInformation";
-            this.SubMaincompanyInformation.Size = new System.Drawing.Size(244, 26);
+            this.SubMaincompanyInformation.Size = new System.Drawing.Size(253, 26);
             this.SubMaincompanyInformation.Text = "Company Information";
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(241, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(250, 6);
             // 
             // SubMainNarration
             // 
             this.SubMainNarration.Name = "SubMainNarration";
-            this.SubMainNarration.Size = new System.Drawing.Size(244, 26);
+            this.SubMainNarration.Size = new System.Drawing.Size(253, 26);
             this.SubMainNarration.Text = "Narration";
             this.SubMainNarration.Click += new System.EventHandler(this.narrationToolStripMenuItem_Click);
             // 
             // SubMainConsultantInfo
             // 
             this.SubMainConsultantInfo.Name = "SubMainConsultantInfo";
-            this.SubMainConsultantInfo.Size = new System.Drawing.Size(244, 26);
+            this.SubMainConsultantInfo.Size = new System.Drawing.Size(253, 26);
             this.SubMainConsultantInfo.Text = "Consultant Information";
             this.SubMainConsultantInfo.Click += new System.EventHandler(this.consultantDetailToolStripMenuItem_Click);
             // 
             // SubMainTestInformationToolStripMenuItem
             // 
             this.SubMainTestInformationToolStripMenuItem.Name = "SubMainTestInformationToolStripMenuItem";
-            this.SubMainTestInformationToolStripMenuItem.Size = new System.Drawing.Size(244, 26);
+            this.SubMainTestInformationToolStripMenuItem.Size = new System.Drawing.Size(253, 26);
             this.SubMainTestInformationToolStripMenuItem.Text = "Test Information";
             this.SubMainTestInformationToolStripMenuItem.Click += new System.EventHandler(this.testInformationToolStripMenuItem_Click);
             // 
             // SubMainmemberInformationToolStripMenuItem
             // 
             this.SubMainmemberInformationToolStripMenuItem.Name = "SubMainmemberInformationToolStripMenuItem";
-            this.SubMainmemberInformationToolStripMenuItem.Size = new System.Drawing.Size(244, 26);
+            this.SubMainmemberInformationToolStripMenuItem.Size = new System.Drawing.Size(253, 26);
             this.SubMainmemberInformationToolStripMenuItem.Text = "Member Information";
             this.SubMainmemberInformationToolStripMenuItem.Click += new System.EventHandler(this.memberInformationToolStripMenuItem_Click);
             // 
             // userControlToolStripMenuItem
             // 
             this.userControlToolStripMenuItem.Name = "userControlToolStripMenuItem";
-            this.userControlToolStripMenuItem.Size = new System.Drawing.Size(244, 26);
+            this.userControlToolStripMenuItem.Size = new System.Drawing.Size(253, 26);
             this.userControlToolStripMenuItem.Text = "User Control";
             this.userControlToolStripMenuItem.Click += new System.EventHandler(this.userControlToolStripMenuItem_Click);
             // 
             // securityLevelToolStripMenuItem
             // 
             this.securityLevelToolStripMenuItem.Name = "securityLevelToolStripMenuItem";
-            this.securityLevelToolStripMenuItem.Size = new System.Drawing.Size(244, 26);
+            this.securityLevelToolStripMenuItem.Size = new System.Drawing.Size(253, 26);
             this.securityLevelToolStripMenuItem.Text = "Security Level";
             this.securityLevelToolStripMenuItem.Click += new System.EventHandler(this.securityLevelToolStripMenuItem_Click);
             // 
             // SubMainTestParameters
             // 
             this.SubMainTestParameters.Name = "SubMainTestParameters";
-            this.SubMainTestParameters.Size = new System.Drawing.Size(244, 26);
+            this.SubMainTestParameters.Size = new System.Drawing.Size(253, 26);
             this.SubMainTestParameters.Text = "Test Parameters";
             this.SubMainTestParameters.Click += new System.EventHandler(this.testParametersToolStripMenuItem_Click);
             // 
             // SubMainReportDesigner
             // 
             this.SubMainReportDesigner.Name = "SubMainReportDesigner";
-            this.SubMainReportDesigner.Size = new System.Drawing.Size(244, 26);
+            this.SubMainReportDesigner.Size = new System.Drawing.Size(253, 26);
             this.SubMainReportDesigner.Text = "Template Designer";
             this.SubMainReportDesigner.Click += new System.EventHandler(this.reportDesignerToolStripMenuItem1_Click);
             // 
             // roomSetupToolStripMenuItem
             // 
             this.roomSetupToolStripMenuItem.Name = "roomSetupToolStripMenuItem";
-            this.roomSetupToolStripMenuItem.Size = new System.Drawing.Size(244, 26);
+            this.roomSetupToolStripMenuItem.Size = new System.Drawing.Size(253, 26);
             this.roomSetupToolStripMenuItem.Text = "Room Setup";
             this.roomSetupToolStripMenuItem.Click += new System.EventHandler(this.roomSetupToolStripMenuItem_Click);
             // 
             // packageInfoToolStripMenuItem
             // 
             this.packageInfoToolStripMenuItem.Name = "packageInfoToolStripMenuItem";
-            this.packageInfoToolStripMenuItem.Size = new System.Drawing.Size(244, 26);
+            this.packageInfoToolStripMenuItem.Size = new System.Drawing.Size(253, 26);
             this.packageInfoToolStripMenuItem.Text = "Package Info";
             this.packageInfoToolStripMenuItem.Click += new System.EventHandler(this.packageInfoToolStripMenuItem_Click);
             // 
             // referenceInfoToolStripMenuItem
             // 
             this.referenceInfoToolStripMenuItem.Name = "referenceInfoToolStripMenuItem";
-            this.referenceInfoToolStripMenuItem.Size = new System.Drawing.Size(244, 26);
+            this.referenceInfoToolStripMenuItem.Size = new System.Drawing.Size(253, 26);
             this.referenceInfoToolStripMenuItem.Text = "Reference Info";
             this.referenceInfoToolStripMenuItem.Click += new System.EventHandler(this.referenceInfoToolStripMenuItem_Click);
             // 
             // SubMainLabTestRemarks
             // 
             this.SubMainLabTestRemarks.Name = "SubMainLabTestRemarks";
-            this.SubMainLabTestRemarks.Size = new System.Drawing.Size(244, 26);
+            this.SubMainLabTestRemarks.Size = new System.Drawing.Size(253, 26);
             this.SubMainLabTestRemarks.Text = "Lab Test Remarks";
             this.SubMainLabTestRemarks.Click += new System.EventHandler(this.labTestRemarksToolStripMenuItem_Click);
             // 
             // menuCatagoryInfo
             // 
             this.menuCatagoryInfo.Name = "menuCatagoryInfo";
-            this.menuCatagoryInfo.Size = new System.Drawing.Size(244, 26);
+            this.menuCatagoryInfo.Size = new System.Drawing.Size(253, 26);
             this.menuCatagoryInfo.Text = "Catagory Info";
             this.menuCatagoryInfo.Click += new System.EventHandler(this.catagoryInfoToolStripMenuItem_Click);
             // 
             // bankAccountToolStripMenuItem
             // 
             this.bankAccountToolStripMenuItem.Name = "bankAccountToolStripMenuItem";
-            this.bankAccountToolStripMenuItem.Size = new System.Drawing.Size(244, 26);
+            this.bankAccountToolStripMenuItem.Size = new System.Drawing.Size(253, 26);
             this.bankAccountToolStripMenuItem.Text = "Bank Account";
             this.bankAccountToolStripMenuItem.Click += new System.EventHandler(this.bankAccountToolStripMenuItem_Click);
+            // 
+            // echoTemplateDesignerToolStripMenuItem
+            // 
+            this.echoTemplateDesignerToolStripMenuItem.Name = "echoTemplateDesignerToolStripMenuItem";
+            this.echoTemplateDesignerToolStripMenuItem.Size = new System.Drawing.Size(253, 26);
+            this.echoTemplateDesignerToolStripMenuItem.Text = "Echo Template Designer";
+            this.echoTemplateDesignerToolStripMenuItem.Visible = false;
+            this.echoTemplateDesignerToolStripMenuItem.Click += new System.EventHandler(this.echoTemplateDesignerToolStripMenuItem_Click);
             // 
             // MainAccounts
             // 
@@ -420,21 +439,21 @@
             // SubMainReceipt
             // 
             this.SubMainReceipt.Name = "SubMainReceipt";
-            this.SubMainReceipt.Size = new System.Drawing.Size(224, 26);
+            this.SubMainReceipt.Size = new System.Drawing.Size(193, 26);
             this.SubMainReceipt.Text = "OPD Receipt";
             this.SubMainReceipt.Click += new System.EventHandler(this.oPDReceiptToolStripMenuItem_Click);
             // 
             // receiptSearchToolStripMenuItem
             // 
             this.receiptSearchToolStripMenuItem.Name = "receiptSearchToolStripMenuItem";
-            this.receiptSearchToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.receiptSearchToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
             this.receiptSearchToolStripMenuItem.Text = "Receipt Search";
             this.receiptSearchToolStripMenuItem.Click += new System.EventHandler(this.receiptSearchToolStripMenuItem_Click);
             // 
             // partialPaymentToolStripMenuItem
             // 
             this.partialPaymentToolStripMenuItem.Name = "partialPaymentToolStripMenuItem";
-            this.partialPaymentToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.partialPaymentToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
             this.partialPaymentToolStripMenuItem.Text = "Partial Payment";
             this.partialPaymentToolStripMenuItem.Click += new System.EventHandler(this.partialPaymentToolStripMenuItem_Click);
             // 
@@ -543,6 +562,7 @@
             // 
             this.MainReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.accountStatementToolStripMenuItem,
+            this.toolStripMenuItem4,
             this.stockBalanceToolStripMenuItem,
             this.itemLedgerToolStripMenuItem,
             this.trialBalanceToolStripMenuItem,
@@ -567,7 +587,12 @@
             this.trialBalanceToolStripMenuItem1,
             this.dialysisPatientDetailsToolStripMenuItem,
             this.partiallyPaymentPendingReportToolStripMenuItem,
-            this.surgeryReportsToolStripMenuItem});
+            this.surgeryReportsToolStripMenuItem,
+            this.oPDFundToolStripMenuItem,
+            this.iPDFunToolStripMenuItem,
+            this.OPDCashInHandToolStripMenuItem,
+            this.toolStripMenuItem5,
+            this.toolStripMenuItem6});
             this.MainReports.Name = "MainReports";
             this.MainReports.Size = new System.Drawing.Size(74, 24);
             this.MainReports.Text = "Reports";
@@ -579,6 +604,13 @@
             this.accountStatementToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.accountStatementToolStripMenuItem.Text = "Account Statement";
             this.accountStatementToolStripMenuItem.Click += new System.EventHandler(this.accountStatementToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(310, 26);
+            this.toolStripMenuItem4.Text = "Discrepancies in vouchers";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click_1);
             // 
             // stockBalanceToolStripMenuItem
             // 
@@ -940,6 +972,42 @@
             this.totalSurgeriesToolStripMenuItem.Text = "Total Surgeries";
             this.totalSurgeriesToolStripMenuItem.Click += new System.EventHandler(this.totalSurgeriesToolStripMenuItem_Click);
             // 
+            // oPDFundToolStripMenuItem
+            // 
+            this.oPDFundToolStripMenuItem.Name = "oPDFundToolStripMenuItem";
+            this.oPDFundToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
+            this.oPDFundToolStripMenuItem.Text = "OPD Fund Utilization";
+            this.oPDFundToolStripMenuItem.Click += new System.EventHandler(this.oPDFundToolStripMenuItem_Click);
+            // 
+            // iPDFunToolStripMenuItem
+            // 
+            this.iPDFunToolStripMenuItem.Name = "iPDFunToolStripMenuItem";
+            this.iPDFunToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
+            this.iPDFunToolStripMenuItem.Text = "IPD Fund Utilization";
+            this.iPDFunToolStripMenuItem.Click += new System.EventHandler(this.iPDFunToolStripMenuItem_Click);
+            // 
+            // OPDCashInHandToolStripMenuItem
+            // 
+            this.OPDCashInHandToolStripMenuItem.Name = "OPDCashInHandToolStripMenuItem";
+            this.OPDCashInHandToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
+            this.OPDCashInHandToolStripMenuItem.Text = "OPD Cash In Hand";
+            this.OPDCashInHandToolStripMenuItem.Click += new System.EventHandler(this.OPDCashInHandToolStripMenuItem_Click_1);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(310, 26);
+            this.toolStripMenuItem5.Text = "IPD Cash In Hand";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click_1);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(310, 26);
+            this.toolStripMenuItem6.Text = "IPD / OPD Closing Summary";
+            this.toolStripMenuItem6.Visible = false;
+            this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click_1);
+            // 
             // MainsSetting
             // 
             this.MainsSetting.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1016,6 +1084,22 @@
             this.reportDesignerToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.reportDesignerToolStripMenuItem.Text = "Report Designer";
             this.reportDesignerToolStripMenuItem.Click += new System.EventHandler(this.reportDesignerToolStripMenuItem_Click);
+            // 
+            // eCToolStripMenuItem
+            // 
+            this.eCToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.echoCardioGraphyToolStripMenuItem});
+            this.eCToolStripMenuItem.Name = "eCToolStripMenuItem";
+            this.eCToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.eCToolStripMenuItem.Text = "Echo";
+            this.eCToolStripMenuItem.Visible = false;
+            // 
+            // echoCardioGraphyToolStripMenuItem
+            // 
+            this.echoCardioGraphyToolStripMenuItem.Name = "echoCardioGraphyToolStripMenuItem";
+            this.echoCardioGraphyToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.echoCardioGraphyToolStripMenuItem.Text = "EchoCardioGraphy";
+            this.echoCardioGraphyToolStripMenuItem.Click += new System.EventHandler(this.echoCardioGraphyToolStripMenuItem_Click);
             // 
             // Mainlaboratory
             // 
@@ -1433,5 +1517,14 @@
         private System.Windows.Forms.ToolStripMenuItem surgeryWiseReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem doctorWiseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem totalSurgeriesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oPDFundToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem iPDFunToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OPDCashInHandToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem eCToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem echoCardioGraphyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem echoTemplateDesignerToolStripMenuItem;
     }
 }

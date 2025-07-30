@@ -124,7 +124,7 @@ namespace ERP
             dgvAccount.Rows.Clear();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                int Index = dgvAccount.Rows.Add(dt.Rows[i]["Vseq"].ToString(), dt.Rows[i]["fkaccountid"].ToString(), null, dt.Rows[i]["description"].ToString(),
+                int Index = dgvAccount.Rows.Add(dt.Rows[i]["Vseq"].ToString(),0, dt.Rows[i]["fkaccountid"].ToString(), null, dt.Rows[i]["description"].ToString(),
                     ((decimal)dt.Rows[i]["dr"]).ToString("N2"), dt.Rows[i]["chequeno"].ToString(), dt.Rows[i]["status"].ToString(), dt.Rows[i]["beneficiary"].ToString());
                 SubAccountDataSource(Index);
                 dgvAccount.Rows[Index].Cells[clnSubAccountDetail.Index].Value = dt.Rows[i]["fkaccountid"].ToString() == AccountHead.ClientAccount ? dt.Rows[i]["fkclientcode"].ToString() :
@@ -304,14 +304,15 @@ namespace ERP
                                 MessageBox.Show("Cheque No. required...!");
                                 return;
                             }
-                            Seq.Add((Convert.ToInt16(dgvAccount[clnVseq.Index, i].Value) > 0 ? -1 : 0) + Convert.ToInt16(dgvAccount[clnVseq.Index, i].Value));
+                            int ssq = (Convert.ToInt16(dgvAccount[clnVseq.Index, i].Value) > 0 ? -1 : 0) + Convert.ToInt16(dgvAccount[clnVseq.Index, i].Value);
+                            Seq.Add(ssq);
                             Account.Add(rdoCash.Checked == true ? Convert.ToString(rdoCash.Tag) : AccountHead.CashInBank);
                             Descr.Add((string)dgvAccount[clnDescription.Index, i].Value);
                             dr.Add(Convert.ToDecimal(0.00m));
                             cr.Add(Convert.ToDecimal(dgvAccount[clnDebit.Index, i].Value.ToString()));
                             SubAccount.Add(Convert.ToString(cmbBankName.SelectedValue));
-                            Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
-                            //Status.Add(2);
+                            //Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
+                            Status.Add(0);
 
 
                             string hello = Convert.ToString(dgvAccount[clnChequeNo.Index, i].Value.ToString() == null ? "" : dgvAccount[clnChequeNo.Index, i].Value.ToString());
@@ -324,9 +325,9 @@ namespace ERP
                             dr.Add(Convert.ToDecimal(dgvAccount[clnDebit.Index, i].Value.ToString()));
                             cr.Add(Convert.ToDecimal(0.00m));
                             SubAccount.Add((string)dgvAccount[clnSubAccountDetail.Index, i].Value);
-                            Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
+                            //Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
 
-                            //  Status.Add(2);
+                            Status.Add(0);
                             ChequeNo.Add(Convert.ToString(dgvAccount[clnChequeNo.Index, i].Value.ToString()));
                             SlipNo.Add("");
                         }
@@ -467,10 +468,27 @@ namespace ERP
         {
             try
             {
-                //string filterQuery = "select convert(varchar, VDate, 103) as VDate,VNO,(select TransNarration from TransactionCode where ID = FK_Narration) as Narration,sum(debit) as Amount from [GL_2017-2018] where ( VDate between '" + dtpFrom.Value.ToString("MM/dd/yyyy 00:00:00:00") + "' and '" + dtpTo.Value.ToString("MM/dd/yyyy 00:00:00:00") + "') and FK_Narration = " + (cmbFilterNarration.Text != "ALL" ? "'" + cmbFilterNarration.SelectedValue.ToString() + "'" : "FK_Narration") + " and VNO = " + VNO + "  and Vtype = 'PV' and status = 0  group by convert(varchar, VDate, 103) ,VNO,FK_Narration";
-                dtquery = Query.PaymentFilter1New(dtpFrom.Value.ToString("dd MMM yyyy"), dtpTo.Value.ToString("dd MMM yyyy"),
-                    (cmbFilterNarration.Text != "ALL" ? "  and fktransactionid = '" + Convert.ToString(cmbFilterNarration.SelectedValue) + "'" : ""),
-                    (VNO != "" ? " and VNO = " + VNO : ""), cmbFilter.Text);
+                string narration = cmbFilterNarration.Text != "ALL" ? Convert.ToString(cmbFilterNarration.SelectedValue) : "ALL";
+                string vno = txtFilterVoucher.Text.Trim();
+                string filter = cmbFilter.Text;
+
+                if (!string.IsNullOrWhiteSpace(vno) && !vno.All(char.IsDigit))
+                {
+                    MessageBox.Show("Only numbers are allowed in PV No.");
+                    return;
+                }
+
+                dtquery = Query.PaymentFilter1New(
+                    dtpFrom.Value.ToString("dd MMM yyyy"),
+                    dtpTo.Value.ToString("dd MMM yyyy"),
+                    narration,
+                    vno,
+                    filter);
+
+                //string narration = cmbFilterNarration.Text != "ALL" ? "  and fktransactionid = '" + Convert.ToString(cmbFilterNarration.SelectedValue) + "'" : "ALL";
+                //string Vno = txtFilterVoucher.Text != "" ? " and VNO = " + txtFilterVoucher.Text : "";
+                //dtquery = Query.PaymentFilter1New(dtpFrom.Value.ToString("dd MMM yyyy"), dtpTo.Value.ToString("dd MMM yyyy"),narration,
+                //    Vno, cmbFilter.Text);
                 Fillquery();
             }
             catch (Exception ex)
@@ -822,7 +840,14 @@ namespace ERP
 
             //}
             if (dgvAccount.Rows[e.RowIndex].Cells[clnVseq.Index].Value == null)
-                dgvAccount.Rows[e.RowIndex].Cells[clnVseq.Index].Value = "0";
+                dgvAccount.Rows[e.RowIndex].Cells[clnVseq.Index].Value = "0"; //Tauqeer Add Serial No
+
+
+            //Add tauqeer show serial no visible value VSeq
+            ReassignSerialNumbers();
+
+
+
             dtpDate.Value = DateTime.Today;
 
 
@@ -832,7 +857,17 @@ namespace ERP
             //}
 
         }
-
+        private void ReassignSerialNumbers()
+        {
+            int serial = 1;
+            foreach (DataGridViewRow row in dgvAccount.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    row.Cells[sno.Index].Value = serial++;
+                }
+            }
+        }
         public void DgRowCount()
         {
             if (dgRowCount > dtrowCount)
@@ -1189,6 +1224,11 @@ namespace ERP
         }
 
         private void grpSCC_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabJournal_Click(object sender, EventArgs e)
         {
 
         }

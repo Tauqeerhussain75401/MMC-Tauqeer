@@ -8,6 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
 using System.IO;
+using System.Drawing.Printing;
+using ZXing;
+using System.Threading.Tasks;
 using ERP.Reports;
 
 namespace ERP
@@ -17,16 +20,12 @@ namespace ERP
         public frmOPDReceipt()
         {
             InitializeComponent();
-            //FillControls.FillcmbCunsultant(cmbConsultant );
             FillControls.FillcmbTestCatagoryForOPD(new ComboBox[] { cmbOPDCatagory, cmbFilterOpdCatagory });
             FillControls.FillcmbPatientCatagory(cmbPatientType);
             FillControls.FillcmbMember(cmbMembership);
             FillControls.FillReferenceIndex(cmbReference);
         }
         public string PType, PBMJ, PTitle, PName, PGender, PContact, PAge, PAgeUnit, PReference, Premakrs = "";
-
-
-
 
         private int currentRow;
         private bool resetRow = false;
@@ -36,28 +35,17 @@ namespace ERP
         DataTable dtConsultant = Query.ConsultantIndex();
         DataTable dtDependent = Query.MemberDependentIndex();
         DataTable dtDependentEmpty = new DataTable();
-        DataTable dtTest = Query.TestIndex();
-        //DataTable dtCashBanks = Query.CashBanks();        
+        DataTable dtTest = Query.TestIndex();    
         #region Fill Controls
         DataTable dtQuery;
         void FillQuery(string[] filter, bool GetAll)
         {
             dgvQuery.Rows.Clear();
 
-            if (GetAll) dtQuery = Query.OPDReceiptQuery(filter, (string)cmbOPDCatagory.SelectedValue == null ? "" : (string)cmbOPDCatagory.SelectedValue);
+            if (GetAll) dtQuery = Query.OPDReceiptQuery(filter, (string)cmbOPDCatagory.SelectedValue == null ? "3" : (string)cmbOPDCatagory.SelectedValue);
             for (int i = 0; i < dtQuery.Rows.Count; i++)
             {
                 int ind = dgvQuery.Rows.Add(dtQuery.Rows[i].ItemArray);
-
-                //int ind = dgvQuery.Rows.Add(dtQuery.Rows[i]["TokenNo"], "OP-" + dtQuery.Rows[i]["ReceiptNo"].ToString(),
-                //    ((DateTime)dtQuery.Rows[i]["VDate"]),
-                //      dtQuery.Rows[i]["CatagoryTitle"].ToString(),
-                //      dtQuery.Rows[i]["ConsultantName"].ToString(),
-                //      dtQuery.Rows[i]["patienttype"].ToString(),
-                //      dtQuery.Rows[i]["patientname"].ToString(),
-                //      dtQuery.Rows[i]["netamount"],
-                //      dtQuery.Rows[i]["CreatedBy"].ToString() + " | " + ((DateTime)dtQuery.Rows[i]["CreatedTime"]).ToString("dd-MMM-yyyy hh:mm:ss tt"),
-                //      dtQuery.Rows[i]["EditBy"].ToString() != "" ? dtQuery.Rows[i]["EditBy"].ToString() + " | " + ((DateTime)dtQuery.Rows[i]["EditTime"]).ToString("dd-MMM-yyyy hh:mm:ss tt") : null);
                 if (dtQuery.Rows[i]["noofPrint"].ToString() == "0")
                     dgvQuery.Rows[ind].DefaultCellStyle.BackColor = Color.LightGray;
                 if (dtQuery.Rows[i]["status"].ToString() != "0")
@@ -95,7 +83,16 @@ namespace ERP
                 }
                 dtpDate.Value = (DateTime)dt.Rows[0]["VDate"];
                 cmbOPDCatagory.SelectedValue = dt.Rows[0]["Catagoryid"];
-                cmbConsultant.SelectedValue = dt.Rows[0]["Consultantid"];
+                string category = dt.Rows[0]["Catagoryid"].ToString();
+
+                if (category == "2")
+                {
+                    cmbConsultant.SelectedValue = dt.Rows[0]["laboratoryConsultantid"];
+                }
+                else
+                {
+                    cmbConsultant.SelectedValue = dt.Rows[0]["Consultantid"];
+                }
                 cmbPatientType.SelectedValue = dt.Rows[0]["patienttype"];//.ToString();
                 cmbMembership.SelectedValue = dt.Rows[0]["memberid"];
                 cmbGender.Text = dt.Rows[0]["gender"].ToString();
@@ -163,37 +160,30 @@ namespace ERP
                 DataTable dt = Query.SessionBalanceAddPartialPayment(UserInfo.UserId);
                 Decimal Balance = Decimal.Parse(dt.Rows[0][2].ToString());
                 lblCash.Text = "Current Cash : " + Balance.ToString("N0");
-
             }
             catch
             {
-
             }
-
         }
+
         private void frmReceipt_Load(object sender, EventArgs e)
         {
             cmbOPDCatagory.SelectedIndex = 1;
+            txtFdate.Text = SoftwareInfo.ServerDate.ToString("dd-MMM-yyyy");
             if (UserInfo.UserLevel == "Admin")
             {
-                txtFdate.Text = SoftwareInfo.ServerDate.ToString("dd-MMM-yyyy");
                 dtpDate.Enabled = true;
                 FillControls.FillcmbUser(cmbRefundUser);
                 cmbRefundUser.SelectedValue = UserInfo.UserId;
                 grpRefundInfo.Visible = true;
             }
-            ///FillQuery(new string[]{} ,true );
-            //btnFind_Click(null, null);
+            btnFind_Click(null, null); 
             btnNew_Click(null, null);
-            FillSessionBalance();
-            dtDependentEmpty = dtDependent.Copy();
-            dtDependentEmpty.Rows.Clear();
-            //if (dtQuery.Rows.Count > 0 && txtVoucherNo.Text == "")
-            //{
-            //    string voucherNo = dtQuery.Rows[VoucherIndex]["ReceiptNo"].ToString();
-            //    FillReceipt(voucherNo);
-            //}
-            if (UserInfo.UserLevel == "Admin")
+            FillSessionBalanceAsync();
+            //FillSessionBalance();
+            dtDependentEmpty = dtDependent.Copy(); 
+            dtDependentEmpty.Rows.Clear(); 
+            if (UserInfo.UserLevel == "Admin") 
             {
                 btnCancelAll.Visible = true;
             }
@@ -408,7 +398,11 @@ namespace ERP
                     MessageBox.Show("Contact Number Required...!");
                     return false;
                 }
-
+            }
+            if (txtContactNo.Text.Length != 11)
+            {
+                MessageBox.Show("Please enter a valid contact number. It should be exactly 11 digits.");
+                return false;
             }
             if (ntxtAge.Value == 0)
             {
@@ -437,7 +431,7 @@ namespace ERP
                 DataRowView TokenStatus = (DataRowView)cmbOPDCatagory.SelectedItem;
                 if (TokenStatus["autotoken"].ToString() == "0" && TokenStatus["resforduptoken"].ToString() == "1")
                 {
-                    DataTable dt = Query.getData(@"SELECT Count(*) FROM opdreceipt opdr WHERE consultantid = '" + cmbConsultant.SelectedValue.ToString() + "' AND catagoryid = '" + cmbOPDCatagory.SelectedValue.ToString() + "' AND vdate + (8/24) >= SYSDATE AND tokenno = '" + ntxtTokenNo.Value.ToString() + "'");
+                    DataTable dt = Query.getData(@"SELECT Count(*) FROM opdreceipt opdr WHERE status = 0 AND consultantid = '" + cmbConsultant.SelectedValue.ToString() + "' AND catagoryid = '" + cmbOPDCatagory.SelectedValue.ToString() + "' AND vdate + (8/24) >= SYSDATE AND tokenno = '" + ntxtTokenNo.Value.ToString() + "'");
                     if (Convert.ToInt32(dt.Rows[0][0]) > 0)
                     {
                         if (dgvExpenses.Rows.Count > 0 && (string)dgvExpenses.Rows[0].Cells[clnTest.Index].Value == "6")
@@ -500,6 +494,27 @@ namespace ERP
                         }
                     }
 
+                    if (cmbOPDCatagory.SelectedValue.ToString() == "2")
+                    {
+                        string[] VfkTestId = fkTestId.ToArray();
+
+                        // Check for duplicates
+                        var duplicateTestIds = VfkTestId
+                            .GroupBy(id => id)
+                            .Where(g => g.Count() > 1)
+                            .Select(g => g.Key)
+                            .ToList();
+
+                        if (duplicateTestIds.Any())
+                        {
+                            MessageBox.Show("A duplicate test has been selected in the list for this patient. Please review the test information to avoid duplicate entries.",
+                            "Duplicate Test",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                    }
 
                     DML.OPDReceipt_Add_Edit(voucher, ntxtTokenNo.Value, dtpDate.Value, cmbOPDCatagory.SelectedValue.ToString(), cmbConsultant.SelectedValue, cmbPatientType.SelectedValue, cmbMembership.SelectedValue,
                         cmbPatientId.SelectedValue, cmbPatientTitle.Text, cmbPatientId.Text, cmbGender.Text, txtContactNo.Text, ntxtAge.Value.ToString(), cmbAgeUnit.Text, (string)cmbReference.SelectedValue, txtRemarks.Text,
@@ -515,23 +530,10 @@ namespace ERP
                         if (!Print(voucher))
                         {
                             MessageBox.Show("Printer Error....!" + Environment.NewLine + "Application will be Exit...!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                             Application.Exit();
-                            //MessageBox.Show("Printer Error....!");
-                            //Print(voucher);
-
                         }
                     }
-                    //FillReceipt(voucher);
-                    // if (dtQuery.Select("ReceiptNo = '" + voucher + "'").Count() == 0)
-                    // {
-                    //     DataRow dr = dtQuery.NewRow();
-                    //     dr.ItemArray = Query.OPDReceiptQuery(voucher).Rows[0].ItemArray.Clone() as object[];
-                    //     dtQuery.Rows.InsertAt(dr, 0);
-                    //     FillQuery(null, false);
-                    // }
                     MessageBox.Show("Record Successfully Saved..!");
-
                     FillSessionBalance();
                     btnNew_Click(null, null);
                 }
@@ -562,14 +564,21 @@ namespace ERP
                 }
             }
             string FDate = txtFdate.Text, TDate = txtTdate.Text, UserId = txtUserid.Text, ReceiptNo = txtReceiptNo.Text, OPDCatagory = (string)cmbOPDCatagory.SelectedValue;
+            //FillQuery(new string[] { FDate != "" ? " and trunc(Vdate) >= '" + FDate + "'" : "",
+            //    TDate != "" ? " and trunc(Vdate) <= '" + TDate + "'" : "",
+            //    UserId != "" ? " and createdby = '" + UserId + "'" : "",
+            //    ReceiptNo  != "" ? " and to_number(receiptno)  in (" + ReceiptNo.Replace(' ',',') +")" : "",
+            //    txtContact.Text!=""?"and contactno='"+txtContact.Text+"'":""
+            //}, true);  Tauqeer 
 
 
-            FillQuery(new string[] { FDate != "" ? " and trunc(Vdate) >= '" + FDate + "'" : "",
+            FillQueryAsync(new string[] { FDate != "" ? " and trunc(Vdate) >= '" + FDate + "'" : "",
                 TDate != "" ? " and trunc(Vdate) <= '" + TDate + "'" : "",
                 UserId != "" ? " and createdby = '" + UserId + "'" : "",
                 ReceiptNo  != "" ? " and to_number(receiptno)  in (" + ReceiptNo.Replace(' ',',') +")" : "",
                 txtContact.Text!=""?"and contactno='"+txtContact.Text+"'":""
             }, true);
+
         }
         private void txtFdate_Validated(object sender, EventArgs e)
         {
@@ -655,7 +664,15 @@ namespace ERP
         }
         void FillLastIssuedSlip()
         {
-            DataTable Lastentry = Query.getData("SELECT * FROM opdreceipt WHERE  createdby = '" + UserInfo.UserId + "' AND receiptno = (SELECT Max(To_Number(receiptno)) FROM opdreceipt WHERE createdby = '" + UserInfo.UserId + "')");
+            //Tauqeer
+            //DataTable Lastentry = Query.getData("SELECT * FROM opdreceipt WHERE  createdby = '" + UserInfo.UserId + "' AND receiptno = (SELECT Max(To_Number(receiptno)) FROM opdreceipt WHERE createdby = '" + UserInfo.UserId + "')");
+            DataTable Lastentry = Query.getData(
+                        "SELECT patientname, grossamount FROM (" +
+                        " SELECT patientname, grossamount FROM opdreceipt " +
+                        " WHERE Trunc(vdate) >= Trunc(SYSDATE - 50) AND createdby = '" + UserInfo.UserId + "' " +
+                        " ORDER BY TO_NUMBER(receiptno) DESC" +
+                        ") WHERE ROWNUM = 1"
+                    );
             if (Lastentry.Rows.Count > 0)
             {
                 lblLastRecord.Text = "Last Slip Issued Patient Name : " + Lastentry.Rows[0]["patientname"].ToString() + " Of Amount " + Lastentry.Rows[0]["grossamount"].ToString();
@@ -678,10 +695,9 @@ namespace ERP
             dtpDate.Value = SoftwareInfo.ServerDate;
             cmbConsultant.SelectedIndex = ConsultIndex;
             cmbOPDCatagory.Focus();
-            FillLastIssuedSlip();
-
+            FillLastIssuedSlip(); //Tauqeer
             txtRSearch.Clear();
-
+            txtContactNo.Clear();
         }
         #region Navigation
         private void btnHome_Click(object sender, EventArgs e)
@@ -735,7 +751,7 @@ namespace ERP
 
         private void deleteRecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (UserInfo.UserLevel == "Admin")
+            if (UserInfo.UserLevel == "Admin" && txtVoucherNo.Text != "")
             {
                 if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to Delete this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
@@ -744,13 +760,24 @@ namespace ERP
 
                         if (txtVoucherNo.Text != "")
                         {
-
                             DML.OPDReceiptTestDetail_Add_Edit(1, Enumerable.Repeat(txtVoucherNo.Text.Replace("OP-", ""), 1).ToArray(),
                                 Enumerable.Repeat(dgvExpenses.CurrentRow.Cells[clnTest.Index].Value.ToString(), 1).ToArray(),
                                 Enumerable.Repeat(Convert.ToDecimal(dgvExpenses.CurrentRow.Cells[dgvExpclnAmount.Index].Value.ToString()), 1).ToArray(),
                                 Enumerable.Repeat("1", 1).ToArray(), Enumerable.Repeat((string)dgvExpenses.CurrentRow.Cells[clnRowId.Index].Value, 1).ToArray());
 
                         }
+                        dgvExpenses.Rows.RemoveAt(dgvExpenses.CurrentRow.Index);
+                        CalcTotAmount();
+                        MessageBox.Show("Record Successfully Deleted..!");
+                    }
+                }
+            }
+            else if (txtVoucherNo.Text == "")
+            {
+                if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to Delete this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if (dgvExpenses[clnTest.Index, dgvExpenses.CurrentRow.Index].Value != null)
+                    {
                         dgvExpenses.Rows.RemoveAt(dgvExpenses.CurrentRow.Index);
                         CalcTotAmount();
                         MessageBox.Show("Record Successfully Deleted..!");
@@ -839,11 +866,14 @@ namespace ERP
                 dgvExpenses.Visible = true;
                 dgvExpenses.Rows.Clear();
                 //string GetTest, GetRate;
-                FillcmbTest(dr["id"].ToString()/*, out GetTest, out GetRate*/);
+                if (dr != null)
+                {
+                    FillcmbTest(dr["id"].ToString()/*, out GetTest, out GetRate*/);
+                }
                 int ind = dgvExpenses.Rows.Add();
                 //dgvExpenses.Rows[0].Cells[clnTest.Index].Value = GetTest;
                 //dgvExpenses.Rows[0].Cells[clnAmount.Index].Value = GetRate;
-                if (dr["DefaultTestId"].ToString() != "")
+                            if (dr != null && dr["DefaultTestId"].ToString() != "")
                 {
                     dgvExpenses[clnTest.Index, ind].Value = dr["DefaultTestId"].ToString();
                     DataRow drTest = dtTest.Select("id = '" + dr["DefaultTestId"].ToString() + "'").FirstOrDefault();
@@ -883,7 +913,7 @@ namespace ERP
         {
             DataTable dt = new DataTable();
 
-            if (Id != "")
+            if (Id != "" && Id != "2")
                 dt = dtConsultant.Select("testtypeid = '" + Id + "'").Count() > 0 ? dtConsultant.Select("testtypeid = '" + Id + "'").CopyToDataTable() : new DataTable();
             else dt = dtConsultant;
 
@@ -931,12 +961,66 @@ namespace ERP
                 lblConsultantCharges.Text = dr["HospitalRate"].ToString();
                 for (int i = 0; i < dgvExpenses.Rows.Count; i++)
                 {
-                    if ((string)dgvExpenses[clnTest.Index, i].Value == "6")
+                    if ((string)dgvExpenses[clnTest.Index, i].Value == "6" || (string)dgvExpenses[clnTest.Index, i].Value == "1366" || (string)dgvExpenses[clnTest.Index, i].Value == "1368")
                     {
                         dgvExpenses[dgvExpclnAmount.Index, i].Value = dr["HospitalRate"].ToString();
                     }
                 }
             }
+
+            //DataRowView TokenStatus = (DataRowView)cmbOPDCatagory.SelectedItem;
+            //if (TokenStatus != null && cmbConsultant.SelectedValue  != null && TokenStatus["autotoken"].ToString() == "0" && TokenStatus["resforduptoken"].ToString() == "1")
+            //{
+            //    string q = @"SELECT tokenno FROM opdreceipt opdr WHERE consultantid = '" + cmbConsultant.SelectedValue.ToString() + "' AND catagoryid = '" + cmbOPDCatagory.SelectedValue.ToString() + "' AND vdate + (8/24) >= SYSDATE AND tokenno = '" + ntxtTokenNo.Value.ToString() + "'";
+            //    DataTable dt = Query.getData(q);
+            //    if (Convert.ToInt32(dt.Rows[0][0]) > 0)
+            //    {
+            //        if (dgvExpenses.Rows.Count > 0 && (string)dgvExpenses.Rows[0].Cells[clnTest.Index].Value == "6")
+            //        {
+            //            MessageBox.Show("This token number has already being issued. Please insert new number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //            return;
+            //        }
+            //    }
+            //}
+
+
+            //-----------------------------------------------
+            //DataRowView drConsultant = null;
+            //DataRowView drOpdCategory = null;
+            //int consultant = 0;
+            //int opdCategory = 0;
+
+            //if ((cmbConsultant.SelectedItem as DataRowView) != null &&
+            //    (cmbOPDCatagory.SelectedItem as DataRowView) != null &&
+            //    cmbConsultant.SelectedValue != null &&
+            //    cmbOPDCatagory.SelectedValue != null &&
+            //    int.TryParse(cmbConsultant.SelectedValue.ToString(), out consultant) &&
+            //    int.TryParse(cmbOPDCatagory.SelectedValue.ToString(), out opdCategory))
+            //{
+
+            //    string q = "SELECT NVL(Max(op.tokenno), 0) AS LastToken  FROM opdreceipt op JOIN usersession us ON us.sessionid = op.sessionid WHERE op.consultantid ='" + cmbConsultant.SelectedValue.ToString() + "'  AND  op.catagoryid = '" + cmbOPDCatagory.SelectedValue.ToString() + "' AND op.vdate >= SYSDATE - INTERVAL '4' HOUR";
+            //    DataTable dt = Query.getData(q);
+            //    lblLastTokenNo.Text = dt.Rows[0]["LastToken"].ToString();
+            //}
+
+
+
+            //    if (drconsultant != null && drOpdCategory != null)
+            //{
+            //    if (cmbConsultant.SelectedValue != null && cmbOPDCatagory.SelectedValue != null)
+            //    {
+            //        int opdCategory = Convert.ToInt32(cmbConsultant.SelectedValue);
+            //        int consultant = Convert.ToInt32(cmbOPDCatagory.SelectedValue);
+            //        if (true)
+            //        {
+
+            //        }
+
+            //        string q = "SELECT NVL(Max(op.tokenno), 0) AS LastToken  FROM opdreceipt op JOIN usersession us ON us.sessionid = op.sessionid WHERE op.consultantid ='" + cmbConsultant.SelectedValue.ToString() + "'  AND  op.catagoryid = '" + cmbOPDCatagory.SelectedValue.ToString() + "' AND op.vdate >= SYSDATE - INTERVAL '4' HOUR";
+            //        DataTable dt = Query.getData(q);
+            //    }
+            //}
+
 
 
         }
@@ -953,41 +1037,56 @@ namespace ERP
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            //frmReportView frm = new frmReportView();
-            Print(VoucherNum);
+            if (UserInfo.UserLevel == "Admin")
+            {
+                Print(VoucherNum);
+            }
+            else
+            {
+                DataTable dt = ReportQuery.OPDReceipt(VoucherNum);
+                if (dt.Rows[0]["noofPrint"].ToString() == "0")
+                {
+                    Print(VoucherNum);
+                }
+                else
+                {
+                    MessageBox.Show("You do not have permission to print this document again.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
 
         private bool Print(string voucher)
         {
-            // bool IsPrinted = false;
+            bool IsPrinted = false;
             try
             {
                 if (voucher != "")
                 {
-                    if (UserInfo.UserLevel != "Admin")
-                    {
-                        DataTable dtCount = Query.getData("select nvl(noofprint,0) from opdreceipt where receiptno = '" + voucher + "'");
-                        if (int.Parse(dtCount.Rows[0][0].ToString()) > 0)
-                        {
-                            return false;
-                        }
-                    }
                     DataRowView dr = (DataRowView)cmbOPDCatagory.SelectedItem;
                     if (dr != null && dr["PrintType"].ToString() != "CARD")
                     {
-                        Reports.OPDReceipt rpt = new Reports.OPDReceipt();
                         DataTable dt = ReportQuery.OPDReceipt(voucher);
-                        DataTable dtTest = ReportQuery.OPDTestReceipt(voucher);
-                        dtTest.Columns.Add("QRcode",typeof(byte[]));
-                        
-
-                        string VoucherNo = "OP-" + voucher;
-                        string QRimagePath = Application.StartupPath + "\\QRCode.jpeg";
-                        DataTable dtQRcode = Query.GenerateQRCode(VoucherNo, QRimagePath);
-                        foreach (DataRow dr2 in dtTest.Rows)
+                        string category = dt.Rows[0]["CatagoryTitle"].ToString();
+                        if (category == "Laboratory")
                         {
-                            dr2["QRcode"] = (byte[])dtQRcode.Rows[0]["Qrcode"];
+                            PrintHussainiLaboratory(voucher, dt);
+                            return true;
                         }
+
+                        Reports.OPDReceipt rpt = new Reports.OPDReceipt();
+                        DataTable dtTest = ReportQuery.OPDTestReceipt(voucher);
+                        dtTest.Columns.Add("QRcode", typeof(byte[]));
+
+
+                      //  string VoucherNo = "OP-" + voucher;
+                      // string QRimagePath = Application.StartupPath + "\\QRCode.jpeg";
+                      //  DataTable dtQRcode = Query.GenerateQRCode(VoucherNo, QRimagePath);
+                      // foreach (DataRow dr2 in dtTest.Rows)
+                      // {
+                      // dr2["QRcode"] = (byte[])dtQRcode.Rows[0]["Qrcode"];
+                      //}
+
+
 
                         rpt.SetDataSource(dtTest);
                         rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
@@ -1005,7 +1104,7 @@ namespace ERP
                         rpt.SetParameterValue("@Remarks", dt.Rows[0]["Remarks"].ToString());
                         rpt.SetParameterValue("@GrossAmount", dt.Rows[0]["GrossAmount"].ToString());
                         decimal NetAmouunt = Convert.ToDecimal(dt.Rows[0]["NetAmount"].ToString());
-                        decimal kECharges =Convert.ToDecimal(dt.Rows[0]["electricitycharges"].ToString());
+                        decimal kECharges = Convert.ToDecimal(dt.Rows[0]["electricitycharges"].ToString());
                         decimal Total = NetAmouunt + kECharges;
                         rpt.SetParameterValue("@NetAmount", NetAmouunt);
                         rpt.SetParameterValue("@electricitycharges", dt.Rows[0]["electricitycharges"].ToString());
@@ -1021,6 +1120,7 @@ namespace ERP
                         rpt.SetParameterValue("@PrintedBy", UserInfo.UserId);
                         rpt.SetParameterValue("@terminal", SoftwareInfo.Terminal);
                         rpt.SetParameterValue("@urcompanyname", CompanyInfo.UrCompanyName);
+                        rpt.SetParameterValue("@phoneNo", dt.Rows[0]["contactno"].ToString());
                         rpt.ReportFooterSection7.SectionFormat.EnableUnderlaySection = true;
                         if (dt.Rows[0]["Discount"].ToString() == "0") rpt.ReportFooterSection3.SectionFormat.EnableSuppress = true;
                         if (dt.Rows[0]["electricitycharges"].ToString() == "0") rpt.ReportFooterSection20.SectionFormat.EnableSuppress = true;
@@ -1044,23 +1144,11 @@ namespace ERP
                             rpt.PrintToPrinter(1, true, 1, 9999);
                             Query.Execute("update opdreceipt set noofprint = nvl(noofprint,0) + 1 where receiptno = '" + voucher + "'");
                         }
-                        //if (dt.Rows[0]["electricitycharges"].ToString() != "0")
-                        //{
-                        //    rpt.ReportFooterSection20.SectionFormat.EnableSuppress = true;
-                        //}
-                       // else { rpt.ReportFooterSection20.SectionFormat.EnableSuppress = false; }
-
                     }
                     else
                     {
                         Reports.OPDCard rpt = new Reports.OPDCard();
                         DataTable dt = ReportQuery.OPDReceipt(voucher);
-
-                        string VoucherNo = "OP-" + voucher;
-                        string QRimagePath = Application.StartupPath + "\\QRCode.jpeg";
-                        DataTable dtQRcode = Query.GenerateQRCode(VoucherNo, QRimagePath);
-                        rpt.SetDataSource(dtQRcode);
-
                         rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
                         rpt.SetParameterValue("@Contact", CompanyInfo.ContactHead);
                         rpt.SetParameterValue("@Address", CompanyInfo.Address);
@@ -1071,11 +1159,7 @@ namespace ERP
                         rpt.SetParameterValue("@Gender", dt.Rows[0]["Gender"].ToString());
                         rpt.SetParameterValue("@Consultant", dt.Rows[0]["ConsultantName"].ToString());
                         rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
-
-                        //3-Aug-2021 Commit By Muhammad Khurram 
-                        //rpt.SetParameterValue("@User", UserInfo.UserName);
                         rpt.SetParameterValue("@User", dt.Rows[0]["createdby"].ToString());
-
                         rpt.SetParameterValue("@Discount", dt.Rows[0]["Discount"].ToString());
                         rpt.SetParameterValue("@Remarks", dt.Rows[0]["Remarks"].ToString());
                         rpt.SetParameterValue("@GrossAmount", dt.Rows[0]["GrossAmount"].ToString());
@@ -1090,11 +1174,11 @@ namespace ERP
                         rpt.SetParameterValue("@PrintedBy", UserInfo.UserId);
                         rpt.SetParameterValue("@terminal", SoftwareInfo.Terminal);
                         rpt.SetParameterValue("@urcompanyname", CompanyInfo.UrCompanyName);
+                        rpt.SetParameterValue("@phoneNo", dt.Rows[0]["contactno"].ToString());
                         if (dt.Rows[0]["Discount"].ToString() == "0") rpt.ReportFooterSection3.SectionFormat.EnableSuppress = true;
                         if (dt.Rows[0]["ReferenceName"].ToString() == "") rpt.ReportFooterSection5.SectionFormat.EnableSuppress = true;
                         if (dt.Rows[0]["memberid"].ToString() == "")
                         {
-
                             rpt.ReportFooterSection6.SectionFormat.EnableSuppress = true;
                         }
                         else
@@ -1102,8 +1186,6 @@ namespace ERP
                             rpt.ReportFooterSection1.SectionFormat.EnableUnderlaySection = true;
                         }
                         if (dt.Rows[0]["tokenNo"].ToString() == "0") rpt.ReportFooterSection7.SectionFormat.EnableSuppress = true;
-                        // rpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
-
                         if (UserInfo.UserLevel == "Admin")
                         {
                             frmReportView frm = new frmReportView();
@@ -1112,14 +1194,11 @@ namespace ERP
                         }
                         else
                         {
-                            rpt.PrintToPrinter(1, true, 0, 0);
+                            rpt.PrintToPrinter(1, true, 1, 9999);
                             Query.Execute("update opdreceipt set noofprint = nvl(noofprint,0) + 1 where receiptno = '" + voucher + "'");
                         }
 
                     }
-
-                    //frm.rptViewer.ReportSource = rpt;
-                    //frm.Show();
                 }
                 return true;
             }
@@ -1277,12 +1356,17 @@ namespace ERP
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void tabDetailQuery_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (UserInfo.UserId != "Admin" && tabDetailQuery.SelectedTab == tpDetail)
-            {
-                btnFind_Click(null, null);
-            }
+            //if (UserInfo.UserId != "Admin" && tabDetailQuery.SelectedTab == tpDetail)
+            //{
+            //    btnFind_Click(null, null);
+            //} Tauqeer
 
         }
 
@@ -1298,10 +1382,8 @@ namespace ERP
         //BASIT 4/3/2020
         private void dgvExpenses_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
-
             if (e.ColumnIndex == clnTest.Index && e.RowIndex > -1)
             {
-
                 string name = (string)dgvExpenses.Rows[e.RowIndex].Cells[clnTest.Index].Value;
                 if (name != null)
                 {
@@ -1325,6 +1407,45 @@ namespace ERP
                         }
                     }
                 }
+            }
+        }
+
+        private void txtContactNo_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F7 && txtContactNo.Focused == true && txtContactNo.Text != "")
+            {
+                Forms.frmSearchHisByContactNo frm = new Forms.frmSearchHisByContactNo();
+                frm.contactno = txtContactNo.Text;
+                //frm.Show();
+                if (frm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    if (frm.dtFillPatHis.Rows.Count > 0)
+                    {
+                        dgvExpenses.Rows.Clear();
+                        Validation.Clear(grpInvoiceDetail);
+                        lblTotAmount.Text = "0";
+                        lblGrossAmount.Text = "0";
+                        ntxtDiscount.Value = 0;
+                        DataRow dr = frm.dtFillPatHis.Rows[0];
+
+                        cmbPatientType.SelectedValue = dr["patienttype"].ToString();
+                        if (dr["memberid"].ToString() != "")
+                        {
+                            cmbMembership.SelectedValue = dr["memberid"].ToString();
+                        }
+                        cmbPatientTitle.Text = dr["patienttitle"].ToString();
+                        cmbPatientId.Text = dr["patientname"].ToString();
+                        cmbGender.Text = dr["gender"].ToString();
+                        txtContactNo.Text = dr["contactno"].ToString();
+                        ntxtAge.Value = Convert.ToInt32(dr["age"].ToString());
+                        cmbAgeUnit.Text = dr["ageunit"].ToString();
+                        cmbReference.SelectedValue = dr["referenceid"].ToString();
+                        txtRemarks.Text = dr["remarks"].ToString();
+                    }
+                    cmbOPDCatagory.Focus();
+
+                }
+
             }
         }
 
@@ -1371,8 +1492,7 @@ namespace ERP
             dgvExpenses.Rows.Clear();
             if (dr != null)
             {
-                //string GetTest, GetRate;
-                FillcmbTest(dr["id"].ToString()/*, out GetTest, out GetRate*/);
+                FillcmbTest(dr["id"].ToString());
             }
             int ind = dgvExpenses.Rows.Add();
             if (dr != null && dr["DefaultTestId"].ToString() != "")
@@ -1386,11 +1506,8 @@ namespace ERP
                     cmbOPDCatagory.SelectedIndex = -1;
                 }
             }
-
-            //DataTable dtConsultantRefresh = Query.ConsultantIndex();
-            //dtConsultant = dtConsultantRefresh.Copy();
-            dtConsultant.Rows.Clear();
-            dtConsultant = Query.ConsultantIndex();
+            //dtConsultant.Rows.Clear(); Tauqeer
+            //dtConsultant = Query.ConsultantIndex(); Tauqeer
             cmbConsultant.DataSource = dtConsultant;
             if (dtConsultant.Rows.Count > 0)
             {
@@ -1402,7 +1519,7 @@ namespace ERP
         }
         private void btnRefreshQuery_Click(object sender, EventArgs e)
         {
-            btnFind_Click(null, null);
+            btnFind_Click(null, null);      
         }
 
         private void txtContactNo_KeyDown(object sender, KeyEventArgs e)
@@ -1460,6 +1577,141 @@ namespace ERP
                     btnNew_Click(null, null);
 
                 }
+            }
+        }
+
+        void PrintHussainiLaboratory(string voucher, DataTable dt)
+        {
+            Reports.OPDReceipt_Laboratory rpt = new Reports.OPDReceipt_Laboratory();
+            DataTable dtTest = ReportQuery.OPDTestReceipt(voucher);
+            dtTest.Columns.Add("QRcode", typeof(byte[]));
+
+
+            // string VoucherNo = "OP-" + voucher;
+            // string QRimagePath = Application.StartupPath + "\\QRCode.jpeg";
+            //  DataTable dtQRcode = Query.GenerateQRCode(VoucherNo, QRimagePath);
+           
+            rpt.SetDataSource(dtTest);
+            rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
+            rpt.SetParameterValue("@Contact", CompanyInfo.ContactHead);
+            rpt.SetParameterValue("@Address", CompanyInfo.Address);
+            rpt.SetParameterValue("@Catagory", dt.Rows[0]["CatagoryTitle"].ToString());
+            rpt.SetParameterValue("@ReceiptNo", "OP-" + voucher);
+            rpt.SetParameterValue("@Date", (DateTime)dt.Rows[0]["Vdate"]);
+            rpt.SetParameterValue("@Patient", dt.Rows[0]["patientName"].ToString());
+            rpt.SetParameterValue("@Gender", dt.Rows[0]["Gender"].ToString());
+            rpt.SetParameterValue("@Consultant", dt.Rows[0]["laboratoryConsultantName"].ToString());
+            rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+            rpt.SetParameterValue("@User", UserInfo.UserName);
+            rpt.SetParameterValue("@Discount", dt.Rows[0]["Discount"].ToString());
+            rpt.SetParameterValue("@Remarks", dt.Rows[0]["Remarks"].ToString());
+            rpt.SetParameterValue("@GrossAmount", dt.Rows[0]["GrossAmount"].ToString());
+            decimal NetAmouunt = Convert.ToDecimal(dt.Rows[0]["NetAmount"].ToString());
+            decimal kECharges = Convert.ToDecimal(dt.Rows[0]["electricitycharges"].ToString());
+            decimal Total = NetAmouunt + kECharges;
+            rpt.SetParameterValue("@NetAmount", NetAmouunt);
+            rpt.SetParameterValue("@electricitycharges", dt.Rows[0]["electricitycharges"].ToString());
+            rpt.SetParameterValue("@DiscountName", dt.Rows[0]["patientType"].ToString());
+            rpt.SetParameterValue("@ReferenceName", dt.Rows[0]["ReferenceName"].ToString());
+            rpt.SetParameterValue("@MemberId", dt.Rows[0]["memberid"].ToString());
+            rpt.SetParameterValue("@TokenNo", dt.Rows[0]["TokenNo"].ToString());
+            rpt.SetParameterValue("@Age", dt.Rows[0]["Age"].ToString());
+            rpt.SetParameterValue("@CreatedBY", dt.Rows[0]["createdby"].ToString());
+            rpt.SetParameterValue("@phoneNo", dt.Rows[0]["contactno"].ToString());
+            rpt.SetParameterValue("@partialName", "Partial Payment");
+            rpt.SetParameterValue("@Partial", dt.Rows[0]["netbalance"].ToString());
+            rpt.SetParameterValue("@Createdtime", (DateTime)dt.Rows[0]["createdtime"]);
+            rpt.SetParameterValue("@PrintedBy", UserInfo.UserId);
+            rpt.SetParameterValue("@terminal", SoftwareInfo.Terminal);
+            rpt.SetParameterValue("@urcompanyname", CompanyInfo.UrCompanyName);
+            rpt.ReportFooterSection7.SectionFormat.EnableUnderlaySection = true;
+            if (dt.Rows[0]["Discount"].ToString() == "0") rpt.ReportFooterSection3.SectionFormat.EnableSuppress = true;
+            if (dt.Rows[0]["electricitycharges"].ToString() == "0") rpt.ReportFooterSection20.SectionFormat.EnableSuppress = true;
+            if (dt.Rows[0]["ispartial"].ToString() == "0") rpt.ReportFooterSection12.SectionFormat.EnableSuppress = true;
+            if (dt.Rows[0]["ReferenceName"].ToString() == "") rpt.ReportFooterSection5.SectionFormat.EnableSuppress = true;
+            if (dt.Rows[0]["memberid"].ToString() == "")
+            {
+                rpt.ReportFooterSection6.SectionFormat.EnableSuppress = true;
+                rpt.ReportFooterSection7.SectionFormat.EnableUnderlaySection = false;
+            }
+            if (dt.Rows[0]["tokenNo"].ToString() == "0") rpt.ReportFooterSection7.SectionFormat.EnableSuppress = true;
+            rpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
+            if (UserInfo.UserLevel == "Admin")
+            {
+                frmReportView frm = new frmReportView();
+                frm.rptViewer.ReportSource = rpt;
+                frm.Show();
+            }
+            else
+            {
+                rpt.PrintToPrinter(1, true, 1, 9999);
+                Query.Execute("update opdreceipt set noofprint = nvl(noofprint,0) + 1 where receiptno = '" + voucher + "'");
+            }
+        }
+
+        private async void FillSessionBalanceAsync()
+        {
+            try
+            {
+                var balance = await Task.Run(() =>
+                {
+                    DataTable dt = Query.SessionBalanceAddPartialPayment(UserInfo.UserId);
+                    return Decimal.Parse(dt.Rows[0][2].ToString());
+                });
+                lblCash.Text = "Current Cash : " + balance.ToString("N0");
+            }
+            catch (Exception ex)
+            {
+                lblCash.Text = "Error loading balance";
+            }
+        }
+
+        private async void FillQueryAsync(string[] filter, bool GetAll)
+        {
+            try
+            {
+                progressBar1.Visible = true;
+                dgvQuery.Rows.Clear(); 
+
+                DataTable dt = await Task.Run(() =>
+                {
+                    if (GetAll)
+                    {
+                        var selectedValue = cmbOPDCatagory.InvokeRequired
+                            ? (string)cmbOPDCatagory.Invoke(new Func<object>(() => cmbOPDCatagory.SelectedValue))
+                            : (string)cmbOPDCatagory.SelectedValue;
+
+                        string catId = string.IsNullOrEmpty(selectedValue) ? "3" : selectedValue;
+                        return Query.OPDReceiptQuery(filter, catId);
+                    }
+                    else
+                    {
+                        return new DataTable(); // or handle the non-GetAll case differently
+                    }
+                });
+
+                dtQuery = dt; // optional if you use dtQuery elsewhere
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    int ind = dgvQuery.Rows.Add(dt.Rows[i].ItemArray);
+
+                    if (dt.Rows[i]["noofPrint"].ToString() == "0")
+                        dgvQuery.Rows[ind].DefaultCellStyle.BackColor = Color.LightGray;
+
+                    if (dt.Rows[i]["status"].ToString() != "0")
+                        dgvQuery.Rows[ind].DefaultCellStyle.BackColor = Color.Red;
+                }
+
+                lblTotRecordsFetched.Text = "Total Records : " + dt.Rows.Count.ToString("N0");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load query data.\n" + ex.Message);
+            }
+            finally
+            {
+                progressBar1.Visible = false;
             }
         }
     }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /.vs
 /VersionUpdater/obj
 /VersionUpdater/obj
@@ -9,3 +10,12 @@
 /ERP/obj/x86
 /ERP/obj
 /ERP/obj/x86/Debug
+=======
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+>>>>>>> Tauqeer_New
+/.vs
+/ERP

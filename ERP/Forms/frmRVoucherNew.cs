@@ -80,7 +80,7 @@ namespace ERP
             dgvAccount.Rows.Clear();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                int Index = dgvAccount.Rows.Add(dt.Rows[i]["Vseq"].ToString(), dt.Rows[i]["fkaccountid"].ToString(), null, dt.Rows[i]["description"].ToString(),
+                int Index = dgvAccount.Rows.Add(dt.Rows[i]["Vseq"].ToString(),0, dt.Rows[i]["fkaccountid"].ToString(), null, dt.Rows[i]["description"].ToString(),
                     ((decimal)dt.Rows[i]["cr"]).ToString("N2"), dt.Rows[i]["chequeno"].ToString(), dt.Rows[i]["slipno"].ToString(), dt.Rows[i]["status"].ToString());
                 SubAccountDataSource(Index);
                 dgvAccount.Rows[Index].Cells[clnSubAccountDetail.Index].Value = dt.Rows[i]["fkaccountid"].ToString() == AccountHead.ClientAccount ? dt.Rows[i]["fkclientcode"].ToString() :
@@ -252,7 +252,8 @@ namespace ERP
                             dr.Add(Convert.ToDecimal(dgvAccount[clnCredit.Index, i].Value.ToString()));
                             cr.Add(Convert.ToDecimal(0.00m));
                             SubAccount.Add(Convert.ToString(cmbBankName.SelectedValue));
-                            Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
+                            //Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
+                            Status.Add(0);
                             string nah = Convert.ToString(dgvAccount[clnChequeNo.Index, i].Value.ToString() == null ? "" : dgvAccount[clnChequeNo.Index, i].Value.ToString());
                             ChequeNo.Add(nah);
                             string na2 = Convert.ToString(dgvAccount[clnSlipNo.Index, i].Value.ToString() == null ? "" : dgvAccount[clnSlipNo.Index, i].Value.ToString());
@@ -264,7 +265,8 @@ namespace ERP
                             dr.Add(Convert.ToDecimal(0.00m));
                             cr.Add(Convert.ToDecimal(dgvAccount[clnCredit.Index, i].Value.ToString()));
                             SubAccount.Add((string)dgvAccount[clnSubAccountDetail.Index, i].Value);
-                            Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
+                            //Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
+                            Status.Add(0);
                             ChequeNo.Add(Convert.ToString(dgvAccount[clnChequeNo.Index, i].Value.ToString()));
                             SlipNo.Add(Convert.ToString(dgvAccount[clnSlipNo.Index, i].Value.ToString()));
                         }
@@ -406,18 +408,47 @@ namespace ERP
         {
             try
             {
-                //string filterQuery = "select convert(varchar, VDate, 103) as VDate,VNO,(select TransNarration from TransactionCode where ID = FK_Narration) as Narration,sum(Credit) as Amount from [GL_2017-2018] where ( VDate between '" + dtpFrom.Value.ToString("MM/dd/yyyy 00:00:00:00") + "' and '" + dtpTo.Value.ToString("MM/dd/yyyy 00:00:00:00") + "') and FK_Narration = " + (cmbFilterNarration.Text != "ALL" ? "'" + cmbFilterNarration.SelectedValue.ToString() + "'" : "FK_Narration") + " and VNO = " + VNO + "  and Vtype = 'RV' and status = 0  group by convert(varchar, VDate, 103) ,VNO,FK_Narration";
-                dtquery = Query.ReceiptFilterWithPendingApr(dtpFrom.Value.ToString("dd MMM yyyy"), dtpTo.Value.ToString("dd MMM yyyy"),
-                    (cmbFilterNarration.Text != "ALL" ? "  and fktransactionid = '" + Convert.ToString(cmbFilterNarration.SelectedValue) + "'" : ""),
-                    (VNO != "" ? " and VNO = " + VNO : ""), cmbFilter.Text);
+                string narration = cmbFilterNarration.Text != "ALL" ? Convert.ToString(cmbFilterNarration.SelectedValue) : "ALL";
+                string vno = txtFilterVoucher.Text.Trim();
+                string filter = cmbFilter.Text;
+
+                if (!string.IsNullOrWhiteSpace(vno) && !vno.All(char.IsDigit))
+                {
+                    MessageBox.Show("Only numbers are allowed in RV No.");
+                    return;
+                }
+
+                dtquery = Query.ReceiptFilterWithPendingApr(
+                    dtpFrom.Value.ToString("dd MMM yyyy"),
+                    dtpTo.Value.ToString("dd MMM yyyy"),
+                    narration,
+                    vno,
+                    filter);
+
                 Fillquery();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show(ex.Message);
                 Errors.writeline(ex.Message.ToString(), "Receipt_btnFind_Click");
             }
         }
+
+        //private void btnFind_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dtquery = Query.ReceiptFilterWithPendingApr(dtpFrom.Value.ToString("dd MMM yyyy"), dtpTo.Value.ToString("dd MMM yyyy"),
+        //            (cmbFilterNarration.Text != "ALL" ? "  and fktransactionid = '" + Convert.ToString(cmbFilterNarration.SelectedValue) + "'" : ""),
+        //            (VNO != "" ? " and VNO = " + VNO : ""), cmbFilter.Text);
+        //        Fillquery();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message.ToString());
+        //        Errors.writeline(ex.Message.ToString(), "Receipt_btnFind_Click");
+        //    }
+        //}
 
         private void txtFilterVoucher_Validated(object sender, EventArgs e)
         {
@@ -726,8 +757,20 @@ namespace ERP
                 dgvAccount.Rows[e.RowIndex].Cells[clnStatus.Index].Value = "2";
             if (dgvAccount.Rows[e.RowIndex].Cells[clnVseq.Index].Value == null)
                 dgvAccount.Rows[e.RowIndex].Cells[clnVseq.Index].Value = "0";
-        }
 
+            ReassignSerialNumbers();
+        }
+        private void ReassignSerialNumbers()
+        {
+            int serial = 1;
+            foreach (DataGridViewRow row in dgvAccount.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    row.Cells[sno.Index].Value = serial++;
+                }
+            }
+        }
         private void dgvAccount_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

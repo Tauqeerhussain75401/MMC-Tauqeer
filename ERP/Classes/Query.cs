@@ -43,6 +43,9 @@ namespace ERP
             return dtQr;
         }
 
+
+
+
         private static Bitmap GetLogo(string QRimagePath)
         {
             
@@ -392,7 +395,31 @@ namespace ERP
         }
         internal static DataTable TemplateIndex()
         {
-            string sql = "SELECT id,templatename FROM DocTemplate where lower(userid) = lower('" + UserInfo.UserId + "') ORDER BY templatename ";
+            string sql = "";
+            if (UserInfo.UserLevel == "Admin")
+            {
+                sql  = "SELECT id,templatename FROM DocTemplate  WHERE isecho =0  ORDER BY templatename ";
+            }
+            else
+            {
+                sql = "SELECT id,templatename FROM DocTemplate where isecho =0 and lower(userid) = lower('" + UserInfo.UserId + "') ORDER BY templatename ";
+            }
+
+            DataTable dt = getData(sql);
+            return dt;
+        }
+        internal static DataTable TemplateIndexEcho()
+        {
+            string sql = "";
+            if (UserInfo.UserLevel == "Admin")
+            {
+                sql = "SELECT id,templatename FROM DocTemplate  WHERE isecho =1  ORDER BY templatename ";
+            }
+            else
+            {
+                sql = "SELECT id,templatename FROM DocTemplate where isecho =1 and lower(userid) = lower('" + UserInfo.UserId + "') ORDER BY templatename ";
+            }
+
             DataTable dt = getData(sql);
             return dt;
         }
@@ -480,27 +507,12 @@ namespace ERP
         internal static DataTable OPDReceiptQuery(string[] filter, string catagoryid)
         {
             string Filter = filter.Count() > 0 ? string.Join(" ", filter) : "";
-            //string sql = "SELECT receiptno,tokenNo, vdate, get_OPDcatagory(catagoryid) CatagoryTitle, Get_consultantName(consultantid) ConsultantName, get_PatientType(patienttype) patienttype, memberid, patientid, patienttitle, patientname, gender, contactno, age, ageunit, netamount, createdby, createdtime, editby, edittime,status,noofprint FROM OPDReceipt where ('" + UserInfo.UserLevel + "' = 'Admin' " + Filter + " ) or  (catagoryid = '" + catagoryid + "' and status = 0 and sessionid in  (select sessionid from usersession where status = 2 and userid = '" + UserInfo.UserId + "'))  order by ReceiptNo desc";
-            //            string sql = @"SELECT 'OP-' || receiptno AS receiptno,tokenNo, vdate, 
-            //                        get_OPDcatagory(catagoryid) CatagoryTitle, 
-            //                        Get_consultantName(consultantid) ConsultantName, 
-            //                        get_PatientType(patienttype) patienttype, 
-            //                        memberid, patientid, patienttitle, patientname, gender, contactno, age, ageunit, netamount, 
-            //                        createdby, createdtime, editby, edittime,
-            //                        status,noofprint FROM OPDReceipt opdr
-            //                        LEFT JOIN (select userid,sessionid from usersession where status = 2) us ON us.sessionid = opdr.sessionid 
-            //                        WHERE ( '" + UserInfo.UserLevel + "'= 'Admin' " + Filter + @") 
-            //                        or (catagoryid = '" + catagoryid + "' AND status = 0 AND us.userid = '" + UserInfo.UserId + @"')  
-            //                        order by ReceiptNo DESC";
             string sql = @"SELECT tokenNo,'OP-' || receiptno AS receiptno,vdate, 
                            get_OPDcatagory(catagoryid) CatagoryTitle, 
                            nvl(Get_consultantName(consultantid),' ') ConsultantName, 
                            get_PatientType(patienttype) patienttype, " +
-                           //memberid, patientid, patienttitle, 
-                           "patientname," +
-                           //gender, contactno, age, ageunit, 
+                           "patientname," + 
                            "netamount + electricitycharges AS netamount, " +
-                           //createdby, createdtime, editby, edittime,
                            @"createdby || '|' || To_Char(createdtime,'dd-Mon-yyyy HH:mm:ss am') AS createdby, Decode(editby, NULL, ' ', editby || '|' || To_Char(edittime,'dd-Mon-yyyy HH:mm:ss am')) AS editby,
                            status,noofprint FROM OPDReceipt opdr
                            LEFT JOIN (select userid,sessionid from usersession where status = 2) us ON us.sessionid = opdr.sessionid 
@@ -552,6 +564,12 @@ namespace ERP
         }
         internal static DataTable ConsultantDetail(string ID)
         {
+            //string sql = @"SELECT 1 As surExist,ct.*,cts.consulshare AS consulShare ,cts.hospshare hospShare,pi.amount AS amount,pi.packagename_name,
+            //             pi.package_id AS package_id FROM consultant ct left JOIN consultantsurgery  cts ON ct.id = cts.fkconsid
+            //             left JOIN packageindex pi ON pi.package_id = fkpkgid where ct.isdeactivate = 0 AND cts.status = 0 and ct.id = '" + ID + "'";
+            //DataTable dt = getData(sql);
+            //return dt;
+
             string sql = @"SELECT 1 As surExist,ct.*,cts.consulshare AS consulShare ,cts.hospshare hospShare,pi.amount AS amount,pi.packagename_name,
                          pi.package_id AS package_id FROM consultant ct left JOIN consultantsurgery  cts ON ct.id = cts.fkconsid
                          left JOIN packageindex pi ON pi.package_id = fkpkgid where ct.id = '" + ID + "'";
@@ -677,41 +695,40 @@ namespace ERP
 
         internal static DataTable SessionBalanceAddPartialPayment(string UserId)
         {
-          
             string sql = @"
-SELECT
-    netamount,
-    partial_amount,
-    netamount + partial_amount AS total_amount
-FROM (
-    SELECT
-        NVL(SUM(CASE WHEN memberid IS NOT NULL THEN 0 ELSE netamount + electricitycharges END), 0) AS netamount
-    FROM
-        opdreceipt
-    WHERE
-        status = 0
-        AND sessionid = (
-            SELECT sessionid
-            FROM usersession
-            WHERE userid = '" + UserId + @"'
-            AND status = 2
-        )
-) t1
-CROSS JOIN (
-    SELECT
-        NVL(SUM(partialamount), 0) AS partial_amount
-    FROM
-        Partialreceipt p
-    WHERE
-        p.status = 0
-        AND p.sessionid = (
-            SELECT sessionid
-            FROM usersession
-            WHERE userid = '" + UserId + @"'
-            AND status = 2
-        )
-) t2
-";
+                    SELECT
+                        netamount,
+                        partial_amount,
+                        netamount + partial_amount AS total_amount
+                    FROM (
+                        SELECT
+                            NVL(SUM(CASE WHEN memberid IS NOT NULL THEN 0 ELSE netamount + electricitycharges END), 0) AS netamount
+                        FROM
+                            opdreceipt
+                        WHERE
+                            status = 0
+                            AND sessionid = (
+                                SELECT sessionid
+                                FROM usersession
+                                WHERE userid = '" + UserId + @"'
+                                AND status = 2
+                            )
+                    ) t1
+                    CROSS JOIN (
+                        SELECT
+                            NVL(SUM(partialamount), 0) AS partial_amount
+                        FROM
+                            Partialreceipt p
+                        WHERE
+                            p.status = 0
+                            AND p.sessionid = (
+                                SELECT sessionid
+                                FROM usersession
+                                WHERE userid = '" + UserId + @"'
+                                AND status = 2
+                            )
+                    ) t2
+                    ";
 
             DataTable dt = getData(sql);
             return dt;
@@ -924,7 +941,7 @@ CROSS JOIN (
             */
 
             //basit write this code 19-08-2020
-            string sql = @"SELECT receiptno,VSeq,get_consultantname(consultantid)AS Consultant,charges,get_testtitle(testid)AS Test ,receiptdate,createdby,editby,edittime,status FROM inptestcharges WHERE testtypeid='" + testtypeid + "' and receiptno = Nvl('" + ReceiptNo + "',receiptno) and serialno =  '" + serialno + "' order by status,receiptno desc";
+            string sql = @"SELECT receiptno,VSeq,get_consultantname(consultantid)AS Consultant,charges,get_testtitle(testid)AS Test ,receiptdate,createdby,editby,edittime,status,testid FROM inptestcharges WHERE testtypeid='" + testtypeid + "' and receiptno = Nvl('" + ReceiptNo + "',receiptno) and serialno =  '" + serialno + "' order by status,receiptno desc";
 
             DataTable dt = getData(sql);
             return dt;
@@ -978,7 +995,7 @@ CROSS JOIN (
         }
         internal static DataTable ConsultantSearch(string serialno)
         {
-            string sql = @"SELECT vseq As vseq,get_consultantname(consname) AS consultant,charges,visits,visits*charges AS total,createdby,createtime,status,editby,edittime FROM inpconsultantcharges where serialno='" + serialno + "'  order by status,vseq desc";
+            string sql = @"SELECT vseq As vseq,get_consultantname(consname) AS consultant,charges,visits,visits*charges AS total,createdby,createtime,status,editby,edittime,get_consultantCategory(consname) AS Category FROM inpconsultantcharges where serialno='" + serialno + "'  order by status,vseq desc";
             DataTable dt = getData(sql);
             return dt;
         }
@@ -1257,38 +1274,94 @@ CROSS JOIN (
                 return dt;
             }
         }
+
+        //string sql = "select VDate,VNO,(select narrationtitle from narration where narrationcode = fktransactionid) as Narration,cr as Amount from Voucherdetail where ( VDate between '" + From + "' and '" + To + "') and FK_Narration = " + Narration + " and VNO = " + VNO + "  and Vtype = 'PV' and status = 0 AND Vseq = 1";
+        //@"select VDate,VNO,(select narrationtitle from narration where narrationcode = fktransactionid) as Narration,
+        //cr as Amount from Voucherdetail 
+        //where ( trunc(VDate)   between TO_DATE('" + From + "', 'dd MON yyyy')  and TO_DATE('" + To + "', 'dd MON yyyy') ) " +
+        //Narration + "  " + VNO + "  and Vtype = 'PV' and status != 1 AND Vseq = 1";
+
+        //public static DataTable PaymentFilter1New(string From, string To, string Narration, string VNO, string filter)
+        //{
+        //    DataTable dt = new DataTable();
+        //    try
+        //    {
+        //        OracleDataAdapter adapter = new OracleDataAdapter();
+        //        string sql = @"select VDate,VNO,(select narrationtitle from narration where narrationcode = fktransactionid) as Narration,
+        //        Sum(cr) as Amount from Voucherdetail 
+        //        where ( trunc(VDate)   between TO_DATE('" + From + "', 'dd MON yyyy')  and TO_DATE('" + To + "', 'dd MON yyyy') ) " +
+        //        "and Vtype = 'PV' and status != 1 AND status = CASE WHEN '" + filter + "'='ALL' THEN status ELSE CASE WHEN '" + filter + "' = 'Pending' THEN 2 ELSE 0 END END GROUP BY VDate,VNO,fktransactionid";
+        //        adapter.SelectCommand = new OracleCommand(sql, clsConnection.con);
+        //        adapter.Fill(dt);
+        //        adapter.Dispose();
+        //        return dt;
+        //    }
+        //    catch (Exception ee)
+        //    {
+        //        Errors.writeline(ee.Message, "Query_ PaymentFilter");
+        //        string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+        //        return dt;
+        //    }
+        //}
+
+
         public static DataTable PaymentFilter1New(string From, string To, string Narration, string VNO, string filter)
         {
             DataTable dt = new DataTable();
             try
             {
-                OracleDataAdapter adapter = new OracleDataAdapter();
-                //string sql = "select VDate,VNO,(select narrationtitle from narration where narrationcode = fktransactionid) as Narration,cr as Amount from Voucherdetail where ( VDate between '" + From + "' and '" + To + "') and FK_Narration = " + Narration + " and VNO = " + VNO + "  and Vtype = 'PV' and status = 0 AND Vseq = 1";
-                string sql = @"select VDate,VNO,(select narrationtitle from narration where narrationcode = fktransactionid) as Narration,
-                Sum(cr) as Amount from Voucherdetail 
-                where ( trunc(VDate)   between TO_DATE('" + From + "', 'dd MON yyyy')  and TO_DATE('" + To + "', 'dd MON yyyy') ) " +
-                "and Vtype = 'PV' and status != 1 AND status = CASE WHEN '" + filter + "'='ALL' THEN status ELSE CASE WHEN '" + filter + "' = 'Pending' THEN 2 ELSE 0 END END GROUP BY VDate,VNO,fktransactionid";
-                //@"select VDate,VNO,(select narrationtitle from narration where narrationcode = fktransactionid) as Narration,
-                //cr as Amount from Voucherdetail 
-                //where ( trunc(VDate)   between TO_DATE('" + From + "', 'dd MON yyyy')  and TO_DATE('" + To + "', 'dd MON yyyy') ) " +
-                //Narration + "  " + VNO + "  and Vtype = 'PV' and status != 1 AND Vseq = 1";
-                adapter.SelectCommand = new OracleCommand(sql, clsConnection.con);
+                string sql = @"
+                    SELECT VDate, VNO,
+                           (SELECT narrationtitle FROM narration WHERE narrationcode = fktransactionid) AS Narration,
+                           SUM(cr) AS Amount
+                    FROM Voucherdetail
+                    WHERE Vtype = 'PV'
+                      AND status != 1";
+
+                // Only apply date filter if VNO is empty
+                if (string.IsNullOrWhiteSpace(VNO))
+                {
+                    sql += @" AND TRUNC(VDate) BETWEEN TO_DATE('" + From + @"', 'dd MON yyyy') 
+                                       AND TO_DATE('" + To + @"', 'dd MON yyyy')";
+                }
+
+                // Add narration filter
+                if (Narration != "ALL")
+                {
+                    sql += " AND fktransactionid = '" + Narration + "'";
+                }
+
+                // Add VNO filter
+                if (!string.IsNullOrWhiteSpace(VNO))
+                {
+                    sql += " AND VNO = " + VNO;
+                }
+
+                // Add status filter
+                if (filter != "ALL")
+                {
+                    if (filter == "Pending")
+                        sql += " AND status = 2";
+                    else
+                        sql += " AND status = 0";
+                }
+
+                sql += " GROUP BY VDate, VNO, fktransactionid";
+
+                OracleDataAdapter adapter = new OracleDataAdapter(sql, clsConnection.con);
                 adapter.Fill(dt);
                 adapter.Dispose();
                 return dt;
             }
-
-
-
             catch (Exception ee)
             {
                 Errors.writeline(ee.Message, "Query_ PaymentFilter");
-                string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
-
-
+                MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
                 return dt;
             }
         }
+
+
 
         public static DataTable CallInvDoucment(string doucmentno)
         {
@@ -1328,18 +1401,64 @@ CROSS JOIN (
             }
         }
 
+        //public static DataTable JournalFilter(string From, string To, string Narration, string VNO)
+        //{
+        //    DataTable dt = new DataTable();
+        //    try
+        //    {
+        //        OracleDataAdapter adapter = new OracleDataAdapter();
+        //        string sql = @"select VDate,VNO,(select narrationtitle from narration where narrationcode = fktransactionid) as Narration,
+        //        dr as Amount from Voucherdetail where 
+        //          ( trunc(VDate) between TO_DATE('" + From + "', 'dd MON yyyy')  and TO_DATE('" + To + "', 'dd MON yyyy')) " +
+        //                 Narration + "  " + VNO + "  and Vtype = 'JV' and status != 1 AND Vseq = 1";
+        //        adapter.SelectCommand = new OracleCommand(sql, clsConnection.con);
+        //        adapter.Fill(dt);
+        //        adapter.Dispose();
+        //        return dt;
+        //    }
+        //    catch (Exception ee)
+        //    {
+        //        Errors.writeline(ee.Message, "Query_ JournalFilter");
+        //        string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+        //        string err = MyMessageBox.ShowBox("Do you want to Exit ?", Variable.Version, 2);
+        //        return dt;
+        //    }
+        //}
+
         public static DataTable JournalFilter(string From, string To, string Narration, string VNO)
         {
             DataTable dt = new DataTable();
             try
             {
-                OracleDataAdapter adapter = new OracleDataAdapter();
-                //string sql = "select VDate,VNO,(select narrationtitle from narration where narrationcode = fktransactionid) as Narration,cr as Amount from Voucherdetail where ( VDate between '" + From + "' and '" + To + "') and FK_Narration = " + Narration + " and VNO = " + VNO + "  and Vtype = 'PV' and status = 0 AND Vseq = 1";
-                string sql = @"select VDate,VNO,(select narrationtitle from narration where narrationcode = fktransactionid) as Narration,
-                dr as Amount from Voucherdetail where 
-                  ( trunc(VDate) between TO_DATE('" + From + "', 'dd MON yyyy')  and TO_DATE('" + To + "', 'dd MON yyyy')) " +
-                         Narration + "  " + VNO + "  and Vtype = 'JV' and status != 1 AND Vseq = 1";
-                adapter.SelectCommand = new OracleCommand(sql, clsConnection.con);
+                string sql = @"
+            SELECT VDate, VNO,
+                   (SELECT narrationtitle FROM narration WHERE narrationcode = fktransactionid) AS Narration,
+                   dr AS Amount
+            FROM Voucherdetail
+            WHERE Vtype = 'JV'
+              AND status != 1
+              AND Vseq = 1";
+
+                // ✅ Date filter only when VNO is empty
+                if (string.IsNullOrWhiteSpace(VNO))
+                {
+                    sql += @" AND TRUNC(VDate) BETWEEN TO_DATE('" + From + @"', 'dd MON yyyy')
+                                          AND TO_DATE('" + To + @"', 'dd MON yyyy')";
+                }
+
+                // ✅ Narration filter
+                if (Narration != "ALL")
+                {
+                    sql += " AND fktransactionid = '" + Narration + "'";
+                }
+
+                // ✅ VNO filter
+                if (!string.IsNullOrWhiteSpace(VNO))
+                {
+                    sql += " AND VNO = " + VNO;
+                }
+
+                OracleDataAdapter adapter = new OracleDataAdapter(sql, clsConnection.con);
                 adapter.Fill(dt);
                 adapter.Dispose();
                 return dt;
@@ -1347,12 +1466,12 @@ CROSS JOIN (
             catch (Exception ee)
             {
                 Errors.writeline(ee.Message, "Query_ JournalFilter");
-                string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
-                string err = MyMessageBox.ShowBox("Do you want to Exit ?", Variable.Version, 2);
-                //   if (err == "1") Application.Exit();
+                MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+                MyMessageBox.ShowBox("Do you want to Exit ?", Variable.Version, 2);
                 return dt;
             }
         }
+
 
         public static DataTable ClientIndex2()
         {
@@ -1439,18 +1558,51 @@ CROSS JOIN (
                 return dt;
             }
         }
+
         public static DataTable ReceiptFilterWithPendingApr(string From, string To, string Narration, string VNO, string filter)
         {
             DataTable dt = new DataTable();
             try
             {
-                OracleDataAdapter adapter = new OracleDataAdapter();
-                //string sql = "select VDate,VNO,(select narrationtitle from narration where narrationcode = fktransactionid) as Narration,cr as Amount from Voucherdetail where ( VDate between '" + From + "' and '" + To + "') and FK_Narration = " + Narration + " and VNO = " + VNO + "  and Vtype = 'PV' and status = 0 AND Vseq = 1";
-                string sql = @"select v.VDate,v.VNO,narrationtitle as Narration,
-               sum(dr) as Amount from Voucherdetail v JOIN narration n ON n.narrationcode = v.fktransactionid
-             where (trunc(VDate) between TO_DATE('" + From + "', 'dd MON yyyy')  and TO_DATE('" + To + "', 'dd MON yyyy')) " + Narration + "  " + VNO +
-                                              "  and v.Vtype = 'RV' and v.status != 1 AND v.status = CASE WHEN '" + filter + "'='ALL' THEN v.status ELSE CASE WHEN '" + filter + "' = 'Pending' THEN 2 ELSE 0 END END GROUP BY vdate,vno ,narrationtitle";
-                adapter.SelectCommand = new OracleCommand(sql, clsConnection.con);
+                string sql = @"
+                     SELECT v.VDate, v.VNO, narrationtitle AS Narration,
+                   SUM(dr) AS Amount
+                    FROM Voucherdetail v
+                    JOIN narration n ON n.narrationcode = v.fktransactionid
+                    WHERE v.Vtype = 'RV'
+                      AND v.status != 1";
+
+                // ✅ Apply date filter only if VNO is not given
+                if (string.IsNullOrWhiteSpace(VNO))
+                {
+                    sql += @" AND TRUNC(VDate) BETWEEN TO_DATE('" + From + @"', 'dd MON yyyy') 
+                                          AND TO_DATE('" + To + @"', 'dd MON yyyy')";
+                }
+
+                // ✅ Narration filter
+                if (Narration != "ALL")
+                {
+                    sql += " AND v.fktransactionid = '" + Narration + "'";
+                }
+
+                // ✅ VNO filter
+                if (!string.IsNullOrWhiteSpace(VNO))
+                {
+                    sql += " AND v.VNO = " + VNO;
+                }
+
+                // ✅ Status filter
+                if (filter != "ALL")
+                {
+                    if (filter == "Pending")
+                        sql += " AND v.status = 2";
+                    else
+                        sql += " AND v.status = 0";
+                }
+
+                sql += " GROUP BY v.VDate, v.VNO, narrationtitle";
+
+                OracleDataAdapter adapter = new OracleDataAdapter(sql, clsConnection.con);
                 adapter.Fill(dt);
                 adapter.Dispose();
                 return dt;
@@ -1458,12 +1610,36 @@ CROSS JOIN (
             catch (Exception ee)
             {
                 Errors.writeline(ee.Message, "Query_ ReceiptFilter");
-                string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
-
-
+                MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
                 return dt;
             }
         }
+
+
+        //public static DataTable ReceiptFilterWithPendingApr(string From, string To, string Narration, string VNO, string filter)
+        //{
+        //    DataTable dt = new DataTable();
+        //    try
+        //    {
+        //        OracleDataAdapter adapter = new OracleDataAdapter();
+        //        string sql = @"select v.VDate,v.VNO,narrationtitle as Narration,
+        //       sum(dr) as Amount from Voucherdetail v JOIN narration n ON n.narrationcode = v.fktransactionid
+        //     where (trunc(VDate) between TO_DATE('" + From + "', 'dd MON yyyy')  and TO_DATE('" + To + "', 'dd MON yyyy')) " + Narration + "  " + VNO +
+        //                                      "  and v.Vtype = 'RV' and v.status != 1 AND v.status = CASE WHEN '" + filter + "'='ALL' THEN v.status ELSE CASE WHEN '" + filter + "' = 'Pending' THEN 2 ELSE 0 END END GROUP BY vdate,vno ,narrationtitle";
+        //        adapter.SelectCommand = new OracleCommand(sql, clsConnection.con);
+        //        adapter.Fill(dt);
+        //        adapter.Dispose();
+        //        return dt;
+        //    }
+        //    catch (Exception ee)
+        //    {
+        //        Errors.writeline(ee.Message, "Query_ ReceiptFilter");
+        //        string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+
+
+        //        return dt;
+        //    }
+        //}
         public static DataTable ChartofAccounts()
         {
 
@@ -1532,23 +1708,38 @@ CROSS JOIN (
             DataSet ds = new DataSet();
             try
             {
+                //Tauqeer comments change vdate
+                //string addsql = "";
+                //if (AcCode == "001001005002001")
+                //     addsql = "and fkbankid='"+bankcode+"' ";
+
+                //string appendsqlcond = "";// AcCode == "001001002001001" ? " AND  fkclientcode  = '" + ClientCode + "' " : (AcCode == "001001005002001" ? " AND fkbankid = '" + ClientCode + "'" : "");
+                //string sql = "";
+                //sql = "SELECT ";
+                //sql += "null FKVNo,NULL AS refno,Max(regexp_substr(createdby,'[^|]+',1,2)) AS VDate,null AS FKTransactionID,null AS FCDR,(case when (Sum(dr) - Sum(cr)) > 0 then (Sum(dr) - Sum(cr)) else 0 end) AS DR,null AS FCCR,(case when (Sum(dr) - Sum(cr)) < 0 then -(Sum(dr) - Sum(cr)) else 0 end) AS CR,'B/F' AS Description ";
+                //sql += "FROM voucherdetail WHERE status = 0 and  fkaccountid = '" + AcCode + "' AND Trunc(vdate) < '" + dtFrom + "' " +addsql+ appendsqlcond;
+                //sql += "GROUP BY fkaccountid";
+                //sql += " UNION ALL ";
+                //sql += "SELECT  ";
+                //sql += "vtype || '-' || vno AS FKVNo,nvl(refrmk || case when refno is not null then '-' else null end  ||  refno,chequeno ||'/'||slipno),regexp_substr(createdby,'[^|]+',1,2) AS VDate,fktransactionid AS FKTransactionID,fcdr AS FCDR,dr AS DR,fccr AS FCCR,cr AS CR,description AS Description ";
+                //sql += "FROM voucherdetail WHERE status = 0 and fkaccountid = '" + AcCode + "' AND Trunc(vdate) BETWEEN '" + dtFrom + "'  AND '" + dtTo + "' " +addsql+ appendsqlcond + " ORDER BY vdate,FKVNo,cr";
+
+
                 string addsql = "";
                 if (AcCode == "001001005002001")
-                     addsql = "and fkbankid='"+bankcode+"' ";
+                    addsql = "and fkbankid='" + bankcode + "' ";
 
-                string appendsqlcond = "";// AcCode == "001001002001001" ? " AND  fkclientcode  = '" + ClientCode + "' " : (AcCode == "001001005002001" ? " AND fkbankid = '" + ClientCode + "'" : "");
+                string appendsqlcond = ""; // AcCode == "001001002001001" ? " AND  fkclientcode  = '" + ClientCode + "' " : (AcCode == "001001005002001" ? " AND fkbankid = '" + ClientCode + "'" : "");    ORDER BY vdate,FKVNo,cr
                 string sql = "";
-                sql = "SELECT ";
-                sql += "null FKVNo,NULL AS refno,Max(regexp_substr(createdby,'[^|]+',1,2)) AS VDate,null AS FKTransactionID,null AS FCDR,(case when (Sum(dr) - Sum(cr)) > 0 then (Sum(dr) - Sum(cr)) else 0 end) AS DR,null AS FCCR,(case when (Sum(dr) - Sum(cr)) < 0 then -(Sum(dr) - Sum(cr)) else 0 end) AS CR,'B/F' AS Description ";
-                sql += "FROM voucherdetail WHERE status = 0 and  fkaccountid = '" + AcCode + "' AND Trunc(vdate) < '" + dtFrom + "' " +addsql+ appendsqlcond;
+                sql = "Select * from ( ";
+                sql += "SELECT ";
+                sql += "NULL vseq,null FKVNo,NULL AS refno,Max(vdate) AS VDate,null AS FKTransactionID,null AS FCDR,(case when (Sum(dr) - Sum(cr)) > 0 then (Sum(dr) - Sum(cr)) else 0 end) AS DR,null AS FCCR,(case when (Sum(dr) - Sum(cr)) < 0 then -(Sum(dr) - Sum(cr)) else 0 end) AS CR,'B/F' AS Description ";
+                sql += "FROM voucherdetail WHERE status = 0 and  fkaccountid = '" + AcCode + "' AND Trunc(vdate) < '" + dtFrom + "' " + addsql + appendsqlcond;
                 sql += "GROUP BY fkaccountid";
                 sql += " UNION ALL ";
                 sql += "SELECT  ";
-                sql += "vtype || '-' || vno AS FKVNo,nvl(refrmk || case when refno is not null then '-' else null end  ||  refno,chequeno ||'/'||slipno),regexp_substr(createdby,'[^|]+',1,2) AS VDate,fktransactionid AS FKTransactionID,fcdr AS FCDR,dr AS DR,fccr AS FCCR,cr AS CR,description AS Description ";
-                sql += "FROM voucherdetail WHERE status = 0 and fkaccountid = '" + AcCode + "' AND Trunc(vdate) BETWEEN '" + dtFrom + "'  AND '" + dtTo + "' " +addsql+ appendsqlcond + " ORDER BY vdate,FKVNo,cr";
-
-
-
+                sql += "vseq,vtype || '-' || vno AS FKVNo,nvl(refrmk || case when refno is not null then '-' else null end  ||  refno,chequeno ||'/'||slipno),vdate AS VDate,fktransactionid AS FKTransactionID,fcdr AS FCDR,dr AS DR,fccr AS FCCR,cr AS CR,description AS Description ";
+                sql += "FROM voucherdetail WHERE status = 0 and fkaccountid = '" + AcCode + "' AND Trunc(vdate) BETWEEN '" + dtFrom + "'  AND '" + dtTo + "' " + addsql + appendsqlcond + " ) ORDER BY CASE WHEN FKVNo IS NULL THEN 0 ELSE 1 END,vdate,FKVNo,vseq,cr";
                 OracleDataAdapter adapter = new OracleDataAdapter();
                 adapter.SelectCommand = new OracleCommand(sql, clsConnection.con);
                 adapter.Fill(ds, "AccountStatement");
@@ -1811,8 +2002,6 @@ CROSS JOIN (
             DataTable dt = new DataTable();
             try
             {
-
-
                 string sql = @" SELECT ch.lvl1Title lvl1,ch.lvl2Title lvl2,ch.lvl3Title lvl3,ch.lvl4Title lvl4,fkbankid,title ||' '|| get_banktitle(fkbankid) ||' '||  get_clienttitle(fkclientcode)  title,
                             Sum(opn) opn, Sum(dr) dr, Sum(cr) cr, Sum(curr) curr,fkaccountid accountid FROM
                            (SELECT CASE 

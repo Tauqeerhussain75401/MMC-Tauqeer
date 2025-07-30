@@ -87,7 +87,6 @@ namespace ERP.Forms
             }
             Validation.Clear(this);
             RefundAmount = 0;
-           
             if (dt.Rows.Count > 0)
             {
 
@@ -167,8 +166,6 @@ namespace ERP.Forms
                     }
                     else
                         zakatDtp.Enabled = false;
-
-
                 }
                 else
                     if (dt.Rows[0]["patienttype"].ToString() == "SPD")
@@ -190,10 +187,12 @@ namespace ERP.Forms
                 chkdischarge.Checked = isdischarge;
                 if (isdischarge == true)
                 {
+                    ntxtDiscount.ReadOnly = true;
                     lbldischarge.Visible = true;
                 }
                 else
                 {
+                    ntxtDiscount.ReadOnly = false;
                     lbldischarge.Visible = false;
                 }
 
@@ -220,6 +219,30 @@ namespace ERP.Forms
                 zakatDtp.Enabled = false;
                 chkSysdate.Checked = false;
             }
+            if (UserInfo.UserLevel == "Admin")
+            {
+                ntxtDiscount.ReadOnly = false;
+                txtdiscount2.Visible = true;
+                txtdiscount3.Visible = true;
+            }
+            else {
+                txtdiscount2.Visible = false;
+                txtdiscount3.Visible = false;
+            }
+            if (dt.Rows.Count > 0)
+            {
+                string disDate;
+                if (dt.Rows[0]["discdate"] == DBNull.Value || string.IsNullOrWhiteSpace(dt.Rows[0]["discdate"].ToString()))
+                {
+                    disDate = DateTime.Now.ToString("dd-MMM-yyyy hh:mm tt");
+                }
+                else
+                {
+                    disDate = Convert.ToDateTime(dt.Rows[0]["discdate"]).ToString("dd-MMM-yyyy hh:mm tt");
+                }
+                dtpDischrgeDate.Text = disDate;
+            }
+            
             txtsearchbillno.Text = txtbillno.Text;
         }
 
@@ -304,10 +327,19 @@ namespace ERP.Forms
                 else
                     txtDischargedBY.Text = "";
 
+                txtdiscount2.Value = (decimal)dt.Rows[0]["Zakatdiscount2"];
+                txtdiscount3.Value = (decimal)dt.Rows[0]["Zakatdiscount3"];
+
+                txtZF2AddBy.Text = dt.Rows[0]["zakatby2"].ToString() + "  " + dt.Rows[0]["zakatdate2"].ToString();
+                txtZP3AddBy.Text = dt.Rows[0]["zakatby3"].ToString() + "  " + dt.Rows[0]["zakatdate3"].ToString();
+
+                    string discount = dt.Rows[0]["discount"].ToString();
+                ntxtDiscount.Value = discount == "" ? 0 : (Decimal)dt.Rows[0]["discount"];
+                txtdischargeRemrks.Text = dt.Rows[0]["remarks"].ToString();
                 ntxtDiscount.Value = (Decimal)dt.Rows[0]["totdiscount"];
                 
                 RefundAmount = Convert.ToDecimal(Validation.DBNullTo(dt.Rows[0]["refundamount"], 0));
-
+                txtrefunded.Value = RefundAmount;
                 chkPackage.Checked = dt.Rows[0]["ispackage"].ToString() == "1" ? true : false;
 
                 //FillControls.FillcmbPackageAll(cmbpackages);
@@ -523,8 +555,8 @@ namespace ERP.Forms
             {
                 ntxtTotalCharges.Value = ntxttotHCharges.Value + ntxttotCcharges.Value;
             }
-            ntxtReceivable.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value;
-            ntxtNetBal.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value + RefundAmount;
+            ntxtReceivable.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value - txtdiscount2.Value - txtdiscount3.Value;
+            ntxtNetBal.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value - txtdiscount2.Value - txtdiscount3.Value + RefundAmount;
             lblRecRefund.Text = ntxtReceivable.Value > 0 ? "Receivable" : "To Be Refunded";
 
         }
@@ -585,7 +617,8 @@ namespace ERP.Forms
                                                          /* String.IsNullOrWhiteSpace(productName)  ? (object)DBNull.Value : (object)productName*/
                 DML.ipdbilling_add_edit(txtSerial.Text, ntxtPharmacy.Value.ToString(), ntxtDiscount.Value.ToString(), chkdischarge.Checked ? "1" : "0",
                     txtdischargeRemrks.Text, ntxtTBdiscount.Value.ToString(), dtpDischrgeDate.Value, chkPackage.Checked ? "1" : "0",
-                    (string)cmbpackages.SelectedValue, packageAmt.ToString(), "0", zakatDtp.Enabled ? (UserInfo.UserId != "Admin" ? "auto" : zakatDtp.Value.ToString("dd-MMM-yyyy hh:mm tt")) : txtzakatDate.Text, zakatDtp.Enabled ? UserInfo.UserId : txtzakatAddBy.Text, txtAppointdate.Value);
+                    (string)cmbpackages.SelectedValue, packageAmt.ToString(), "0", zakatDtp.Enabled ? (UserInfo.UserId != "Admin" ? "auto" : zakatDtp.Value.ToString("dd-MMM-yyyy hh:mm tt")) : txtzakatDate.Text, 
+                    zakatDtp.Enabled ? UserInfo.UserId : txtzakatAddBy.Text, txtAppointdate.Value,txtdiscount2.Value.ToString(),txtdiscount3.Value.ToString());
                 MessageBox.Show("Record Successfully Saved..!");
                 BasicInfo(txtRegAlpha.Text, ntxtRegNo.Text, true);
             }
@@ -739,6 +772,15 @@ namespace ERP.Forms
             {
                 zakatDtp.Enabled = true;
                 chkSysdate.Checked = true;
+
+                if (UserInfo.UserLevel == "Admin")
+                {
+                    txtdiscount2.Enabled = true;
+                    txtdiscount3.Enabled = true;
+
+                    txtdiscount2.ReadOnly = false;
+                    txtdiscount3.ReadOnly = false;
+                }
             }
             else
                 zakatDtp.Enabled = false;
@@ -748,8 +790,12 @@ namespace ERP.Forms
 
         private void ntxtTBdiscount_ValueChanged(object sender, EventArgs e)
         {
-            ntxtReceivable.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value;
-            ntxtNetBal.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value + RefundAmount;
+            //ntxtReceivable.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value;
+            //ntxtNetBal.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value + RefundAmount;
+
+            ntxtTBdiscount.Value = ntxtDiscount.Value + txtdiscount2.Value + txtdiscount3.Value;
+            ntxtReceivable.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value - txtdiscount2.Value - txtdiscount3.Value;
+            ntxtNetBal.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value - txtdiscount2.Value - txtdiscount3.Value + RefundAmount;
         }
 
         private void btnRefund_Click(object sender, EventArgs e)
@@ -798,15 +844,16 @@ namespace ERP.Forms
         {
             if (chkdischarge.Checked)
             {
-                dtpDischrgeDate.Enabled = true;
-                //basit 14-07-2020
-                //  dtpDischrgeDate.Value = SoftwareInfo.ServerDate;
+                if (UserInfo.UserLevel == "Admin")
+                {
+                    dtpDischrgeDate.Enabled = true;
+                }
+                else { dtpDischrgeDate.Enabled = false; }
+                dtpDischrgeDate.Value = SoftwareInfo.ServerDate;
             }
-
             else
             {
                 dtpDischrgeDate.Enabled = false;
-                //basit 14-07-2020
                 dtpDischrgeDate.Value = SoftwareInfo.ServerDate;
             }
 
@@ -911,6 +958,18 @@ namespace ERP.Forms
             }
         }
 
-       
+        private void txtdiscount2_ValueChanged(object sender, EventArgs e)
+        {
+            ntxtTBdiscount.Value = ntxtDiscount.Value + txtdiscount2.Value + txtdiscount3.Value;
+            ntxtReceivable.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value - txtdiscount2.Value - txtdiscount3.Value;
+            ntxtNetBal.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value - txtdiscount2.Value - txtdiscount3.Value + RefundAmount;
+        }
+
+        private void txtdiscount3_ValueChanged(object sender, EventArgs e)
+        {
+            ntxtTBdiscount.Value = ntxtDiscount.Value + txtdiscount2.Value + txtdiscount3.Value;
+            ntxtReceivable.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value - txtdiscount2.Value - txtdiscount3.Value;
+            ntxtNetBal.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value - txtdiscount2.Value - txtdiscount3.Value + RefundAmount;
+        }
     }
 }

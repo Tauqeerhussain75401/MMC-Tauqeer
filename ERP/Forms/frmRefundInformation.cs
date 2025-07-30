@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ERP
 {
@@ -69,14 +70,23 @@ namespace ERP
                     ntxtDepositedAmount.Value = DepositAmount;
                     ntxtDiscount.Value = Discount;
                     txtrefvno.Text = dt.Rows[0]["refundvno"].ToString();
-
+                    decimal refunded = Convert.ToDecimal(dt.Rows[0]["RefundAmount"].ToString());
+                    txtrefunded.Value = refunded;
                     //ntxtToBeRefund.Value = TotCharges - DepositAmount - Discount < 0 ? -(TotCharges - DepositAmount - Discount) : 0;
                     //ntxtRefundAmount.Value = ntxtToBeRefund.Value;//Convert.ToDecimal(dt.Rows[0]["RefundAmount"].ToString());
 
                     if (TotCharges - DepositAmount - Discount < 0)
                     {
-                        ntxtToBeRefund.Value = TotCharges - DepositAmount - Discount < 0 ? -(TotCharges - DepositAmount - Discount) : 0;
-                        ntxtRefundAmount.Value = ntxtToBeRefund.Value;
+                        ntxtToBeRefund.Value = TotCharges - DepositAmount - Discount  < 0 ? -(TotCharges - DepositAmount - Discount) : 0;
+                        //if (Discount > 0 && refunded > 0)
+                        //{
+                        //    ntxtRefundAmount.Value = 0;
+                        //}
+                        //else
+                        //{
+                          
+                        //}
+                        ntxtRefundAmount.Value = ntxtToBeRefund.Value - refunded;
                         //ntxtRefundAmount.Value = 
                     }
                     else
@@ -182,13 +192,14 @@ namespace ERP
             {
                 //if (chkRefundYesNo.Checked == true)
                 //{
+                decimal totalRefundAmount = txtrefunded.Value + ntxtRefundAmount.Value;
                 DML.UpdateIPDRefundAmount(
                     txtrefvno.Text,
                     txtRegAlpha.Text,
                      "1",
                     dtpRrfundDate.Value,
                     dtpRefundTime.Value,
-                    ntxtRefundAmount.Value.ToString(),
+                    totalRefundAmount.ToString(), //ntxtRefundAmount.Value.ToString(),
                     txtRecePersonName.Text,
                     txtRelation.Text,
                     txtContactNumber.Text,
@@ -288,11 +299,12 @@ namespace ERP
 
             crprefund.SetDataSource(dt);
 
+            decimal refund = (ntxtDiscount.Value > 0 && txtrefunded.Value > 0) ? txtrefunded.Value : decimal.Parse(ntxtRefundAmount.Text);
             crprefund.SetParameterValue("pRcpDate", dtpRrfundDate.Value);
             crprefund.SetParameterValue("pRcpTime", dtpRefundTime.Value);
             crprefund.SetParameterValue("pTotalBilling", ntxtTotalCharges.Text);
             crprefund.SetParameterValue("pDiscount", ntxtDiscount.Text);
-            crprefund.SetParameterValue("pRefund", ntxtRefundAmount.Text);
+            crprefund.SetParameterValue("pRefund", refund);
             crprefund.SetParameterValue("pPersonName", txtRecePersonName.Text);
             crprefund.SetParameterValue("pRelation", txtRelation.Text);
             crprefund.SetParameterValue("pContact", txtContactNumber.Text);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -75,6 +76,8 @@
             this.referencename = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.emergency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.createdby = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CNIC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CnicRelation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnPreview = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
@@ -120,12 +123,17 @@
             this.label20 = new System.Windows.Forms.Label();
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
             this.grpBasicInfo = new System.Windows.Forms.GroupBox();
+            this.txtCnic = new System.Windows.Forms.MaskedTextBox();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.cmbCnicRelation = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtRemarks = new System.Windows.Forms.TextBox();
-            this.txtReason = new System.Windows.Forms.TextBox();
+            this.txtCNICPerson = new System.Windows.Forms.TextBox();
             this.txtRelation = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -145,6 +153,11 @@
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txtReason = new System.Windows.Forms.TextBox();
             this.grpContact.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetail)).BeginInit();
             this.panel1.SuspendLayout();
@@ -189,11 +202,11 @@
             this.grpContact.Controls.Add(this.cmbCity);
             this.grpContact.Controls.Add(this.label16);
             this.grpContact.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpContact.Location = new System.Drawing.Point(23, 199);
+            this.grpContact.Location = new System.Drawing.Point(22, 234);
             this.grpContact.Margin = new System.Windows.Forms.Padding(4);
             this.grpContact.Name = "grpContact";
             this.grpContact.Padding = new System.Windows.Forms.Padding(4);
-            this.grpContact.Size = new System.Drawing.Size(994, 80);
+            this.grpContact.Size = new System.Drawing.Size(1004, 80);
             this.grpContact.TabIndex = 1;
             this.grpContact.TabStop = false;
             this.grpContact.Text = "Contact Info";
@@ -406,9 +419,11 @@
             this.address,
             this.referencename,
             this.emergency,
-            this.createdby});
+            this.createdby,
+            this.CNIC,
+            this.CnicRelation});
             this.dgvDetail.GridColor = System.Drawing.Color.SkyBlue;
-            this.dgvDetail.Location = new System.Drawing.Point(21, 326);
+            this.dgvDetail.Location = new System.Drawing.Point(21, 367);
             this.dgvDetail.Name = "dgvDetail";
             this.dgvDetail.ReadOnly = true;
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
@@ -416,7 +431,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvDetail.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetail.Size = new System.Drawing.Size(996, 411);
+            this.dgvDetail.Size = new System.Drawing.Size(996, 370);
             this.dgvDetail.TabIndex = 5;
             this.dgvDetail.Tag = "Lock";
             this.dgvDetail.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetail_CellDoubleClick);
@@ -549,6 +564,18 @@
             this.createdby.Name = "createdby";
             this.createdby.ReadOnly = true;
             // 
+            // CNIC
+            // 
+            this.CNIC.HeaderText = "CNIC";
+            this.CNIC.Name = "CNIC";
+            this.CNIC.ReadOnly = true;
+            // 
+            // CnicRelation
+            // 
+            this.CnicRelation.HeaderText = "CNIC Relation";
+            this.CnicRelation.Name = "CnicRelation";
+            this.CnicRelation.ReadOnly = true;
+            // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -557,7 +584,7 @@
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Controls.Add(this.btnNew);
-            this.panel1.Location = new System.Drawing.Point(21, 285);
+            this.panel1.Location = new System.Drawing.Point(21, 320);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(478, 38);
             this.panel1.TabIndex = 2;
@@ -650,7 +677,7 @@
             this.btnShowLast.BackColor = System.Drawing.SystemColors.Window;
             this.btnShowLast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShowLast.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShowLast.Location = new System.Drawing.Point(921, 289);
+            this.btnShowLast.Location = new System.Drawing.Point(921, 324);
             this.btnShowLast.Name = "btnShowLast";
             this.btnShowLast.Size = new System.Drawing.Size(95, 29);
             this.btnShowLast.TabIndex = 4;
@@ -664,7 +691,7 @@
             this.btnShowAll.BackColor = System.Drawing.SystemColors.Window;
             this.btnShowAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShowAll.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShowAll.Location = new System.Drawing.Point(828, 289);
+            this.btnShowAll.Location = new System.Drawing.Point(828, 324);
             this.btnShowAll.Name = "btnShowAll";
             this.btnShowAll.Size = new System.Drawing.Size(95, 29);
             this.btnShowAll.TabIndex = 3;
@@ -982,7 +1009,7 @@
             this.cmbReference.Margin = new System.Windows.Forms.Padding(4);
             this.cmbReference.Name = "cmbReference";
             this.cmbReference.Size = new System.Drawing.Size(321, 24);
-            this.cmbReference.TabIndex = 27;
+            this.cmbReference.TabIndex = 19;
             // 
             // label3
             // 
@@ -1070,17 +1097,18 @@
             this.cmbRelationType.Name = "cmbRelationType";
             this.cmbRelationType.Size = new System.Drawing.Size(159, 24);
             this.cmbRelationType.TabIndex = 14;
+            this.cmbRelationType.SelectedIndexChanged += new System.EventHandler(this.cmbRelationType_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(453, 102);
+            this.label2.Location = new System.Drawing.Point(453, 131);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 17);
+            this.label2.Size = new System.Drawing.Size(97, 17);
             this.label2.TabIndex = 17;
-            this.label2.Text = "Reason :";
+            this.label2.Text = "CNIC Person :";
             // 
             // btnRoomSearch
             // 
@@ -1107,7 +1135,7 @@
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(453, 130);
+            this.label20.Location = new System.Drawing.Point(453, 159);
             this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(70, 17);
@@ -1127,6 +1155,13 @@
             // 
             // grpBasicInfo
             // 
+            this.grpBasicInfo.Controls.Add(this.panel12);
+            this.grpBasicInfo.Controls.Add(this.label23);
+            this.grpBasicInfo.Controls.Add(this.txtReason);
+            this.grpBasicInfo.Controls.Add(this.txtCnic);
+            this.grpBasicInfo.Controls.Add(this.panel11);
+            this.grpBasicInfo.Controls.Add(this.cmbCnicRelation);
+            this.grpBasicInfo.Controls.Add(this.label9);
             this.grpBasicInfo.Controls.Add(this.panel5);
             this.grpBasicInfo.Controls.Add(this.panel4);
             this.grpBasicInfo.Controls.Add(this.panel3);
@@ -1137,7 +1172,7 @@
             this.grpBasicInfo.Controls.Add(this.txtRemarks);
             this.grpBasicInfo.Controls.Add(this.label2);
             this.grpBasicInfo.Controls.Add(this.cmbRelationType);
-            this.grpBasicInfo.Controls.Add(this.txtReason);
+            this.grpBasicInfo.Controls.Add(this.txtCNICPerson);
             this.grpBasicInfo.Controls.Add(this.txtRegAlpha);
             this.grpBasicInfo.Controls.Add(this.ntxtRegNo);
             this.grpBasicInfo.Controls.Add(this.label21);
@@ -1168,16 +1203,67 @@
             this.grpBasicInfo.Margin = new System.Windows.Forms.Padding(4);
             this.grpBasicInfo.Name = "grpBasicInfo";
             this.grpBasicInfo.Padding = new System.Windows.Forms.Padding(4);
-            this.grpBasicInfo.Size = new System.Drawing.Size(1006, 157);
+            this.grpBasicInfo.Size = new System.Drawing.Size(1006, 186);
             this.grpBasicInfo.TabIndex = 0;
             this.grpBasicInfo.TabStop = false;
             this.grpBasicInfo.Text = "Basic Info";
             this.grpBasicInfo.Enter += new System.EventHandler(this.grpBasicInfo_Enter);
             // 
+            // txtCnic
+            // 
+            this.txtCnic.Location = new System.Drawing.Point(566, 97);
+            this.txtCnic.Mask = "00000-0000000-0";
+            this.txtCnic.Name = "txtCnic";
+            this.txtCnic.Size = new System.Drawing.Size(253, 22);
+            this.txtCnic.TabIndex = 40;
+            // 
+            // panel11
+            // 
+            this.panel11.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel11.Location = new System.Drawing.Point(566, 121);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(251, 2);
+            this.panel11.TabIndex = 39;
+            // 
+            // cmbCnicRelation
+            // 
+            this.cmbCnicRelation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbCnicRelation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbCnicRelation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCnicRelation.FormattingEnabled = true;
+            this.cmbCnicRelation.Items.AddRange(new object[] {
+            "Self",
+            "Husband",
+            "Father",
+            "Son",
+            "Brother",
+            "Wife",
+            "Mother",
+            "Daughter",
+            "Sister",
+            "Widow",
+            "Other"});
+            this.cmbCnicRelation.Location = new System.Drawing.Point(826, 102);
+            this.cmbCnicRelation.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbCnicRelation.Name = "cmbCnicRelation";
+            this.cmbCnicRelation.Size = new System.Drawing.Size(159, 24);
+            this.cmbCnicRelation.TabIndex = 18;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(454, 105);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(51, 17);
+            this.label9.TabIndex = 36;
+            this.label9.Text = "CNIC :";
+            // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel5.Location = new System.Drawing.Point(566, 146);
+            this.panel5.Location = new System.Drawing.Point(566, 175);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(419, 2);
             this.panel5.TabIndex = 32;
@@ -1185,7 +1271,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel4.Location = new System.Drawing.Point(566, 118);
+            this.panel4.Location = new System.Drawing.Point(566, 147);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(419, 2);
             this.panel4.TabIndex = 33;
@@ -1201,20 +1287,20 @@
             // txtRemarks
             // 
             this.txtRemarks.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtRemarks.Location = new System.Drawing.Point(566, 127);
+            this.txtRemarks.Location = new System.Drawing.Point(566, 156);
             this.txtRemarks.Margin = new System.Windows.Forms.Padding(4);
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(419, 15);
-            this.txtRemarks.TabIndex = 29;
+            this.txtRemarks.TabIndex = 21;
             // 
-            // txtReason
+            // txtCNICPerson
             // 
-            this.txtReason.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtReason.Location = new System.Drawing.Point(566, 99);
-            this.txtReason.Margin = new System.Windows.Forms.Padding(4);
-            this.txtReason.Name = "txtReason";
-            this.txtReason.Size = new System.Drawing.Size(419, 15);
-            this.txtReason.TabIndex = 18;
+            this.txtCNICPerson.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtCNICPerson.Location = new System.Drawing.Point(566, 128);
+            this.txtCNICPerson.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCNICPerson.Name = "txtCNICPerson";
+            this.txtCNICPerson.Size = new System.Drawing.Size(419, 15);
+            this.txtCNICPerson.TabIndex = 20;
             // 
             // txtRelation
             // 
@@ -1224,6 +1310,11 @@
             this.txtRelation.Name = "txtRelation";
             this.txtRelation.Size = new System.Drawing.Size(251, 15);
             this.txtRelation.TabIndex = 13;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -1359,6 +1450,44 @@
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             this.dataGridViewTextBoxColumn19.ReadOnly = true;
             // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.HeaderText = "CNIC";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            this.dataGridViewTextBoxColumn21.HeaderText = "CNIC Relation";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel12.Location = new System.Drawing.Point(107, 175);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(318, 2);
+            this.panel12.TabIndex = 43;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(12, 159);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(63, 17);
+            this.label23.TabIndex = 41;
+            this.label23.Text = "Reason :";
+            // 
+            // txtReason
+            // 
+            this.txtReason.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtReason.Location = new System.Drawing.Point(107, 156);
+            this.txtReason.Margin = new System.Windows.Forms.Padding(4);
+            this.txtReason.Name = "txtReason";
+            this.txtReason.Size = new System.Drawing.Size(318, 15);
+            this.txtReason.TabIndex = 42;
+            // 
             // frmAddmissionInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1434,25 +1563,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clnReg;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Adm_Date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Adm_Time;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Bmj;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Title;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Patient_Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Room;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ConsultantName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clnRemarks;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Relation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Patient_Relaton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn relationname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn age;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ymd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gender;
-        private System.Windows.Forms.DataGridViewTextBoxColumn address;
-        private System.Windows.Forms.DataGridViewTextBoxColumn referencename;
-        private System.Windows.Forms.DataGridViewTextBoxColumn emergency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn createdby;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -1506,6 +1616,37 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox txtRemarks;
+        private System.Windows.Forms.TextBox txtCNICPerson;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.ComboBox cmbCnicRelation;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnReg;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Adm_Date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Adm_Time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Bmj;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Title;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Patient_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Room;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ConsultantName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnRemarks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Relation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Patient_Relaton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn relationname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn age;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ymd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gender;
+        private System.Windows.Forms.DataGridViewTextBoxColumn address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn referencename;
+        private System.Windows.Forms.DataGridViewTextBoxColumn emergency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createdby;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CNIC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CnicRelation;
+        private System.Windows.Forms.MaskedTextBox txtCnic;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox txtReason;
     }
 }
