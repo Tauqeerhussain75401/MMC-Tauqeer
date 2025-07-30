@@ -305,7 +305,7 @@ namespace ERP.Forms
                     txtDischargedBY.Text = "";
 
                 ntxtDiscount.Value = (Decimal)dt.Rows[0]["totdiscount"];
-                txtdischargeRemrks.Text = dt.Rows[0]["remarks"].ToString();
+                
                 RefundAmount = Convert.ToDecimal(Validation.DBNullTo(dt.Rows[0]["refundamount"], 0));
 
                 chkPackage.Checked = dt.Rows[0]["ispackage"].ToString() == "1" ? true : false;
@@ -350,7 +350,7 @@ namespace ERP.Forms
                     cmbpackages.SelectedValue = dt.Rows[0]["packageid"];
                     btnSurgeryCharges.Enabled = true;
                 }
-
+                txtdischargeRemrks.Text = dt.Rows[0]["remarks"].ToString();
                 CalcSummary();
             }
         }

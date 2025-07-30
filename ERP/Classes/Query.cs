@@ -354,9 +354,9 @@ namespace ERP
             DataTable dt = getData(sql);
             return dt;
         }
-        internal static DataTable TestIndex(string Catagory, string Status)
+        internal static DataTable TestIndex(string Catagory, string Status) 
         {
-            string sql = "SELECT * FROM test  WHERE testtypeid = '" + Catagory + "' AND isdeactivated = " + (Status == "Active" ? "0" : Status == "Deactive" ? "1" : "isdeactivated") + " ORDER BY Title";
+            string sql = "SELECT * FROM test  WHERE (" + Catagory + " = 0 OR testtypeid = '" + Catagory + "') AND isdeactivated = " + (Status == "Active" ? "0" : Status == "Deactive" ? "1" : "isdeactivated") + " ORDER BY Title";
             DataTable dt = getData(sql);
             return dt;
         }

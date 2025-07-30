@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
 using System.IO;
+using ERP.Reports;
 
 namespace ERP
 {
@@ -430,6 +431,7 @@ namespace ERP
             {
                 return;
             }
+
             if (UserInfo.UserLevel != "Admin")
             {
                 DataRowView TokenStatus = (DataRowView)cmbOPDCatagory.SelectedItem;
@@ -1148,7 +1150,28 @@ namespace ERP
                 DataRowView dr = (DataRowView)cmbMembership.SelectedItem;
                 if (dr != null)
                 {
-                    FillcmbDependent(dr["newno"].ToString(), dr);
+                    string memberNewId = dr["newno"].ToString();
+
+                    DataTable dtmember = Query.getData(" SELECT * FROM member WHERE   newno = '" + memberNewId + "'");
+                    DateTime? validityDate = dtmember.Rows[0]["validitydate"] as DateTime?;
+                    if (validityDate.HasValue)
+                    {
+                        if (DateTime.Now > validityDate.Value)
+                        {
+                            string formattedDate = validityDate.Value.ToString("dd-MMM-yyyy"); // e.g., 21-Jul-2025
+                            MessageBox.Show(
+                                "Membership is no longer valid.The card expired on " + formattedDate +
+                                ". Please contact the management.",
+                                "Invalid Membership",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning
+                            );
+                            cmbPatientId.DataSource = null;
+                            return;
+                        }
+                    }
+
+                    FillcmbDependent(memberNewId, dr);
                     cmbPatientId.DropDownStyle = ComboBoxStyle.DropDownList;
                 }
                 else

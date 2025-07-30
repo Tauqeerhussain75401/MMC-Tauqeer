@@ -101,3 +101,24 @@ D:\101171-N\A-Working File NUBIT\HMS_ERP-MMC-- NC\VersionUpdater\bin\Debug\Versi
 D:\101171-N\A-Working File NUBIT\HMS_ERP-MMC-- NC\VersionUpdater\bin\Debug\VersionUpdater.pdb
 D:\101171-N\A-Working File NUBIT\HMS_ERP-MMC-- NC\VersionUpdater\obj\x86\Debug\VersionUpdater.exe
 D:\101171-N\A-Working File NUBIT\HMS_ERP-MMC-- NC\VersionUpdater\obj\x86\Debug\VersionUpdater.pdb
+D:\Nubit Software\Nubit Github Application\HRMS-MMC\VersionUpdater\bin\Debug\VersionUpdater.exe.config
+D:\Nubit Software\Nubit Github Application\HRMS-MMC\VersionUpdater\bin\Debug\VersionUpdater.exe
+D:\Nubit Software\Nubit Github Application\HRMS-MMC\VersionUpdater\bin\Debug\VersionUpdater.pdb
+D:\Nubit Software\Nubit Github Application\HRMS-MMC\VersionUpdater\obj\x86\Debug\VersionUpdater.csproj.AssemblyReference.cache
+D:\Nubit Software\Nubit Github Application\HRMS-MMC\VersionUpdater\obj\x86\Debug\VersionUpdater.csproj.CoreCompileInputs.cache
+D:\Nubit Software\Nubit Github Application\HRMS-MMC\VersionUpdater\obj\x86\Debug\VersionUpdater.exe
+D:\Nubit Software\Nubit Github Application\HRMS-MMC\VersionUpdater\obj\x86\Debug\VersionUpdater.pdb
+C:\Users\DELL\source\repos\HRMS-MMC\VersionUpdater\bin\Debug\VersionUpdater.exe.config
+C:\Users\DELL\source\repos\HRMS-MMC\VersionUpdater\bin\Debug\VersionUpdater.exe
+C:\Users\DELL\source\repos\HRMS-MMC\VersionUpdater\bin\Debug\VersionUpdater.pdb
+C:\Users\DELL\source\repos\HRMS-MMC\VersionUpdater\obj\x86\Debug\VersionUpdater.csproj.AssemblyReference.cache
+C:\Users\DELL\source\repos\HRMS-MMC\VersionUpdater\obj\x86\Debug\VersionUpdater.csproj.CoreCompileInputs.cache
+C:\Users\DELL\source\repos\HRMS-MMC\VersionUpdater\obj\x86\Debug\VersionUpdater.exe
+C:\Users\DELL\source\repos\HRMS-MMC\VersionUpdater\obj\x86\Debug\VersionUpdater.pdb
+D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\VersionUpdater\bin\Debug\VersionUpdater.exe.config
+D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\VersionUpdater\bin\Debug\VersionUpdater.exe
+D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\VersionUpdater\bin\Debug\VersionUpdater.pdb
+D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\VersionUpdater\obj\x86\Debug\VersionUpdater.csproj.AssemblyReference.cache
+D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\VersionUpdater\obj\x86\Debug\VersionUpdater.csproj.CoreCompileInputs.cache
+D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\VersionUpdater\obj\x86\Debug\VersionUpdater.exe
+D:\Nubit Software\Nubit Github Application\Me and Usman\HRMS-MMC Usman\VersionUpdater\obj\x86\Debug\VersionUpdater.pdb

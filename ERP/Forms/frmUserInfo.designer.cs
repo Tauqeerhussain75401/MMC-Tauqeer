@@ -30,12 +30,8 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvUserDetails = new System.Windows.Forms.DataGridView();
-            this.clnLoginId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnDesignation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnLock = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.clnMultiLogin = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.clnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpUserInfo = new System.Windows.Forms.GroupBox();
             this.chkMultiLogin = new System.Windows.Forms.CheckBox();
             this.chkLock = new System.Windows.Forms.CheckBox();
@@ -51,10 +47,20 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtUname = new System.Windows.Forms.TextBox();
+            this.tb_search = new System.Windows.Forms.TextBox();
             this.txtUserid = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnLoginId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnDesignation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUserDetails)).BeginInit();
             this.grpUserInfo.SuspendLayout();
             this.grpbtns.SuspendLayout();
@@ -76,7 +82,7 @@
             this.clnLock,
             this.clnMultiLogin,
             this.clnStatus});
-            this.dgvUserDetails.Location = new System.Drawing.Point(12, 247);
+            this.dgvUserDetails.Location = new System.Drawing.Point(12, 259);
             this.dgvUserDetails.MultiSelect = false;
             this.dgvUserDetails.Name = "dgvUserDetails";
             this.dgvUserDetails.ReadOnly = true;
@@ -87,30 +93,9 @@
             this.dgvUserDetails.RowTemplate.ReadOnly = true;
             this.dgvUserDetails.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvUserDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUserDetails.Size = new System.Drawing.Size(538, 320);
+            this.dgvUserDetails.Size = new System.Drawing.Size(538, 308);
             this.dgvUserDetails.TabIndex = 0;
             this.dgvUserDetails.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUserDetails_CellDoubleClick);
-            // 
-            // clnLoginId
-            // 
-            this.clnLoginId.HeaderText = "User Id";
-            this.clnLoginId.Name = "clnLoginId";
-            this.clnLoginId.ReadOnly = true;
-            this.clnLoginId.Width = 66;
-            // 
-            // clnName
-            // 
-            this.clnName.HeaderText = "User Name";
-            this.clnName.Name = "clnName";
-            this.clnName.ReadOnly = true;
-            this.clnName.Width = 85;
-            // 
-            // clnDesignation
-            // 
-            this.clnDesignation.HeaderText = "User Level";
-            this.clnDesignation.Name = "clnDesignation";
-            this.clnDesignation.ReadOnly = true;
-            this.clnDesignation.Width = 83;
             // 
             // clnLock
             // 
@@ -126,13 +111,6 @@
             this.clnMultiLogin.ReadOnly = true;
             this.clnMultiLogin.Width = 61;
             // 
-            // clnStatus
-            // 
-            this.clnStatus.HeaderText = "Status";
-            this.clnStatus.Name = "clnStatus";
-            this.clnStatus.ReadOnly = true;
-            this.clnStatus.Width = 62;
-            // 
             // grpUserInfo
             // 
             this.grpUserInfo.Controls.Add(this.chkMultiLogin);
@@ -146,7 +124,6 @@
             this.grpUserInfo.Controls.Add(this.grpbtns);
             this.grpUserInfo.Controls.Add(this.label2);
             this.grpUserInfo.Controls.Add(this.label1);
-            this.grpUserInfo.Controls.Add(this.txtUname);
             this.grpUserInfo.Controls.Add(this.txtUserid);
             this.grpUserInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpUserInfo.Location = new System.Drawing.Point(12, 49);
@@ -296,12 +273,13 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "User ID";
             // 
-            // txtUname
+            // tb_search
             // 
-            this.txtUname.Location = new System.Drawing.Point(112, 77);
-            this.txtUname.Name = "txtUname";
-            this.txtUname.Size = new System.Drawing.Size(134, 23);
-            this.txtUname.TabIndex = 2;
+            this.tb_search.Location = new System.Drawing.Point(82, 229);
+            this.tb_search.Name = "tb_search";
+            this.tb_search.Size = new System.Drawing.Size(176, 20);
+            this.tb_search.TabIndex = 2;
+            this.tb_search.TextChanged += new System.EventHandler(this.tb_search_TextChanged);
             // 
             // txtUserid
             // 
@@ -324,21 +302,101 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(12, 231);
+            this.label6.Location = new System.Drawing.Point(428, 232);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(122, 13);
             this.label6.TabIndex = 6;
             this.label6.Text = "(Double click to retrieve)";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(24, 230);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 15);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Search :";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "User Id";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 66;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "User Name";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 85;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "User Level";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 83;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Status";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 62;
+            // 
+            // clnLoginId
+            // 
+            this.clnLoginId.HeaderText = "User Id";
+            this.clnLoginId.Name = "clnLoginId";
+            this.clnLoginId.ReadOnly = true;
+            this.clnLoginId.Width = 66;
+            // 
+            // clnName
+            // 
+            this.clnName.HeaderText = "User Name";
+            this.clnName.Name = "clnName";
+            this.clnName.ReadOnly = true;
+            this.clnName.Width = 85;
+            // 
+            // clnDesignation
+            // 
+            this.clnDesignation.HeaderText = "User Level";
+            this.clnDesignation.Name = "clnDesignation";
+            this.clnDesignation.ReadOnly = true;
+            this.clnDesignation.Width = 83;
+            // 
+            // clnStatus
+            // 
+            this.clnStatus.HeaderText = "Status";
+            this.clnStatus.Name = "clnStatus";
+            this.clnStatus.ReadOnly = true;
+            this.clnStatus.Width = 62;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "lock",
+            "unlock"});
+            this.comboBox1.Location = new System.Drawing.Point(277, 229);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(134, 21);
+            this.comboBox1.TabIndex = 16;
             // 
             // frmUserInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(566, 576);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.grpUserInfo);
             this.Controls.Add(this.dgvUserDetails);
+            this.Controls.Add(this.tb_search);
             this.Name = "frmUserInfo";
             this.Text = "User Information";
             this.Load += new System.EventHandler(this.frmUserInfo_Load);
@@ -358,7 +416,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtUname;
+        private System.Windows.Forms.TextBox tb_search;
         private System.Windows.Forms.TextBox txtUserid;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbUserLevel;
@@ -379,5 +437,11 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn clnLock;
         private System.Windows.Forms.DataGridViewCheckBoxColumn clnMultiLogin;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

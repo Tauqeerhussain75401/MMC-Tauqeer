@@ -77,6 +77,35 @@ namespace ERP
                 TabControl1.SelectedIndex = 0;
 
 
+                // Validity (LifeTime or TimePeriod)
+                string validityType = dt.Rows[0]["membervalidity"].ToString(); // 0 = Lifetime, 1 = Time Period
+
+                if (validityType == "0")
+                {
+                    chkLifeTime.Checked = true;
+                    chkTimePeriod.Checked = false;
+                    txtTimePeriodDate.Enabled = false;
+                    txtTimePeriodDate.Value = DateTime.Now;
+                }
+                else
+                {
+                    chkLifeTime.Checked = false;
+                    chkTimePeriod.Checked = true;
+
+                    // Load the validity date
+                    if (dt.Rows[0]["validitydate"] != DBNull.Value && !string.IsNullOrEmpty(dt.Rows[0]["validitydate"].ToString()))
+                    {
+                        txtTimePeriodDate.Enabled = true;
+                        txtTimePeriodDate.Value = Convert.ToDateTime(dt.Rows[0]["validitydate"]);
+                    }
+                    else
+                    {
+                        txtTimePeriodDate.Enabled = false;
+                        txtTimePeriodDate.Value = DateTime.Now;
+                    }
+                }
+
+
 
                 dt = Query.getmemberdependent(txtBmjCard.Text);
                 dgvBmjFamily.Rows.Clear();
@@ -119,11 +148,18 @@ namespace ERP
                     return;
                 }
             }
+            if (!chkLifeTime.Checked && !chkTimePeriod.Checked)
+            {
+                MessageBox.Show("Please select Member Validity 'Lifetime' or 'Time Period'.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (UserInfo.UserLevel == "Admin")
                 {
-
+                    int memberValidity = chkLifeTime.Checked ? 0 : 1;
+                    DateTime? validityDate = chkTimePeriod.Checked ? txtTimePeriodDate.Value : (DateTime?)null;
 
                     DML.MemberInfo_Add_Edit(txtComputerId.Text,
                                              txtBmjCard.Text,
@@ -149,7 +185,10 @@ namespace ERP
                                              txtMobileNumberForms.Text,
                                              "0",
                                              chkPaidByZakat.Checked ? "1" : "0",
-                                             cmbReferenceName.SelectedValue == null ? "" : cmbReferenceName.SelectedValue.ToString());
+                                             cmbReferenceName.SelectedValue == null ? "" : cmbReferenceName.SelectedValue.ToString(),
+                                             memberValidity,
+                                             validityDate
+                                             );
                     MessageBox.Show("Record Save Successfully.....!!!!!");
                 }
             }
@@ -280,9 +319,21 @@ namespace ERP
             }
         }
 
-        
+        private void chkTimePeriod_CheckedChanged(object sender, EventArgs e)
+        {
+            txtTimePeriodDate.Enabled = chkTimePeriod.Checked;
+            if (chkTimePeriod.Checked)
+            {
+                chkLifeTime.Checked = false;
+            }
+        }
 
-
-
+        private void chkLifeTime_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkLifeTime.Checked)
+            {
+                chkTimePeriod.Checked = false;
+            }
+        }
     }
 }

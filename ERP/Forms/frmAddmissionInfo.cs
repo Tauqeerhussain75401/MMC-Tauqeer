@@ -327,7 +327,21 @@ namespace ERP.Forms
                 DataRowView dr = (DataRowView)cmbMembership.SelectedItem;
                 if (dr != null)
                 {
-                    FillcmbDependent(dr["newno"].ToString(), dr);
+                    string memberNewId = dr["newno"].ToString();
+
+                    DataTable dtmember = Query.getData(" SELECT * FROM member WHERE   newno = '" + memberNewId + "'");
+                    DateTime? validityDate = dtmember.Rows[0]["validitydate"] as DateTime?;
+                    if (validityDate.HasValue)
+                    {
+                        if (DateTime.Now > validityDate.Value)
+                        {
+                            MessageBox.Show("Membership is no longer valid. The card has expired. Please contact the management.", "Invalid Membership", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            cmbPatientId.DataSource = null;
+                            return;
+                        }
+                    }
+
+                    FillcmbDependent(memberNewId, dr);
                     cmbPatientId.DropDownStyle = ComboBoxStyle.DropDownList;
                 }
                 else

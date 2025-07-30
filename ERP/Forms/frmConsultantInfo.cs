@@ -20,21 +20,42 @@ namespace ERP
         {
             InitializeComponent();
             FillControls.FillcmbTestCatagory(cmbType);
-
         }
-
-
         private void Form1_Load(object sender, EventArgs e)
         {
-
             FillQuery();
+            fillActiveConsultant();
             cmbCharges.Enabled = false;
             fillSurgery();
-
-
-
         }
+        private void tb_search_TextChanged(object sender, EventArgs e)
+        {
+            if (dtQuery == null)
+            {
+                return;
+            }
+            string search = tb_search.Text.Trim().Replace("'", "'");
 
+            DataView dv = new DataView(dtQuery);
+            dv.RowFilter  = $"CONVERT(ID, 'System.String') LIKE '%{search}%' OR name LIKE '%{search}%'";
+            dgvDetail.DataSource = dv;
+            if (string.IsNullOrWhiteSpace(tb_search.Text))
+            {
+                FillQuery();
+            }
+        }
+        private void tb_search_surgery_TextChanged(object sender, EventArgs e)
+        {
+            if(dtSurgery == null)
+            {
+                return;
+            }
+            string search = tb_search_surgery.Text.Trim().Replace("'", "'");
+            
+            DataView dv = new DataView(dtSurgery);
+            dv.RowFilter = $"CONVERT(package_id, 'System.String') LIKE '%{search}%' OR packagename_name LIKE '%{search}%'";
+            dgvSurgery.DataSource = dv;
+        }
         private void btnsave_Click(object sender, EventArgs e)
         {
             if (txtConsultantName.Text == "" || numConsultantCharges.Value <= 0 || cmbType.SelectedValue == null)
@@ -80,7 +101,6 @@ namespace ERP
         {
             if (dgvDetail.Rows.Count > 0)
             {
-
                 dgvDetail.AutoGenerateColumns = false;
                 dtQuery = Query.ConsultantIndexAll();
                 dtSurgery = Query.surgeryAll();
@@ -93,6 +113,7 @@ namespace ERP
                 dgvDetail.Columns[clnFaculty.Index].DataPropertyName = "faculty";
                 dgvDetail.Columns[clnisDeactivate.Index].DataPropertyName = "isdeactivate";
                 dgvDetail.DataSource = dtQuery;
+
                 cmbConsultant.DataSource = dtQuery;
                 cmbConsultant.DisplayMember = "name";
                 cmbConsultant.ValueMember = "id";
@@ -120,6 +141,7 @@ namespace ERP
                 dgvDetail.Columns[clnFaculty.Index].DataPropertyName = "faculty";
                 dgvDetail.Columns[clnisDeactivate.Index].DataPropertyName = "isdeactivate";
                 dgvDetail.DataSource = dtQuery;
+
                 cmbConsultant.DataSource = dtQuery;
                 cmbConsultant.DisplayMember = "name";
                 cmbConsultant.ValueMember = "id";
@@ -132,10 +154,6 @@ namespace ERP
                 cmbCharges.DisplayMember = "amount";
                 cmbCharges.ValueMember = "package_id";
             }
-
-
-
-
         }
 
         void fillSurgery()
@@ -155,10 +173,14 @@ namespace ERP
 
         }
 
-
+        void fillActiveConsultant() // Work by Usman for Showing the active consultant
+        {
+            DataTable dt = Query.MasterQueryEC("SELECT Count(*) AS total FROM consultant WHERE isdeactivate = 0\r\n\r\n");
+            string  number = dt.Rows[0]["total"].ToString(); 
+            tb_activeNumber.Text = $"Number of Active Consultant : {number}";
+        }
         internal void FillDetail(string ID)
         {
-
             DataTable dt;
             dt = Query.ConsultantDetail(ID);
             /////////////////////
@@ -221,10 +243,8 @@ namespace ERP
                 ////    dgvSurgery.Columns[clnHospCharges.Index].DataPropertyName = "hospShare";
                 ////
                 ////}
-
             }
         }
-
 
         private void dgvDetail_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -307,7 +327,6 @@ namespace ERP
         private void cmbCharges_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbshare = cmbCharges.Text;
-
         }
 
         private void rdoPercent_CheckedChanged(object sender, EventArgs e)
@@ -328,7 +347,6 @@ namespace ERP
 
             textbox.KeyPress += new KeyPressEventHandler(textbox_KeyPress);
             textbox.Validated += new EventHandler(textbox_Validated);
-
         }
         void textbox_Validated(object sender, EventArgs e)
         {
@@ -376,15 +394,11 @@ namespace ERP
                         dgvSurgery.CurrentRow.Cells[5].Value = amount - Convert.ToDouble(abc);
                     }
                 }
-
             }
             catch
             {
 
             }
-
-
-
         }
         void textbox_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -401,8 +415,6 @@ namespace ERP
                 e.Handled = true;
             }
         }
-
-
         private void txtShare_Validated(object sender, EventArgs e)
         {
 
@@ -429,5 +441,7 @@ namespace ERP
             else
                 dgvSurgery.Rows.Cast<DataGridViewRow>().ToList().ForEach(fe => fe.Visible = true);
         }
+
+        
     }
 }

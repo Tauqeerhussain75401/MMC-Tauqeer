@@ -12,33 +12,74 @@ namespace ERP
 {
     public partial class frmTest : Form
     {
-
         public frmTest()
         {
             InitializeComponent();
             FillControls.FillcmbTestCatagory(cmbFilterCatagory);
             FillControls.FillcmbTestCatagory(cmbCatagory);
             FillControls.FillcmbDepartmentIndex(cmbDepartment);
-
         }
         bool FLogIn = true;
         DataTable dtQuery;
+       
         void FillQuery()
         {
             dgvQuery.Rows.Clear();
+            // work by Usman
+            if (cmbFilterCatagory.SelectedIndex == -1) 
+            {
+                return;
+            }
             dtQuery = Query.TestIndex((string)cmbFilterCatagory.SelectedValue, cmbStatus.Text);
             for (int i = 0; i < dtQuery.Rows.Count; i++)
             {
-                dgvQuery.Rows.Add(dtQuery.Rows[i]["ID"].ToString(), dtQuery.Rows[i]["TiTle"].ToString(),
+                dgvQuery.Rows.Add(
+                    dtQuery.Rows[i]["ID"].ToString(), dtQuery.Rows[i]["TiTle"].ToString(),
                     dtQuery.Rows[i]["hospitalrate"].ToString(),
                     dtQuery.Rows[i]["IsDeactivated"].ToString() == "0" ? true : false,
                     dtQuery.Rows[i]["CreatedBy"].ToString() + " | " + ((DateTime)dtQuery.Rows[i]["CreatedTime"]).ToString("dd-MMM-yyyy hh:mm:ss tt"),
                     dtQuery.Rows[i]["EditBy"].ToString() != "" ? dtQuery.Rows[i]["EditBy"].ToString() + " | " + ((DateTime)dtQuery.Rows[i]["EditTime"]).ToString("dd-MMM-yyyy hh:mm:ss tt") : null);
             }
-
-
-
         }
+        #region Worked by Usman
+        private void tb_search_TextChanged(object sender, EventArgs e)
+        {
+            if (dtQuery == null) 
+            {
+                return;
+            };
+
+            string searchText = tb_search.Text.Trim().ToLower();
+
+            dgvQuery.Rows.Clear();
+
+            foreach (DataRow row in dtQuery.Rows)
+            {
+                string id = row["ID"]?.ToString() ?? "";
+                string title = row["TiTle"]?.ToString() ?? "";
+
+                if (id.ToLower().Contains(searchText) || title.ToLower().Contains(searchText))
+                {
+                    string rate = row["hospitalrate"]?.ToString() ?? "";
+                    bool isActive = row["IsDeactivated"]?.ToString() == "0";
+                    string createdBy = row["CreatedBy"]?.ToString() ?? "";
+                    string createdTime = row["CreatedTime"] != DBNull.Value
+                        ? ((DateTime)row["CreatedTime"]).ToString("dd-MMM-yyyy hh:mm:ss tt")
+                        : "";
+                    string editBy = row["EditBy"]?.ToString() ?? "";
+                    string editTime = row["EditTime"] != DBNull.Value
+                        ? ((DateTime)row["EditTime"]).ToString("dd-MMM-yyyy hh:mm:ss tt")
+                        : "";
+                    string editDisplay = !string.IsNullOrWhiteSpace(editBy) && !string.IsNullOrWhiteSpace(editTime)
+                        ? $"{editBy} | {editTime}"
+                        : "";
+
+                    dgvQuery.Rows.Add(id, title, rate, isActive, $"{createdBy} | {createdTime}", editDisplay);
+                }
+            }
+        }
+        #endregion
+
         internal void FillDetail(string ID)
         {
             DataTable dt;
@@ -63,14 +104,11 @@ namespace ERP
         DataTable dtDepartment = Query.DepartmentIndexAll();
         private void frmReceipt_Load(object sender, EventArgs e)
         {
-
             FillQuery();
             FillControls.FillcmBLocation(cmbLocation);
             //FillLocation
             FLogIn = false;
         }
-
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -96,12 +134,11 @@ namespace ERP
                         return;
                     }
                 }
-                //        if (row.Cells[clnAccount.Index].Value != null &&
-                //            row.Cells[clnAccount.Index].Value != null)
-                //        {
+                //if (row.Cells[clnAccount.Index].Value != null && row.Cells[clnAccount.Index].Value != null)
+                //{
                 DML.Test_add_Edit(txtID.Text, txtTitle.Text, ntxtCharges.Value.ToString(), (string)cmbCatagory.SelectedValue, ntxtConsShare.Value.ToString(), ntxtHospShare.Value.ToString(), (string)cmbDepartment.SelectedValue, cmbLocation.SelectedValue.ToString(), chkIsActive.Checked ? "0" : "1");
-                //        }
                 //    }
+                // }
                 //FillDetail(voucher);
                 MessageBox.Show("Record Successfully Saved..!");
                 FillQuery();
@@ -113,15 +150,13 @@ namespace ERP
         {
             if (!FLogIn && e.RowIndex != -1)
             {
-                string voucherNo = dgvQuery.Rows[e.RowIndex].Cells[clnid.Index].Value.ToString();
+                string voucherNo = dgvQuery.Rows[e.RowIndex].Cells["clnid"].Value.ToString();  
                 tabDetailQuery.SelectedTab = tabpgDetail;
                 FillDetail(voucherNo);
             }
         }
         private void btnFind_Click(object sender, EventArgs e)
         {
-
-
             FillQuery();
         }
         private void dgvQuery_KeyDown(object sender, KeyEventArgs e)
@@ -130,7 +165,7 @@ namespace ERP
             {
                 if (dgvQuery.CurrentRow != null)
                 {
-                    string voucherNo = dgvQuery.CurrentRow.Cells[clnid.Index].Value.ToString();
+                    string voucherNo = dgvQuery.CurrentRow.Cells["clnid"].Value.ToString(); 
                     tabDetailQuery.SelectedTab = tabpgDetail;
                     FillDetail(voucherNo);
                     e.Handled = true;
@@ -138,19 +173,14 @@ namespace ERP
             }
         }
         int VoucherIndex = 0;
-
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void btnNew_Click(object sender, EventArgs e)
         {
             Validation.Clear(grpInvoiceDetail);
-
         }
-
         private void frmPayments_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -158,9 +188,6 @@ namespace ERP
                 SendKeys.Send("{tab}");
             }
         }
-
-
-
         private void btnPrint_Click(object sender, EventArgs e)
         {
             Reports.CrpTest rpt = new Reports.CrpTest();
@@ -176,7 +203,6 @@ namespace ERP
         {
 
         }
-
         private void cmbCatagory_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbDepartment.Enabled = false;
@@ -185,10 +211,5 @@ namespace ERP
                 cmbDepartment.Enabled = true;
             }
         }
-
-
-
-
-
     }
 }

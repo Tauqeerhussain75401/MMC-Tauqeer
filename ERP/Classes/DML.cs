@@ -107,7 +107,7 @@ namespace ERP
 
         public static bool MemberInfo_Add_Edit(string Vid, string Vnewno, string Vnewno1, string Vbtmwcoldno, string Voldno, string Vmembershipnumber, string Vtitle, string Vname, string Vfather, string Vgrandfather,
                    string Vhusband, string Vcaste, string Vmaritalstatus, string Vdob, string Vqualification, string Vwork, string Vcontact, string Vcnic, string Vaddress, string Vvoternumber, string Visdeactivate,
-                   string Vmobilenumberforsms, string Vstatus, String Vpaidbyzakat, string ReferenceId)
+                   string Vmobilenumberforsms, string Vstatus, String Vpaidbyzakat, string ReferenceId,int memberValidity,DateTime? validityDate)
         {
             bool Saved = false;
 
@@ -140,6 +140,9 @@ namespace ERP
             com.Parameters.Add("Vstatus", OracleDbType.Varchar2).Value = Vstatus;
             com.Parameters.Add("Vpaidbyzakat", OracleDbType.Varchar2).Value = Vpaidbyzakat;
             com.Parameters.Add("Vreferenceid", OracleDbType.Varchar2).Value = ReferenceId;
+            com.Parameters.Add("VMemberValidity", OracleDbType.Varchar2).Value = memberValidity;
+            com.Parameters.Add("VValidityDate", OracleDbType.Date).Value = validityDate;
+
             //com.Parameters.Add("VmemberPic", OracleDbType.Blob).Value = VmemberPic;
             //com.Parameters.Add("Vsignature", OracleDbType.Blob).Value = Vsignature;
 

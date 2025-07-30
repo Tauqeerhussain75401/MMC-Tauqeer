@@ -127,20 +127,33 @@ namespace ERP
             cmb.ValueMember = "Id";
             cmb.SelectedIndex = -1;
         }
+        #region workeb by Usman To show the All option
+        //internal static void FillcmbTestCatagory(ComboBox cmb)
+        //{
+        //   cmb.DataSource = Query.TestCatagoryIndex();
+
+        //    cmb.DisplayMember = "Title";
+        //    cmb.ValueMember = "Id";
+        //    cmb.SelectedIndex = -1;
+        //}
         internal static void FillcmbTestCatagory(ComboBox cmb)
         {
-            cmb.DataSource = Query.TestCatagoryIndex();
+            DataTable dt = Query.TestCatagoryIndex();
 
+            DataRow allRow = dt.NewRow();
+            allRow["Title"] = "--All--";
+            allRow["Id"] = 0;
+            dt.Rows.InsertAt(allRow, 0);
 
-
+            cmb.DataSource = dt;
             cmb.DisplayMember = "Title";
             cmb.ValueMember = "Id";
-            cmb.SelectedIndex = -1;
+            cmb.SelectedIndex = -1; 
         }
+        #endregion
         internal static void FillcmbIPDTestCatagory(ComboBox cmb)
         {
             cmb.DataSource = Query.IPDTestCatagoryIndex();
-
 
 
             cmb.DisplayMember = "Title";
