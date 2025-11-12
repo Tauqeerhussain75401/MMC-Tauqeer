@@ -1,0 +1,190 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Oracle.DataAccess.Client;
+
+namespace ERP
+{
+    public partial class PTPackages : Form
+    {
+        public PTPackages()
+        {
+            InitializeComponent();
+
+        }
+
+        void FillQuery()
+        {
+
+
+            DataTable dtQuery = Query.PackageInfo();
+            for (int i = 0; i < dtQuery.Rows.Count; i++)
+            {
+                dgvSearch.Rows.Add(dtQuery.Rows[i]["package_id"].ToString(),
+                dtQuery.Rows[i]["packagename_name"].ToString(),
+                dtQuery.Rows[i]["amount"].ToString(),
+                dtQuery.Rows[i]["isdeactivate"].ToString() == "0" ? true : false,
+                dtQuery.Rows[i]["createdby"].ToString(),
+                dtQuery.Rows[i]["editby"].ToString(),
+                dtQuery.Rows[i]["createtime"],
+                dtQuery.Rows[i]["edittime"],
+
+                dtQuery.Rows[i]["status"].ToString(),
+                dtQuery.Rows[i]["terminalid"].ToString());
+
+
+
+            }
+        }
+
+        private void PTPackages_Load(object sender, EventArgs e)
+        {
+
+            FillQuery();
+            FillControls.FillcmbTest(cmbSurgery, 16);
+        }
+
+        //internal void Loadsurgery()
+        //{
+        //    DataTable dt = Query.getData("SELECT id,title FROM test WHERE  isdeactivated = 0 ORDER BY title");
+        //    cmbSurgery.DataSource = dt;
+        //    cmbSurgery.DisplayMember = "title";
+        //    cmbSurgery.ValueMember = "id";
+        //    cmbSurgery.SelectedIndex = 0;
+        //}
+
+        internal void FillDetail(string ID)
+        {
+
+            DataTable dt;
+            dt = Query.PackageInformation(ID);
+            /////////////////////
+            txtpkgid.Text = ID;
+            if (dt.Rows.Count > 0)
+            {
+                // cmbCatagory.SelectedValue = dt.Rows[0]["TesttypeId"].ToString();
+                txtpkgid.Text = dt.Rows[0]["package_id"].ToString();
+                txtpkgname.Text = dt.Rows[0]["packagename_name"].ToString();
+                ntxtamount.Value = (Decimal)dt.Rows[0]["amount"];
+                cmbpkgactive.Checked = dt.Rows[0]["isdeactivate"].ToString() == "0" ? true : false;
+                cmbSurgery.SelectedValue = dt.Rows[0]["surgeryid"].ToString();
+
+            }
+            fillDetailQuery(ID);
+        }
+
+        private void dgvpackages_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            FillDetail(dgvSearch.Rows[e.RowIndex].Cells[Id.Index].Value.ToString());
+
+            Detail.SelectedTab = tabDetail;
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PTPackages_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendKeys.Send("{tab}");
+            }
+        }
+
+
+
+
+
+
+        private void numEnter(object sender, EventArgs e)
+        {
+            (sender as NumericUpDown).Select(0, (sender as NumericUpDown).Text.Length);
+        }
+
+        private void txtAdd_Click(object sender, EventArgs e)
+        {
+            dgvDetail.Rows.Add("0", txtDPackageDetail.Text, txtDAmount.Value);
+            Validation.Clear(grpPackageDetail);
+        }
+
+
+
+        private void btnDetailSave_Click(object sender, EventArgs e)
+        {
+
+            if (txtpkgname.Text == "" || ntxtamount.Text == "" || ntxtamount.Value == 0)
+            {
+
+                MessageBox.Show("Please Enter Fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+
+                if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    string ret_id = "";
+                    DML.packageinfo_add_edit(txtpkgid.Text, txtpkgname.Text, ntxtamount.Text,Convert.ToString( cmbSurgery.SelectedValue),cmbpkgactive.Checked == true ? "0" : "1", "0", out ret_id);
+                    for (int i = 0; i < dgvDetail.Rows.Count; i++)
+                    {
+                        DML.packagesdetail_Add_Edit(dgvDetail.Rows[i].Cells[clnDID.Index].Value.ToString(), dgvDetail.Rows[i].Cells[clnDPDescription.Index].Value.ToString(), dgvDetail.Rows[i].Cells[clnDetailAmount.Index].Value.ToString(), "0", ret_id);
+                    }
+                    MessageBox.Show("Record Successfully Saved..!");
+                    FillDetail(ret_id);
+                    dgvSearch.Rows.Clear();
+                    FillQuery();
+                    dgvDetail.Rows.Clear();
+                }
+
+        }
+
+
+
+        void fillDetailQuery(string id)
+        {
+            dgvDetail.Rows.Clear();
+            DataTable dt = Query.getData("select * from packagesdetail where package_id='" + id + "'");
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                dgvDetail.Rows.Add(
+                    dt.Rows[i]["id"].ToString(),
+                    dt.Rows[i]["PACKAGEDESCRIPTION"].ToString(),
+                    dt.Rows[i]["Amount"].ToString());
+            }
+
+        }
+
+        private void btnDetailNew_Click_1(object sender, EventArgs e)
+        {
+            dgvDetail.Rows.Clear();
+            Validation.Clear(grpPackageDetail);
+            Validation.Clear(grppackageinfo);
+
+        }
+
+        private void btnDetailExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+
+
+
+    }
+}
+

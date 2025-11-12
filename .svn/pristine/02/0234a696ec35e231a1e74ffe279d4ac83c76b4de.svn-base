@@ -1,0 +1,331 @@
+﻿namespace ERP.Forms
+{
+    partial class frmUserSession
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.dgvSession = new System.Windows.Forms.DataGridView();
+            this.btnClosed = new System.Windows.Forms.Button();
+            this.cmbUser = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnSessionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnFrom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnClosed = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.clnsessiondate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnshiftname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSession)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // dgvSession
+            // 
+            this.dgvSession.AllowUserToAddRows = false;
+            this.dgvSession.AllowUserToDeleteRows = false;
+            this.dgvSession.AllowUserToOrderColumns = true;
+            this.dgvSession.AllowUserToResizeColumns = false;
+            this.dgvSession.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvSession.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSession.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvSession.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSession.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clnSessionId,
+            this.clnFrom,
+            this.clnTo,
+            this.clnClosed,
+            this.clnsessiondate,
+            this.clnshiftname});
+            this.dgvSession.Location = new System.Drawing.Point(10, 122);
+            this.dgvSession.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvSession.MultiSelect = false;
+            this.dgvSession.Name = "dgvSession";
+            this.dgvSession.ReadOnly = true;
+            this.dgvSession.RowHeadersWidth = 30;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvSession.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgvSession.RowTemplate.Height = 30;
+            this.dgvSession.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvSession.Size = new System.Drawing.Size(1115, 608);
+            this.dgvSession.TabIndex = 165;
+            this.dgvSession.SelectionChanged += new System.EventHandler(this.dgvSession_SelectionChanged);
+            // 
+            // btnClosed
+            // 
+            this.btnClosed.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnClosed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClosed.Location = new System.Drawing.Point(13, 80);
+            this.btnClosed.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClosed.Name = "btnClosed";
+            this.btnClosed.Size = new System.Drawing.Size(180, 34);
+            this.btnClosed.TabIndex = 167;
+            this.btnClosed.TabStop = false;
+            this.btnClosed.Text = "Session &Closed";
+            this.btnClosed.UseVisualStyleBackColor = false;
+            this.btnClosed.Click += new System.EventHandler(this.btnClosed_Click);
+            // 
+            // cmbUser
+            // 
+            this.cmbUser.AutoCompleteCustomSource.AddRange(new string[] {
+            "Male",
+            "Female"});
+            this.cmbUser.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbUser.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbUser.FormattingEnabled = true;
+            this.cmbUser.Location = new System.Drawing.Point(803, 93);
+            this.cmbUser.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbUser.Name = "cmbUser";
+            this.cmbUser.Size = new System.Drawing.Size(187, 24);
+            this.cmbUser.TabIndex = 181;
+            this.cmbUser.SelectedIndexChanged += new System.EventHandler(this.cmbUser_SelectedIndexChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(738, 97);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(57, 16);
+            this.label15.TabIndex = 182;
+            this.label15.Text = "User Id :";
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Location = new System.Drawing.Point(201, 80);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(85, 34);
+            this.btnPrint.TabIndex = 183;
+            this.btnPrint.TabStop = false;
+            this.btnPrint.Text = "&Print";
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Voucher #";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 120;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.Format = "dd-MMM-yyyy";
+            dataGridViewCellStyle9.NullValue = null;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle9;
+            this.dataGridViewTextBoxColumn2.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Date";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 110;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle10;
+            this.dataGridViewTextBoxColumn3.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Catagory";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 110;
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Consultant";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 341;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Patient Type";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "PatientName";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn7.HeaderText = "Amount";
+            this.dataGridViewTextBoxColumn7.MinimumWidth = 120;
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "Edit By";
+            this.dataGridViewTextBoxColumn9.MinimumWidth = 180;
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Width = 180;
+            // 
+            // clnSessionId
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.clnSessionId.DefaultCellStyle = dataGridViewCellStyle2;
+            this.clnSessionId.HeaderText = "Session ID";
+            this.clnSessionId.MinimumWidth = 120;
+            this.clnSessionId.Name = "clnSessionId";
+            this.clnSessionId.ReadOnly = true;
+            this.clnSessionId.Width = 120;
+            // 
+            // clnFrom
+            // 
+            this.clnFrom.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Format = "dd-MMM-yyyy";
+            dataGridViewCellStyle3.NullValue = null;
+            this.clnFrom.DefaultCellStyle = dataGridViewCellStyle3;
+            this.clnFrom.FillWeight = 50F;
+            this.clnFrom.HeaderText = "From";
+            this.clnFrom.MinimumWidth = 110;
+            this.clnFrom.Name = "clnFrom";
+            this.clnFrom.ReadOnly = true;
+            this.clnFrom.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // clnTo
+            // 
+            this.clnTo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.clnTo.DefaultCellStyle = dataGridViewCellStyle4;
+            this.clnTo.FillWeight = 50F;
+            this.clnTo.HeaderText = "To";
+            this.clnTo.MinimumWidth = 110;
+            this.clnTo.Name = "clnTo";
+            this.clnTo.ReadOnly = true;
+            // 
+            // clnClosed
+            // 
+            this.clnClosed.HeaderText = "Closed";
+            this.clnClosed.MinimumWidth = 80;
+            this.clnClosed.Name = "clnClosed";
+            this.clnClosed.ReadOnly = true;
+            this.clnClosed.Width = 80;
+            // 
+            // clnsessiondate
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.clnsessiondate.DefaultCellStyle = dataGridViewCellStyle5;
+            this.clnsessiondate.HeaderText = "Session Date";
+            this.clnsessiondate.Name = "clnsessiondate";
+            this.clnsessiondate.ReadOnly = true;
+            this.clnsessiondate.Width = 150;
+            // 
+            // clnshiftname
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.clnshiftname.DefaultCellStyle = dataGridViewCellStyle6;
+            this.clnshiftname.HeaderText = "Shift Name";
+            this.clnshiftname.Name = "clnshiftname";
+            this.clnshiftname.ReadOnly = true;
+            this.clnshiftname.Width = 120;
+            // 
+            // frmUserSession
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1135, 743);
+            this.Controls.Add(this.btnPrint);
+            this.Controls.Add(this.cmbUser);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.btnClosed);
+            this.Controls.Add(this.dgvSession);
+            this.Name = "frmUserSession";
+            this.Text = "frmUserSession";
+            this.Load += new System.EventHandler(this.frmUserSession_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSession)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.DataGridView dgvSession;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.Button btnClosed;
+        private System.Windows.Forms.ComboBox cmbUser;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnSessionId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnFrom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnTo;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn clnClosed;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnsessiondate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnshiftname;
+    }
+}

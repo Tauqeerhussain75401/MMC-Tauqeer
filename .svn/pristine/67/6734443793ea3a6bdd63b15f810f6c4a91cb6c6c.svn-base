@@ -1,0 +1,383 @@
+﻿namespace ERP
+{
+    partial class frmChartOfAccount
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmChartOfAccount));
+            this.tvChartOfAcc = new System.Windows.Forms.TreeView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.grpDescription = new System.Windows.Forms.GroupBox();
+            this.lblSelected = new System.Windows.Forms.Label();
+            this.lblSelectedAc = new System.Windows.Forms.Label();
+            this.lblType = new System.Windows.Forms.Label();
+            this.lblControlAc = new System.Windows.Forms.Label();
+            this.lblLvl = new System.Windows.Forms.Label();
+            this.lblLevel = new System.Windows.Forms.Label();
+            this.lblTypee = new System.Windows.Forms.Label();
+            this.lblParentAcc = new System.Windows.Forms.Label();
+            this.lblChartofAc = new System.Windows.Forms.Label();
+            this.picChartofAcLogo = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.StatusUser = new System.Windows.Forms.ToolStripStatusLabel();
+            this.StatusRights = new System.Windows.Forms.ToolStripStatusLabel();
+            this.StatusDateTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.StatusTeminalID = new System.Windows.Forms.ToolStripStatusLabel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.contextMenuStrip1.SuspendLayout();
+            this.grpDescription.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picChartofAcLogo)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // tvChartOfAcc
+            // 
+            this.tvChartOfAcc.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tvChartOfAcc.ContextMenuStrip = this.contextMenuStrip1;
+            this.tvChartOfAcc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvChartOfAcc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tvChartOfAcc.Location = new System.Drawing.Point(0, 0);
+            this.tvChartOfAcc.Margin = new System.Windows.Forms.Padding(2);
+            this.tvChartOfAcc.Name = "tvChartOfAcc";
+            this.tvChartOfAcc.Size = new System.Drawing.Size(346, 340);
+            this.tvChartOfAcc.TabIndex = 0;
+            this.tvChartOfAcc.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvChartOfAcc_AfterSelect);
+            this.tvChartOfAcc.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvChartOfAcc_NodeMouseClick);
+            this.tvChartOfAcc.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tvChartOfAcc_KeyDown);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem,
+            this.changeToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(116, 70);
+            // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.addToolStripMenuItem.Text = "Add";
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
+            // 
+            // changeToolStripMenuItem
+            // 
+            this.changeToolStripMenuItem.Name = "changeToolStripMenuItem";
+            this.changeToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.changeToolStripMenuItem.Text = "Change";
+            this.changeToolStripMenuItem.Click += new System.EventHandler(this.changeToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // grpDescription
+            // 
+            this.grpDescription.BackColor = System.Drawing.Color.Transparent;
+            this.grpDescription.Controls.Add(this.lblSelected);
+            this.grpDescription.Controls.Add(this.lblSelectedAc);
+            this.grpDescription.Controls.Add(this.lblType);
+            this.grpDescription.Controls.Add(this.lblControlAc);
+            this.grpDescription.Controls.Add(this.lblLvl);
+            this.grpDescription.Controls.Add(this.lblLevel);
+            this.grpDescription.Controls.Add(this.lblTypee);
+            this.grpDescription.Controls.Add(this.lblParentAcc);
+            this.grpDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpDescription.ForeColor = System.Drawing.Color.Black;
+            this.grpDescription.Location = new System.Drawing.Point(352, 175);
+            this.grpDescription.Name = "grpDescription";
+            this.grpDescription.Size = new System.Drawing.Size(493, 142);
+            this.grpDescription.TabIndex = 312;
+            this.grpDescription.TabStop = false;
+            this.grpDescription.Text = "Account";
+            // 
+            // lblSelected
+            // 
+            this.lblSelected.AutoSize = true;
+            this.lblSelected.BackColor = System.Drawing.Color.Transparent;
+            this.lblSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelected.ForeColor = System.Drawing.Color.Black;
+            this.lblSelected.Location = new System.Drawing.Point(150, 72);
+            this.lblSelected.Name = "lblSelected";
+            this.lblSelected.Size = new System.Drawing.Size(62, 16);
+            this.lblSelected.TabIndex = 330;
+            this.lblSelected.Text = "Selected";
+            // 
+            // lblSelectedAc
+            // 
+            this.lblSelectedAc.AutoSize = true;
+            this.lblSelectedAc.BackColor = System.Drawing.Color.Transparent;
+            this.lblSelectedAc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectedAc.ForeColor = System.Drawing.Color.Black;
+            this.lblSelectedAc.Location = new System.Drawing.Point(25, 72);
+            this.lblSelectedAc.Name = "lblSelectedAc";
+            this.lblSelectedAc.Size = new System.Drawing.Size(119, 16);
+            this.lblSelectedAc.TabIndex = 329;
+            this.lblSelectedAc.Text = "Selected Account :";
+            // 
+            // lblType
+            // 
+            this.lblType.AutoSize = true;
+            this.lblType.BackColor = System.Drawing.Color.Transparent;
+            this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblType.ForeColor = System.Drawing.Color.Black;
+            this.lblType.Location = new System.Drawing.Point(150, 96);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(40, 16);
+            this.lblType.TabIndex = 328;
+            this.lblType.Text = "Type";
+            // 
+            // lblControlAc
+            // 
+            this.lblControlAc.AutoSize = true;
+            this.lblControlAc.BackColor = System.Drawing.Color.Transparent;
+            this.lblControlAc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblControlAc.ForeColor = System.Drawing.Color.Black;
+            this.lblControlAc.Location = new System.Drawing.Point(25, 48);
+            this.lblControlAc.Name = "lblControlAc";
+            this.lblControlAc.Size = new System.Drawing.Size(107, 16);
+            this.lblControlAc.TabIndex = 327;
+            this.lblControlAc.Text = "Control Account :";
+            // 
+            // lblLvl
+            // 
+            this.lblLvl.AutoSize = true;
+            this.lblLvl.BackColor = System.Drawing.Color.Transparent;
+            this.lblLvl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLvl.ForeColor = System.Drawing.Color.Black;
+            this.lblLvl.Location = new System.Drawing.Point(25, 24);
+            this.lblLvl.Name = "lblLvl";
+            this.lblLvl.Size = new System.Drawing.Size(47, 16);
+            this.lblLvl.TabIndex = 326;
+            this.lblLvl.Text = "Level :";
+            // 
+            // lblLevel
+            // 
+            this.lblLevel.AutoSize = true;
+            this.lblLevel.BackColor = System.Drawing.Color.Transparent;
+            this.lblLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLevel.ForeColor = System.Drawing.Color.Black;
+            this.lblLevel.Location = new System.Drawing.Point(150, 24);
+            this.lblLevel.Name = "lblLevel";
+            this.lblLevel.Size = new System.Drawing.Size(41, 16);
+            this.lblLevel.TabIndex = 325;
+            this.lblLevel.Text = "Level";
+            // 
+            // lblTypee
+            // 
+            this.lblTypee.AutoSize = true;
+            this.lblTypee.BackColor = System.Drawing.Color.Transparent;
+            this.lblTypee.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTypee.ForeColor = System.Drawing.Color.Black;
+            this.lblTypee.Location = new System.Drawing.Point(25, 96);
+            this.lblTypee.Name = "lblTypee";
+            this.lblTypee.Size = new System.Drawing.Size(46, 16);
+            this.lblTypee.TabIndex = 323;
+            this.lblTypee.Text = "Type :";
+            // 
+            // lblParentAcc
+            // 
+            this.lblParentAcc.AutoSize = true;
+            this.lblParentAcc.BackColor = System.Drawing.Color.Transparent;
+            this.lblParentAcc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblParentAcc.ForeColor = System.Drawing.Color.Black;
+            this.lblParentAcc.Location = new System.Drawing.Point(150, 48);
+            this.lblParentAcc.Name = "lblParentAcc";
+            this.lblParentAcc.Size = new System.Drawing.Size(111, 16);
+            this.lblParentAcc.TabIndex = 320;
+            this.lblParentAcc.Text = "Chart of Accounts";
+            // 
+            // lblChartofAc
+            // 
+            this.lblChartofAc.BackColor = System.Drawing.Color.White;
+            this.lblChartofAc.Font = new System.Drawing.Font("Times New Roman", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChartofAc.ForeColor = System.Drawing.Color.DimGray;
+            this.lblChartofAc.Location = new System.Drawing.Point(320, 56);
+            this.lblChartofAc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblChartofAc.Name = "lblChartofAc";
+            this.lblChartofAc.Size = new System.Drawing.Size(394, 58);
+            this.lblChartofAc.TabIndex = 313;
+            this.lblChartofAc.Text = "Chart of Account";
+            this.lblChartofAc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // picChartofAcLogo
+            // 
+            this.picChartofAcLogo.Image = ((System.Drawing.Image)(resources.GetObject("picChartofAcLogo.Image")));
+            this.picChartofAcLogo.Location = new System.Drawing.Point(141, -3);
+            this.picChartofAcLogo.Name = "picChartofAcLogo";
+            this.picChartofAcLogo.Size = new System.Drawing.Size(191, 169);
+            this.picChartofAcLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picChartofAcLogo.TabIndex = 315;
+            this.picChartofAcLogo.TabStop = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.picChartofAcLogo);
+            this.panel1.Controls.Add(this.lblChartofAc);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(855, 169);
+            this.panel1.TabIndex = 316;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.StatusUser,
+            this.StatusRights,
+            this.StatusDateTime,
+            this.StatusTeminalID});
+            this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
+            this.statusStrip1.Location = new System.Drawing.Point(0, 509);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.statusStrip1.Size = new System.Drawing.Size(855, 22);
+            this.statusStrip1.TabIndex = 318;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // StatusUser
+            // 
+            this.StatusUser.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.StatusUser.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
+            this.StatusUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.StatusUser.Name = "StatusUser";
+            this.StatusUser.Size = new System.Drawing.Size(64, 17);
+            this.StatusUser.Text = "User Name";
+            // 
+            // StatusRights
+            // 
+            this.StatusRights.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.StatusRights.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
+            this.StatusRights.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.StatusRights.Name = "StatusRights";
+            this.StatusRights.Size = new System.Drawing.Size(38, 17);
+            this.StatusRights.Text = "Mode";
+            // 
+            // StatusDateTime
+            // 
+            this.StatusDateTime.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.StatusDateTime.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.StatusDateTime.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
+            this.StatusDateTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StatusDateTime.Name = "StatusDateTime";
+            this.StatusDateTime.Size = new System.Drawing.Size(83, 17);
+            this.StatusDateTime.Text = "LoginDateTime";
+            // 
+            // StatusTeminalID
+            // 
+            this.StatusTeminalID.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.StatusTeminalID.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
+            this.StatusTeminalID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.StatusTeminalID.Name = "StatusTeminalID";
+            this.StatusTeminalID.Size = new System.Drawing.Size(65, 17);
+            this.StatusTeminalID.Text = "Terminal ID";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.tvChartOfAcc);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(0, 169);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(346, 340);
+            this.panel2.TabIndex = 319;
+            // 
+            // frmChartOfAccount
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(855, 531);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.grpDescription);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Name = "frmChartOfAccount";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Chart Of Account";
+            this.Load += new System.EventHandler(this.frmChartOfAccount_Load);
+            this.contextMenuStrip1.ResumeLayout(false);
+            this.grpDescription.ResumeLayout(false);
+            this.grpDescription.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picChartofAcLogo)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.TreeView tvChartOfAcc;
+        private System.Windows.Forms.GroupBox grpDescription;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeToolStripMenuItem;
+        private System.Windows.Forms.Label lblChartofAc;
+        private System.Windows.Forms.Label lblSelected;
+        private System.Windows.Forms.Label lblSelectedAc;
+        private System.Windows.Forms.Label lblType;
+        private System.Windows.Forms.Label lblControlAc;
+        private System.Windows.Forms.Label lblLvl;
+        private System.Windows.Forms.Label lblLevel;
+        private System.Windows.Forms.Label lblTypee;
+        private System.Windows.Forms.Label lblParentAcc;
+        private System.Windows.Forms.PictureBox picChartofAcLogo;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel StatusUser;
+        private System.Windows.Forms.ToolStripStatusLabel StatusRights;
+        private System.Windows.Forms.ToolStripStatusLabel StatusDateTime;
+        private System.Windows.Forms.ToolStripStatusLabel StatusTeminalID;
+        private System.Windows.Forms.Panel panel2;
+    }
+}

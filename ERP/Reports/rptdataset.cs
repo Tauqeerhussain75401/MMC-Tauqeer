@@ -1,0 +1,135 @@
+﻿namespace ERP.Reports
+{
+
+
+    public partial class rptdataset
+    {
+        partial class Less_UnPaid_SummaryDataTable
+        {
+        }
+
+        partial class IPD_OPD_ClosingSummaryDataTable
+        {
+        }
+
+        partial class Discrepancies_Voucher_DataTable
+        {
+        }
+
+        partial class Get_surgerygroupDataTable
+        {
+        }
+
+        partial class OPDReceiptDataTable
+        {
+        }
+
+        partial class SubCancelOpdReceiptDataTable
+        {
+        }
+
+        partial class SPD_ZFDataTable
+        {
+        }
+
+        partial class consultantsurgeryDataTable
+        {
+        }
+
+        partial class VoucherDataTable
+        {
+        }
+
+        partial class VoucherERPDataTable
+        {
+        }
+
+        partial class consulShareDetailDataTable
+        {
+
+        }
+
+        partial class TrialBalanceOldDataTable
+        {
+        }
+
+        partial class DataTable1DataTable
+        {
+        }
+
+        partial class Crp_IPD_BMJDataTable
+        {
+
+            partial class RoomwisepatientinfoDataTable
+            {
+            }
+
+            partial class TrialBalanceDataTable
+            {
+            }
+
+            partial class InpatientReportDataTable
+            {
+            }
+
+            partial class daily_cash_statementDataTable
+            {
+            }
+
+            partial class rptMBJMemberDataTable
+            {
+            }
+
+            partial class opdtestreceipptDataTable
+            {
+            }
+
+            partial class TblBirthInfoDataTable
+            {
+            }
+
+            partial class DtAdvanceDataTable
+            {
+            }
+
+            partial class IPDDisChargeBillDetailDataTable
+            {
+            }
+
+            partial class IncomeSummaryCatagoryWiseDataTable
+            {
+                partial class ReferenceInvoicesDataTable
+                {
+                }
+
+                partial class DaywiseMilkDetailDataTable
+                {
+                }
+
+                partial class CustomerBillDetailDataTable
+                {
+                }
+
+                partial class MilkDetail5DaysDataTable
+                {
+
+                }
+                partial class VehicleMilkDetailDataTable
+                {
+                }
+
+                partial class StockBalanceDataTable
+                {
+                }
+
+                partial class BalanceSheetDataTable
+                {
+                }
+
+                partial class StockLedgerDataTable
+                {
+                }
+            }
+        }
+    }
+}

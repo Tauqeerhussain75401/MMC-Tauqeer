@@ -1,0 +1,1374 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using ZXing;
+
+namespace ERP
+{
+    public partial class frmHospitalCharges : Form
+    {
+        public frmHospitalCharges()
+        {
+            InitializeComponent();
+            DateTime dt = SoftwareInfo.ServerDate;// DateTime.Now;
+            dtpDate.Value = dt;
+            dtpDateFrom.Value = dt;
+            dtpDateTo.Value = dt;
+        }
+
+        internal string HosCharges = "";
+        internal int TestId = 0;
+        internal string serialno;
+        internal string billno;
+        internal string RoomTitle;
+        internal Decimal PackageAmount;
+        string ReceiptNo;
+        public string SlipNumber;
+        public string PackageId;
+        string SurgerPackageId;
+        DataTable dtQueryDay;
+
+
+
+        private void ManageControls(Control[] ctrl)
+        {
+            // int LocX = 12, LocY = 60;
+            // LocY += 50;
+            foreach (Control item in ctrl)
+            {
+                item.Visible = true;
+                // item.Location = new Point(LocX, LocY);
+                // LocY += item.Height + 3;
+            }
+
+
+        }
+
+        private void frmHospitalCharges_Load(object sender, EventArgs e)
+        {
+            ChargesHeading.Text = HosCharges;
+
+            if (HosCharges == "In-Patient Lab" || HosCharges == "In-Patient Ultra" || HosCharges == "In-Patient Xray" || HosCharges == "In-Patient Medical Services" || HosCharges == "In-Patient Echo" || HosCharges == "In-Patient Physio")
+            {
+                FillControls.FillcmbTest(cmbTestName, TestId);
+                FillControls.FillcmbCunsultantHoscharges(cmbConsName);
+                ManageControls(new Control[] { pnlReceiptNo, pnlDateTime, pnltest, pnlCharges, pnlCname, pnlbtns });
+                InpReceiptInitialize();
+            }
+            else if (HosCharges == "Room Charges")
+            {
+                FillControls.FillcmbRoomindex(cmbRoomType);
+                ManageControls(new Control[] { pnlReceiptNo, pnlRoomType, pnlCharges, pnlDateFrom, pnlDays, pnlbtns });
+                InpRoomInitialize();
+                cmbRoomType.Text = RoomTitle;
+                numCharges.Enabled = false;
+                dtQueryDay = Query.RoomChargesDay(serialno, billno);
+                if (dtQueryDay.Rows.Count > 0)
+                    dtpDateFrom.Value = Convert.ToDateTime(dtQueryDay.Rows[0]["AddmissionDate"].ToString());
+                numDays.Value = Convert.ToInt32(dtQueryDay.Rows[0]["Days"].ToString()) == 0 ? 1 : Convert.ToInt32(dtQueryDay.Rows[0]["Days"].ToString());
+
+            }
+            else if (HosCharges == "Misc Charges")
+            {
+                ManageControls(new Control[] { pnlReceiptNo, pnlMiscdes, pnlCharges, pnlbtns });
+                InpMiscInitialize();
+
+            }
+            else if (HosCharges == "Surgery Charges")
+            {
+                ManageControls(new Control[] { pnlCname, pnlCname2, pnlAnaes, pnlCharges, pnlbtns, pnlSurgery, pnlAnaesCharges });
+
+                InpSurgeryInitialize();
+                cmbConsName.SelectedIndex = 0;
+                cmbConname2.SelectedIndex = 0;
+                cmbAnaes.SelectedIndex = 0;
+                //numCharges.Enabled = false;
+                numCharges.Value = PackageAmount;
+
+
+
+
+            }
+            else if (HosCharges == "Delivery Charges")
+            {
+                FillControls.FillcmbCunsultantHoscharges(cmbConsName);
+                FillControls.FillcmbTest(cmbDeli, TestId);
+                ManageControls(new Control[] { pnlReceiptNo, pnlCname, pnlDeliv, pnlCharges, pnlFixed, pnlRecvry, pnlbtns });
+                InpDeliveryInitialize();
+                cmbConsName.SelectedIndex = 1;
+            }
+            else if (HosCharges == "Consultant Charges")
+            {
+                FillControls.FillcmbCunsultantHoscharges(cmbConsName);
+                FillControls.FillcmbCunsultantcategory(cmbCategory);
+                ManageControls(new Control[] { pnlReceiptNo,pnlCategory, pnlCname, pnlCharges, pnlVisits, pnlbtns });
+                InpConsultantInitialize();
+                ConsultantQuery(serialno);
+            }
+        }
+
+        #region InitializeForm
+        private void InpConsultantInitialize()
+        {
+            pnlReceiptNo.Location = new Point(10, 10);
+            pnlCname.Location = new Point(10, 40);
+            pnlCharges.Location = new Point(376, 40);
+            pnlVisits.Location = new Point(550, 40);
+            pnlControls.Size = new Size(740, 80);
+            dgvHosCharges.Location = new Point(10, 120);
+            dgvHosCharges.Size = new Size(920, 300);
+            pnlbtns.Location = new Point(450, 430);
+            this.Size = new Size(980, 520);
+            pnlCname.Focus();
+            cmbConsName.Focus();
+            pnlCname.TabIndex = 1;
+            pnlCharges.TabIndex = 2;
+            pnlVisits.TabIndex = 3;
+            btnSave.TabIndex = 4;
+            btnExit.TabStop = false;
+            btnShowAllReceipt.TabStop = false;
+            btnPrint.TabStop = false;
+            btnShowAllReceipt.Enabled = true;
+        }
+        private void InpDeliveryInitialize()
+        {
+            pnlReceiptNo.Location = new Point(10, 10);
+            pnlCname.Location = new Point(215, 10);
+            pnlDeliv.Location = new Point(10, 40);
+            pnlCharges.Location = new Point(322, 40);
+            pnlFixed.Location = new Point(12, 100);
+            pnlRecvry.Location = new Point(215, 100);
+            pnlControls.Size = new Size(726, 80);
+            dgvHosCharges.Size = new Size(900, 314);
+            dgvHosCharges.Location = new Point(10, 120);
+            pnlbtns.Location = new Point(430, 450);
+            this.Size = new Size(1000, 530);
+            cmbConsName.Focus();
+            pnlCname.TabIndex = 0;
+            pnlDeliv.TabIndex = 1;
+            pnlCharges.TabIndex = 2;
+            pnlFixed.TabIndex = 3;
+            pnlRecvry.TabIndex = 4;
+            btnSave.TabIndex = 5;
+            btnExit.TabStop = false;
+            btnShowAllReceipt.TabStop = false;
+            btnPrint.TabStop = false;
+            btnShowAllReceipt.Enabled = true;
+            numCharges.ReadOnly = false;
+        }
+        private void InpSurgeryInitialize()
+        {
+            this.Size = new Size(1000, 500);
+            FillControls.FillcmbCunsultantHoscharges(cmbConsName);
+            FillControls.FillcmbCunsultantHoscharges(cmbConname2);
+            FillControls.FillcmbCunsultantHoscharges(cmbAnaes);
+
+            //FillControls.FillcmbTest(cmbSurgery, TestId); //12-04-2021 commit
+            FillControls.FillcmbPackage(cmbSurgery);
+
+            DataTable dt = Query.getData("select package_id from packageindex WHERE package_id = '" + PackageId + "' ");
+            //DataTable dt = Query.getData("SELECT surgeryid FROM PACKAGEINDEX  WHERE package_id ='" + PackageId + "'"); //12-04-2021 commit
+            if (dt.Rows.Count > 0)
+            {
+                //SurgerPackageId = dt.Rows[0]["surgeryid"].ToString(); //12-04-2021 commit
+                SurgerPackageId = dt.Rows[0]["package_id"].ToString();
+                cmbSurgery.SelectedValue = SurgerPackageId;
+
+            }
+            else
+            {
+                cmbSurgery.SelectedIndex = -1;
+            }
+            pnlCname.Location = new Point(10, 10);
+            pnlCname2.Location = new Point(380, 10);
+            pnlAnaes.Location = new Point(10, 40);
+            pnlCharges.Location = new Point(10, 70);
+            pnlSurgery.Location = new Point(10, 100);
+            pnlControls.Size = new Size(726, 140);
+            dgvHosCharges.Size = new Size(900, 200);
+            dgvHosCharges.Location = new Point(10, 200);
+            pnlbtns.Location = new Point(430, 425);
+            cmbConsName.Focus();
+            pnlCname.TabIndex = 0;
+
+            pnlAnaes.TabIndex = 1;
+            pnlanaescharges1.TabIndex = 2;
+            btnSave.TabIndex = 3;
+            btnExit.TabStop = false;
+            btnShowAllReceipt.TabStop = false;
+            btnPrint.TabStop = false;
+            btnShowAllReceipt.Enabled = true;
+
+            numCharges.Enabled = false;
+            cmbSurgery.Enabled = false;
+        }
+        private void InpMiscInitialize()
+        {
+            pnlReceiptNo.Location = new Point(10, 10);
+            pnlMiscdes.Location = new Point(10, 40);
+            pnlCharges.Location = new Point(393, 40);
+
+            pnlControls.Size = new Size(583, 80);
+            dgvHosCharges.Location = new Point(10, 120);
+            dgvHosCharges.Size = new Size(583, 340);
+            pnlbtns.Location = new Point(293, 470);
+            this.Size = new Size(621, 560);
+            txtMiscDesc.Focus();
+            pnlMiscdes.TabIndex = 0;
+            pnlCharges.TabIndex = 1;
+            btnExit.TabStop = false;
+            btnShowAllReceipt.TabStop = false;
+            btnPrint.TabStop = false;
+            btnShowAllReceipt.Enabled = true;
+        }
+        private void InpRoomInitialize()
+        {
+            pnlReceiptNo.Location = new Point(10, 10);
+            pnlDateFrom.Location = new Point(10, 40);
+            pnlRoomType.Location = new Point(12, 68);
+            pnlDays.Location = new Point(224, 68);
+            pnlCharges.Location = new Point(355, 68);
+            pnlControls.Size = new Size(670, 110);
+            dgvHosCharges.Location = new Point(10, 150);
+            dgvHosCharges.Size = new Size(900, 240);
+            pnlbtns.Location = new Point(376, 390);
+            this.Size = new Size(950, 470);
+            btnShowAllReceipt.Enabled = true;
+            cmbRoomType.Focus();
+            pnlRoomType.TabIndex = 0;
+            dtpDateFrom.TabIndex = 1;
+            dtpDateTo.TabIndex = 2;
+            pnlDays.TabIndex = 3;
+            pnlCharges.TabIndex = 4;
+            btnSave.TabIndex = 5;
+        }
+        private void InpReceiptInitialize()
+        {
+            cmbConsName.Text = "MMC";
+            pnlReceiptNo.Location = new Point(10, 10);
+            pnltest.Location = new Point(10, 40);
+            pnlDateTime.Location = new Point(230, 10);
+            pnlCname.Location = new Point(10, 70);
+            pnlCharges.Location = new Point(380, 70);
+            pnlControls.Size = new Size(670, 110);
+            dgvHosCharges.Location = new Point(10, 150);
+            dgvHosCharges.Size = new Size(670, 282);
+            pnlbtns.Location = new Point(380, 440);
+            this.Size = new Size(711, 525);
+            dtpDate.Enabled = false;
+            btnShowAllReceipt.Enabled = true;
+            btnPrint.Enabled = true;
+            cmbTestName.Focus();
+            pnltest.TabIndex = 0;
+            label10.TabIndex = 1;
+            cmbTestName.TabIndex = 2;
+            pnlCharges.TabIndex = 3;
+            pnlCname.TabIndex = 4;
+            btnSave.TabIndex = 5;
+            btnExit.TabStop = false;
+            btnShowAllReceipt.TabStop = false;
+            btnPrint.TabStop = false;
+        }
+        #endregion
+        #region FillQuery
+        DataTable dtQuery = new DataTable();
+        internal void ReceiptQuery(string serialno, string testtypeid, string Receipt)
+        {
+            dtQuery = Query.InPatientTestInfo(testtypeid, Receipt, serialno);
+            DataView view = new DataView(dtQuery);
+            dtQuery = view.ToTable(false, "ReceiptNo", "VSeq", "test", "charges", "receiptdate", "createdby", "editby", "edittime", "status");
+            dgvHosCharges.DataSource = dtQuery;
+            dgvHosCharges.Columns["receiptdate"].DefaultCellStyle.Format = "dd-MMM-yyyy hh:mm tt";
+            dgvHosCharges.Columns["VSeq"].Visible = false;
+            dgvHosCharges.Columns["test"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; ;
+            dgvHosCharges.Columns["editby"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; ;
+            dgvHosCharges.Columns["edittime"].DefaultCellStyle.Format = "dd-MMM-yyyy hh:mm tt";
+
+            //basit write this code 19-08-2020
+            dgvHosCharges.Columns["status"].Visible = false;
+            if (UserInfo.UserLevel == "Admin")
+            {
+                DeleteSlipRecodeRed(dtQuery);
+            }
+            else
+            {
+                HidDeleteSlipRecodeRed(dtQuery);
+            }
+            //basit write this code 19-08-2020
+        }
+
+        //basit write this code 19-08-2020
+        internal void DeleteSlipRecodeRed(DataTable dtQuery)
+        {
+            if (HosCharges == "In-Patient Lab" || HosCharges == "In-Patient Ultra" || HosCharges == "In-Patient Xray" || HosCharges == "In-Patient Medical Services" || HosCharges == "In-Patient Echo" || HosCharges == "In-Patient Physio")
+            {
+                #region
+                for (int i = 0; i < dtQuery.Rows.Count; i++)
+                {
+
+                    if (dtQuery.Rows[i]["status"].ToString() == "1")
+                    {
+                        dgvHosCharges.Rows[i].Cells["ReceiptNo"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["ReceiptNo"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["test"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["test"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["charges"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["charges"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["receiptdate"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["receiptdate"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["createdby"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["createdby"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["editby"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["editby"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["edittime"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["edittime"].ReadOnly = true;
+
+                    }
+
+                }
+                #endregion
+            }
+            else if (HosCharges == "Room Charges")
+            {
+                #region
+                for (int i = 0; i < dtQuery.Rows.Count; i++)
+                {
+
+                    if (dtQuery.Rows[i]["status"].ToString() == "1")
+                    {
+                        dgvHosCharges.Rows[i].Cells["createtime"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["createtime"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["room"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["room"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["datefrom"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["datefrom"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["dateto"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["dateto"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["days"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["days"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["charges"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["charges"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["createdby"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["createdby"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["total"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["total"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["edittime"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["edittime"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["editby"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["editby"].ReadOnly = true;
+
+                    }
+
+                }
+                #endregion
+            }
+            else if (HosCharges == "Misc Charges")
+            {
+                #region
+                for (int i = 0; i < dtQuery.Rows.Count; i++)
+                {
+
+                    if (dtQuery.Rows[i]["status"].ToString() == "1")//createdby,createtime
+                    {
+                        dgvHosCharges.Rows[i].Cells["vseq"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["vseq"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["miscdesc"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["miscdesc"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["charges"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["charges"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["createdby"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["createdby"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["createtime"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["createtime"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["editby"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["editby"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["edittime"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["edittime"].ReadOnly = true;
+
+                        //dgvHosCharges.Rows[i].Cells["days"].Style.BackColor = Color.Red;
+                        //dgvHosCharges.Rows[i].Cells["days"].ReadOnly = true;
+
+                        //dgvHosCharges.Rows[i].Cells["charges"].Style.BackColor = Color.Red;
+                        //dgvHosCharges.Rows[i].Cells["charges"].ReadOnly = true;
+
+                    }
+
+                }
+                #endregion
+            }
+            else if (HosCharges == "Consultant Charges")
+            {
+                #region
+                for (int i = 0; i < dtQuery.Rows.Count; i++)
+                {
+
+                    if (dtQuery.Rows[i]["status"].ToString() == "1")
+                    {
+                        dgvHosCharges.Rows[i].Cells["createdby"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["createdby"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["createtime"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["createtime"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["vseq"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["vseq"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["consultant"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["consultant"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["charges"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["charges"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["editby"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["editby"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["edittime"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["edittime"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["total"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["total"].ReadOnly = true;
+
+
+
+
+                    }
+
+                }
+                #endregion
+
+            }
+            else if (HosCharges == "Delivery Charges")
+            {
+                #region
+                for (int i = 0; i < dtQuery.Rows.Count; i++)
+                {
+
+                    if (dtQuery.Rows[i]["status"].ToString() == "1")
+                    {
+                        dgvHosCharges.Rows[i].Cells["vseq"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["vseq"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["createdby"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["createdby"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["createtime"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["createtime"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["consultant"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["consultant"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["Test"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["Test"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["charges"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["charges"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["lramount"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["lramount"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["recoveryamount"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["recoveryamount"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["editby"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["editby"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["edittime"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["edittime"].ReadOnly = true;
+
+                    }
+
+                }
+                #endregion
+            }
+            else if (HosCharges == "Surgery Charges")
+            {
+                #region
+                for (int i = 0; i < dtQuery.Rows.Count; i++)
+                {
+
+                    if (dtQuery.Rows[i]["status"].ToString() == "1")
+                    {
+                        dgvHosCharges.Rows[i].Cells["vseq"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["vseq"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["createdby"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["createdby"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["createtime"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["createtime"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["consultant"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["consultant"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["surgery"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["surgery"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["charges"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["charges"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["Otfixed"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["Otfixed"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["nitrous"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["nitrous"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["recovery"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["recovery"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["anaesthetist"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["anaesthetist"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["anaescharges"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["anaescharges"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["editby"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["editby"].ReadOnly = true;
+
+                        dgvHosCharges.Rows[i].Cells["edittime"].Style.BackColor = Color.Red;
+                        dgvHosCharges.Rows[i].Cells["edittime"].ReadOnly = true;
+
+
+                    }
+
+                }
+                #endregion
+            }
+
+        }
+
+
+
+        internal void HidDeleteSlipRecodeRed(DataTable dtQuery)
+        {
+            for (int i = 0; i < dtQuery.Rows.Count; i++)
+            {
+                if (dtQuery.Rows[i]["status"].ToString() == "1")
+                {
+                    CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[dgvHosCharges.DataSource];
+                    currencyManager1.SuspendBinding();
+
+
+
+                    dgvHosCharges.Rows[i].Visible = false;
+                    dgvHosCharges.Rows[i].Visible = false;
+                    dgvHosCharges.Rows[i].Visible = false;
+                    dgvHosCharges.Rows[i].Visible = false;
+                    dgvHosCharges.Rows[i].Visible = false;
+                    currencyManager1.ResumeBinding();
+                }
+            }
+
+        }
+
+        //basit write this code 19-08-2020
+
+        internal void RoomQuery(string serialno)
+        {
+            DataTable dtQuery = Query.RoomChargesSeacrh(serialno);
+            DataView view = new DataView(dtQuery);
+            dtQuery = view.ToTable(false, "vseq", "room", "datefrom", "dateto", "days", "charges", "total", "status", "createdby", "createtime", "editby", "edittime");
+            dgvHosCharges.DataSource = dtQuery;
+            dgvHosCharges.Columns["createtime"].DefaultCellStyle.Format = "dd-MMM-yyyy hh:mm tt";
+            dgvHosCharges.Columns["createdby"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvHosCharges.Columns["editby"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvHosCharges.Columns["edittime"].DefaultCellStyle.Format = "dd-MMM-yyyy hh:mm tt";
+            dgvHosCharges.Columns["total"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvHosCharges.Columns["datefrom"].DefaultCellStyle.Format = "dd-MMM-yyyy hh:mm tt";
+            dgvHosCharges.Columns["dateto"].DefaultCellStyle.Format = "dd-MMM-yyyy hh:mm tt";
+            dgvHosCharges.Columns["vseq"].Visible = false;
+            dgvHosCharges.Columns["room"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            //basit write this code 19-08-2020
+            dgvHosCharges.Columns["status"].Visible = false;
+
+            if (UserInfo.UserLevel == "Admin")
+            {
+                DeleteSlipRecodeRed(dtQuery);
+            }
+            else
+            {
+                HidDeleteSlipRecodeRed(dtQuery);
+            }
+        }
+
+        internal void SurgeryQuery(string serialno)
+        {
+            DataTable dtQuery = Query.SurgerySearch(serialno);
+            DataView view = new DataView(dtQuery);
+            dtQuery = view.ToTable(false, "vseq", "consultant", "surgery", "charges", "otfixed", "nitrous", "recovery", "anaesthetist", "anaescharges", "Consultant_2", "createdby", "createtime", "editby", "edittime", "status");
+            dgvHosCharges.DataSource = dtQuery;
+            dgvHosCharges.Columns["vseq"].Visible = false;
+
+            //
+            dgvHosCharges.Columns["otfixed"].Visible = false;
+            dgvHosCharges.Columns["nitrous"].Visible = false;
+            dgvHosCharges.Columns["recovery"].Visible = false;
+            dgvHosCharges.Columns["anaescharges"].Visible = false;
+            dgvHosCharges.Columns["createdby"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvHosCharges.Columns["createtime"].DefaultCellStyle.Format = "dd-MMM-yyyy hh:mm tt";
+
+            dgvHosCharges.Columns["editby"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvHosCharges.Columns["edittime"].DefaultCellStyle.Format = "dd-MMM-yyyy hh:mm tt";
+            //dgvHosCharges.Columns[""].Visible = false;
+            //dgvHosCharges.Columns[""].Visible = false;
+            //dgvHosCharges.Columns[""].Visible = false;
+            //dgvHosCharges.Columns[""].Visible = false;
+
+            //
+
+            //basit write this code 19-08-2020
+            dgvHosCharges.Columns["status"].Visible = false;
+
+            if (UserInfo.UserLevel == "Admin")
+            {
+                DeleteSlipRecodeRed(dtQuery);
+            }
+            else
+            {
+                HidDeleteSlipRecodeRed(dtQuery);
+            }
+
+        }
+        internal void DeliveryQuery(string serialno)
+        {
+            DataTable dtQuery = Query.DeliverySearch(serialno);
+            DataView view = new DataView(dtQuery);
+            dtQuery = view.ToTable(false, "vseq", "consultant", "Test", "charges", "lramount", "recoveryamount", "createdby", "createtime", "editby", "edittime", "status");
+            dgvHosCharges.DataSource = dtQuery;
+            dgvHosCharges.Columns["vseq"].Visible = false;
+
+            //basit write this code 19-08-2020
+            dgvHosCharges.Columns["status"].Visible = false;
+            dgvHosCharges.Columns["consultant"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvHosCharges.Columns["createdby"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvHosCharges.Columns["createtime"].DefaultCellStyle.Format = "dd-MMM-yyyy hh:mm tt";
+
+            dgvHosCharges.Columns["editby"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvHosCharges.Columns["edittime"].DefaultCellStyle.Format = "dd-MMM-yyyy hh:mm tt";
+
+            if (UserInfo.UserLevel == "Admin")
+            {
+                DeleteSlipRecodeRed(dtQuery);
+            }
+            else
+            {
+                HidDeleteSlipRecodeRed(dtQuery);
+            }
+
+        }
+        internal void ConsultantQuery(string serialno)
+        {
+            DataTable dtQuery = Query.ConsultantSearch(serialno);
+            DataView view = new DataView(dtQuery);
+            dtQuery = view.ToTable(false, "vseq", "consultant","category", "charges", "visits", "total", "createdby", "createtime", "editby", "edittime", "status");
+            dgvHosCharges.DataSource = dtQuery;
+            dgvHosCharges.Columns["vseq"].Visible = false;
+            dgvHosCharges.Columns["consultant"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvHosCharges.Columns["category"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvHosCharges.Columns["createdby"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvHosCharges.Columns["createtime"].DefaultCellStyle.Format = "dd-MMM-yyyy hh:mm tt";
+            dgvHosCharges.Columns["editby"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvHosCharges.Columns["edittime"].DefaultCellStyle.Format = "dd-MMM-yyyy hh:mm tt";
+
+            //basit write this code 19-08-2020
+            dgvHosCharges.Columns["status"].Visible = false;
+
+            if (UserInfo.UserLevel == "Admin")
+            {
+                DeleteSlipRecodeRed(dtQuery);
+            }
+            else
+            {
+                HidDeleteSlipRecodeRed(dtQuery);
+            }
+        }
+        internal void MiscQuery(string serialno)
+        {
+            DataTable dtQuery = Query.MiscSearch(serialno);
+            DataView view = new DataView(dtQuery);
+            dtQuery = view.ToTable(false, "vseq", "miscdesc", "charges", "createdby", "createtime", "editby", "edittime", "status");
+            dgvHosCharges.DataSource = dtQuery;
+            dgvHosCharges.Columns["vseq"].Visible = false;
+            dgvHosCharges.Columns["createdby"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvHosCharges.Columns["createtime"].DefaultCellStyle.Format = "dd-MMM-yyyy hh:mm tt";
+
+            dgvHosCharges.Columns["editby"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvHosCharges.Columns["edittime"].DefaultCellStyle.Format = "dd-MMM-yyyy hh:mm tt";
+
+            //basit write this code 19-08-2020
+            dgvHosCharges.Columns["status"].Visible = false;
+            dgvHosCharges.Columns["miscdesc"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            if (UserInfo.UserLevel == "Admin")
+            {
+                DeleteSlipRecodeRed(dtQuery);
+            }
+            else
+            {
+                HidDeleteSlipRecodeRed(dtQuery);
+            }
+
+        }
+
+        #endregion
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (HosCharges == "In-Patient Lab" || HosCharges == "In-Patient Ultra" || HosCharges == "In-Patient Xray" || HosCharges == "In-Patient Medical Services" || HosCharges == "In-Patient Echo" || HosCharges == "In-Patient Physio")
+            {
+                if (cmbConsName.SelectedValue == null)
+                {
+                    MessageBox.Show("Select Consultant");
+                    return;
+                }
+                else if (numCharges.Value == 0)
+                {
+                    MessageBox.Show("Enter Charges");
+                    return;
+                }
+                else if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if (HosCharges == "In-Patient Lab")
+                    {
+                        if (ReceiptNo != null)
+                        {
+                            dtQuery = Query.InPatientTestInfo(TestId.ToString(), ReceiptNo, serialno);
+                            bool testExists = dtQuery.AsEnumerable().Any(row => row["TestId"].ToString() == cmbTestName.SelectedValue.ToString());
+
+                            if (testExists)
+                            {
+                                MessageBox.Show("The selected test is already included in the list for this patient. Please review the test information to avoid duplicate entries.", "Duplicate Test", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                        }
+                    }
+
+                    DML.inptestcharges_add_edit(ReceiptNo, txtSeq.Text, serialno.ToString(), dtpDate.Value, TestId.ToString(), cmbTestName.SelectedValue.ToString(), numCharges.Text, cmbConsName.SelectedValue.ToString(), "0", ref ReceiptNo);
+                    ReceiptQuery(serialno, TestId.ToString(), ReceiptNo);
+                    cmbTestName.Focus();
+                }
+            }
+            else if (HosCharges == "Room Charges")
+            {
+                if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+
+                    DML.roomcharges_add_edit(numReceipt.Text, serialno, (string)cmbRoomType.SelectedValue, (numCharges.Value * numDays.Value).ToString(), dtpDateFrom.Value, dtpDateTo.Value, numDays.Value.ToString(), "0");
+                    RoomQuery(serialno);
+                    cmbRoomType.Focus();
+                    //this.DialogResult = DialogResult.OK; //basit 25-09-2020 commit
+
+
+                }
+            }
+            else if (HosCharges == "Misc Charges")
+            {
+                if (txtMiscDesc.Text == "")
+                {
+                    MessageBox.Show("Please Enter Misc Description");
+                    return;
+                }
+                else
+                    if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    DML.misccharges_add_edit(numReceipt.Text, serialno, txtMiscDesc.Text, Convert.ToString(numCharges.Value), "0");
+                    MessageBox.Show("Record Successfully Saved..!");
+                    MiscQuery(serialno);
+                    txtMiscDesc.Focus();
+                    // this.DialogResult = DialogResult.OK;
+                }
+            }
+            else if (HosCharges == "Surgery Charges")
+            {
+                if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    DML.surgerycharges_add_edit(numReceipt.Text, serialno, (string)cmbConsName.SelectedValue, (string)cmbTestName.SelectedValue, numCharges.Value.ToString(), "0", (string)cmbConname2.SelectedValue, (string)cmbSurgery.SelectedValue, (string)cmbAnaes.SelectedValue, numOTFixed.Value.ToString(), numRecov.Value.ToString(), numNitro.Value.ToString());
+                    SurgeryQuery(serialno);
+                    cmbConsName.Focus();
+                    //this.DialogResult = DialogResult.OK;
+
+                }
+            }
+            else if (HosCharges == "Delivery Charges")
+            {
+                if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    DML.deliverycharges_add_edit(numReceipt.Text, serialno, (string)cmbConsName.SelectedValue, (string)cmbTestName.SelectedValue, numCharges.Value.ToString(), numLFixed.Value.ToString(), numRecov.Value.ToString(), "0", (string)cmbDeli.SelectedValue);
+                    DeliveryQuery(serialno);
+                    cmbConsName.Focus();
+                    //this.DialogResult = DialogResult.OK;
+
+                }
+            }
+            else if (HosCharges == "Consultant Charges")
+            {
+                if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    DML.consultantcharges_add_edit(numReceipt.Text, serialno, (string)cmbConsName.SelectedValue, numCharges.Value.ToString(),
+                        numVisits.Value.ToString(), "0");
+                    ConsultantQuery(serialno);
+                    //MessageBox.Show("Record Successfully Saved..!");
+                    cmbConsName.Focus();
+                    //this.DialogResult = DialogResult.OK;
+
+                    //basit 12-04-2021
+                    if (numVisits.Value.ToString() != "0")
+                    {
+                        cmbConsName_SelectedIndexChanged((string)cmbConsName.SelectedValue, null);
+                    }
+                    //basit 12-04-2021
+                }
+            }
+        }
+
+        internal void FillReceiptDetail(string Seq)
+        {
+            DataTable dt;
+            dt = Query.InpatientTestSearch(Seq);
+            if (dt.Rows.Count > 0)
+            {
+                ReceiptNo = dt.Rows[0]["ReceiptNo"].ToString();
+                numReceipt.Text = dt.Rows[0]["ReceiptNo"].ToString();
+                txtSeq.Text = dt.Rows[0]["VSeq"].ToString();
+                cmbConsName.SelectedValue = dt.Rows[0]["consultantid"];
+                numCharges.Value = (Decimal)dt.Rows[0]["charges"];
+                cmbTestName.SelectedValue = dt.Rows[0]["testid"].ToString();
+                dtpDate.Value = ((DateTime)dt.Rows[0]["receiptdate"]);
+            }
+        }
+
+        private void btnShowAllReceipt_Click(object sender, EventArgs e)
+        {
+            if (HosCharges == "In-Patient Lab" || HosCharges == "In-Patient Ultra" || HosCharges == "In-Patient Xray" || HosCharges == "In-Patient Medical Services" || HosCharges == "In-Patient Echo" || HosCharges == "In-Patient Physio")
+            {
+                ReceiptQuery(serialno, TestId.ToString(), "");
+            }
+            else if (HosCharges == "Room Charges")
+            {
+                RoomQuery(serialno);
+            }
+            else if (HosCharges == "Surgery Charges")
+            {
+                SurgeryQuery(serialno);
+            }
+            else if (HosCharges == "Delivery Charges")
+            {
+                DeliveryQuery(serialno);
+            }
+            else if (HosCharges == "Consultant Charges")
+            {
+                ConsultantQuery(serialno);
+            }
+            else if (HosCharges == "Misc Charges")
+            {
+                MiscQuery(serialno);
+            }
+
+
+        }
+
+        //public string SerialNumber;
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            string q = "Select get_opdcatagory('" + TestId + "') catagory,ad.* from admissioninfo ad where serialno='" + serialno + "'";
+            DataTable dt = Query.getData(q);
+            string currrcpt = (string)dgvHosCharges.CurrentRow.Cells["ReceiptNo"].Value;
+
+            DataTable dtTest = Query.getData("Select isprinted,charges as amount,get_testtitle(testid) as testname,receiptdate,get_consultantname(consultantid) as consultantid " +
+                "from inptestcharges where " +
+                "serialno='" + serialno + "' AND " +
+                "testtypeid='" + TestId + "' and " +
+                "receiptno = '" + currrcpt + "' and status = 0 ");
+            string category = dt.Rows[0]["catagory"].ToString();
+            if (category == "Laboratory")
+            {
+                PrintINPatientHussainiReport(dtTest, dt, currrcpt);
+                //PrintBarcode(dt, currrcpt);
+            }
+            else
+            {
+                PrintINPatientMMCReport(dtTest, dt, currrcpt);
+            }
+        }
+
+        void PrintINPatientHussainiReport(DataTable dtTest, DataTable dt, string currrcpt)
+        {
+            Reports.IPDReceipt_Laboratory rpt = new Reports.IPDReceipt_Laboratory();
+            rpt.SetDataSource(dtTest);
+
+            DataTable dtroom = Query.getData($"SELECT * FROM  roomindex where id = {dt.Rows[0]["roomid"]}");
+
+            string PatientName = dt.Rows[0]["title"].ToString() + "" + dt.Rows[0]["patientname"].ToString();
+
+            rpt.SetParameterValue("@CompanyName", CompanyInfo.CompanyName);
+            rpt.SetParameterValue("@Contact", CompanyInfo.Cell);
+            rpt.SetParameterValue("@Address", CompanyInfo.Address);
+            rpt.SetParameterValue("@Catagory", dt.Rows[0]["catagory"].ToString());
+            rpt.SetParameterValue("@ReceiptNo", currrcpt);
+            rpt.SetParameterValue("@Date", ((DateTime)dtTest.Rows[0]["receiptdate"]).ToString());
+            rpt.SetParameterValue("@Patient", PatientName);
+            rpt.SetParameterValue("@Gender", dt.Rows[0]["gender"].ToString());
+            rpt.SetParameterValue("@Consultant", dtTest.Rows[0]["consultantid"].ToString());
+            rpt.SetParameterValue("@phoneNo", dt.Rows[0]["emergency"].ToString());
+            rpt.SetParameterValue("@User", UserInfo.UserId);
+            rpt.SetParameterValue("@NetAmount", dtTest.Rows[0]["amount"].ToString());
+            rpt.SetParameterValue("@Age", dt.Rows[0]["age"].ToString() + " - " + dt.Rows[0]["ymd"].ToString());
+            rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+            rpt.SetParameterValue("@SlipNumber", SlipNumber);
+            rpt.SetParameterValue("@Room", dtroom.Rows[0]["fullname"]);
+
+            if (UserInfo.UserLevel != "Admin")
+            {
+                if (dtTest.Rows[0]["isprinted"].ToString() == "1")
+                {
+                    MessageBox.Show("Receipt Already Printed...!");
+                }
+                else
+                {
+                    rpt.PrintToPrinter(1, false, 1, 9999);
+                    DataTable dt5 = Query.getData("update inptestcharges set isprinted='1' where serialno='" + serialno + "' AND testtypeid='" + TestId + "' and receiptno = '" + currrcpt + "' and status = 0  ");
+                }
+            }
+            else
+            {
+                frmReportView frm = new frmReportView();
+                frm.rptViewer.ReportSource = rpt;
+                frm.Show();
+            }
+        }
+
+        void PrintINPatientMMCReport(DataTable dtTest, DataTable dt, string currrcpt)
+        {
+            Reports.IPDReceipt rpt = new Reports.IPDReceipt();
+            rpt.SetDataSource(dtTest);
+
+            rpt.SetParameterValue("@CompanyName", CompanyInfo.CompanyName);
+            rpt.SetParameterValue("@Contact", CompanyInfo.Cell);
+            rpt.SetParameterValue("@Address", CompanyInfo.Address);
+            rpt.SetParameterValue("@Catagory", dt.Rows[0]["catagory"].ToString());
+            rpt.SetParameterValue("@ReceiptNo", currrcpt);
+            rpt.SetParameterValue("@Date", ((DateTime)dtTest.Rows[0]["receiptdate"]).ToString());
+            rpt.SetParameterValue("@Patient", dt.Rows[0]["patientname"].ToString());
+            rpt.SetParameterValue("@Gender", dt.Rows[0]["gender"].ToString());
+            rpt.SetParameterValue("@Consultant", dtTest.Rows[0]["consultantid"].ToString());
+            rpt.SetParameterValue("@User", UserInfo.UserId);
+            rpt.SetParameterValue("@NetAmount", dtTest.Rows[0]["amount"].ToString());
+            rpt.SetParameterValue("@Age", dt.Rows[0]["age"].ToString() + " - " + dt.Rows[0]["ymd"].ToString());
+            rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+            rpt.SetParameterValue("@SlipNumber", SlipNumber);
+
+            if (UserInfo.UserLevel != "Admin")
+            {
+                if (dtTest.Rows[0]["isprinted"].ToString() == "1")
+                {
+                    MessageBox.Show("Receipt Already Printed...!");
+                }
+                else
+                {
+                    rpt.PrintToPrinter(1, false, 1, 9999);
+                    DataTable dt5 = Query.getData("update inptestcharges set isprinted='1' where serialno='" + serialno + "' AND testtypeid='" + TestId + "' and receiptno = '" + currrcpt + "' and status = 0  ");
+                }
+            }
+            else
+            {
+                frmReportView frm = new frmReportView();
+                frm.rptViewer.ReportSource = rpt;
+                frm.Show();
+            }
+        }
+
+        void PrintBarcode(DataTable dt, string currrcpt)
+        {
+            // Generate barcode using ZXing.Net
+            var barcodeWriter = new BarcodeWriter
+            {
+                Format = BarcodeFormat.CODE_128,
+                Options = new ZXing.Common.EncodingOptions
+                {
+                    Width = 150,  // Adjust to make the barcode narrower (e.g., 150 pixels)
+                    Height = 50  // Adjust to make the barcode shorter (e.g., 50 pixels)
+                                 // PureBarcode = true  // Ensures no text is displayed below the barcode
+                }
+            };
+
+            Bitmap bitmap = barcodeWriter.Write("IP-" + currrcpt);
+
+            // Convert Bitmap to byte array to store in DataTable
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] imgData = ms.ToArray();
+
+                // Create and populate the DataTable
+                DataTable dtTest = new DataTable();
+                dtTest.Columns.Add("Barcode", typeof(byte[])); // Match this with the field in Crystal Report
+
+                DataRow row = dtTest.NewRow();
+                row["Barcode"] = imgData;
+                dtTest.Rows.Add(row);
+
+                string PatientName = dt.Rows[0]["title"].ToString() + "" + dt.Rows[0]["patientname"].ToString();
+                // Load the report
+                Reports.test rpt1 = new Reports.test();
+                rpt1.SetDataSource(dtTest);
+                rpt1.SetParameterValue("@PatientName", PatientName);
+                rpt1.SetParameterValue("@OpNo", "IP-" + currrcpt);
+
+                // Export the report to PDF
+                string pdfPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "BarcodeReport.pdf");
+                rpt1.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, pdfPath);
+
+                // Open the PDF file
+                System.Diagnostics.Process.Start(pdfPath);
+
+                //frmReportView frm1 = new frmReportView();
+                //frm1.rptViewer.ReportSource = rpt1;
+                //frm1.Show();
+            }
+        }
+
+        private void cmbTestName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (cmbTestName.SelectedIndex != -1)
+            {
+                DataRowView dr = (DataRowView)cmbTestName.SelectedItem;
+                if (dr != null)
+                {
+                    numCharges.Value = (Decimal)dr["HospitalRate"];
+                }
+            }
+        }
+        private void cmbRoomType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (cmbRoomType.SelectedIndex != -1)
+            {
+                DataRowView dr = (DataRowView)cmbRoomType.SelectedItem;
+                if (dr != null)
+                {
+                    numCharges.Value = (Decimal)dr["hospitalrate"];
+                }
+            }
+        }
+
+
+        private void cmbConsName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (HosCharges == "Consultant Charges")
+            {
+                if (cmbConsName.SelectedIndex != -1)
+                {
+                    //if(consultant==t)   
+                    DataRowView dr = (DataRowView)cmbConsName.SelectedItem;
+                    //if (dr != null)
+                    //{
+                    //    numCharges.Value = (Decimal)dr["HospitalRate"];
+                    //}
+                    if (dr["HospitalRate"] != DBNull.Value)
+                    {
+                        numCharges.Value = Convert.ToDecimal(dr["HospitalRate"]);
+                    }
+                    else
+                    {
+                        numCharges.Value = 0; // or some default value
+                    }
+                }
+            }
+        }
+
+        private void frmHospitalCharges_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendKeys.Send("{tab}");
+            }
+        }
+
+        private void cmbSurgery_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            /*
+            if (cmbSurgery.SelectedIndex != -1)
+            {
+                DataRowView dr = (DataRowView)cmbSurgery.SelectedItem;
+                if (dr != null)
+                {
+                    numCharges.Value = (Decimal)dr["HospitalRate"];
+                }
+            }
+
+            */
+            //commit 12-04-2021
+        }
+
+        private void dgvHosCharges_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            //if (UserInfo.UserId == "Admin")  //basit commit 19-08-2020
+            //if (UserInfo.UserLevel == "Admin")
+            //{
+            //    if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to Delete this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //    {
+            //        if (dgvHosCharges.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            //        {
+            //            dgvHosCharges.CurrentRow.Selected = true;
+            //            string VSeqValue = dgvHosCharges.Rows[e.RowIndex].Cells["VSeq"].FormattedValue.ToString();
+            //
+            //
+            //            //Query.Execute("UPDATE  inptestcharges SET status ='1'   WHERE   vseq  = '" + VSeqValue + "'");
+            //            if (HosCharges == "In-Patient Lab" || HosCharges == "In-Patient Ultra" || HosCharges == "In-Patient Xray" || HosCharges == "In-Patient Medical Services" || HosCharges == "In-Patient Echo" || HosCharges == "In-Patient Physio")
+            //            {
+            //                Query.Execute("UPDATE  inptestcharges SET status ='1'   WHERE   vseq  = '" + VSeqValue + "'");
+            //            }
+            //            else if (HosCharges == "Room Charges")
+            //            {
+            //                Query.Execute("UPDATE  inproomcharges SET status ='1'   WHERE   vseq  = '" + VSeqValue + "'");
+            //            }
+            //            else if (HosCharges == "Surgery Charges")
+            //            {
+            //                Query.Execute("UPDATE  inpsurgerycharges SET status ='1'   WHERE   vseq  = '" + VSeqValue + "'");
+            //            }
+            //            else if (HosCharges == "Delivery Charges")
+            //            {
+            //                Query.Execute("UPDATE  inpdeliverycharges   SET status ='1'   WHERE   vseq  = '" + VSeqValue + "'");
+            //            }
+            //            else if (HosCharges == "Consultant Charges")
+            //            {
+            //                Query.Execute("UPDATE  inpconsultantcharges  SET status ='1'   WHERE   vseq  = '" + VSeqValue + "'");
+            //            }
+            //            else if (HosCharges == "Misc Charges")
+            //            {
+            //                Query.Execute("UPDATE  inpmisccharges SET status ='1'   WHERE   vseq  = '" + VSeqValue + "'");
+            //            }
+            //            //basit write this code 19-08-2020
+            //            //DML.ipdbilling_Update(billno, serialno, ref billno);
+            //            DML.ipdbilling_Update(serialno);
+            //            //basit write this code 19-08-2020
+            //        }
+            //
+            //        //basit write this code 19-08-2020
+            //        DeleteSlipRecodeRed(dtQuery);
+            //        ReceiptQuery(serialno, TestId.ToString(), ReceiptNo); 
+            //        //basit write this code 19-08-2020
+            //
+            //    }
+            //    //basit write this code 19-08-2020
+            //    DeleteSlipRecodeRed(dtQuery);
+            //    ReceiptQuery(serialno, TestId.ToString(),ReceiptNo ); 
+            //    //basit write this code 19-08-2020
+            //}
+        }
+
+        private void num_Enter(object sender, EventArgs e)
+        {
+            (sender as NumericUpDown).Select(0, (sender as NumericUpDown).Text.Length);
+        }
+
+        private void dtpDateFrom_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime inTime = Convert.ToDateTime(dtpDateFrom.Value);
+            DateTime outTime = Convert.ToDateTime(dtpDateTo.Value);
+
+            if (outTime >= inTime)
+            {
+                numDays.Value = Convert.ToInt32(outTime.Subtract(inTime).Days.ToString());
+
+            }
+
+        }
+
+        private void dtpDateTo_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime inTime = Convert.ToDateTime(dtpDateFrom.Value);
+            DateTime outTime = Convert.ToDateTime(dtpDateTo.Value);
+            if (inTime <= outTime)
+            {
+                numDays.Value = Convert.ToInt32(outTime.Subtract(inTime).Days.ToString());
+
+            }
+        }
+
+        private void chkSecondConsult_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSecondConsult.Checked)
+                cmbConname2.Enabled = true;
+            else
+                cmbConname2.Enabled = false;
+        }
+
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (UserInfo.UserLevel == "Admin")
+                {
+                    if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to Delete this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        if (Convert.ToString(dgvHosCharges.CurrentRow.Cells) != null)
+                        {
+                            dgvHosCharges.CurrentRow.Selected = true;
+                            string VSeqValue = dgvHosCharges.CurrentRow.Cells["VSeq"].FormattedValue.ToString();
+
+
+                            //Query.Execute("UPDATE  inptestcharges SET status ='1'   WHERE   vseq  = '" + VSeqValue + "'");
+                            if (HosCharges == "In-Patient Lab" || HosCharges == "In-Patient Ultra" || HosCharges == "In-Patient Xray" || HosCharges == "In-Patient Medical Services" || HosCharges == "In-Patient Echo" || HosCharges == "In-Patient Physio")
+                            {
+                                Query.Execute("UPDATE  inptestcharges SET status ='1', isTransfer = 3 , editby = '" + UserInfo.UserId + "' , edittime = sysdate  WHERE   vseq  = '" + VSeqValue + "'");
+                            }
+                            else if (HosCharges == "Room Charges")
+                            {
+                                Query.Execute("UPDATE  inproomcharges SET status ='1' , editby = '" + UserInfo.UserId + "' , edittime = sysdate  WHERE   vseq  = '" + VSeqValue + "'");
+                            }
+                            else if (HosCharges == "Surgery Charges")
+                            {
+                                Query.Execute("UPDATE  inpsurgerycharges SET status ='1' , editby = '" + UserInfo.UserId + "' , edittime = sysdate   WHERE   vseq  = '" + VSeqValue + "'");
+                            }
+                            else if (HosCharges == "Delivery Charges")
+                            {
+                                Query.Execute("UPDATE  inpdeliverycharges   SET status ='1' , editby = '" + UserInfo.UserId + "' , edittime = sysdate  WHERE   vseq  = '" + VSeqValue + "'");
+                            }
+                            else if (HosCharges == "Consultant Charges")
+                            {
+                                Query.Execute("UPDATE  inpconsultantcharges  SET status ='1' , editby = '" + UserInfo.UserId + "' , edittime = sysdate   WHERE   vseq  = '" + VSeqValue + "'");
+                            }
+                            else if (HosCharges == "Misc Charges")
+                            {
+                                Query.Execute("UPDATE  inpmisccharges SET status ='1' , editby = '" + UserInfo.UserId + "' , edittime = sysdate   WHERE   vseq  = '" + VSeqValue + "'");
+                            }
+                            //basit write this code 19-08-2020
+                            //DML.ipdbilling_Update(billno, serialno, ref billno);
+                            DML.ipdbilling_Update(serialno);
+                            //basit write this code 19-08-2020
+                        }
+
+                        //basit write this code 19-08-2020
+                        DeleteSlipRecodeRed(dtQuery);
+                        ReceiptQuery(serialno, TestId.ToString(), ReceiptNo);
+                        //basit write this code 19-08-2020
+
+                    }
+                    //basit write this code 19-08-2020
+                    DeleteSlipRecodeRed(dtQuery);
+                    ReceiptQuery(serialno, TestId.ToString(), ReceiptNo);
+                    //basit write this code 19-08-2020
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void restoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (UserInfo.UserLevel == "Admin")
+                {
+                    if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to Restore this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        if (Convert.ToString(dgvHosCharges.CurrentRow.Cells) != null)
+                        {
+                            dgvHosCharges.CurrentRow.Selected = true;
+                            string VSeqValue = dgvHosCharges.CurrentRow.Cells["VSeq"].FormattedValue.ToString();
+
+                            //Query.Execute("UPDATE  inptestcharges SET status ='1'   WHERE   vseq  = '" + VSeqValue + "'");
+                            if (HosCharges == "In-Patient Lab" || HosCharges == "In-Patient Ultra" || HosCharges == "In-Patient Xray" || HosCharges == "In-Patient Medical Services" || HosCharges == "In-Patient Echo" || HosCharges == "In-Patient Physio")
+                            {
+                                Query.Execute("UPDATE  inptestcharges SET status ='0' , isTransfer = 3, editby = '" + UserInfo.UserId + "' , edittime = sysdate   WHERE   vseq  = '" + VSeqValue + "'");
+                            }
+                            else if (HosCharges == "Room Charges")
+                            {
+                                Query.Execute("UPDATE  inproomcharges SET status ='0' , editby = '" + UserInfo.UserId + "' , edittime = sysdate  WHERE   vseq  = '" + VSeqValue + "'");
+                            }
+                            else if (HosCharges == "Surgery Charges")
+                            {
+                                Query.Execute("UPDATE  inpsurgerycharges SET status ='0' , editby = '" + UserInfo.UserId + "' , edittime = sysdate   WHERE   vseq  = '" + VSeqValue + "'");
+                            }
+                            else if (HosCharges == "Delivery Charges")
+                            {
+                                Query.Execute("UPDATE  inpdeliverycharges   SET status ='0' , editby = '" + UserInfo.UserId + "' , edittime = sysdate  WHERE   vseq  = '" + VSeqValue + "'");
+                            }
+                            else if (HosCharges == "Consultant Charges")
+                            {
+                                Query.Execute("UPDATE  inpconsultantcharges  SET status ='0' , editby = '" + UserInfo.UserId + "' , edittime = sysdate  WHERE   vseq  = '" + VSeqValue + "'");
+                            }
+                            else if (HosCharges == "Misc Charges")
+                            {
+                                Query.Execute("UPDATE  inpmisccharges SET status ='0' , editby = '" + UserInfo.UserId + "' , edittime = sysdate    WHERE   vseq  = '" + VSeqValue + "'");
+                            }
+                            //basit write this code 19-08-2020
+                            //DML.ipdbilling_Update(billno, serialno, ref billno);
+                            DML.ipdbilling_Update(serialno);
+                            //basit write this code 19-08-2020
+                        }
+
+                        //basit write this code 19-08-2020
+                        DeleteSlipRecodeRed(dtQuery);
+                        ReceiptQuery(serialno, TestId.ToString(), ReceiptNo);
+                        //basit write this code 19-08-2020
+
+                    }
+                    //basit write this code 19-08-2020
+                    DeleteSlipRecodeRed(dtQuery);
+                    ReceiptQuery(serialno, TestId.ToString(), ReceiptNo);
+                    //basit write this code 19-08-2020
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void dgvHosCharges_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void cmbCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (HosCharges == "Consultant Charges")
+            {
+                if (cmbCategory.SelectedValue != null && cmbCategory.SelectedValue is string)
+                {
+                    int selectedIndex = cmbCategory.SelectedIndex;
+                    string selectedValue = cmbCategory.SelectedValue.ToString();
+                    FillControls.FillcmbCunsultantHoschargeByCategory(cmbConsName, selectedValue);
+                }
+            }
+        }
+    }
+}

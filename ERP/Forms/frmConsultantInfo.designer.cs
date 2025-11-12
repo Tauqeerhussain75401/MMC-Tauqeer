@@ -1,0 +1,1008 @@
+﻿namespace ERP
+{
+    partial class frmConsultantInfo
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.chkDeactivate = new System.Windows.Forms.CheckBox();
+            this.txtConsultantid = new System.Windows.Forms.TextBox();
+            this.txtConsultantName = new System.Windows.Forms.TextBox();
+            this.txtDegrees = new System.Windows.Forms.TextBox();
+            this.txtTiming = new System.Windows.Forms.TextBox();
+            this.txtFaculty = new System.Windows.Forms.TextBox();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.txtTelephone = new System.Windows.Forms.TextBox();
+            this.txtMobilenumber = new System.Windows.Forms.TextBox();
+            this.txtFax = new System.Windows.Forms.TextBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.btnsave = new System.Windows.Forms.Button();
+            this.btnexit = new System.Windows.Forms.Button();
+            this.numConsultantCharges = new System.Windows.Forms.NumericUpDown();
+            this.cmbType = new System.Windows.Forms.ComboBox();
+            this.grp = new System.Windows.Forms.GroupBox();
+            this.nudHosOutPatient = new System.Windows.Forms.NumericUpDown();
+            this.nudHosInPatient = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.nudConOutPatient = new System.Windows.Forms.NumericUpDown();
+            this.nudConInPatient = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.dgvDetail = new System.Windows.Forms.DataGridView();
+            this.clnisDeactivate = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
+            this.cmbCharges = new System.Windows.Forms.ComboBox();
+            this.txtShare = new System.Windows.Forms.TextBox();
+            this.btnAddSurgery = new System.Windows.Forms.Button();
+            this.txtHospShare = new System.Windows.Forms.TextBox();
+            this.dgvSurgery = new System.Windows.Forms.DataGridView();
+            this.clnChk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.chkShowAllSurgery = new System.Windows.Forms.CheckBox();
+            this.cmbConsultant = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.tb_activeNumber = new System.Windows.Forms.Label();
+            this.tb_search = new System.Windows.Forms.TextBox();
+            this.tb_search_surgery = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.cmbType2 = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnIdSurgery = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnSurgeryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnConsultantShare = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnHospCharges = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnMobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnHospitalRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnDegrees = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnTimings = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnFaculty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnPrev = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.numConsultantCharges)).BeginInit();
+            this.grp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHosOutPatient)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHosInPatient)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudConOutPatient)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudConInPatient)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSurgery)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(65, 128);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(69, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Consultant Id";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(47, 155);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(88, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Consultant Name";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(87, 181);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(47, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Degrees";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(96, 207);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Timings";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(96, 233);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Faculty";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(90, 259);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(45, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Address";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(77, 285);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Telephone";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(57, 314);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(78, 13);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Mobile Number";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(27, 337);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(107, 13);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Consultation Charges";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(343, 362);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(0, 13);
+            this.label10.TabIndex = 9;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(346, 403);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(0, 13);
+            this.label11.TabIndex = 10;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(278, 285);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(24, 13);
+            this.label12.TabIndex = 11;
+            this.label12.Text = "Fax";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(270, 314);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(32, 13);
+            this.label13.TabIndex = 12;
+            this.label13.Text = "Email";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(271, 342);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(31, 13);
+            this.label14.TabIndex = 13;
+            this.label14.Text = "Type";
+            // 
+            // chkDeactivate
+            // 
+            this.chkDeactivate.AutoSize = true;
+            this.chkDeactivate.Location = new System.Drawing.Point(374, 117);
+            this.chkDeactivate.Name = "chkDeactivate";
+            this.chkDeactivate.Size = new System.Drawing.Size(78, 17);
+            this.chkDeactivate.TabIndex = 16;
+            this.chkDeactivate.Text = "Deactivate";
+            this.chkDeactivate.UseVisualStyleBackColor = true;
+            // 
+            // txtConsultantid
+            // 
+            this.txtConsultantid.Location = new System.Drawing.Point(141, 121);
+            this.txtConsultantid.Name = "txtConsultantid";
+            this.txtConsultantid.ReadOnly = true;
+            this.txtConsultantid.Size = new System.Drawing.Size(63, 20);
+            this.txtConsultantid.TabIndex = 17;
+            this.txtConsultantid.TabStop = false;
+            // 
+            // txtConsultantName
+            // 
+            this.txtConsultantName.Location = new System.Drawing.Point(141, 148);
+            this.txtConsultantName.Name = "txtConsultantName";
+            this.txtConsultantName.Size = new System.Drawing.Size(311, 20);
+            this.txtConsultantName.TabIndex = 18;
+            // 
+            // txtDegrees
+            // 
+            this.txtDegrees.Location = new System.Drawing.Point(141, 174);
+            this.txtDegrees.Name = "txtDegrees";
+            this.txtDegrees.Size = new System.Drawing.Size(311, 20);
+            this.txtDegrees.TabIndex = 19;
+            // 
+            // txtTiming
+            // 
+            this.txtTiming.Location = new System.Drawing.Point(141, 200);
+            this.txtTiming.Name = "txtTiming";
+            this.txtTiming.Size = new System.Drawing.Size(311, 20);
+            this.txtTiming.TabIndex = 20;
+            // 
+            // txtFaculty
+            // 
+            this.txtFaculty.Location = new System.Drawing.Point(141, 226);
+            this.txtFaculty.Name = "txtFaculty";
+            this.txtFaculty.Size = new System.Drawing.Size(311, 20);
+            this.txtFaculty.TabIndex = 21;
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(141, 252);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(311, 20);
+            this.txtAddress.TabIndex = 22;
+            // 
+            // txtTelephone
+            // 
+            this.txtTelephone.Location = new System.Drawing.Point(141, 278);
+            this.txtTelephone.Name = "txtTelephone";
+            this.txtTelephone.Size = new System.Drawing.Size(123, 20);
+            this.txtTelephone.TabIndex = 23;
+            // 
+            // txtMobilenumber
+            // 
+            this.txtMobilenumber.Location = new System.Drawing.Point(141, 307);
+            this.txtMobilenumber.Name = "txtMobilenumber";
+            this.txtMobilenumber.Size = new System.Drawing.Size(123, 20);
+            this.txtMobilenumber.TabIndex = 24;
+            // 
+            // txtFax
+            // 
+            this.txtFax.Location = new System.Drawing.Point(308, 278);
+            this.txtFax.Name = "txtFax";
+            this.txtFax.Size = new System.Drawing.Size(144, 20);
+            this.txtFax.TabIndex = 26;
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Location = new System.Drawing.Point(308, 307);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(144, 20);
+            this.txtEmail.TabIndex = 27;
+            // 
+            // btnsave
+            // 
+            this.btnsave.Location = new System.Drawing.Point(240, 476);
+            this.btnsave.Name = "btnsave";
+            this.btnsave.Size = new System.Drawing.Size(75, 23);
+            this.btnsave.TabIndex = 29;
+            this.btnsave.Text = "Save";
+            this.btnsave.UseVisualStyleBackColor = true;
+            this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
+            // 
+            // btnexit
+            // 
+            this.btnexit.Location = new System.Drawing.Point(337, 476);
+            this.btnexit.Name = "btnexit";
+            this.btnexit.Size = new System.Drawing.Size(72, 23);
+            this.btnexit.TabIndex = 30;
+            this.btnexit.Text = "Exit";
+            this.btnexit.UseVisualStyleBackColor = true;
+            // 
+            // numConsultantCharges
+            // 
+            this.numConsultantCharges.Location = new System.Drawing.Point(140, 333);
+            this.numConsultantCharges.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numConsultantCharges.Name = "numConsultantCharges";
+            this.numConsultantCharges.Size = new System.Drawing.Size(120, 20);
+            this.numConsultantCharges.TabIndex = 31;
+            this.numConsultantCharges.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numConsultantCharges.ValueChanged += new System.EventHandler(this.numConsultantCharges_ValueChanged);
+            // 
+            // cmbType
+            // 
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Location = new System.Drawing.Point(308, 334);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(144, 21);
+            this.cmbType.TabIndex = 33;
+            this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
+            // 
+            // grp
+            // 
+            this.grp.Controls.Add(this.nudHosOutPatient);
+            this.grp.Controls.Add(this.nudHosInPatient);
+            this.grp.Controls.Add(this.label18);
+            this.grp.Controls.Add(this.label17);
+            this.grp.Controls.Add(this.nudConOutPatient);
+            this.grp.Controls.Add(this.nudConInPatient);
+            this.grp.Controls.Add(this.label16);
+            this.grp.Controls.Add(this.label15);
+            this.grp.Location = new System.Drawing.Point(30, 362);
+            this.grp.Name = "grp";
+            this.grp.Size = new System.Drawing.Size(422, 93);
+            this.grp.TabIndex = 34;
+            this.grp.TabStop = false;
+            this.grp.Text = "Share";
+            // 
+            // nudHosOutPatient
+            // 
+            this.nudHosOutPatient.Location = new System.Drawing.Point(322, 55);
+            this.nudHosOutPatient.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudHosOutPatient.Name = "nudHosOutPatient";
+            this.nudHosOutPatient.Size = new System.Drawing.Size(48, 20);
+            this.nudHosOutPatient.TabIndex = 7;
+            this.nudHosOutPatient.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // nudHosInPatient
+            // 
+            this.nudHosInPatient.Location = new System.Drawing.Point(117, 60);
+            this.nudHosInPatient.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudHosInPatient.Name = "nudHosInPatient";
+            this.nudHosInPatient.Size = new System.Drawing.Size(40, 20);
+            this.nudHosInPatient.TabIndex = 6;
+            this.nudHosInPatient.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(248, 62);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(60, 13);
+            this.label18.TabIndex = 5;
+            this.label18.Text = "Out Patient";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(14, 62);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(93, 13);
+            this.label17.TabIndex = 4;
+            this.label17.Text = "Hospital In-Patient";
+            // 
+            // nudConOutPatient
+            // 
+            this.nudConOutPatient.Location = new System.Drawing.Point(322, 16);
+            this.nudConOutPatient.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudConOutPatient.Name = "nudConOutPatient";
+            this.nudConOutPatient.Size = new System.Drawing.Size(48, 20);
+            this.nudConOutPatient.TabIndex = 3;
+            this.nudConOutPatient.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // nudConInPatient
+            // 
+            this.nudConInPatient.Location = new System.Drawing.Point(117, 19);
+            this.nudConInPatient.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudConInPatient.Name = "nudConInPatient";
+            this.nudConInPatient.Size = new System.Drawing.Size(40, 20);
+            this.nudConInPatient.TabIndex = 2;
+            this.nudConInPatient.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(248, 23);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(60, 13);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "Out Patient";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 23);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(105, 13);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Consultant In-Patient";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.BackColor = System.Drawing.Color.Red;
+            this.label20.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label20.Location = new System.Drawing.Point(917, 106);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(99, 13);
+            this.label20.TabIndex = 36;
+            this.label20.Text = "Double Click to edit";
+            // 
+            // dgvDetail
+            // 
+            this.dgvDetail.AllowUserToAddRows = false;
+            this.dgvDetail.AllowUserToDeleteRows = false;
+            this.dgvDetail.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dgvDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clnID,
+            this.clnName,
+            this.clnMobile,
+            this.clnHospitalRate,
+            this.clnDegrees,
+            this.clnTimings,
+            this.clnFaculty,
+            this.clnisDeactivate});
+            this.dgvDetail.Location = new System.Drawing.Point(471, 130);
+            this.dgvDetail.MultiSelect = false;
+            this.dgvDetail.Name = "dgvDetail";
+            this.dgvDetail.ReadOnly = true;
+            this.dgvDetail.RowHeadersVisible = false;
+            this.dgvDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDetail.Size = new System.Drawing.Size(551, 168);
+            this.dgvDetail.TabIndex = 37;
+            this.dgvDetail.Tag = "Lock";
+            this.dgvDetail.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetail_CellDoubleClick);
+            // 
+            // clnisDeactivate
+            // 
+            this.clnisDeactivate.HeaderText = "isDeactivate";
+            this.clnisDeactivate.Name = "clnisDeactivate";
+            this.clnisDeactivate.ReadOnly = true;
+            this.clnisDeactivate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.clnisDeactivate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // btnNew
+            // 
+            this.btnNew.Location = new System.Drawing.Point(62, 476);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(75, 23);
+            this.btnNew.TabIndex = 38;
+            this.btnNew.Text = "New";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Calibri", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label19.Location = new System.Drawing.Point(298, 9);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(493, 59);
+            this.label19.TabIndex = 225;
+            this.label19.Text = "Consultant Information";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmbCharges
+            // 
+            this.cmbCharges.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbCharges.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbCharges.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCharges.FormattingEnabled = true;
+            this.cmbCharges.Location = new System.Drawing.Point(1037, 54);
+            this.cmbCharges.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbCharges.Name = "cmbCharges";
+            this.cmbCharges.Size = new System.Drawing.Size(64, 21);
+            this.cmbCharges.TabIndex = 229;
+            this.cmbCharges.Visible = false;
+            this.cmbCharges.SelectedIndexChanged += new System.EventHandler(this.cmbCharges_SelectedIndexChanged);
+            // 
+            // txtShare
+            // 
+            this.txtShare.Location = new System.Drawing.Point(1037, 79);
+            this.txtShare.Name = "txtShare";
+            this.txtShare.Size = new System.Drawing.Size(100, 20);
+            this.txtShare.TabIndex = 232;
+            this.txtShare.Visible = false;
+            this.txtShare.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtShare.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtShare_KeyPress);
+            this.txtShare.Validated += new System.EventHandler(this.txtShare_Validated);
+            // 
+            // btnAddSurgery
+            // 
+            this.btnAddSurgery.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddSurgery.Location = new System.Drawing.Point(1064, 60);
+            this.btnAddSurgery.Name = "btnAddSurgery";
+            this.btnAddSurgery.Size = new System.Drawing.Size(55, 48);
+            this.btnAddSurgery.TabIndex = 234;
+            this.btnAddSurgery.Text = "Add";
+            this.btnAddSurgery.UseVisualStyleBackColor = true;
+            this.btnAddSurgery.Visible = false;
+            // 
+            // txtHospShare
+            // 
+            this.txtHospShare.Location = new System.Drawing.Point(1037, 105);
+            this.txtHospShare.Name = "txtHospShare";
+            this.txtHospShare.Size = new System.Drawing.Size(100, 20);
+            this.txtHospShare.TabIndex = 237;
+            this.txtHospShare.Visible = false;
+            // 
+            // dgvSurgery
+            // 
+            this.dgvSurgery.AllowUserToAddRows = false;
+            this.dgvSurgery.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvSurgery.ColumnHeadersHeight = 21;
+            this.dgvSurgery.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clnChk,
+            this.clnIdSurgery,
+            this.clnSurgeryName,
+            this.clnAmount,
+            this.clnConsultantShare,
+            this.clnHospCharges});
+            this.dgvSurgery.Location = new System.Drawing.Point(471, 334);
+            this.dgvSurgery.Name = "dgvSurgery";
+            this.dgvSurgery.RowHeadersVisible = false;
+            this.dgvSurgery.Size = new System.Drawing.Size(551, 193);
+            this.dgvSurgery.TabIndex = 239;
+            this.dgvSurgery.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvSurgery_EditingControlShowing);
+            // 
+            // clnChk
+            // 
+            this.clnChk.FalseValue = "0";
+            this.clnChk.HeaderText = "Check";
+            this.clnChk.Name = "clnChk";
+            this.clnChk.TrueValue = "1";
+            this.clnChk.Width = 50;
+            // 
+            // chkShowAllSurgery
+            // 
+            this.chkShowAllSurgery.AutoSize = true;
+            this.chkShowAllSurgery.Checked = true;
+            this.chkShowAllSurgery.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkShowAllSurgery.Location = new System.Drawing.Point(471, 307);
+            this.chkShowAllSurgery.Name = "chkShowAllSurgery";
+            this.chkShowAllSurgery.Size = new System.Drawing.Size(106, 17);
+            this.chkShowAllSurgery.TabIndex = 240;
+            this.chkShowAllSurgery.Text = "Show All Surgery";
+            this.chkShowAllSurgery.UseVisualStyleBackColor = true;
+            this.chkShowAllSurgery.CheckedChanged += new System.EventHandler(this.chkShowAllSurgery_CheckedChanged);
+            // 
+            // cmbConsultant
+            // 
+            this.cmbConsultant.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbConsultant.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbConsultant.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConsultant.FormattingEnabled = true;
+            this.cmbConsultant.Location = new System.Drawing.Point(687, 102);
+            this.cmbConsultant.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbConsultant.Name = "cmbConsultant";
+            this.cmbConsultant.Size = new System.Drawing.Size(225, 21);
+            this.cmbConsultant.TabIndex = 241;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(468, 83);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(254, 13);
+            this.label21.TabIndex = 242;
+            this.label21.Text = "Search Consultant : (Type the name or Through List)";
+            // 
+            // tb_activeNumber
+            // 
+            this.tb_activeNumber.AutoSize = true;
+            this.tb_activeNumber.Location = new System.Drawing.Point(583, 310);
+            this.tb_activeNumber.Name = "tb_activeNumber";
+            this.tb_activeNumber.Size = new System.Drawing.Size(148, 13);
+            this.tb_activeNumber.TabIndex = 243;
+            this.tb_activeNumber.Text = "Number of Active Consultant :";
+            // 
+            // tb_search
+            // 
+            this.tb_search.Location = new System.Drawing.Point(471, 102);
+            this.tb_search.Name = "tb_search";
+            this.tb_search.Size = new System.Drawing.Size(196, 20);
+            this.tb_search.TabIndex = 244;
+            this.tb_search.TextChanged += new System.EventHandler(this.tb_search_TextChanged);
+            // 
+            // tb_search_surgery
+            // 
+            this.tb_search_surgery.Location = new System.Drawing.Point(826, 307);
+            this.tb_search_surgery.Name = "tb_search_surgery";
+            this.tb_search_surgery.Size = new System.Drawing.Size(196, 20);
+            this.tb_search_surgery.TabIndex = 245;
+            this.tb_search_surgery.TextChanged += new System.EventHandler(this.tb_search_surgery_TextChanged);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(773, 311);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(47, 13);
+            this.label22.TabIndex = 246;
+            this.label22.Text = "Search :";
+            // 
+            // cmbType2
+            // 
+            this.cmbType2.FormattingEnabled = true;
+            this.cmbType2.Location = new System.Drawing.Point(874, 75);
+            this.cmbType2.Name = "cmbType2";
+            this.cmbType2.Size = new System.Drawing.Size(147, 21);
+            this.cmbType2.TabIndex = 247;
+            this.cmbType2.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(837, 79);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(31, 13);
+            this.label23.TabIndex = 248;
+            this.label23.Text = "Type";
+            this.label23.Click += new System.EventHandler(this.label23_Click);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Mobile";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "HospitalRate";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Degrees";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Timings";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Faculty";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.Width = 200;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.HeaderText = "Total Amount";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.HeaderText = "Consultant Share";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.HeaderText = "Hospital Share";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            // 
+            // clnIdSurgery
+            // 
+            this.clnIdSurgery.HeaderText = "ID";
+            this.clnIdSurgery.Name = "clnIdSurgery";
+            this.clnIdSurgery.Width = 50;
+            // 
+            // clnSurgeryName
+            // 
+            this.clnSurgeryName.HeaderText = "Name";
+            this.clnSurgeryName.Name = "clnSurgeryName";
+            this.clnSurgeryName.Width = 200;
+            // 
+            // clnAmount
+            // 
+            this.clnAmount.HeaderText = "Amount";
+            this.clnAmount.Name = "clnAmount";
+            // 
+            // clnConsultantShare
+            // 
+            this.clnConsultantShare.HeaderText = "Consultant Share";
+            this.clnConsultantShare.Name = "clnConsultantShare";
+            // 
+            // clnHospCharges
+            // 
+            this.clnHospCharges.HeaderText = "Hospital Share";
+            this.clnHospCharges.Name = "clnHospCharges";
+            // 
+            // clnID
+            // 
+            this.clnID.HeaderText = "ID";
+            this.clnID.Name = "clnID";
+            this.clnID.ReadOnly = true;
+            // 
+            // clnName
+            // 
+            this.clnName.HeaderText = "Name";
+            this.clnName.Name = "clnName";
+            this.clnName.ReadOnly = true;
+            // 
+            // clnMobile
+            // 
+            this.clnMobile.HeaderText = "Mobile";
+            this.clnMobile.Name = "clnMobile";
+            this.clnMobile.ReadOnly = true;
+            // 
+            // clnHospitalRate
+            // 
+            this.clnHospitalRate.HeaderText = "HospitalRate";
+            this.clnHospitalRate.Name = "clnHospitalRate";
+            this.clnHospitalRate.ReadOnly = true;
+            // 
+            // clnDegrees
+            // 
+            this.clnDegrees.HeaderText = "Degrees";
+            this.clnDegrees.Name = "clnDegrees";
+            this.clnDegrees.ReadOnly = true;
+            // 
+            // clnTimings
+            // 
+            this.clnTimings.HeaderText = "Timings";
+            this.clnTimings.Name = "clnTimings";
+            this.clnTimings.ReadOnly = true;
+            // 
+            // clnFaculty
+            // 
+            this.clnFaculty.HeaderText = "Faculty";
+            this.clnFaculty.Name = "clnFaculty";
+            this.clnFaculty.ReadOnly = true;
+            // 
+            // btnPrev
+            // 
+            this.btnPrev.Location = new System.Drawing.Point(759, 75);
+            this.btnPrev.Name = "btnPrev";
+            this.btnPrev.Size = new System.Drawing.Size(72, 23);
+            this.btnPrev.TabIndex = 249;
+            this.btnPrev.Text = "Preview";
+            this.btnPrev.UseVisualStyleBackColor = true;
+            this.btnPrev.Click += new System.EventHandler(this.brnPrev_Click);
+            // 
+            // frmConsultantInfo
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1038, 534);
+            this.Controls.Add(this.btnPrev);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.cmbType2);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.tb_search_surgery);
+            this.Controls.Add(this.tb_search);
+            this.Controls.Add(this.tb_activeNumber);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.cmbConsultant);
+            this.Controls.Add(this.chkShowAllSurgery);
+            this.Controls.Add(this.dgvSurgery);
+            this.Controls.Add(this.txtHospShare);
+            this.Controls.Add(this.btnAddSurgery);
+            this.Controls.Add(this.txtShare);
+            this.Controls.Add(this.cmbCharges);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.btnNew);
+            this.Controls.Add(this.dgvDetail);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.grp);
+            this.Controls.Add(this.cmbType);
+            this.Controls.Add(this.numConsultantCharges);
+            this.Controls.Add(this.btnexit);
+            this.Controls.Add(this.btnsave);
+            this.Controls.Add(this.txtEmail);
+            this.Controls.Add(this.txtFax);
+            this.Controls.Add(this.txtMobilenumber);
+            this.Controls.Add(this.txtTelephone);
+            this.Controls.Add(this.txtAddress);
+            this.Controls.Add(this.txtFaculty);
+            this.Controls.Add(this.txtTiming);
+            this.Controls.Add(this.txtDegrees);
+            this.Controls.Add(this.txtConsultantName);
+            this.Controls.Add(this.txtConsultantid);
+            this.Controls.Add(this.chkDeactivate);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Name = "frmConsultantInfo";
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.numConsultantCharges)).EndInit();
+            this.grp.ResumeLayout(false);
+            this.grp.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHosOutPatient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHosInPatient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudConOutPatient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudConInPatient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSurgery)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckBox chkDeactivate;
+        private System.Windows.Forms.TextBox txtConsultantid;
+        private System.Windows.Forms.TextBox txtConsultantName;
+        private System.Windows.Forms.TextBox txtDegrees;
+        private System.Windows.Forms.TextBox txtTiming;
+        private System.Windows.Forms.TextBox txtFaculty;
+        private System.Windows.Forms.TextBox txtAddress;
+        private System.Windows.Forms.TextBox txtTelephone;
+        private System.Windows.Forms.TextBox txtMobilenumber;
+        private System.Windows.Forms.TextBox txtFax;
+        private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.Button btnsave;
+        private System.Windows.Forms.Button btnexit;
+        private System.Windows.Forms.NumericUpDown numConsultantCharges;
+        private System.Windows.Forms.ComboBox cmbType;
+        private System.Windows.Forms.GroupBox grp;
+        private System.Windows.Forms.NumericUpDown nudHosOutPatient;
+        private System.Windows.Forms.NumericUpDown nudHosInPatient;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.NumericUpDown nudConOutPatient;
+        private System.Windows.Forms.NumericUpDown nudConInPatient;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.DataGridView dgvDetail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnMobile;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnHospitalRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnDegrees;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnTimings;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnFaculty;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn clnisDeactivate;
+        private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ComboBox cmbCharges;
+        private System.Windows.Forms.TextBox txtShare;
+        private System.Windows.Forms.Button btnAddSurgery;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.TextBox txtHospShare;
+        private System.Windows.Forms.DataGridView dgvSurgery;
+        private System.Windows.Forms.CheckBox chkShowAllSurgery;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn clnChk;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnIdSurgery;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnSurgeryName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnConsultantShare;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnHospCharges;
+        private System.Windows.Forms.ComboBox cmbConsultant;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label tb_activeNumber;
+        private System.Windows.Forms.TextBox tb_search;
+        private System.Windows.Forms.TextBox tb_search_surgery;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox cmbType2;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Button btnPrev;
+    }
+}
+

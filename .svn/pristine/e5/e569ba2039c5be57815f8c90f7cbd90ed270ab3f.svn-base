@@ -1,0 +1,830 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Collections;
+
+namespace ERP.Forms
+{
+    public partial class frmIPDBilling : Form
+    {
+        List<string> fileNumber = new List<string>();
+        int UndoRedoIndex = 0;
+
+
+
+        public frmIPDBilling()
+        {
+            InitializeComponent();
+            FillControls.FillcmbPackage(cmbpackages);
+            //cmbpackages.Enabled = false; //basit 25-09-2020
+            dtpDate.Value = SoftwareInfo.ServerDate;//DateTime.Now;
+            dtpDischrgeDate.Value = SoftwareInfo.ServerDate;//DateTime.Now;
+            dtpDischrgeDate.Enabled = false;
+
+        }
+        string referenceName;
+        internal void BasicInfo(string regAlpha, string regNum, bool AddLog)
+        {
+            DataTable dt = Query.AdmInfo(regAlpha, regNum);
+            /////////////////////
+            if (UserInfo.UserLevel != "Admin" && dt.Rows.Count > 0)
+            {
+                string currentdate = dtpDate.Value.ToString("dd/MMM/yyyy");
+                string admitDate = ((DateTime)dt.Rows[0]["admdate"]).ToString("dd/MMM/yyyy");
+                DataTable dtMonthcount = Query.TwoMonthCount(currentdate, admitDate, ntxtRegNo.Text);
+              
+                if (dt.Rows[0]["discyn"].ToString() == "1")
+                {
+                    grpConsCharges.Enabled = false;
+                    grpHosCharges.Enabled = false;
+                    groupBox5.Enabled = false;
+                    pnlDiscount.Enabled = false;
+                    zakatDtp.Enabled = false;
+                    cmbpackages.Enabled = false;
+                    chkPackage.Enabled = false;
+                    btnPrint.Enabled = true;
+                    btnPreview.Enabled = true;
+
+
+                }
+                else
+                {
+                    grpConsCharges.Enabled = true;
+                    grpHosCharges.Enabled = true;
+                    groupBox5.Enabled = true;
+                    pnlDiscount.Enabled = true;
+                    if (ntxtDiscount.Value > 0)
+                    {
+                        zakatDtp.Enabled = true;
+                    }
+                    else
+                    {
+                        zakatDtp.Enabled = false;
+                    }
+                    //     
+                    cmbpackages.Enabled = true;
+                    chkPackage.Enabled = true;
+                    grpControls.Enabled = true;
+                    btnPrint.Enabled = false;
+                    btnPreview.Enabled = false;
+                }
+
+                if (Convert.ToInt32(dtMonthcount.Rows[0]["Month"].ToString()) > 2)
+                {
+                    MessageBox.Show("Please select correct date", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    btnPreview.Enabled = false;
+                    btnPrint.Enabled = false;
+                    btnSave.Enabled = false;
+                    Clear();
+                    return;
+                }
+            }
+            Validation.Clear(this);
+            RefundAmount = 0;
+            if (dt.Rows.Count > 0)
+            {
+                pnlDiscount.Enabled = false;
+                zakatDtp.Enabled = false;
+                txtRegAlpha.Text = regAlpha;
+                ntxtRegNo.Text = regNum;
+                txtSerial.Text = dt.Rows[0]["admissionid"].ToString();
+                txtSlipDate.Text = ((DateTime)dt.Rows[0]["admdate"]).ToString();
+                txtType.Text = dt.Rows[0]["patienttype"].ToString();
+                txtPatientName.Text = dt.Rows[0]["patientName"].ToString();
+                txtRoom.Text = dt.Rows[0]["roomTitle"].ToString();
+                txtConsultant.Text = dt.Rows[0]["consultantname"].ToString();
+                txtGender.Text = dt.Rows[0]["gender"].ToString();
+                txtAge.Text = dt.Rows[0]["age"].ToString();
+                txtRemarks.Text = dt.Rows[0]["remarks"].ToString();
+                referenceName = dt.Rows[0]["referencename"].ToString();
+                
+             
+                foreach (DataRow row in dt.Rows)
+                {
+                    object value = row["currentRoom"];
+                    if (value != DBNull.Value)
+                    {
+                        txtCurrentRoom.Visible = true;
+                        txtCurrentRoom.Enabled = true;
+                        txtCurrentRoom.Text = dt.Rows[0]["currentRoom"].ToString();
+                        lblCurRoom.Visible = true;
+                        lblCurRoom.Enabled = true;
+                    }
+                    else
+                    {
+                        // txtzakatAddBy.Text = "";
+
+                    }
+
+                }
+
+
+                DepositAmount(txtSerial.Text);
+                BillDetail(txtSerial.Text);
+
+                if (dt.Rows[0]["patienttype"].ToString() == "ZAKAT")
+                {
+                    lblDiscount.Text = "ZAKAT";
+                    pnlDiscount.Enabled = true;
+                    ntxtDiscount.ReadOnly = false;
+                    ntxtDiscount.Enabled = true;
+                    if (ntxtDiscount.Value > 0)
+                    {
+                        zakatDtp.Enabled = true;
+                    }
+                    else
+                        zakatDtp.Enabled = false;
+
+
+                }
+                else
+                    if (dt.Rows[0]["patienttype"].ToString() == "SPD")
+                {
+                    lblDiscount.Text = "SPD";
+                    pnlDiscount.Enabled = true;
+                    ntxtDiscount.ReadOnly = false;
+                    ntxtDiscount.Enabled = true;
+                    if (ntxtDiscount.Value > 0)
+                    {
+                        zakatDtp.Enabled = true;
+                    }
+                    else
+                        zakatDtp.Enabled = false;
+                }
+
+
+                bool isdischarge = dt.Rows[0]["discyn"].ToString() == "1" ? true : false;
+                chkdischarge.Checked = isdischarge;
+                if (isdischarge == true)
+                {
+                    lbldischarge.Visible = true;
+                }
+                else
+                {
+                    lbldischarge.Visible = false;
+                }
+
+                if (AddLog)
+                {
+                    fileNumber.Add(txtRegAlpha.Text + "-" + ntxtRegNo.Value.ToString());
+                    UndoRedoIndex = fileNumber.Count - 1;
+                }
+            }
+            else
+            {
+                lbldischarge.Visible = false;
+                chkdischarge.Enabled = true;
+                dtpDischrgeDate.Enabled = true;
+                grpConsCharges.Enabled = true;
+                grpHosCharges.Enabled = true;
+                grpTotalBill.Enabled = true;
+                txtdischargeRemrks.Enabled = true;
+                MessageBox.Show("Admission Not Exist");
+                txtRegAlpha.Focus();
+            }
+
+        }
+
+        DataTable dt;
+        internal void RefreshValues(string AddmissionId)
+        {
+            dt = Query.BillDetail(AddmissionId);
+            if (dt.Rows.Count > 0)
+            {
+                ntxtPharmacy.Value = (Decimal)dt.Rows[0]["pharmacy"];
+                ntxtLaboratory.Value = (Decimal)dt.Rows[0]["laboratory"];
+                ntxtRoom.Value = (Decimal)dt.Rows[0]["room"];
+                ntxtXRay.Value = (Decimal)dt.Rows[0]["xray"];
+                ntxtMedicalServices.Value = (Decimal)dt.Rows[0]["medicalservices"];
+                ntxtMisc.Value = (Decimal)dt.Rows[0]["misc"];
+                ntxtConsultant.Value = (Decimal)dt.Rows[0]["consulatntcharges"];
+                ntxtSurgery.Value = (Decimal)dt.Rows[0]["surgerycharges"];
+                ntxtDelivery.Value = (Decimal)dt.Rows[0]["deliverycharges"];
+                ntxtUltrasound.Value = (Decimal)dt.Rows[0]["ultrasoundchatges"];
+                ntxtPhysio.Value = (Decimal)dt.Rows[0]["physiotherapycharges"];
+                ntxtEcho.Value = (Decimal)dt.Rows[0]["echocardio"];
+                ntxtNetBal.Value = (Decimal)dt.Rows[0]["netcharges"];
+                CalcSummary();
+            }
+        }
+        decimal RefundAmount = 0;
+        internal void BillDetail(string AddmissionId)
+        {
+            dt = Query.BillDetail(AddmissionId);
+            if (dt.Rows.Count == 0)
+            {
+                //DML.ipdbilling_Update("", txtSerial.Text, ref ReturnBillNo);
+                DML.ipdbilling_Update(txtSerial.Text);
+                dt = Query.BillDetail(AddmissionId);
+            }
+
+            /////////////////////
+            if (dt.Rows.Count > 0)
+            {
+                txtbillno.Text = dt.Rows[0]["ipdbillid"].ToString();
+
+                ntxtPharmacy.Value = (Decimal)dt.Rows[0]["pharmacy"];
+                ntxtLaboratory.Value = (Decimal)dt.Rows[0]["laboratory"];
+                ntxtRoom.Value = (Decimal)dt.Rows[0]["room"];
+                ntxtXRay.Value = (Decimal)dt.Rows[0]["xray"];
+                ntxtMedicalServices.Value = (Decimal)dt.Rows[0]["medicalservices"];
+                ntxtMisc.Value = (Decimal)dt.Rows[0]["misc"];
+                ntxtConsultant.Value = (Decimal)dt.Rows[0]["consulatntcharges"];
+                ntxtSurgery.Value = (Decimal)dt.Rows[0]["surgerycharges"];
+                ntxtDelivery.Value = (Decimal)dt.Rows[0]["deliverycharges"];
+                ntxtUltrasound.Value = (Decimal)dt.Rows[0]["ultrasoundchatges"];
+                ntxtPhysio.Value = (Decimal)dt.Rows[0]["physiotherapycharges"];
+                ntxtEcho.Value = (Decimal)dt.Rows[0]["echocardio"];
+                txtLastUpdatedBY.Text = dt.Rows[0]["editby"].ToString();
+                foreach (DataRow row in dt.Rows)
+                {
+                    object value = row["zakatAddBy"];
+                    if (value != DBNull.Value)
+                    {
+                        txtzakatAddBy.Text = dt.Rows[0]["zakatAddBy"].ToString();
+                        txtzakatDate.Text =  Convert.ToDateTime(dt.Rows[0]["zakatadddatenew"]).ToString("dd-MMM-yyyy hh:mm tt");
+                        zakatDtp.Enabled = false;
+                    }
+                    else
+                    {
+                        txtzakatAddBy.Text = "";
+                      
+                    }
+
+                }
+
+
+
+                if (dt.Rows[0]["dischargesessionid"].ToString() != null)
+                {
+                    txtDischargedBY.Text = dt.Rows[0]["dischargesessionid"].ToString();
+                }
+                else
+                    txtDischargedBY.Text = "";
+
+                ntxtDiscount.Value = (Decimal)dt.Rows[0]["totdiscount"];
+                txtdischargeRemrks.Text = dt.Rows[0]["remarks"].ToString();
+                RefundAmount = Convert.ToDecimal(Validation.DBNullTo(dt.Rows[0]["refundamount"], 0));
+
+                chkPackage.Checked = dt.Rows[0]["ispackage"].ToString() == "1" ? true : false;
+
+                cmbpackages.SelectedValue = dt.Rows[0]["packageid"];
+
+
+
+                if (dt.Rows[0]["dischargeyn"].ToString() == "1")
+                    dtpDischrgeDate.Value = Convert.ToDateTime(dt.Rows[0]["dischargedate"].ToString());
+                else
+                {
+                    dtpDischrgeDate.Value = SoftwareInfo.ServerDate;
+                    dtpDischrgeDate.Enabled = false;
+                }
+
+
+
+
+                if (dt.Rows[0]["ispackage"].ToString() == "1")
+                {
+                    grpTotalBill.Text = "Package Bill";
+                    lbltotalCharges.Text = "Package Charges";
+                    cmbpackages.SelectedValue = dt.Rows[0]["packageid"];
+                    btnSurgeryCharges.Enabled = true;
+                }
+
+                CalcSummary();
+            }
+        }
+
+        private void btnSurgeryValidate1()
+        {
+            if (cmbpackages.SelectedValue != null && chkPackage.Checked)
+                btnSurgeryCharges.Enabled = true;
+
+            DataRowView dr = (DataRowView)cmbpackages.SelectedItem;
+            if (dr != null)
+            {
+
+                ntxtTotalCharges.Value = (Decimal)dr["amount"];
+                CalcSummary();
+            }
+
+
+            else
+                btnSurgeryCharges.Enabled = true;
+
+        }
+        internal void DepositAmount(string serialno)
+        {
+            DataTable dt;
+            dt = Query.DepositAmount(serialno);
+            if (dt.Rows.Count > 0)
+            {
+                ntxtDepositAmount.Value = (Decimal)dt.Rows[0]["amount"];
+
+            }
+
+
+        }
+        private void btnLabCharges_Click(object sender, EventArgs e)
+        {
+
+            CallChargesDetail(2, "In-Patient Lab");
+
+        }
+
+        private void btnRoomCharsges_Click(object sender, EventArgs e)
+        {
+            CallChargesDetail(6, "Room Charges");
+        }
+
+        private void btnXrayCharges_Click(object sender, EventArgs e)
+        {
+
+            CallChargesDetail(4, "In-Patient Xray");
+        }
+
+        private void btnMedicalCharges_Click(object sender, EventArgs e)
+        {
+
+            CallChargesDetail(6, "In-Patient Medical Services");
+        }
+
+        private void btnMiscCharges_Click(object sender, EventArgs e)
+        {
+
+            CallChargesDetail(0, "Misc Charges");
+
+        }
+
+        private void btnSurgeryCharges_Click(object sender, EventArgs e)
+        {
+
+            CallChargesDetail(16, "Surgery Charges");
+        }
+
+        private void btnDelieveryCharges_Click(object sender, EventArgs e)
+        {
+
+            CallChargesDetail(17, "Delivery Charges");
+        }
+
+        private void btnUltraSound_Click(object sender, EventArgs e)
+        {
+
+            CallChargesDetail(5, "In-Patient Ultra");
+        }
+
+        private void btnPhysioCharges_Click(object sender, EventArgs e)
+        {
+
+            CallChargesDetail(12, "In-Patient Physio");
+
+        }
+
+        private void btnEchoCharges_Click(object sender, EventArgs e)
+        {
+            CallChargesDetail(14, "In-Patient Echo");
+
+        }
+        private void btnConsCharges_Click(object sender, EventArgs e)
+        {
+
+            CallChargesDetail(0, "Consultant Charges");
+
+
+        }
+
+        internal void CallChargesDetail(int testid, string hoscharges)
+        {
+
+            frmHospitalCharges charges = new frmHospitalCharges();
+            charges.HosCharges = hoscharges;
+            charges.TestId = testid;
+            charges.serialno = txtSerial.Text;
+            charges.billno = txtbillno.Text;
+            charges.RoomTitle = txtRoom.Text;
+            charges.SlipNumber = txtRegAlpha.Text + "-" + ntxtRegNo.Text;
+            charges.PackageId = cmbpackages.SelectedValue == null ? "-1" : cmbpackages.SelectedValue.ToString();
+            DataRowView dr = (DataRowView)cmbpackages.SelectedItem;
+            if (dr != null)
+                charges.PackageAmount = (Decimal)dr["amount"];
+
+            //charges.ShowDialog();
+            if (charges.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                RefreshValues(txtSerial.Text);
+            }
+
+        }
+
+
+        public string SerialNumber;
+        public string regAlphaCharacter;
+        public string regNumber;
+
+        private void frmIPDBilling_Load(object sender, EventArgs e)
+        {
+
+            SuspendLayout();
+            cmbpackages.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbpackages.AutoCompleteSource = AutoCompleteSource.ListItems;
+            AutoScaleDimensions = new System.Drawing.SizeF(96.0F, 96.0F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+
+            ResumeLayout();
+            dtpDischrgeDate.Value = SoftwareInfo.ServerDate;
+
+        }
+
+
+        void CalcSummary()
+        {
+            if (chkPackage.Checked == true)
+            {
+                DataRowView dr = (DataRowView)cmbpackages.SelectedItem;
+                decimal packageAmt = 0;
+                if (dr != null)
+                    packageAmt = (Decimal)dr["amount"];
+                ntxtTotalCharges.Value = ntxtMisc.Value + packageAmt;
+            }
+            else
+            {
+                ntxtTotalCharges.Value = ntxttotHCharges.Value + ntxttotCcharges.Value;
+            }
+            ntxtReceivable.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value;
+            ntxtNetBal.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value + RefundAmount;
+            lblRecRefund.Text = ntxtReceivable.Value > 0 ? "Receivable" : "To Be Refunded";
+
+        }
+        private void chkPackage_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPackage.Checked)
+            {
+                grpTotalBill.Text = "Package Bill";
+                lbltotalCharges.Text = "Package Charges";
+                cmbpackages.Enabled = true;
+
+                if (dt != null && dt.Rows.Count > 0 && dt.Rows[0]["packageid"].ToString() != "")
+                    cmbpackages.SelectedValue = dt.Rows[0]["packageid"];
+                //else                                   // basit commit 14-04-2021
+                // cmbpackages.SelectedIndex = -1;   // basit commit 14-04-2021
+
+            }
+            else
+            {
+                grpTotalBill.Text = "Total Bill";
+                lbltotalCharges.Text = "Total Charges";
+                pnlConsCharges.Visible = true;
+                pnlTotalHosCharges.Visible = true;
+                // cmbpackages.SelectedIndex = -1; //basit 12-04-2021
+                cmbpackages.Enabled = false;
+
+            }
+            CalcSummary();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (Validation_for_EmptyTexboxes() == false)
+            {
+                return;
+            }
+            /*
+            if (chkPackage.Checked == true && ntxtSurgery.Value <= 0)
+            {
+                MessageBox.Show("Plz Surgery Charges");
+                return;
+            }
+             */
+
+
+           
+            if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                DataRowView dr = (DataRowView)cmbpackages.SelectedItem;
+                decimal packageAmt = 0;
+                if (dr != null)
+                    packageAmt = (Decimal)dr["amount"];  //txtSerial.Text 
+                /* String.IsNullOrWhiteSpace(productName)  ? (object)DBNull.Value : (object)productName*/
+                DML.ipdbilling_add_edit(txtSerial.Text, ntxtPharmacy.Value.ToString(), ntxtDiscount.Value.ToString(), chkdischarge.Checked ? "1" : "0",
+                    txtdischargeRemrks.Text, ntxtTBdiscount.Value.ToString(), dtpDischrgeDate.Value, chkPackage.Checked ? "1" : "0",
+                    (string)cmbpackages.SelectedValue, packageAmt.ToString(), "0", zakatDtp.Enabled ? zakatDtp.Value.ToString("dd-MMM-yyyy HH:mm:ss") : null, zakatDtp.Enabled ? UserInfo.UserId : null);
+                MessageBox.Show("Record Successfully Saved..!");
+                BasicInfo(txtRegAlpha.Text, ntxtRegNo.Text, true);
+            }
+        }
+
+        private void cmbpackages_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CalcSummary();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            Clear();
+
+        }
+
+        public void Clear()
+        {
+            Validation.Clear(grpBasicInfo);
+            Validation.Clear(grpConsCharges);
+            Validation.Clear(grpHosCharges);
+            Validation.Clear(grpTotalBill);
+            txtRegAlpha.Text = "";
+            ntxtRegNo.Text = "";
+            txtRegAlpha.Focus();
+            chkPackage.Checked = false;
+            Validation.Clear(cmbpackages);
+
+            btnPreview.Enabled = true;
+            btnPrint.Enabled = true;
+            btnSave.Enabled = true;
+        }
+
+        private void ntxtRegNo_Validated(object sender, EventArgs e)
+        {
+            BasicInfo(txtRegAlpha.Text, ntxtRegNo.Text, true);
+
+
+        }
+
+        private void frmIPDBilling_KeyDown(object sender, KeyEventArgs e)
+
+
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendKeys.Send("{tab}");
+            }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            PrintReport(true);
+
+        }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            PrintReport(false);
+        }
+
+        private void PrintReport(bool DirectPrint)
+        {
+            try
+            {
+                ERP.Reports.CrpInPBillMaster rptInPBillMaster = new Reports.CrpInPBillMaster();
+                DataSet ds = new DataSet();
+                ds = ReportQuery.InPBillMasterPackage(txtSerial.Text);
+                ds.Tables[0].TableName = "DtExpVoucher";
+                rptInPBillMaster.SetDataSource(ds.Tables[0]);
+
+                rptInPBillMaster.SetParameterValue("pAdmDate", txtSlipDate.Text);
+                rptInPBillMaster.SetParameterValue("pDischargeDate", dtpDischrgeDate.Value);
+                rptInPBillMaster.SetParameterValue("pUser", UserInfo.UserName);
+                rptInPBillMaster.SetParameterValue("pBillNo", txtbillno.Text);
+                rptInPBillMaster.SetParameterValue("pAccountType", txtType.Text);
+                rptInPBillMaster.SetParameterValue("pPatientName", txtPatientName.Text);
+                rptInPBillMaster.SetParameterValue("pRegNo", txtRegAlpha.Text + "" + ntxtRegNo.Value);
+                rptInPBillMaster.SetParameterValue("pRoom", txtRoom.Text);
+                rptInPBillMaster.SetParameterValue("pConsultant", txtConsultant.Text);
+                rptInPBillMaster.SetParameterValue("pBillDate", dtpDate.Value);
+                rptInPBillMaster.SetParameterValue("pDeposit", ntxtDepositAmount.Value);
+                rptInPBillMaster.SetParameterValue("Discount", ntxtTBdiscount.Value);
+                rptInPBillMaster.SetParameterValue("pDischargeby", txtDischargedBY.Text);
+
+                rptInPBillMaster.SetParameterValue("pReceivable", ntxtReceivable.Value);
+                rptInPBillMaster.SetParameterValue("pNetBalance", ntxtNetBal.Value);
+                //new add parameter
+                rptInPBillMaster.SetParameterValue("pDischargeRemarks", txtdischargeRemrks.Text.ToString());
+                rptInPBillMaster.SetParameterValue("preferenceName", referenceName);
+
+
+
+                if (DirectPrint == false)
+                {
+                    frmReportView rptview = new frmReportView();
+                    rptview.rptViewer.ReportSource = rptInPBillMaster;
+                    rptview.Show();
+                }
+                else
+                {
+                    rptInPBillMaster.PrintToPrinter(1, false, 1, 9999);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
+
+
+        private void btnUndo_Click(object sender, EventArgs e)
+        {
+            Clear();
+            txtRegAlpha.Focus();
+        }
+
+        bool Validation_for_EmptyTexboxes()
+        {
+            if (ntxtRegNo.Text == "" || txtRegAlpha.Text == "")
+            {
+                MessageBox.Show("Please Enter Reg No", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRegAlpha.Focus();
+                return false;
+
+            }
+            return true;
+        }
+
+        private void ntxtDiscount_ValueChanged(object sender, EventArgs e)
+        {
+            ntxtTBdiscount.Value = ntxtDiscount.Value;
+            if (ntxtDiscount.Value > 0)
+            {
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    object value = row["currentRoom"];
+                    if (value != DBNull.Value)
+                    {
+                        zakatDtp.Enabled = false;
+                    }
+                    else
+                    {
+                        // txtzakatAddBy.Text = "";
+
+                    }
+
+                }
+                zakatDtp.Enabled = true;
+            }
+            else
+                zakatDtp.Enabled = false;
+        }
+
+
+
+        private void ntxtTBdiscount_ValueChanged(object sender, EventArgs e)
+        {
+            ntxtReceivable.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value;
+            ntxtNetBal.Value = ntxtTotalCharges.Value - ntxtDepositAmount.Value - ntxtDiscount.Value + RefundAmount;
+        }
+
+        private void btnRefund_Click(object sender, EventArgs e)
+        {
+            frmRefundInformation frm = new frmRefundInformation();
+            frm.txtRegAlpha.ReadOnly = true;
+            frm.ntxtRegNo.ReadOnly = true;
+            frm.BasicInfo(txtRegAlpha.Text.ToString(), ntxtRegNo.Value.ToString());
+
+            frm.ShowDialog();
+            //if (frm.ShowDialog()==System.Windows.Forms.DialogResult.OK)
+            //{
+            //    BillDetail(txtSerial.Text);
+            //}
+            BillDetail(txtSerial.Text);
+
+            // AmountLoad(txtSerial.Text); //basit 
+
+
+        }
+        //public void AmountLoad(string serialNo)
+        //{
+        //    DataTable dtAmount;
+        //    dtAmount = Query.IPDbillingAmount(serialNo);
+
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        ntxtTotalCharges.Value = (Decimal)dtAmount.Rows[0]["totalcharges"];
+        //        ntxtDepositAmount.Value = (Decimal)dtAmount.Rows[0]["depositeAmount"];
+        //        ntxtTBdiscount.Value = (Decimal)dtAmount.Rows[0]["discount"];
+        //        ntxtReceivable.Value = (Decimal)dtAmount.Rows[0]["toberefunded"];
+        //        Decimal refundAmount = (Decimal)dtAmount.Rows[0]["RefundAmount"];
+        //        //ntxtNetBal.Value = (Decimal)dtAmount.Rows[0]["netbalance"] + refundAmount;
+        //        ntxtNetBal.Value = (Decimal)dtAmount.Rows[0]["netbalance"];
+        //    }
+        //    /////////////////////    
+        //}
+
+        private void txtRegAlpha_TextChanged(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void chkdischarge_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkdischarge.Checked)
+            {
+                dtpDischrgeDate.Enabled = true;
+                //basit 14-07-2020
+                //  dtpDischrgeDate.Value = SoftwareInfo.ServerDate;
+            }
+            else
+            {
+                dtpDischrgeDate.Enabled = false;
+                //basit 14-07-2020
+                dtpDischrgeDate.Value = SoftwareInfo.ServerDate;
+
+
+            }
+        }
+
+        private void txtRegAlpha_Validated(object sender, EventArgs e)
+        {
+            ntxtRegNo.Select(0, ntxtRegNo.Value.ToString().Length);
+        }
+
+        void CalcHCAndCCTotal()
+        {
+            ntxttotHCharges.Value = ntxtPharmacy.Value + ntxtLaboratory.Value + ntxtRoom.Value + ntxtXRay.Value + ntxtMedicalServices.Value + ntxtMisc.Value;
+            ntxttotCcharges.Value = ntxtConsultant.Value + ntxtSurgery.Value + ntxtDelivery.Value + ntxtUltrasound.Value + ntxtPhysio.Value + ntxtEcho.Value;
+        }
+        private void ntxtCharges_ValueChanged(object sender, EventArgs e)
+        {
+            CalcHCAndCCTotal();
+        }
+
+        private void ntxttotHCharges_ValueChanged(object sender, EventArgs e)
+        {
+            CalcSummary();
+        }
+
+        private void ntxttotCcharges_ValueChanged(object sender, EventArgs e)
+        {
+            CalcSummary();
+        }
+
+        private void btnRoomCharges_Click(object sender, EventArgs e)
+        {
+            CallChargesDetail(6, "Room Charges");
+        }
+
+        private void ntxtRegNo_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grpBasicInfo_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ntxtRegNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void ntxtRegNo_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void chkdischarge_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCurrRoom_Click(object sender, EventArgs e)
+        {
+            frmCurRoom frm = new frmCurRoom();
+            frm.serialnum = txtSerial.Text;
+            frm.ShowDialog();
+            DataTable dt = Query.checkCurrentRoom(txtRegAlpha.Text, ntxtRegNo.Text);
+            foreach (DataRow row in dt.Rows)
+            {
+                object value = row["currentRoom"];
+                if (value != DBNull.Value)
+                {
+                    txtCurrentRoom.Visible = true;
+                    txtCurrentRoom.Enabled = true;
+                    txtCurrentRoom.Text = dt.Rows[0]["currentRoom"].ToString();
+                    lblCurRoom.Visible = true;
+                    lblCurRoom.Enabled = true;
+                }
+                else
+                {
+                    // txtzakatAddBy.Text = "";
+
+                }
+
+            }
+
+        }
+                   
+
+    }
+}

@@ -1,0 +1,342 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+
+namespace ERP
+{
+    public partial class frmRefundInformation : Form
+    {
+        public frmRefundInformation()
+        {
+            InitializeComponent();
+        }
+        internal void BasicInfo(string regAlpha, string regNum)
+        {
+            DataTable dt;
+            dt = DML.RefundInfo(regAlpha, regNum);
+
+            Validation.Clear(this);
+           
+            if (dt.Rows.Count > 0)
+            {
+                if(Convert.ToString(dt.Rows[0]["refundsessionid"]) == "")
+                {
+                    btnPreview.Enabled = false;
+                    btnPrint.Enabled = false;
+                }
+                else
+                {
+                    btnPrint.Enabled = true;
+                    btnPreview.Enabled = true;
+                }
+                if (dt.Rows[0]["Discharge"].ToString() == "1")
+                {
+
+                    txtRegAlpha.Text = dt.Rows[0]["regnoalpha"].ToString();
+                    ntxtRegNo.Value = Convert.ToDecimal(dt.Rows[0]["regnonumeric"].ToString());
+                    txtConsultant.Text = dt.Rows[0]["consultantname"].ToString();
+                    txtType.Text = dt.Rows[0]["patienttype"].ToString();
+                    txtBillingDate.Text = dt.Rows[0]["BillingDate"].ToString();
+                    txtTime.Text = dt.Rows[0]["BillingTime"].ToString();
+
+
+                    txtPatientName.Text = dt.Rows[0]["patientName"].ToString();
+                    txtAdmDate.Text = dt.Rows[0]["admdate"].ToString();
+                    txtAdmTime.Text = dt.Rows[0]["admtime"].ToString();
+                    txtRoom.Text = dt.Rows[0]["roomTitle"].ToString();
+                    txtGender.Text = dt.Rows[0]["gender"].ToString();
+
+
+                    // chkRefundYesNo.Checked = dt.Rows[0]["RefuendYesNo"].ToString() == "1" ? true : false;
+                    dtpRrfundDate.Value = Convert.ToDateTime(dt.Rows[0]["RefundDateTime"]);
+                    dtpRefundTime.Value = Convert.ToDateTime(dt.Rows[0]["RefundDateTime"]);
+
+                    ntxtRefundAmount.Value = Convert.ToDecimal(dt.Rows[0]["RefundAmount"].ToString());
+                    txtRecePersonName.Text = dt.Rows[0]["RefundPerson"].ToString();
+                    txtRelation.Text = dt.Rows[0]["RefundRelation"].ToString();
+                    txtContactNumber.Text = dt.Rows[0]["RefundContactPerson"].ToString();
+                    //txtRemarks.Text = dt.Rows[0]["remarks"].ToString();
+                    decimal TotCharges = 0, DepositAmount = 0, Discount = 0;
+                    TotCharges = Convert.ToDecimal(dt.Rows[0]["totalcharges"]);
+                    DepositAmount = Convert.ToDecimal(dt.Rows[0]["DepositedAmount"]);
+                    Discount = Convert.ToDecimal(dt.Rows[0]["discount"]);
+                    ntxtTotalCharges.Value = TotCharges;
+                    ntxtDepositedAmount.Value = DepositAmount;
+                    ntxtDiscount.Value = Discount;
+                    txtrefvno.Text = dt.Rows[0]["refundvno"].ToString();
+                    decimal refunded = Convert.ToDecimal(dt.Rows[0]["RefundAmount"].ToString());
+                    txtrefunded.Value = refunded;
+                    //ntxtToBeRefund.Value = TotCharges - DepositAmount - Discount < 0 ? -(TotCharges - DepositAmount - Discount) : 0;
+                    //ntxtRefundAmount.Value = ntxtToBeRefund.Value;//Convert.ToDecimal(dt.Rows[0]["RefundAmount"].ToString());
+
+                    if (TotCharges - DepositAmount - Discount < 0)
+                    {
+                        ntxtToBeRefund.Value = TotCharges - DepositAmount - Discount  < 0 ? -(TotCharges - DepositAmount - Discount) : 0;
+                        //if (Discount > 0 && refunded > 0)
+                        //{
+                        //    ntxtRefundAmount.Value = 0;
+                        //}
+                        //else
+                        //{
+                          
+                        //}
+                        ntxtRefundAmount.Value = ntxtToBeRefund.Value - refunded;
+                        //ntxtRefundAmount.Value = 
+                    }
+                    else
+                    {
+                        if (Discount != 0)
+                        {
+                            ntxtToBeRefund.Value = TotCharges - DepositAmount - Discount;
+                            ntxtRefundAmount.Value = ntxtToBeRefund.Value;
+
+                            lblREC_Refund.Text = ntxtToBeRefund.Value > 0 ? "Receivable" : "To Be Refunded";
+                            if (lblREC_Refund.Text == "Receivable")
+                            {
+                                ntxtRefundAmount.Value = 0;
+                            }
+                            else
+                            {
+                                ntxtRefundAmount.Value = ntxtToBeRefund.Value;
+                            }
+
+                        }
+                        else
+                        {
+                            ntxtToBeRefund.Value = TotCharges - DepositAmount - Discount > 0 ? 0 : -(TotCharges - DepositAmount - Discount);
+                            ntxtRefundAmount.Value = ntxtToBeRefund.Value;
+                            lblREC_Refund.Text = ntxtToBeRefund.Value > 0 ? "Receivable" : "To Be Refunded";
+                        }
+                    }
+
+                    //if (chkRefundYesNo.Checked == true )
+                    //{
+                    if (Convert.ToString(dt.Rows[0]["refundsessionid"]) != "" && UserInfo.UserId != "Admin")
+                    {
+                        btnSave.Enabled = false;
+                        dtpRrfundDate.Enabled = false;
+                        dtpRefundTime.Enabled = false;
+                        chkRefundYesNo.Enabled = false;
+
+                    }
+
+                    //   }
+                    else
+                    {
+                        ntxtNetBalance.Value = Convert.ToDecimal(dt.Rows[0]["NetBalance"].ToString());
+                        lbldischarge.Visible = false;
+                        btnSave.Enabled = true;
+                        //btnPreview.Enabled = true;
+                        btnPrint.Enabled = true;
+                        ntxtRefundAmount.Enabled = true;
+                    }
+
+                    if (UserInfo.UserLevel == "Admin")
+                    {
+                        ntxtRefundAmount.Enabled = true;
+                        btnSave.Enabled = true;
+                    }
+
+                }
+                else  //basit 14-07-2020
+                {
+                    if (UserInfo.UserLevel == "Admin")
+                    {
+                        lbldischarge.Visible = true;
+                        btnSave.Enabled = true;
+                        btnPreview.Enabled = false;
+                        btnPrint.Enabled = false;
+                        txtRegAlpha.Text = dt.Rows[0]["regnoalpha"].ToString();
+                        ntxtRegNo.Value = Convert.ToDecimal(dt.Rows[0]["regnonumeric"].ToString());
+                    }
+                    else
+                    {
+                        lbldischarge.Visible = true;
+                        btnSave.Enabled = false;
+                        btnPreview.Enabled = false;
+                        btnPrint.Enabled = false;
+                        txtRegAlpha.Text = dt.Rows[0]["regnoalpha"].ToString();
+                        ntxtRegNo.Value = Convert.ToDecimal(dt.Rows[0]["regnonumeric"].ToString());
+                    }
+                    //basit 14-07-2020
+
+                }
+                if (UserInfo.UserLevel == "Admin")
+                {
+                    btnSave.Enabled = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Not Record Found");
+
+            }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                //if (chkRefundYesNo.Checked == true)
+                //{
+                decimal totalRefundAmount = txtrefunded.Value + ntxtRefundAmount.Value;
+                DML.UpdateIPDRefundAmount(
+                    txtrefvno.Text,
+                    txtRegAlpha.Text,
+                     "1",
+                    dtpRrfundDate.Value,
+                    dtpRefundTime.Value,
+                    totalRefundAmount.ToString(), //ntxtRefundAmount.Value.ToString(),
+                    txtRecePersonName.Text,
+                    txtRelation.Text,
+                    txtContactNumber.Text,
+                    txtRemarks.Text,
+                    ntxtRegNo.Value.ToString());
+                MessageBox.Show("Record Successfully Saved..!");
+                btnPreview.Enabled = true;
+                btnPrint.Enabled = true;
+                if (txtRegAlpha.Text != null && ntxtRegNo.Text != null)
+                {
+                    BasicInfo(txtRegAlpha.Text, ntxtRegNo.Text);
+                }
+                //   }
+                //else
+                //{
+                //    MessageBox.Show("Plz Check Refund Y/N");
+                //}
+            }
+        }
+
+        private void ntxtRegNo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                lblREC_Refund.Text = "To Be Refunded";
+                BasicInfo(txtRegAlpha.Text, ntxtRegNo.Text);
+            }
+        }
+
+        private void frmRefundInformation_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendKeys.Send("{tab}");
+            }
+        }
+
+        private void frmRefundInformation_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            Clear();
+        }
+
+
+        private void Clear()
+        {
+            //basit 14-07-2020
+            Validation.Clear(groupBox1);
+            Validation.Clear(panel1);
+
+            //Validation.Clear(grpTotalBill);
+            //   chkRefundYesNo.Checked = false;
+            //Validation.Clear(ntxtRefundAmount);
+            //Validation.Clear(txtRelation);
+            //Validation.Clear(txtRecePersonName);
+            //Validation.Clear(txtContactNumber);
+            //Validation.Clear(txtContactNumber);
+            //Validation.Clear(txtRemarks);
+
+
+            ntxtRefundAmount.Value = 0;
+            txtRelation.Text = "";
+            txtRecePersonName.Text = "";
+            txtContactNumber.Text = "";
+            txtRemarks.Text = "";
+
+
+
+            lbldischarge.Visible = false;
+            txtRegAlpha.Text = "";
+            ntxtRegNo.Text = "";
+            txtRegAlpha.Focus();
+
+            dtpRrfundDate.Value = DateTime.Today;
+            dtpRefundTime.Value = DateTime.Now;
+        }
+
+        private void txtRegAlpha_Validated(object sender, EventArgs e)
+        {
+            ntxtRegNo.Select(0, ntxtRegNo.Value.ToString().Length);
+        }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            PrintReport(false);
+        }
+
+        private void PrintReport(bool DirectPrint)
+        {
+            Reports.CrpBillRefund crprefund = new Reports.CrpBillRefund();
+            DataTable dt = ReportQuery.IPDRefundAmount(txtRegAlpha.Text, ntxtRegNo.Text);
+            // DataTable refund_vno = Query.getData("SELECT To_Char(Max(Nvl(To_Number(refundvno),0))+1,'FM0000') AS Maximum FROM ipdbilling where status=0 AND discharge=1");
+
+            crprefund.SetDataSource(dt);
+
+            decimal refund = (ntxtDiscount.Value > 0 && txtrefunded.Value > 0) ? txtrefunded.Value : decimal.Parse(ntxtRefundAmount.Text);
+            crprefund.SetParameterValue("pRcpDate", dtpRrfundDate.Value);
+            crprefund.SetParameterValue("pRcpTime", dtpRefundTime.Value);
+            crprefund.SetParameterValue("pTotalBilling", ntxtTotalCharges.Text);
+            crprefund.SetParameterValue("pDiscount", ntxtDiscount.Text);
+            crprefund.SetParameterValue("pRefund", refund);
+            crprefund.SetParameterValue("pPersonName", txtRecePersonName.Text);
+            crprefund.SetParameterValue("pRelation", txtRelation.Text);
+            crprefund.SetParameterValue("pContact", txtContactNumber.Text);
+            crprefund.SetParameterValue("pRemarks", txtRemarks.Text);
+            crprefund.SetParameterValue("pUserRefundId", UserInfo.UserName);
+            crprefund.SetParameterValue("pAdvanceDeposit", ntxtDepositedAmount.Value);
+
+            if (DirectPrint == false)
+            {
+                frmReportView frm = new frmReportView();
+                frm.rptViewer.ReportSource = crprefund;
+                frm.Show();
+            }
+            else
+            {
+                crprefund.PrintToPrinter(1, false, 1, 9999);
+            }
+
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            if (btnSave.Enabled == false)
+            {
+                PrintReport(true);
+
+            }
+            btnSave_Click(null, null);
+            PrintReport(true);
+           
+        }
+
+
+    }
+}
