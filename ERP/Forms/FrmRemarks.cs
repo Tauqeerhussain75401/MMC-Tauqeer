@@ -33,6 +33,8 @@ namespace ERP
                 frmPVoucherNew.Remarks = Type == "OK" ? richtxtRemarks.Text : "";
             else if (SetVoucherType == "Receipt")
                 frmRVoucherNew.Remarks = Type == "OK" ? richtxtRemarks.Text : "";
+            else if (SetVoucherType == "TellerClosingVoucher")
+                frmTellerClosingVoucher.Remarks = Type == "OK" ? richtxtRemarks.Text : "";
             else if (SetVoucherType == "BankToBank")
             {
                 frmBankToBank.Remarks = Type == "OK" ? richtxtRemarks.Text : "";

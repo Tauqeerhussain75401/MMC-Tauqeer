@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Drawing;
 using ERP;
+using System.ComponentModel;
 
 namespace ERP
 {
@@ -258,4 +259,141 @@ namespace ERP
       base.OnValueChanged(eventargs);
     }
   }
+    public class TimeEditingControl : DateTimePicker, IDataGridViewEditingControl
+    {
+        DataGridView dgv;
+        bool valueChanged;
+        int rowIndex;
+
+        public TimeEditingControl()
+        {
+            Format = DateTimePickerFormat.Custom;
+            CustomFormat = "HH:mm";
+            ShowUpDown = true;
+        }
+
+        public object EditingControlFormattedValue
+        {
+            get => Value;
+            set
+            {
+                if (value == null || value == DBNull.Value)
+                    Value = DateTime.Today;
+                else if (value is DateTime dt)
+                    Value = dt;
+            }
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Delete || keyData == Keys.Back)
+            {
+                if (EditingControlDataGridView?.CurrentCell != null)
+                {
+                    EditingControlDataGridView.CurrentCell.Value = DBNull.Value;
+
+                    EditingControlDataGridView.NotifyCurrentCellDirty(true);
+                    EditingControlDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                    EditingControlDataGridView.EndEdit();
+                }
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+        public object GetEditingControlFormattedValue(
+            DataGridViewDataErrorContexts context) => Value;
+
+        public void ApplyCellStyleToEditingControl(DataGridViewCellStyle style)
+        {
+            Font = style.Font;
+        }
+
+        public int EditingControlRowIndex
+        {
+            get => rowIndex;
+            set => rowIndex = value;
+        }
+
+        public bool EditingControlWantsInputKey(Keys key, bool dgvWantsKey)
+        {
+            switch (key & Keys.KeyCode)
+            {
+                case Keys.Up:
+                case Keys.Down:
+                case Keys.Left:
+                case Keys.Right:
+                case Keys.Home:
+                case Keys.End:
+                case Keys.PageUp:
+                case Keys.PageDown:
+                    return true; // 🔑 arrow keys change time
+                default:
+                    return !dgvWantsKey;
+            }
+        }
+
+        public void PrepareEditingControlForEdit(bool selectAll) { }
+
+        public bool RepositionEditingControlOnValueChange => false;
+
+        public DataGridView EditingControlDataGridView
+        {
+            get => dgv;
+            set => dgv = value;
+        }
+
+        public bool EditingControlValueChanged
+        {
+            get => valueChanged;
+            set => valueChanged = value;
+        }
+
+        public Cursor EditingPanelCursor => Cursor;
+
+        protected override void OnValueChanged(EventArgs e)
+        {
+            valueChanged = true;
+            EditingControlDataGridView?.NotifyCurrentCellDirty(true);
+            base.OnValueChanged(e);
+        }
+    }
+    public class TimeCalendarCell : DataGridViewTextBoxCell
+    {
+        public override Type EditType => typeof(TimeEditingControl);
+        public override Type ValueType => typeof(DateTime);
+        public override object DefaultNewRowValue => DBNull.Value;
+
+        public override object ParseFormattedValue(
+            object formattedValue,
+            DataGridViewCellStyle cellStyle,
+            TypeConverter formattedValueTypeConverter,
+            TypeConverter valueTypeConverter)
+        {
+            if (formattedValue == null || formattedValue == DBNull.Value)
+                return DBNull.Value;
+
+            // If already DateTime → accept
+            if (formattedValue is DateTime dt)
+                return dt;
+
+            // Parse HH:mm string safely
+            if (formattedValue is string s && DateTime.TryParse(s, out DateTime parsed))
+                return parsed;
+
+            return base.ParseFormattedValue(
+                formattedValue,
+                cellStyle,
+                formattedValueTypeConverter,
+                valueTypeConverter);
+        }
+    }
+    public class TimeCalendarColumn : DataGridViewColumn
+    {
+        public TimeCalendarColumn()
+            : base(new TimeCalendarCell())
+        {
+            DefaultCellStyle.Format = "HH:mm";
+        }
+    }
+
+
 }

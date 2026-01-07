@@ -49,6 +49,23 @@ namespace ERP
             return dt;
       
         }
+        internal static DataTable get_session_IPDrefundInfo(string SessionId)
+        {
+            DataTable dt = new DataTable();
+            OracleCommand comm = new OracleCommand("session_IPDrefundInfo", clsConnection.con);
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.Add("VSessionId", OracleDbType.Varchar2).Value = SessionId;
+            comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            //comm.Parameters["retval"].Direction = ParameterDirection.Output;
+
+
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = comm;// new OracleCommand(sql, Connection.Conn_ecyear);
+            adapter.Fill(dt);
+            adapter.Dispose();
+            return dt;
+
+        }
         internal static DataTable allUserClosingSummary(DateTime VFDate, DateTime VTDate)
         {
             DataTable dt = new DataTable();

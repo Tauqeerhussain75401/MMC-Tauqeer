@@ -7,10 +7,33 @@ using System.Globalization;
 using System.Drawing;
 using System.Windows.Forms;
 using Oracle.DataAccess.Client;
+using Oracle.DataAccess.Types;
+
 namespace ERP
 {
     class MSP
     {
+        public static int Check_LastSession(string userid)
+        {
+            int sessionopen = 0;
+            try
+            {
+                OracleCommand oc = new OracleCommand("lastsession", clsConnection.con);
+                oc.CommandType = CommandType.StoredProcedure;
+                oc.Parameters.Add("vUserid", OracleDbType.Varchar2, 30).Value = userid;
+                oc.Parameters.Add("vReturn", OracleDbType.Int32).Direction = ParameterDirection.Output;
+                oc.ExecuteNonQuery();
+                sessionopen = ((OracleDecimal)oc.Parameters["vReturn"].Value).ToInt32();
+                return sessionopen;
+            }
+            catch (Exception e)
+            {
+                Errors.writeline(e.Message, "MSP_LastSession");
+                string result = MyMessageBox.ShowBox(e.Message, Variable.Version, 1);
+                return sessionopen;
+            }
+        }
+
         public static string GL_Add_Edit(string VVdate, string Vfkaccountid, string Vvtype, string Vvno, string Vdescription,
          string Vfkbankid, string Vchequeno, string Vdr, string Vcr, string Vfcdr,
          string Vfccr, string Vrate, string Vstatus, string Vvseq, string Vfkfccode, string Vcontrafkbrcode,
@@ -501,6 +524,80 @@ namespace ERP
                 return "";
             }
         }
+        public static string Voucher_post2(string vouchertype, string Vno, string sessionid,DateTime Vdate, string VNarration, string User, string branchCode, string fkbankid,
+           List<int> Seq, List<string> Account, List<string> Descr, List<decimal> dr, List<decimal> cr, List<string> SubAccount, List<int> Status, List<string> ChequeNo, List<string> SlipNo, string VDocumentChanged, string Vfkdocumentid, byte[] VDocuments, string beneficiary)
+        {
+            string ReturnValue = "";
+            try
+            {
+                OracleCommand DbCommand = new OracleCommand("pkg_VoucherPost2.Voucherpost1", clsConnection.con);
+                DbCommand.CommandType = CommandType.StoredProcedure;
+
+                DbCommand.Parameters.Add("Vvtype", OracleDbType.Varchar2).Value = vouchertype;
+                DbCommand.Parameters.Add("VVno", OracleDbType.Varchar2).Value = Vno;
+                DbCommand.Parameters.Add("VSessionid", OracleDbType.Varchar2).Value = sessionid;
+                DbCommand.Parameters.Add("VVdate", OracleDbType.Date).Value = Vdate;
+                DbCommand.Parameters.Add("VNarration", OracleDbType.Varchar2).Value = VNarration;
+                DbCommand.Parameters.Add("VUser", OracleDbType.Varchar2).Value = User;
+                DbCommand.Parameters.Add("VTerminalID", OracleDbType.Varchar2).Value = SoftwareInfo.Terminal;
+                DbCommand.Parameters.Add("Vfkbrcode", OracleDbType.Varchar2).Value = branchCode;
+                DbCommand.Parameters.Add("fkbankid", OracleDbType.Varchar2).Value = fkbankid;
+
+                DbCommand.Parameters.Add("Seq", OracleDbType.Int16, Seq.Count()).Value = Seq.ToArray();
+                DbCommand.Parameters["Seq"].CollectionType = OracleCollectionType.PLSQLAssociativeArray;
+
+                DbCommand.Parameters.Add("Account", OracleDbType.Varchar2, Account.Count()).Value = Account.ToArray();
+                DbCommand.Parameters["Account"].CollectionType = OracleCollectionType.PLSQLAssociativeArray;
+                DbCommand.Parameters["Account"].ArrayBindSize = Account.Select(_ => _.Length).ToArray();
+
+                DbCommand.Parameters.Add("Descr", OracleDbType.Varchar2, Descr.Count()).Value = Descr.ToArray();
+                DbCommand.Parameters["Descr"].CollectionType = OracleCollectionType.PLSQLAssociativeArray;
+                DbCommand.Parameters["Descr"].ArrayBindSize = Descr.Select(_ => !string.IsNullOrEmpty(_) ? _.Length : 0).ToArray();
+
+                DbCommand.Parameters.Add("dr", OracleDbType.Decimal, dr.Count()).Value = dr.ToArray();
+                DbCommand.Parameters["dr"].CollectionType = OracleCollectionType.PLSQLAssociativeArray;
+
+                DbCommand.Parameters.Add("cr", OracleDbType.Decimal, cr.Count()).Value = cr.ToArray();
+                DbCommand.Parameters["cr"].CollectionType = OracleCollectionType.PLSQLAssociativeArray;
+
+                DbCommand.Parameters.Add("SubAccount", OracleDbType.Varchar2, SubAccount.Count()).Value = SubAccount.ToArray();
+                DbCommand.Parameters["SubAccount"].CollectionType = OracleCollectionType.PLSQLAssociativeArray;
+                DbCommand.Parameters["SubAccount"].ArrayBindSize = SubAccount.Select(_ => !string.IsNullOrEmpty(_) ? _.Length : 0).ToArray();
+
+                DbCommand.Parameters.Add("Status", OracleDbType.Int16, Status.Count()).Value = Status.ToArray();
+                DbCommand.Parameters["Status"].CollectionType = OracleCollectionType.PLSQLAssociativeArray;
+
+                DbCommand.Parameters.Add("ChequeNo", OracleDbType.Varchar2, ChequeNo.Count()).Value = ChequeNo.ToArray();
+                DbCommand.Parameters["ChequeNo"].CollectionType = OracleCollectionType.PLSQLAssociativeArray;
+                DbCommand.Parameters["ChequeNo"].ArrayBindSize = ChequeNo.Select(_ => !string.IsNullOrEmpty(_) ? _.Length : 0).ToArray();
+
+                DbCommand.Parameters.Add("SlipNo", OracleDbType.Varchar2, SlipNo.Count()).Value = SlipNo.ToArray();
+                DbCommand.Parameters["SlipNo"].CollectionType = OracleCollectionType.PLSQLAssociativeArray;
+                DbCommand.Parameters["SlipNo"].ArrayBindSize = SlipNo.Select(_ => !string.IsNullOrEmpty(_) ? _.Length : 0).ToArray();
+
+                DbCommand.Parameters.Add("VDocumentChanged", OracleDbType.Varchar2, 1).Value = VDocumentChanged;
+                DbCommand.Parameters.Add("Vfkdocumentid", OracleDbType.Varchar2, 5).Value = Vfkdocumentid;
+                DbCommand.Parameters.Add("VDocuments", OracleDbType.Blob).Value = VDocuments;
+                DbCommand.Parameters.Add("Vbeneficiary", OracleDbType.Varchar2).Value = beneficiary;
+
+
+                DbCommand.Parameters.Add("RefVno", OracleDbType.Varchar2, 100).Direction = ParameterDirection.Output;
+
+                DbCommand.ExecuteNonQuery();
+                ReturnValue = DbCommand.Parameters["RefVno"].Value.ToString();
+
+                DbCommand.Dispose();
+                return ReturnValue;
+            }
+            catch (Exception ee)
+            {
+                MyMessageBox.ShowBox(ee.Message);
+                //// Errors.writeline(ee.Message, "MSP_GenerateKey");
+                //string result = MessageBox.Show(ee.Message, Variable.Version, 1);
+                return "";
+            }
+        }
+
         public static string BankReconcile_Add_Edit1(string VbankId, string VVtype, string VVno, string VClearentry, string Vreconciledate, string VChequeNo, string VDr, string VCr)
         {
             string tf = "";

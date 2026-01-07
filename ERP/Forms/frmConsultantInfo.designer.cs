@@ -68,6 +68,13 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.dgvDetail = new System.Windows.Forms.DataGridView();
+            this.clnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnMobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnHospitalRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnDegrees = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnTimings = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnFaculty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnisDeactivate = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnNew = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
@@ -77,6 +84,11 @@
             this.txtHospShare = new System.Windows.Forms.TextBox();
             this.dgvSurgery = new System.Windows.Forms.DataGridView();
             this.clnChk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.clnIdSurgery = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnSurgeryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnConsultantShare = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnHospCharges = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chkShowAllSurgery = new System.Windows.Forms.CheckBox();
             this.cmbConsultant = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -98,19 +110,8 @@
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnIdSurgery = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnSurgeryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnConsultantShare = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnHospCharges = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnMobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnHospitalRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnDegrees = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnTimings = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnFaculty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnPrev = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numConsultantCharges)).BeginInit();
             this.grp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHosOutPatient)).BeginInit();
@@ -284,6 +285,7 @@
             this.txtTiming.Name = "txtTiming";
             this.txtTiming.Size = new System.Drawing.Size(311, 20);
             this.txtTiming.TabIndex = 20;
+            this.txtTiming.Visible = false;
             // 
             // txtFaculty
             // 
@@ -509,7 +511,50 @@
             this.dgvDetail.Size = new System.Drawing.Size(551, 168);
             this.dgvDetail.TabIndex = 37;
             this.dgvDetail.Tag = "Lock";
+            this.dgvDetail.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetail_CellContentClick);
             this.dgvDetail.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetail_CellDoubleClick);
+            // 
+            // clnID
+            // 
+            this.clnID.HeaderText = "ID";
+            this.clnID.Name = "clnID";
+            this.clnID.ReadOnly = true;
+            // 
+            // clnName
+            // 
+            this.clnName.HeaderText = "Name";
+            this.clnName.Name = "clnName";
+            this.clnName.ReadOnly = true;
+            // 
+            // clnMobile
+            // 
+            this.clnMobile.HeaderText = "Mobile";
+            this.clnMobile.Name = "clnMobile";
+            this.clnMobile.ReadOnly = true;
+            // 
+            // clnHospitalRate
+            // 
+            this.clnHospitalRate.HeaderText = "HospitalRate";
+            this.clnHospitalRate.Name = "clnHospitalRate";
+            this.clnHospitalRate.ReadOnly = true;
+            // 
+            // clnDegrees
+            // 
+            this.clnDegrees.HeaderText = "Degrees";
+            this.clnDegrees.Name = "clnDegrees";
+            this.clnDegrees.ReadOnly = true;
+            // 
+            // clnTimings
+            // 
+            this.clnTimings.HeaderText = "Timings";
+            this.clnTimings.Name = "clnTimings";
+            this.clnTimings.ReadOnly = true;
+            // 
+            // clnFaculty
+            // 
+            this.clnFaculty.HeaderText = "Faculty";
+            this.clnFaculty.Name = "clnFaculty";
+            this.clnFaculty.ReadOnly = true;
             // 
             // clnisDeactivate
             // 
@@ -611,6 +656,33 @@
             this.clnChk.Name = "clnChk";
             this.clnChk.TrueValue = "1";
             this.clnChk.Width = 50;
+            // 
+            // clnIdSurgery
+            // 
+            this.clnIdSurgery.HeaderText = "ID";
+            this.clnIdSurgery.Name = "clnIdSurgery";
+            this.clnIdSurgery.Width = 50;
+            // 
+            // clnSurgeryName
+            // 
+            this.clnSurgeryName.HeaderText = "Name";
+            this.clnSurgeryName.Name = "clnSurgeryName";
+            this.clnSurgeryName.Width = 200;
+            // 
+            // clnAmount
+            // 
+            this.clnAmount.HeaderText = "Amount";
+            this.clnAmount.Name = "clnAmount";
+            // 
+            // clnConsultantShare
+            // 
+            this.clnConsultantShare.HeaderText = "Consultant Share";
+            this.clnConsultantShare.Name = "clnConsultantShare";
+            // 
+            // clnHospCharges
+            // 
+            this.clnHospCharges.HeaderText = "Hospital Share";
+            this.clnHospCharges.Name = "clnHospCharges";
             // 
             // chkShowAllSurgery
             // 
@@ -768,75 +840,6 @@
             this.dataGridViewTextBoxColumn12.HeaderText = "Hospital Share";
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             // 
-            // clnIdSurgery
-            // 
-            this.clnIdSurgery.HeaderText = "ID";
-            this.clnIdSurgery.Name = "clnIdSurgery";
-            this.clnIdSurgery.Width = 50;
-            // 
-            // clnSurgeryName
-            // 
-            this.clnSurgeryName.HeaderText = "Name";
-            this.clnSurgeryName.Name = "clnSurgeryName";
-            this.clnSurgeryName.Width = 200;
-            // 
-            // clnAmount
-            // 
-            this.clnAmount.HeaderText = "Amount";
-            this.clnAmount.Name = "clnAmount";
-            // 
-            // clnConsultantShare
-            // 
-            this.clnConsultantShare.HeaderText = "Consultant Share";
-            this.clnConsultantShare.Name = "clnConsultantShare";
-            // 
-            // clnHospCharges
-            // 
-            this.clnHospCharges.HeaderText = "Hospital Share";
-            this.clnHospCharges.Name = "clnHospCharges";
-            // 
-            // clnID
-            // 
-            this.clnID.HeaderText = "ID";
-            this.clnID.Name = "clnID";
-            this.clnID.ReadOnly = true;
-            // 
-            // clnName
-            // 
-            this.clnName.HeaderText = "Name";
-            this.clnName.Name = "clnName";
-            this.clnName.ReadOnly = true;
-            // 
-            // clnMobile
-            // 
-            this.clnMobile.HeaderText = "Mobile";
-            this.clnMobile.Name = "clnMobile";
-            this.clnMobile.ReadOnly = true;
-            // 
-            // clnHospitalRate
-            // 
-            this.clnHospitalRate.HeaderText = "HospitalRate";
-            this.clnHospitalRate.Name = "clnHospitalRate";
-            this.clnHospitalRate.ReadOnly = true;
-            // 
-            // clnDegrees
-            // 
-            this.clnDegrees.HeaderText = "Degrees";
-            this.clnDegrees.Name = "clnDegrees";
-            this.clnDegrees.ReadOnly = true;
-            // 
-            // clnTimings
-            // 
-            this.clnTimings.HeaderText = "Timings";
-            this.clnTimings.Name = "clnTimings";
-            this.clnTimings.ReadOnly = true;
-            // 
-            // clnFaculty
-            // 
-            this.clnFaculty.HeaderText = "Faculty";
-            this.clnFaculty.Name = "clnFaculty";
-            this.clnFaculty.ReadOnly = true;
-            // 
             // btnPrev
             // 
             this.btnPrev.Location = new System.Drawing.Point(759, 75);
@@ -847,11 +850,22 @@
             this.btnPrev.UseVisualStyleBackColor = true;
             this.btnPrev.Click += new System.EventHandler(this.brnPrev_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(140, 198);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(44, 23);
+            this.button1.TabIndex = 250;
+            this.button1.Text = "Add";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmConsultantInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1038, 534);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnPrev);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.cmbType2);
@@ -1003,6 +1017,7 @@
         private System.Windows.Forms.ComboBox cmbType2;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Button btnPrev;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -472,6 +472,28 @@ namespace ERP
 
         private void cmbTransCode_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!FLogIn && Convert.ToString(cmbTransCode.SelectedValue) == "S S-001")
+            {
+                dgvAccount.Rows.Clear();
+                string sessionId;
+                using (var f = new frmInput("SessionId"))
+                {
+                    if (f.ShowDialog() == DialogResult.OK)
+                        sessionId = f.inputText;
+                    else
+                        return;
+
+                }
+
+                DataTable dt = ReportQuery.ClosingSummarySessionWise(sessionId);
+                
+                for(    int i = 0; i < dt.Rows.Count; i++)
+                {
+                    dgvAccount.Rows.Add("0", dt.Rows[i][1].ToString(), "", dt.Rows[i][5].ToString(), dt.Rows[i][5].ToString(), "");
+                }
+
+            }
+
             if (!FLogIn && Convert.ToString(cmbTransCode.SelectedValue) == "CLS-0001")
             {
                 //BETWEEN '01 Jul " + Variable.FinancialYear.Split('-').GetValue(0).ToString() + @"' AND 
@@ -499,7 +521,7 @@ namespace ERP
                             dgvAccount.Rows.Add("0"/*OddNumber.ToString()*/, dt.Rows[i][1].ToString(), "Transfer from Unappropriated Profit/Loss Account (" + Variable._FanancialYear + ")", Convert.ToDecimal(dt.Rows[i][2]).ToString("F2"), Convert.ToDecimal(dt.Rows[i][3]).ToString("F2"), null, "0");
                             OddNumber = OddNumber + 2;
                         }
-                        else
+                        else 
                         {
                             dgvAccount.Rows.Insert(j += 2, "0"/*EvenNumber.ToString()*/, "003003001001001", "Transfer to " + dt.Rows[i - dt.Rows.Count][0].ToString(), Convert.ToDecimal(dt.Rows[i - dt.Rows.Count][2]) > 0 ? "0.00" : Convert.ToDecimal(dt.Rows[i - dt.Rows.Count][3]).ToString("F2"), Convert.ToDecimal(dt.Rows[i - dt.Rows.Count][3]) > 0 ? "0.00" : Convert.ToDecimal(dt.Rows[i - dt.Rows.Count][2]).ToString("F2"), null, "0");
                             EvenNumber = EvenNumber + 2;

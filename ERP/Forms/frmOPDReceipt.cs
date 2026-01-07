@@ -165,6 +165,19 @@ namespace ERP
             {
             }
         }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            CheckSession(UserInfo.UserId);
+        }
+        private void CheckSession(string Vuser)
+        {
+            int status = MSP.Check_LastSession(Vuser);
+
+            if (status > 0)
+            {
+                MessageBox.Show("Your previous session is still open...!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
 
         private void frmReceipt_Load(object sender, EventArgs e)
         {
@@ -189,6 +202,10 @@ namespace ERP
             }
             btnCancelAll.Visible = false;
             FLogIn = false;
+            CheckSession(UserInfo.UserId);
+            timer1.Interval = 21600000;
+            timer1.Tick += timer1_Tick;
+            timer1.Start();
         }
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1448,7 +1465,7 @@ namespace ERP
 
             }
         }
-
+        
         private void btnCancelAll_Click(object sender, EventArgs e)
         {
             frmAuthentication frm = new frmAuthentication();

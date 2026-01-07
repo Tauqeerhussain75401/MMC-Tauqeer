@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvtestcatagoryInfo = new System.Windows.Forms.DataGridView();
             this.grpbtns = new System.Windows.Forms.GroupBox();
             this.btnClose = new System.Windows.Forms.Button();
@@ -44,10 +43,13 @@
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.ntxtFixedRate = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkRes_For_dup_token = new System.Windows.Forms.CheckBox();
             this.chkAgeRequired = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mcbAccounts = new ERP.MultiColumnComboBox();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,13 +61,13 @@
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClnFixedRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Clnautotoken = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Clncontactrequired = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ClnIsActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ClnIsAgeRequired = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.clnRes_For_Dup_Tok = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.chkRes_For_dup_token = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvtestcatagoryInfo)).BeginInit();
             this.grpbtns.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ntxtFixedRate)).BeginInit();
@@ -78,21 +80,14 @@
             this.dgvtestcatagoryInfo.AllowUserToDeleteRows = false;
             this.dgvtestcatagoryInfo.AllowUserToResizeColumns = false;
             this.dgvtestcatagoryInfo.AllowUserToResizeRows = false;
-            this.dgvtestcatagoryInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvtestcatagoryInfo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvtestcatagoryInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvtestcatagoryInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvtestcatagoryInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clnID,
             this.clnTitle,
+            this.clnAccount,
             this.ClnFixedRate,
             this.Clnautotoken,
             this.Clncontactrequired,
@@ -113,7 +108,7 @@
             // 
             this.grpbtns.Controls.Add(this.btnClose);
             this.grpbtns.Controls.Add(this.btnSave);
-            this.grpbtns.Location = new System.Drawing.Point(425, 67);
+            this.grpbtns.Location = new System.Drawing.Point(425, 85);
             this.grpbtns.Name = "grpbtns";
             this.grpbtns.Size = new System.Drawing.Size(171, 58);
             this.grpbtns.TabIndex = 5;
@@ -247,6 +242,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.mcbAccounts);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.chkRes_For_dup_token);
             this.groupBox1.Controls.Add(this.chkAgeRequired);
             this.groupBox1.Controls.Add(this.label3);
@@ -266,6 +263,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Catagory Info";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // chkRes_For_dup_token
+            // 
+            this.chkRes_For_dup_token.AutoSize = true;
+            this.chkRes_For_dup_token.Location = new System.Drawing.Point(144, 67);
+            this.chkRes_For_dup_token.Name = "chkRes_For_dup_token";
+            this.chkRes_For_dup_token.Size = new System.Drawing.Size(126, 20);
+            this.chkRes_For_dup_token.TabIndex = 21;
+            this.chkRes_For_dup_token.Text = "Duplicate Token";
+            this.chkRes_For_dup_token.UseVisualStyleBackColor = true;
             // 
             // chkAgeRequired
             // 
@@ -278,6 +286,15 @@
             this.chkAgeRequired.Text = "Age required";
             this.chkAgeRequired.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(319, 68);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(56, 16);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Account";
+            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -285,6 +302,7 @@
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.Width = 24;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -293,6 +311,7 @@
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn2.Width = 33;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -301,6 +320,19 @@
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
             this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn3.Width = 64;
+            // 
+            // mcbAccounts
+            // 
+            this.mcbAccounts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.mcbAccounts.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.mcbAccounts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.mcbAccounts.FormattingEnabled = true;
+            this.mcbAccounts.Location = new System.Drawing.Point(394, 61);
+            this.mcbAccounts.Name = "mcbAccounts";
+            this.mcbAccounts.Size = new System.Drawing.Size(194, 23);
+            this.mcbAccounts.TabIndex = 24;
+            this.mcbAccounts.Tag = "UnLock";
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -364,7 +396,7 @@
             this.clnID.Name = "clnID";
             this.clnID.ReadOnly = true;
             this.clnID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clnID.Width = 27;
+            this.clnID.Width = 24;
             // 
             // clnTitle
             // 
@@ -373,7 +405,15 @@
             this.clnTitle.Name = "clnTitle";
             this.clnTitle.ReadOnly = true;
             this.clnTitle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clnTitle.Width = 40;
+            this.clnTitle.Width = 33;
+            // 
+            // clnAccount
+            // 
+            this.clnAccount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.clnAccount.HeaderText = "Account";
+            this.clnAccount.Name = "clnAccount";
+            this.clnAccount.ReadOnly = true;
+            this.clnAccount.Width = 72;
             // 
             // ClnFixedRate
             // 
@@ -382,7 +422,7 @@
             this.ClnFixedRate.Name = "ClnFixedRate";
             this.ClnFixedRate.ReadOnly = true;
             this.ClnFixedRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ClnFixedRate.Width = 79;
+            this.ClnFixedRate.Width = 64;
             // 
             // Clnautotoken
             // 
@@ -391,7 +431,7 @@
             this.Clnautotoken.Name = "Clnautotoken";
             this.Clnautotoken.ReadOnly = true;
             this.Clnautotoken.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Clnautotoken.Width = 83;
+            this.Clnautotoken.Width = 69;
             // 
             // Clncontactrequired
             // 
@@ -400,7 +440,7 @@
             this.Clncontactrequired.Name = "Clncontactrequired";
             this.Clncontactrequired.ReadOnly = true;
             this.Clncontactrequired.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Clncontactrequired.Width = 104;
+            this.Clncontactrequired.Width = 85;
             // 
             // ClnIsActive
             // 
@@ -422,16 +462,6 @@
             this.clnRes_For_Dup_Tok.ReadOnly = true;
             this.clnRes_For_Dup_Tok.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.clnRes_For_Dup_Tok.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // chkRes_For_dup_token
-            // 
-            this.chkRes_For_dup_token.AutoSize = true;
-            this.chkRes_For_dup_token.Location = new System.Drawing.Point(144, 67);
-            this.chkRes_For_dup_token.Name = "chkRes_For_dup_token";
-            this.chkRes_For_dup_token.Size = new System.Drawing.Size(126, 20);
-            this.chkRes_For_dup_token.TabIndex = 21;
-            this.chkRes_For_dup_token.Text = "Duplicate Token";
-            this.chkRes_For_dup_token.UseVisualStyleBackColor = true;
             // 
             // frmTestCatagoryInfo
             // 
@@ -486,14 +516,17 @@
         private System.Windows.Forms.NumericUpDown ntxtFixedRate;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox chkAgeRequired;
+        private System.Windows.Forms.CheckBox chkRes_For_dup_token;
+        private System.Windows.Forms.Label label5;
+        private MultiColumnComboBox mcbAccounts;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnID;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnTitle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnAccount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClnFixedRate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Clnautotoken;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Clncontactrequired;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ClnIsActive;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ClnIsAgeRequired;
         private System.Windows.Forms.DataGridViewCheckBoxColumn clnRes_For_Dup_Tok;
-        private System.Windows.Forms.CheckBox chkRes_For_dup_token;
     }
 }

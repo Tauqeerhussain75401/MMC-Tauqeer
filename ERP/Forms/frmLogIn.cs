@@ -22,11 +22,14 @@ namespace ERP
         }
         private void frmLogIn_Load(object sender, EventArgs e)
         {
-                CheckApplicationOpen();
-                this.Text = "ERP Version(" + Application.ProductVersion + ")"; 
-                UserInfo.UserId = "Log Out";
-                thConnecting = new Thread(Connecting);
-                thConnecting.Start();
+            CheckApplicationOpen();
+            txtUserId.Text = "Admin";
+            txtPassword.Text = "75401";
+            
+            this.Text = "ERP Version(" + Application.ProductVersion + ")"; 
+            UserInfo.UserId = "Log Out";
+            thConnecting = new Thread(Connecting);
+            thConnecting.Start();
 
            
         }

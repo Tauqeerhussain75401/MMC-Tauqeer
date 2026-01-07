@@ -15,6 +15,21 @@ namespace ERP
 {
     class Query
     {
+        #region Queries of hussaini lab report
+        public static DataTable getpateintinfo(string status)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string sql = @"Select * from mmc_result where {status}";
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return dt;
+        }
+        #endregion
         public static DataTable GenerateQRCode(string Vno,string QRimagePath)
         {
             // Create QR code
@@ -42,14 +57,8 @@ namespace ERP
             // Return the DataTable
             return dtQr;
         }
-
-
-
-
         private static Bitmap GetLogo(string QRimagePath)
         {
-            
-
             Bitmap logo = new Bitmap(QRimagePath);
             int logoSize = 30;
             return new Bitmap(logo, new System.Drawing.Size(logoSize, logoSize));
@@ -92,7 +101,6 @@ namespace ERP
             OracleCommand com = new OracleCommand(sql, clsConnection.con);
             com.ExecuteNonQuery();
         }
-
         public static DataTable Get_dataTable(string sql)
         {
             DataTable dt = new DataTable();
@@ -126,7 +134,6 @@ namespace ERP
             adap.Dispose();
             return dt;
         }
-     
         internal static DataSet getDataSet(string sql)
         {
             DataSet ds = new DataSet();
@@ -138,8 +145,6 @@ namespace ERP
             adap.Dispose();
             return ds;
         }
-
-
         public static DataTable get_ChartOfAcc()
         {
 
@@ -161,7 +166,6 @@ namespace ERP
                 return dt;
             }
         }
-
         internal static string get_TerminalId(string proccessorid, string hddid, string ComputerName)
         {
             string TerminalId = "";
@@ -196,7 +200,6 @@ namespace ERP
             adap.Dispose();
             return dt;
         }
-
         internal static DataTable GetPartialltPaymentReport(string fdate, string tdate, string regno)
         {
             string sql = @"SELECT --* 
@@ -215,9 +218,40 @@ namespace ERP
         }
         internal static DataTable NarrationIndex()
         {
+
             string sql = "select * from Narration  where status = 0";
+
             DataTable dt = getData(sql);
             return dt;
+
+        }
+        internal static DataTable NarrationIndex_TellerVoucher()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+
+                OracleCommand comm = new OracleCommand("Get_Narration_Teller_Voucher", clsConnection.con);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.Parameters.Add("retval", OracleDbType.RefCursor);
+                comm.Parameters["retval"].Direction = ParameterDirection.Output;
+
+                OracleDataAdapter adapter = new OracleDataAdapter();
+                adapter.SelectCommand = comm;
+                adapter.Fill(dt);
+                return dt;
+            }
+            catch (Exception ee)
+            {
+                Errors.writeline(ee.Message, "rep_Get_Narration_Receipt_Voucher");
+                MessageBox.Show(ee.Message);
+                return dt;
+            }
+
+            ////string sql = "select * from Narration  where status = 0 and ";
+
+            ////DataTable dt = getData(sql);
+            ////return dt;
         }
         internal static DataTable TestRemarksIndex(string departmentid)
         {
@@ -252,17 +286,14 @@ namespace ERP
             DataTable dt = getData(Sql);
             return dt;
         }
-
         internal static DataTable getrefunddata(string serialno)
         {
             String Sql = " SELECT refundamount FROM  ipdbilling WHERE admissionid= '"+ serialno + "'";
             DataTable dt = getData(Sql);
             return dt;
         }
-
         internal static DataTable getMemberDetail(string Id, string bmjCard, string Filter)
         {
-
             String Sql = " Select * From v_member where  id = '" + Id + "' ";
             if (Filter == "BMJ")
                 Sql = " Select * From v_member where newno = '" + bmjCard + "'";
@@ -277,8 +308,6 @@ namespace ERP
             adp.Fill(dt);
             return dt;
         }
-
-
         internal static DataTable getMemberFamilyDetail(string Id)
         {
             String Sql = "Select * From memberdependent where id = '" + Id + "' ";
@@ -442,12 +471,11 @@ namespace ERP
             return dt;
         }
 
-        //string sql = @"SELECT id,fullname room,floornumber,wm_concat(regnoalpha||'-'|| regnonumeric) regno  FROM roomindex  ri 
+        /*//string sql = @"SELECT id,fullname room,floornumber,wm_concat(regnoalpha||'-'|| regnonumeric) regno  FROM roomindex  ri 
         //                    left JOIN admissioninfo ad
         //                    ON ri.id = ad.roomid  AND dischargeyn = '0'
         //                    GROUP BY id,fullname,floornumber
-        //                    ORDER BY floornumber,fullname,id ";
-
+        //                    ORDER BY floornumber,fullname,id ";*/
         internal static DataTable RoomIndex()
         {
             string sql = @"SELECT id,fullname room,floornumber,regnoalpha||'-'|| regnonumeric regno  FROM roomindex  ri 
@@ -478,7 +506,6 @@ namespace ERP
         }
         public static DataTable DetailAccounts()
         {
-
             DataTable dt = new DataTable();
             try
             {
@@ -499,7 +526,6 @@ namespace ERP
         }
         internal static DataTable OPDReceiptQuery(string Vno)
         {
-
             string sql = "SELECT receiptno,tokenNo, vdate, get_OPDcatagory(catagoryid) CatagoryTitle, Get_consultantName(consultantid) ConsultantName, get_PatientType(patienttype) patienttype, memberid, patientid, patienttitle, patientname, gender, contactno, age, ageunit, netamount, createdby, createdtime, editby, edittime,status,noofprint FROM OPDReceipt where status = 0 and ReceiptNo = '" + Vno + "'   order by ReceiptNo desc";
             DataTable dt = getData(sql);
             return dt;
@@ -564,12 +590,11 @@ namespace ERP
         }
         internal static DataTable ConsultantDetail(string ID)
         {
-            //string sql = @"SELECT 1 As surExist,ct.*,cts.consulshare AS consulShare ,cts.hospshare hospShare,pi.amount AS amount,pi.packagename_name,
+           /* //string sql = @"SELECT 1 As surExist,ct.*,cts.consulshare AS consulShare ,cts.hospshare hospShare,pi.amount AS amount,pi.packagename_name,
             //             pi.package_id AS package_id FROM consultant ct left JOIN consultantsurgery  cts ON ct.id = cts.fkconsid
             //             left JOIN packageindex pi ON pi.package_id = fkpkgid where ct.isdeactivate = 0 AND cts.status = 0 and ct.id = '" + ID + "'";
             //DataTable dt = getData(sql);
-            //return dt;
-
+            //return dt;*/
             string sql = @"SELECT 1 As surExist,ct.*,cts.consulshare AS consulShare ,cts.hospshare hospShare,pi.amount AS amount,pi.packagename_name,
                          pi.package_id AS package_id FROM consultant ct left JOIN consultantsurgery  cts ON ct.id = cts.fkconsid
                          left JOIN packageindex pi ON pi.package_id = fkpkgid where ct.id = '" + ID + "'";
@@ -679,7 +704,6 @@ namespace ERP
             DataTable dt = getData(sql);
             return dt;
         }
-
         internal static DataTable UserDetail(string UserId)
         {
             string sql = "select *,sysdate LogIndate from users where userid = '" + UserId + "' and status = '0' and softwaremodule='ERP'";
@@ -692,7 +716,6 @@ namespace ERP
             DataTable dt = getData(sql);
             return dt;
         }
-
         internal static DataTable SessionBalanceAddPartialPayment(string UserId)
         {
             string sql = @"
@@ -786,7 +809,6 @@ namespace ERP
             DataTable dt = getData(sql);
             return dt;
         }
-
         internal static DataTable OPDreceptInfo(string ReceptNo)
         {
             string sql = $"SELECT * FROM opdRECEIPT  o JOIN consultant c ON c.id = o.consultantid WHERE status = 0 and  receiptno = '" + ReceptNo + "'";
@@ -921,7 +943,6 @@ namespace ERP
             DataTable dt = getData(sql);
             return dt;
         }
-
         internal static DataTable InPatientTestInfo(string serialno, string billno, string testtypeid, string ReceiptNo)
         {
             //string sql = @"SELECT receiptno,VSeq,get_consultantname(consultantid)AS Consultant,charges,get_testtitle(testid)AS Test ,receiptdate,createdby FROM inptestcharges WHERE status = '0' AND  serialno='" + serialno + "' AND billno='" + billno + "' AND testtypeid='" + testtypeid + "' and receiptno = Nvl('" + ReceiptNo + "',receiptno) ";
@@ -933,7 +954,6 @@ namespace ERP
         internal static DataTable InPatientTestInfo(string testtypeid, string ReceiptNo, string serialno)
         {
             //string sql = @"SELECT receiptno,VSeq,get_consultantname(consultantid)AS Consultant,charges,get_testtitle(testid)AS Test ,receiptdate,createdby FROM inptestcharges WHERE status = '0' AND  serialno='" + serialno + "' AND billno='" + billno + "' AND testtypeid='" + testtypeid + "' and receiptno = Nvl('" + ReceiptNo + "',receiptno) ";
-
 
             //basit commit this code 19-08-2020
             /*
@@ -956,14 +976,12 @@ namespace ERP
             dt = getData(sql);
             return dt;
         }
-      
         internal static DataTable RoomChargesSeacrh(string serialno)
         {
             string sql = @"SELECT vseq,get_roomtitle(roomtypeid) as room ,datefrom,dateto,days,To_Number(get_roomcharges(roomtypeid)) AS charges,charges AS total,edittime,editby,createdby,createtime,status FROM inproomcharges WHERE  serialno='" + serialno + "' order by status,vseq desc ";
             DataTable dt = getData(sql);
             return dt;
         }
-
         //basit 09-07-2020 start 
         internal static DataTable RoomChargesDay(string serialno, string billno)
         {
@@ -971,9 +989,7 @@ namespace ERP
             DataTable dt = getData(sql);
             return dt;
         }
-
         //basit 09-07-2020 end 
-
         internal static DataTable DepositAmount(string serialno)
         {
             string sql = @"SELECT Nvl(Sum(amount),0) as amount from advancereceipt where status = 0 and admissionid='" + serialno + "'";
@@ -1023,7 +1039,6 @@ namespace ERP
             DataTable dt = getData(sql);
             return dt;
         }
-
         internal static DataTable InPSearch(string[] filter)
         {
             string Filter = filter.Count() > 0 ? string.Join(" ", filter) : "";
@@ -1031,12 +1046,9 @@ namespace ERP
             DataTable dt = getData(sql);
             return dt;
         }
-
-
         //basit 14-07-2020
         internal static DataTable BirthDate(string serialno)
         {
-
             string sql = @" SELECT get_consultantname(b.consult) AS consultants,b.*  FROM  birthinfo b  WHERE b.serialno= '" + serialno + "' and status=0";
             DataTable dt = getData(sql);
             return dt;
@@ -1053,14 +1065,13 @@ namespace ERP
             DataTable dt = getData(sql);
             return dt;
         }
-
         //BASIT 28-07-2020
-        //internal static DataTable CatagoryTestIndex()
+        /*//internal static DataTable CatagoryTestIndex()
         //{
         //    string sql = "SELECT to_char(id) id,title,hospitalrate,testtypeid FROM test where isdeactivated = 0 ORDER BY title";
         //    DataTable dt = getData(sql);
         //    return dt;
-        //}
+        //}*/
         internal static DataTable TestTypeId(string typeid)
         {
             //string sql = "SELECT to_char(id) id,title,hospitalrate,testtypeid FROM test where testtypeid = " + typeid + " AND isdeactivated = 0 ORDER BY title";
@@ -1069,28 +1080,16 @@ namespace ERP
             DataTable dt = getData(sql);
             return dt;
         }
-
-
-
-
         internal static DataTable TwoMonthCount(string CurrentDate, string admitDate, string regNo)
         {
             //            string sql = @" SELECT
             //                           (EXTRACT( MONTH FROM TO_DATE( '" + CurrentDate + "','dd/Mon/yyyy') ))  - (EXTRACT( MONTH FROM TO_DATE( '" + CurrentDate + "','dd/Mon/yyyy') )  - 2) AS  Month FROM DUAL";
             string sql = @" select EXTRACT( MONTH FROM TO_DATE( '" + CurrentDate + "' ,'dd/Mon/yyyy'))  - EXTRACT( MONTH FROM TO_DATE('" + admitDate + "','dd/Mon/yyyy')) AS  Month FROM admissioninfo WHERE regnonumeric ='" + regNo + "'";
-
-
             DataTable dt = getData(sql);
-
             return dt;
-
         }
-
-
-
         internal static DataTable IPDbillingAmount(string serialNo)
         {
-
             string sql = @" SELECT totalcharges AS totalcharges,nvl(adv.amount,0) AS depositeAmount, totdiscount AS discount,                                    
                             CASE WHEN nvl(to_number(ipdbill.refundamount) , 0 ) > 0 THEN                                                                         
                             CASE WHEN totdiscount > 0 THEN  nvl(to_number(ipdbill.refundamount),0) ELSE nvl(to_number(ipdbill.refundamount),0) END ELSE          
@@ -1102,44 +1101,33 @@ namespace ERP
                             where status = 0 GROUP BY admissionid) adv ON adv.admissionid =   ipdbill.admissionid                                                
                             WHERE ipdbill.admissionid ='" + serialNo + "'";
 
-
             DataTable dt = getData(sql);
-
             return dt;
-
         }
-
-
-
         internal static DataTable LocationIndex()
         {
             string sql = "SELECT DISTINCT t.location as Location FROM test t WHERE t.location IN('MMC','ESSA','BEH') GROUP BY t.location";
             DataTable dt = getData(sql);
             return dt;
         }
-
-
         internal static DataTable cmbTestIndex()
         {
             string sql = "SELECT to_char(id) id,title,hospitalrate,testtypeid FROM test  WHERE isdeactivated = 0 ORDER BY Title";
             DataTable dt = getData(sql);
             return dt;
         }
-
         internal static DataTable cmbTestIndexFilter(string testid)
         {
             string sql = "SELECT to_char(id) id,title,hospitalrate,testtypeid FROM test  WHERE isdeactivated = 0 " + (testid == "All" ? "" : "AND testtypeid = '" + testid + "'") + " ORDER BY Title";
             DataTable dt = getData(sql);
             return dt;
         }
-
         internal static DataTable ZakatRecipient()
         {
             string sql = "SELECT id,name FROM Reference where isactive=1 ORDER BY lower(name)";
             DataTable dt = getData(sql);
             return dt;
         }
-
         internal static DataTable MBGMember()
         {
             string SQL = "SELECT To_Char(newno) newno,newno || '   ' || name  as name FROM member";
@@ -1205,6 +1193,62 @@ namespace ERP
                 return dt;
             }
         }
+        public static DataTable getVoucher_TellerClosing(string VSession, string Fkbrcode)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                OracleCommand comm = new OracleCommand("get_voucher_teller_closing", clsConnection.con);
+                comm.CommandType = CommandType.StoredProcedure;
+                
+                comm.Parameters.Add("VSession", OracleDbType.Varchar2).Value = VSession;
+                comm.Parameters.Add("Vtype", OracleDbType.Varchar2).Value = "";
+                comm.Parameters.Add("Vfkbrcode", OracleDbType.Varchar2).Value = Fkbrcode;
+                comm.Parameters.Add("retval", OracleDbType.RefCursor);
+                comm.Parameters["retval"].Direction = ParameterDirection.Output;
+
+                OracleDataAdapter adapter = new OracleDataAdapter();
+                adapter.SelectCommand = comm;
+                adapter.Fill(dt);
+                adapter.Dispose();
+                return dt;
+            }
+            catch (Exception ee)
+            {
+                Errors.writeline(ee.Message, "Query_ PaymentFilter");
+                string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+                string err = MyMessageBox.ShowBox("Do you want to Exit ?", Variable.Version, 2);
+                //if (err == "1") Application.Exit();
+                return dt;
+            }
+        }
+        public static DataTable save_docTimings(string id, string timingid, string docid, DateTime starttime, DateTime endtime)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                OracleCommand comm = new OracleCommand("save_doctor_timings", clsConnection.con);
+                comm.CommandType = CommandType.StoredProcedure;
+
+                comm.Parameters.Add("VDayId", OracleDbType.Varchar2).Value = id;
+                comm.Parameters.Add("VtimingId", OracleDbType.Varchar2).Value = timingid;
+                comm.Parameters.Add("VDocId", OracleDbType.Varchar2).Value = docid;
+                comm.Parameters.Add("VStarttime", OracleDbType.TimeStamp).Value = starttime;
+                comm.Parameters.Add("VEndTime", OracleDbType.TimeStamp).Value = endtime;
+
+                comm.ExecuteNonQuery();
+                
+                return dt;
+            }
+            catch (Exception ee)
+            {
+                Errors.writeline(ee.Message, "Query_ PaymentFilter");
+                string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+                string err = MyMessageBox.ShowBox("Do you want to Exit ?", Variable.Version, 2);
+                //if (err == "1") Application.Exit();
+                return dt;
+            }
+        }
         public static decimal BankBal(string bankcode)
         {
             DataTable dt = new DataTable();
@@ -1229,7 +1273,6 @@ namespace ERP
                 return bal;
             }
         }
-
         public static decimal CashBal()
         {
             DataTable dt = new DataTable();
@@ -1274,8 +1317,7 @@ namespace ERP
                 return dt;
             }
         }
-
-        //string sql = "select VDate,VNO,(select narrationtitle from narration where narrationcode = fktransactionid) as Narration,cr as Amount from Voucherdetail where ( VDate between '" + From + "' and '" + To + "') and FK_Narration = " + Narration + " and VNO = " + VNO + "  and Vtype = 'PV' and status = 0 AND Vseq = 1";
+        /*//string sql = "select VDate,VNO,(select narrationtitle from narration where narrationcode = fktransactionid) as Narration,cr as Amount from Voucherdetail where ( VDate between '" + From + "' and '" + To + "') and FK_Narration = " + Narration + " and VNO = " + VNO + "  and Vtype = 'PV' and status = 0 AND Vseq = 1";
         //@"select VDate,VNO,(select narrationtitle from narration where narrationcode = fktransactionid) as Narration,
         //cr as Amount from Voucherdetail 
         //where ( trunc(VDate)   between TO_DATE('" + From + "', 'dd MON yyyy')  and TO_DATE('" + To + "', 'dd MON yyyy') ) " +
@@ -1302,9 +1344,7 @@ namespace ERP
         //        string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
         //        return dt;
         //    }
-        //}
-
-
+        //}*/
         public static DataTable PaymentFilter1New(string From, string To, string Narration, string VNO, string filter)
         {
             DataTable dt = new DataTable();
@@ -1360,9 +1400,6 @@ namespace ERP
                 return dt;
             }
         }
-
-
-
         public static DataTable CallInvDoucment(string doucmentno)
         {
             DataTable dt = new DataTable();
@@ -1400,8 +1437,7 @@ namespace ERP
                 return dt;
             }
         }
-
-        //public static DataTable JournalFilter(string From, string To, string Narration, string VNO)
+       /* //public static DataTable JournalFilter(string From, string To, string Narration, string VNO)
         //{
         //    DataTable dt = new DataTable();
         //    try
@@ -1423,8 +1459,7 @@ namespace ERP
         //        string err = MyMessageBox.ShowBox("Do you want to Exit ?", Variable.Version, 2);
         //        return dt;
         //    }
-        //}
-
+        //}*/
         public static DataTable JournalFilter(string From, string To, string Narration, string VNO)
         {
             DataTable dt = new DataTable();
@@ -1471,8 +1506,6 @@ namespace ERP
                 return dt;
             }
         }
-
-
         public static DataTable ClientIndex2()
         {
             DataTable dt = new DataTable();
@@ -1493,7 +1526,6 @@ namespace ERP
                 return dt;
             }
         }
-
         public static DataTable HRindex4()
         {
             DataTable dt = new DataTable();
@@ -1534,7 +1566,6 @@ namespace ERP
                 return dt;
             }
         }
-
         public static DataTable DealerInfo()
         {
             DataTable dt = new DataTable();
@@ -1558,65 +1589,73 @@ namespace ERP
                 return dt;
             }
         }
-
-        public static DataTable ReceiptFilterWithPendingApr(string From, string To, string Narration, string VNO, string filter)
+        public static DataTable ReceiptFilterWithPendingApr(string From, string To, string session, string VNO, string filter)
         {
             DataTable dt = new DataTable();
             try
             {
-                string sql = @"
-                     SELECT v.VDate, v.VNO, narrationtitle AS Narration,
-                   SUM(dr) AS Amount
-                    FROM Voucherdetail v
-                    JOIN narration n ON n.narrationcode = v.fktransactionid
-                    WHERE v.Vtype = 'RV'
-                      AND v.status != 1";
+                //string sql = @"
+                //     SELECT v.VDate, v.VNO, narrationtitle AS Narration,
+                //   SUM(dr) AS Amount
+                //    FROM Voucherdetail v
+                //    JOIN narration n ON n.narrationcode = v.fktransactionid
+                //    WHERE v.Vtype = 'RV'
+                //      AND v.status != 1";
 
-                // ✅ Apply date filter only if VNO is not given
-                if (string.IsNullOrWhiteSpace(VNO))
-                {
-                    sql += @" AND TRUNC(VDate) BETWEEN TO_DATE('" + From + @"', 'dd MON yyyy') 
-                                          AND TO_DATE('" + To + @"', 'dd MON yyyy')";
-                }
+                //// ✅ Apply date filter only if VNO is not given
+                //if (string.IsNullOrWhiteSpace(VNO))
+                //{
+                //    sql += @" AND TRUNC(VDate) BETWEEN TO_DATE('" + From + @"', 'dd MON yyyy') 
+                //                          AND TO_DATE('" + To + @"', 'dd MON yyyy')";
+                //}
 
-                // ✅ Narration filter
-                if (Narration != "ALL")
-                {
-                    sql += " AND v.fktransactionid = '" + Narration + "'";
-                }
+                //// ✅ Narration filter
+                //if (Narration != "ALL")
+                //{
+                //    sql += " AND v.fktransactionid = '" + Narration + "'";
+                //}
 
-                // ✅ VNO filter
-                if (!string.IsNullOrWhiteSpace(VNO))
-                {
-                    sql += " AND v.VNO = " + VNO;
-                }
+                //// ✅ VNO filter
+                //if (!string.IsNullOrWhiteSpace(VNO))
+                //{
+                //    sql += " AND v.VNO = " + VNO;
+                //}
 
-                // ✅ Status filter
-                if (filter != "ALL")
-                {
-                    if (filter == "Pending")
-                        sql += " AND v.status = 2";
-                    else
-                        sql += " AND v.status = 0";
-                }
+                //// ✅ Status filter
+                //if (filter != "ALL")
+                //{
+                //    if (filter == "Pending")
+                //        sql += " AND v.status = 2";
+                //    else
+                //        sql += " AND v.status = 0";
+                //}
 
-                sql += " GROUP BY v.VDate, v.VNO, narrationtitle";
+                //sql += " GROUP BY v.VDate, v.VNO, narrationtitle";
 
-                OracleDataAdapter adapter = new OracleDataAdapter(sql, clsConnection.con);
+                OracleCommand comm = new OracleCommand("search_voucher_teller_closing", clsConnection.con);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.Parameters.Add("VSessionId", OracleDbType.Varchar2).Value = session == "" ? DBNull.Value : (object)session;
+                comm.Parameters.Add("VFromDate", OracleDbType.Date).Value = From;
+                comm.Parameters.Add("VToDate", OracleDbType.Date).Value = To;
+                comm.Parameters.Add("VNO", OracleDbType.Varchar2).Value = VNO == null ? DBNull.Value : (object)VNO;
+                comm.Parameters.Add("VFilter", OracleDbType.Varchar2).Value = filter;
+                comm.Parameters.Add("retval", OracleDbType.RefCursor);
+                comm.Parameters["retval"].Direction = ParameterDirection.Output;
+
+                OracleDataAdapter adapter = new OracleDataAdapter();
+                adapter.SelectCommand = comm;
                 adapter.Fill(dt);
                 adapter.Dispose();
                 return dt;
             }
             catch (Exception ee)
             {
-                Errors.writeline(ee.Message, "Query_ ReceiptFilter");
+                Errors.writeline(ee.Message, "Query_search_voucher_teller_closing");
                 MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
                 return dt;
             }
         }
-
-
-        //public static DataTable ReceiptFilterWithPendingApr(string From, string To, string Narration, string VNO, string filter)
+        /*//public static DataTable ReceiptFilterWithPendingApr(string From, string To, string Narration, string VNO, string filter)
         //{
         //    DataTable dt = new DataTable();
         //    try
@@ -1635,11 +1674,9 @@ namespace ERP
         //    {
         //        Errors.writeline(ee.Message, "Query_ ReceiptFilter");
         //        string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
-
-
         //        return dt;
         //    }
-        //}
+        //}*/
         public static DataTable ChartofAccounts()
         {
 
@@ -1661,7 +1698,6 @@ namespace ERP
                 return dt;
             }
         }
-
         public static DataTable AccountCodes(string accounts)
         {
             DataTable dt = new DataTable();
@@ -1755,7 +1791,6 @@ namespace ERP
                 return ds;
             }
         }
-
         public static DataTable PaymentFilter1withdate(string From, string To, string Narration, string VNO, string vtype, string Post)
         {
             DataTable dt = new DataTable();
@@ -1788,9 +1823,6 @@ namespace ERP
                 adapter.Dispose();
                 return dt;
             }
-
-
-
             catch (Exception ee)
             {
                 Errors.writeline(ee.Message, "Query_ PaymentFilter");
@@ -1867,7 +1899,6 @@ namespace ERP
                 return dt;
             }
         }
-
         public static DataTable CountryIndex()
         {
             DataTable dt = new DataTable();
@@ -1997,6 +2028,33 @@ namespace ERP
             DataTable dt = getData(sql);
             return dt;
         }
+        internal static DataTable get_doctor_timings(string docId)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                OracleCommand comm = new OracleCommand("get_doctor_timings", clsConnection.con);
+                comm.CommandType = CommandType.StoredProcedure;
+
+                comm.Parameters.Add("VDocId", OracleDbType.Varchar2).Value = docId;
+                
+                comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+                comm.Parameters["retval"].Direction = ParameterDirection.Output;
+
+
+                OracleDataAdapter adapter = new OracleDataAdapter();
+                adapter.SelectCommand = comm;// new OracleCommand(sql, Connection.Conn_ecyear);
+                adapter.Fill(dt);
+                adapter.Dispose();
+                return dt;
+            }
+            catch (Exception ee)
+            {
+                Errors.writeline(ee.Message, "get_doctor_timings");
+                MessageBox.Show(ee.ToString());
+                return dt;
+            }
+        }
         internal static DataTable ConsultantFacultyAll()
         {
             string sql = "SELECT distinct faculty FROM consultant";
@@ -2092,11 +2150,6 @@ namespace ERP
                 adapter.Dispose();
                 return dt;
 
-
-
-
-
-
                 //OracleCommand comm = new OracleCommand("HMS.rep_trialbalance", clsConnection.con);
                 //comm.CommandType = CommandType.StoredProcedure;
                 //comm.Parameters.Add("VFromDate", OracleDbType.Varchar2).Value = dtFromDate;
@@ -2132,9 +2185,6 @@ namespace ERP
             //adapter.Fill(dt);
             //adapter.Dispose();
             //return dt;
-
-
-
         }
         public static DataSet Rep_Voucher(string ason, string type, string vno)
         {
@@ -2200,7 +2250,6 @@ namespace ERP
                 return "0";
             }
         }
-
         public static DataTable FillCheckBoxList()
         {
             DataTable dt = new DataTable();

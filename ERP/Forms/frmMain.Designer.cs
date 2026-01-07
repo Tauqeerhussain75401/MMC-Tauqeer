@@ -151,6 +151,7 @@
             this.eSSALabRegisterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mMCHussainiLabReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.existToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -168,7 +169,7 @@
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.chkDate = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.mMCHussainiLabReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tellerClosingVoucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -373,6 +374,7 @@
             this.receiptVoucherToolStripMenuItem,
             this.journalVoucherToolStripMenuItem,
             this.bankReconcilationToolStripMenuItem,
+            this.tellerClosingVoucherToolStripMenuItem,
             this.toolStripSeparator2,
             this.bankReconcilationToolStripMenuItem1,
             this.bankToBankTransferToolStripMenuItem});
@@ -383,48 +385,48 @@
             // paymentVoucherToolStripMenuItem
             // 
             this.paymentVoucherToolStripMenuItem.Name = "paymentVoucherToolStripMenuItem";
-            this.paymentVoucherToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.paymentVoucherToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.paymentVoucherToolStripMenuItem.Text = "Payment Voucher";
             this.paymentVoucherToolStripMenuItem.Click += new System.EventHandler(this.paymentVoucherToolStripMenuItem_Click);
             // 
             // receiptVoucherToolStripMenuItem
             // 
             this.receiptVoucherToolStripMenuItem.Name = "receiptVoucherToolStripMenuItem";
-            this.receiptVoucherToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.receiptVoucherToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.receiptVoucherToolStripMenuItem.Text = "Receipt Voucher";
             this.receiptVoucherToolStripMenuItem.Click += new System.EventHandler(this.receiptVoucherToolStripMenuItem_Click);
             // 
             // journalVoucherToolStripMenuItem
             // 
             this.journalVoucherToolStripMenuItem.Name = "journalVoucherToolStripMenuItem";
-            this.journalVoucherToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.journalVoucherToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.journalVoucherToolStripMenuItem.Text = "Journal Voucher";
             this.journalVoucherToolStripMenuItem.Click += new System.EventHandler(this.journalVoucherToolStripMenuItem_Click);
             // 
             // bankReconcilationToolStripMenuItem
             // 
             this.bankReconcilationToolStripMenuItem.Name = "bankReconcilationToolStripMenuItem";
-            this.bankReconcilationToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.bankReconcilationToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.bankReconcilationToolStripMenuItem.Text = "Post Voucher";
             this.bankReconcilationToolStripMenuItem.Click += new System.EventHandler(this.bankReconcilationToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(185, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(187, 6);
             this.toolStripSeparator2.Click += new System.EventHandler(this.toolStripSeparator2_Click);
             // 
             // bankReconcilationToolStripMenuItem1
             // 
             this.bankReconcilationToolStripMenuItem1.Name = "bankReconcilationToolStripMenuItem1";
-            this.bankReconcilationToolStripMenuItem1.Size = new System.Drawing.Size(188, 22);
+            this.bankReconcilationToolStripMenuItem1.Size = new System.Drawing.Size(190, 22);
             this.bankReconcilationToolStripMenuItem1.Text = "Bank Reconcilation";
             this.bankReconcilationToolStripMenuItem1.Click += new System.EventHandler(this.bankReconcilationToolStripMenuItem1_Click);
             // 
             // bankToBankTransferToolStripMenuItem
             // 
             this.bankToBankTransferToolStripMenuItem.Name = "bankToBankTransferToolStripMenuItem";
-            this.bankToBankTransferToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.bankToBankTransferToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.bankToBankTransferToolStripMenuItem.Text = "Bank To Bank Transfer";
             this.bankToBankTransferToolStripMenuItem.Click += new System.EventHandler(this.bankToBankTransferToolStripMenuItem_Click);
             // 
@@ -1120,35 +1122,35 @@
             // labReortEntryToolStripMenuItem
             // 
             this.labReortEntryToolStripMenuItem.Name = "labReortEntryToolStripMenuItem";
-            this.labReortEntryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.labReortEntryToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.labReortEntryToolStripMenuItem.Text = "Lab Report Entry";
             this.labReortEntryToolStripMenuItem.Click += new System.EventHandler(this.labReortEntryToolStripMenuItem_Click);
             // 
             // labReortEntryToolStripMenuItem2
             // 
             this.labReortEntryToolStripMenuItem2.Name = "labReortEntryToolStripMenuItem2";
-            this.labReortEntryToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.labReortEntryToolStripMenuItem2.Size = new System.Drawing.Size(214, 22);
             this.labReortEntryToolStripMenuItem2.Text = "Lab Report Entry 2";
             this.labReortEntryToolStripMenuItem2.Click += new System.EventHandler(this.labReportEntry2ToolStripMenuItem_Click);
             // 
             // masterRegisterToolStripMenuItem
             // 
             this.masterRegisterToolStripMenuItem.Name = "masterRegisterToolStripMenuItem";
-            this.masterRegisterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.masterRegisterToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.masterRegisterToolStripMenuItem.Text = "Master Register";
             this.masterRegisterToolStripMenuItem.Click += new System.EventHandler(this.masterRegisterToolStripMenuItem_Click);
             // 
             // headRegisterToolStripMenuItem
             // 
             this.headRegisterToolStripMenuItem.Name = "headRegisterToolStripMenuItem";
-            this.headRegisterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.headRegisterToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.headRegisterToolStripMenuItem.Text = "Head Register";
             this.headRegisterToolStripMenuItem.Click += new System.EventHandler(this.headRegisterToolStripMenuItem_Click);
             // 
             // eSSALabRegisterToolStripMenuItem
             // 
             this.eSSALabRegisterToolStripMenuItem.Name = "eSSALabRegisterToolStripMenuItem";
-            this.eSSALabRegisterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eSSALabRegisterToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.eSSALabRegisterToolStripMenuItem.Text = "ESSA Lab Register";
             this.eSSALabRegisterToolStripMenuItem.Click += new System.EventHandler(this.eSSALabRegisterToolStripMenuItem_Click);
             // 
@@ -1157,7 +1159,7 @@
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.labToolStripMenuItem});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.reportsToolStripMenuItem.Text = "Reports";
             // 
             // labToolStripMenuItem
@@ -1166,6 +1168,13 @@
             this.labToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.labToolStripMenuItem.Text = "Laboratory Statement";
             this.labToolStripMenuItem.Click += new System.EventHandler(this.labToolStripMenuItem_Click);
+            // 
+            // mMCHussainiLabReportToolStripMenuItem
+            // 
+            this.mMCHussainiLabReportToolStripMenuItem.Name = "mMCHussainiLabReportToolStripMenuItem";
+            this.mMCHussainiLabReportToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.mMCHussainiLabReportToolStripMenuItem.Text = "MMC-Hussaini Lab Report";
+            this.mMCHussainiLabReportToolStripMenuItem.Click += new System.EventHandler(this.mMCHussainiLabReportToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
@@ -1338,16 +1347,16 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(1185, 2);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(115, 16);
+            this.label1.Size = new System.Drawing.Size(116, 16);
             this.label1.TabIndex = 19;
             this.label1.Text = "Read Dates from :";
             // 
-            // mMCHussainiLabReportToolStripMenuItem
+            // tellerClosingVoucherToolStripMenuItem
             // 
-            this.mMCHussainiLabReportToolStripMenuItem.Name = "mMCHussainiLabReportToolStripMenuItem";
-            this.mMCHussainiLabReportToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            this.mMCHussainiLabReportToolStripMenuItem.Text = "MMC-Hussaini Lab Report";
-            this.mMCHussainiLabReportToolStripMenuItem.Click += new System.EventHandler(this.mMCHussainiLabReportToolStripMenuItem_Click);
+            this.tellerClosingVoucherToolStripMenuItem.Name = "tellerClosingVoucherToolStripMenuItem";
+            this.tellerClosingVoucherToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.tellerClosingVoucherToolStripMenuItem.Text = "Teller Closing Voucher";
+            this.tellerClosingVoucherToolStripMenuItem.Click += new System.EventHandler(this.tellerClosingVoucherToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -1527,5 +1536,6 @@
         private System.Windows.Forms.ToolStripMenuItem echoCardioGraphyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem echoTemplateDesignerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mMCHussainiLabReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tellerClosingVoucherToolStripMenuItem;
     }
 }

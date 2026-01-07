@@ -1576,8 +1576,18 @@ namespace ERP
 
         private void mMCHussainiLabReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmReportParameters frm = new frmReportParameters();
+           /* frmReportParameters frm = new frmReportParameters();
             frm.Reportname = "MMC-Hussaini Lab Report";
+            frm.MdiParent = this;
+            frm.Show();*/
+            Forms.frmHussainiReportEntry frm = new Forms.frmHussainiReportEntry();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void tellerClosingVoucherToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTellerClosingVoucher frm = new frmTellerClosingVoucher();
             frm.MdiParent = this;
             frm.Show();
         }

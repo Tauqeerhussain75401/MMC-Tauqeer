@@ -1265,13 +1265,14 @@ string Vipdopd)
             Saved = true;
             return Saved;
         }
-        public static bool updatetestcatagory(string VID, string VTITLE, string VISACTIVE, string VFIXEDRATE, string VAUTOTOKEN, string VCONTACTREQUIRED, string VAgeRequired, string VResForDupToken)
+        public static bool updatetestcatagory(string VID, string VTITLE, string ACCOUNTID,string VISACTIVE, string VFIXEDRATE, string VAUTOTOKEN, string VCONTACTREQUIRED, string VAgeRequired, string VResForDupToken)
         {
             bool Saved = false;
             OracleCommand com = new OracleCommand("updatetestcatagory1", clsConnection.con);
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.Add("VID", OracleDbType.Varchar2).Value = VID;
             com.Parameters.Add("VTITLE", OracleDbType.Varchar2).Value = VTITLE;
+            com.Parameters.Add("VACCOUNTID", OracleDbType.Varchar2).Value = ACCOUNTID;
             com.Parameters.Add("VISACTIVE", OracleDbType.Varchar2).Value = VISACTIVE;
             com.Parameters.Add("VFIXEDRATE", OracleDbType.Varchar2).Value = VFIXEDRATE;
             com.Parameters.Add("VAUTOTOKEN", OracleDbType.Varchar2).Value = VAUTOTOKEN;

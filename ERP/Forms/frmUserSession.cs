@@ -99,7 +99,7 @@ namespace ERP.Forms
 
                     daily.SetParameterValue("@sessionfrom", (string)dgvSession.CurrentRow.Cells[clnFrom.Index].Value);
                     daily.SetParameterValue("@sessionto", (string)dgvSession.CurrentRow.Cells[clnTo.Index].Value);
-
+                    daily.SetParameterValue("@SessionID", (string)dgvSession.CurrentRow.Cells[clnSessionId.Index].Value);
                     daily.SetParameterValue("@CompanyName", CompanyInfo.CompanyName);
                     frmReportView rptview = new frmReportView();
                     rptview.rptViewer.ReportSource = daily;
@@ -122,6 +122,7 @@ namespace ERP.Forms
                         rpt.SetParameterValue("@SessionUser", UserInfo.UserLevel == "Admin" ? cmbUser.SelectedValue.ToString() : UserInfo.UserId);
                         rpt.SetParameterValue("@SessionStart", (string)dgvSession.CurrentRow.Cells[clnFrom.Index].Value);
                         rpt.SetParameterValue("@SessionEnd", (string)dgvSession.CurrentRow.Cells[clnTo.Index].Value);
+                        rpt.SetParameterValue("@SessionID", (string)dgvSession.CurrentRow.Cells[clnSessionId.Index].Value);
                         frm.rptViewer.ReportSource = rpt;
                         frm.Show();
                     }
@@ -144,6 +145,7 @@ namespace ERP.Forms
                     rpt.SetParameterValue("@SessionUser", UserInfo.UserLevel == "Admin" ? cmbUser.SelectedValue.ToString() : UserInfo.UserId);
                     rpt.SetParameterValue("@SessionStart", (string)dgvSession.CurrentRow.Cells[clnFrom.Index].Value);
                     rpt.SetParameterValue("@SessionEnd", (string)dgvSession.CurrentRow.Cells[clnTo.Index].Value);
+                    rpt.SetParameterValue("@SessionID", (string)dgvSession.CurrentRow.Cells[clnSessionId.Index].Value);
                     frm.rptViewer.ReportSource = rpt;
                     frm.Show();
                 }

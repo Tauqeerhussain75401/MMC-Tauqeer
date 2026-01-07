@@ -109,7 +109,16 @@ namespace ERP
         void FillNarration()
         {
             DataTable dtTransCode = Query.NarrationIndex();
-            dtTransCode.Rows.RemoveAt(dtTransCode.Rows.Cast<DataRow>().Where(w => w[0].ToString() == "CLS-0001").Select((s, index) => new { s = s, index = dtTransCode.Rows.IndexOf(s) }).ToArray()[0].index);
+            //dtTransCode.Rows.RemoveAt(dtTransCode.Rows.Cast<DataRow>().Where(w => w[0].ToString() == "CLS-0001").Select((s, index) => new { s = s, index = dtTransCode.Rows.IndexOf(s) }).ToArray()[0].index);
+            string[] codesToRemove = { "CLS-0001", "S S-001" };
+
+            for (int i = dtTransCode.Rows.Count - 1; i >= 0; i--)
+            {
+                if (codesToRemove.Contains(dtTransCode.Rows[i][0].ToString()))
+                {
+                    dtTransCode.Rows.RemoveAt(i);
+                }
+            }
             cmbTransCode.DataSource = dtTransCode;
             cmbTransCode.DisplayMember = "narrationtitle";
             cmbTransCode.ValueMember = "narrationcode";
@@ -919,6 +928,55 @@ namespace ERP
                 comboBox.DropDownStyle = ComboBoxStyle.DropDown;
                 comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             }
+        }
+        private void set_control_session_closing_narration(bool a)
+        {
+            rdoCash.Checked = a;
+            rdoCheque.Checked = !a;
+            grpChqCash.Enabled = !a;
+            
+            cmbBankName.SelectedValue = a ? "007" : "";
+            cmbBankName.Enabled = !a;
+            txtBranch.Enabled = !a;
+            txtIBAN.Enabled = !a;
+        }
+        private void cmbTransCode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string a = Convert.ToString(cmbTransCode.SelectedValue);
+            if (!FLogIn && Convert.ToString(cmbTransCode.SelectedValue) == "S S-001")
+            {
+                dgvAccount.Rows.Clear();
+                set_control_session_closing_narration(true);
+                
+                string sessionId;
+                string refundSlipNo;
+                using (var f = new frmInput("Session Id"))
+                {
+                    if (f.ShowDialog() == DialogResult.OK)
+                        sessionId = f.inputText;
+                    else
+                        return;
+
+                }
+                using (var f = new frmInput("Refund Slip No"))
+                {
+                    if (f.ShowDialog() == DialogResult.OK)
+                        refundSlipNo = f.inputText;
+                    else
+                        return;
+
+                }
+
+                DataTable dt = ReportQuery.ClosingSummarySessionWise(sessionId);
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    dgvAccount.Rows.Add(null, null, dt.Rows[i][1].ToString(), null, null, dt.Rows[i][5].ToString(), null, null, null);
+                }
+
+            }
+            else if(!FLogIn &&  Convert.ToString(cmbTransCode.SelectedValue) != "")
+                set_control_session_closing_narration(false);
         }
     }
 }

@@ -9,8 +9,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using Oracle.DataAccess.Client;
 using System.Globalization;
-
-
+using ERP.Forms;
 
 namespace ERP
 {
@@ -95,7 +94,24 @@ namespace ERP
                 if (dr != null)
                     dtQuery.Rows.Remove(dr);
                 dtQuery.ImportRow(dt.Rows[0]);
-
+                if(timingEdit)
+                {
+                    for(int i = 0; i < dtDocTimings.Rows.Count; i++)
+                    {
+                        var end_time = dtDocTimings.Rows[i]["end_time"];
+                        var start_time = dtDocTimings.Rows[i]["start_time"];
+                        var isEdit = dtDocTimings.Rows[i]["IsEdit"];
+                        if ((isEdit != DBNull.Value || !string.IsNullOrWhiteSpace(isEdit.ToString())))
+                        {
+                            if ((start_time != DBNull.Value || !string.IsNullOrWhiteSpace(start_time.ToString())) && (end_time != DBNull.Value || !string.IsNullOrWhiteSpace(end_time.ToString())))
+                                Query.save_docTimings(dtDocTimings.Rows[i]["day_id"].ToString(), dtDocTimings.Rows[i]["timing_id"] != DBNull.Value ? dtDocTimings.Rows[i]["timing_id"].ToString() : "", txtConsultantid.Text, Convert.ToDateTime(dtDocTimings.Rows[i]["start_time"]), Convert.ToDateTime(dtDocTimings.Rows[i]["end_time"]));
+                            else
+                            {
+                                MessageBox.Show("Missing start time or end time for " + dtDocTimings.Rows[i]["day_of_week"].ToString());
+                            }
+                        }
+                    }
+                }
             }
             MessageBox.Show("Record Successfully Saved..!");
             //this.FillQuery();
@@ -105,7 +121,8 @@ namespace ERP
         DataTable dtQuery;
         DataTable dtSurgery;
         DataTable dtConsultantFaculty;
-
+        DataTable dtDocTimings;
+        bool timingEdit = false;
         void consultantCategoryFill()
         {
             DataView view = new DataView(dtConsultantFaculty);
@@ -128,6 +145,7 @@ namespace ERP
                 dtQuery = Query.ConsultantIndexAll();
                 dtSurgery = Query.surgeryAll();
                 
+
                 dgvDetail.Columns[clnID.Index].DataPropertyName = "id";
                 dgvDetail.Columns[clnName.Index].DataPropertyName = "name";
                 dgvDetail.Columns[clnMobile.Index].DataPropertyName = "mobile";
@@ -158,6 +176,7 @@ namespace ERP
                 dgvDetail.AutoGenerateColumns = false;
                 dtQuery = Query.ConsultantIndexAll();
                 dtSurgery = Query.surgeryAll();
+                
                 dgvDetail.Columns[clnID.Index].DataPropertyName = "id";
                 dgvDetail.Columns[clnName.Index].DataPropertyName = "name";
                 dgvDetail.Columns[clnMobile.Index].DataPropertyName = "mobile";
@@ -276,6 +295,7 @@ namespace ERP
         {
             if (e.RowIndex > -1)
                 FillDetail(dgvDetail.Rows[e.RowIndex].Cells[clnID.Index].Value.ToString());
+            dtDocTimings = Query.get_doctor_timings(txtConsultantid.Text);
         }
 
         private void numConsultantCharges_ValueChanged(object sender, EventArgs e)
@@ -568,6 +588,37 @@ namespace ERP
             rpt.SetDataSource(resultTable);
             frm.rptViewer.ReportSource = rpt;
             frm.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (txtConsultantid.Text == "")
+                return;
+
+            //DataTable dtInp = null;
+            //string filter = string.Format("fk_doc_id = {0}", txtConsultantid.Text);
+            //dtInp = dtDocTimings.Select(filter)?.CopyToDataTable();
+            //DataView SortingData = dtInp.DefaultView;
+            //SortingData.Sort = "day_id";
+            //dtInp = SortingData.ToTable();
+            using (var f = new frmTimings(dtDocTimings))
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    dtDocTimings = f.dt;
+                    timingEdit = f.gridEdited;
+                }
+                else
+                {
+
+                    return;
+                }
+            }
+        }
+
+        private void dgvDetail_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
