@@ -364,3 +364,10 @@ FodyWeavers.xsd
 
 # Subversion metadata (legacy, leftover from prior SVN working copy)
 .svn/
+
+# Required native SqlServerTypes binaries (copied as Content by ERP.csproj),
+# wrongly swallowed by the generic x64/ and x86/ rules above
+!ERP/SqlServerTypes/x64/
+!ERP/SqlServerTypes/x64/**
+!ERP/SqlServerTypes/x86/
+!ERP/SqlServerTypes/x86/**
