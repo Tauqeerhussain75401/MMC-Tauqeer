@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Subversion metadata (legacy, leftover from prior SVN working copy)
+.svn/
