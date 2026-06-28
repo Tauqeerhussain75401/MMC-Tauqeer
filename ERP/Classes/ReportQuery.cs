@@ -12,7 +12,7 @@ namespace ERP
     {
         internal  static DataTable OPDReceipt(string ReceiptNo)
         {
-            string sql = "SELECT tokenno,vdate,get_OPDCatagory(catagoryid) CatagoryTitle  ,get_opdcatagoryReportType(catagoryid) ReportType ,get_ConsultantName(consultantid) ConsultantName,memberid,gender,patienttitle || patientname  patientname,age||' '||ageunit age,netamount,contactno,get_patienttype(patienttype) patienttype,get_ReferenceName(referenceid) ReferenceName,remarks,grossamount,discount,netamount,partialamount,netbalance,ispartial,createdby,createdtime,electricitycharges,get_ConsultantName(laboratoryConsultantid) laboratoryConsultantName,noofPrint  FROM opdreceipt WHERE receiptno = '" + ReceiptNo + "'";
+            string sql = "SELECT tokenno,vdate,get_OPDCatagory(catagoryid) CatagoryTitle  ,get_opdcatagoryReportType(catagoryid) ReportType , consultantid, get_ConsultantName(consultantid) ConsultantName,memberid,gender,patienttitle || patientname  patientname,age||' '||ageunit age,netamount,contactno,get_patienttype(patienttype) patienttype,get_ReferenceName(referenceid) ReferenceName,remarks,grossamount,discount,netamount,partialamount,netbalance,ispartial,createdby,createdtime,electricitycharges,get_ConsultantName(laboratoryConsultantid) laboratoryConsultantName,noofPrint  FROM opdreceipt WHERE receiptno = '" + ReceiptNo + "'";
             DataTable dt = Query.getData(sql);
             return dt;
         }
@@ -35,7 +35,7 @@ namespace ERP
         internal static DataTable ClosingSummarySessionWise(string SessionId)
         {
             DataTable dt = new DataTable();
-            OracleCommand comm = new OracleCommand("rep_closingsummarys_w_new", clsConnection .con );
+            OracleCommand comm = new OracleCommand("rep_closingsummarys_voucher", clsConnection .con );
             comm.CommandType = CommandType.StoredProcedure;
             comm.Parameters.Add("VSessionId", OracleDbType.Varchar2).Value = SessionId;
             comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
@@ -475,7 +475,24 @@ namespace ERP
         internal static DataTable SubAddLessDetail(string SessionId)
         {
             DataTable dt = new DataTable();
-            OracleCommand comm = new OracleCommand("rep_SubAddLessDetail", clsConnection.con);
+            OracleCommand comm = new OracleCommand("rep_SubAddLessDetail_1", clsConnection.con);
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.Add("VSessionId", OracleDbType.Varchar2).Value = SessionId;
+            comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            //comm.Parameters["retval"].Direction = ParameterDirection.Output;
+
+
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = comm;// new OracleCommand(sql, Connection.Conn_ecyear);
+            adapter.Fill(dt);
+            adapter.Dispose();
+            return dt;
+
+        }
+        internal static DataTable ClosingSummarySessionIPD(string SessionId)
+        {
+            DataTable dt = new DataTable();
+            OracleCommand comm = new OracleCommand("teller_ipd_amount", clsConnection.con);
             comm.CommandType = CommandType.StoredProcedure;
             comm.Parameters.Add("VSessionId", OracleDbType.Varchar2).Value = SessionId;
             comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;

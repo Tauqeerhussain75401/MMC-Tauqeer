@@ -57,6 +57,38 @@ namespace ERP
             // Return the DataTable
             return dtQr;
         }
+        public static DataTable FinancialYear()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                OracleDataAdapter adapter = new OracleDataAdapter();
+                adapter.SelectCommand = new OracleCommand("select * from FinancialYear order by FinancialYear", clsConnection.con);
+                adapter.Fill(dt);
+                adapter.Dispose();
+                return dt;
+            }
+            catch (Exception ee)
+            {
+                Errors.writeline(ee.Message, "Query_FinancialYear");
+                string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+
+
+                return dt;
+            }
+        }
+         internal static DataTable GetOPDDetailsByContactNo(string VContactno)
+        {
+            string sql = "select * from OPDReceipt where contactno = '" + VContactno + "'";
+            DataTable dt = getData(sql);
+            return dt;
+        }
+        internal static DataTable GetMaxMRno()
+        {
+            string sql = "SELECT Max(MRNo) as MRno FROM  opdreceipt";
+            DataTable dt = getData(sql);
+            return dt;
+        }   
         private static Bitmap GetLogo(string QRimagePath)
         {
             Bitmap logo = new Bitmap(QRimagePath);
@@ -166,6 +198,101 @@ namespace ERP
                 return dt;
             }
         }
+        public static DataTable get_Patients(
+            string PatientTitle,
+            string PatientName,
+            string ContactNo,
+            string DOB,
+            string Gender
+            )
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+
+                OracleCommand DbCommand = new OracleCommand("rep_get_patients", clsConnection.con);
+                DbCommand.CommandType = CommandType.StoredProcedure;
+               
+                object VPatientTitle = string.IsNullOrWhiteSpace(PatientTitle) ? (object)DBNull.Value : PatientTitle;
+                object VPatientName = string.IsNullOrWhiteSpace(PatientName) ? (object)DBNull.Value : PatientName;
+                object VContactNo = string.IsNullOrWhiteSpace(ContactNo) ? (object)DBNull.Value : ContactNo;
+                object VDOB = string.IsNullOrWhiteSpace(DOB) ? (object)DBNull.Value : DOB;
+                object VGender = string.IsNullOrWhiteSpace(Gender) ? (object)DBNull.Value : Gender;
+
+
+                DbCommand.Parameters.Add("VPatientTitle", OracleDbType.Varchar2, 10).Value = VPatientTitle;
+                DbCommand.Parameters.Add("VPatientName", OracleDbType.Varchar2, 20).Value = VPatientName;
+                DbCommand.Parameters.Add("VContactNo", OracleDbType.Varchar2, 20).Value = VContactNo;
+                DbCommand.Parameters.Add("VDOB", OracleDbType.Date).Value = VDOB;
+                DbCommand.Parameters.Add("VGender", OracleDbType.Date).Value = Gender;
+                DbCommand.Parameters.Add("VUser", OracleDbType.Varchar2).Value = Variable.User;
+                DbCommand.Parameters.Add("VTerminalID", OracleDbType.Varchar2).Value = Variable.TerminalId;
+                DbCommand.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+
+
+                OracleDataAdapter adapter = new OracleDataAdapter();
+                adapter.SelectCommand = DbCommand;
+                adapter.Fill(dt);
+                adapter.Dispose();
+                return dt;
+            }
+            catch (Exception ee)
+            {
+                MyMessageBox.ShowBox(ee.Message);
+                Errors.writeline(ee.Message, "MSP_search patient");
+                //string result = MessageBox.Show(ee.Message, Variable.Version, 1);
+                return dt;
+            }
+        }
+
+        public static DataTable save_Patient(
+            string Id,
+            string PatientTitle,
+            string PatientName,
+            string ContactNo,
+            string DOB,
+            string Gender
+            )
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+
+                OracleCommand DbCommand = new OracleCommand("rep_save_patients", clsConnection.con);
+                DbCommand.CommandType = CommandType.StoredProcedure;
+
+                object VPatientTitle = string.IsNullOrWhiteSpace(PatientTitle) ? (object)DBNull.Value : PatientTitle;
+                object VPatientName = string.IsNullOrWhiteSpace(PatientName) ? (object)DBNull.Value : PatientName;
+                object VContactNo = string.IsNullOrWhiteSpace(ContactNo) ? (object)DBNull.Value : ContactNo;
+                object VDOB = string.IsNullOrWhiteSpace(DOB) ? (object)DBNull.Value : DOB;
+                object VGender = string.IsNullOrWhiteSpace(Gender) ? (object)DBNull.Value : Gender;
+
+                DbCommand.Parameters.Add("VId", OracleDbType.Varchar2, 10).Value = Id;
+                DbCommand.Parameters.Add("VPatientTitle", OracleDbType.Varchar2, 10).Value = VPatientTitle;
+                DbCommand.Parameters.Add("VPatientName", OracleDbType.Varchar2, 20).Value = VPatientName;
+                DbCommand.Parameters.Add("VContactNo", OracleDbType.Varchar2, 20).Value = VContactNo;
+                DbCommand.Parameters.Add("VDOB", OracleDbType.Date).Value = VDOB;
+                DbCommand.Parameters.Add("VGender", OracleDbType.Date).Value = Gender;
+                DbCommand.Parameters.Add("VUser", OracleDbType.Varchar2).Value = Variable.User;
+                DbCommand.Parameters.Add("VTerminalID", OracleDbType.Varchar2).Value = Variable.TerminalId;
+                DbCommand.Parameters.Add("ReturnValue", OracleDbType.Varchar2).Direction = ParameterDirection.Output;
+
+
+                DbCommand.ExecuteNonQuery();
+                //ReturnValue = DbCommand.Parameters["RefVno"].Value.ToString();
+
+                DbCommand.Dispose();
+
+                return dt;
+            }
+            catch (Exception ee)
+            {
+                MyMessageBox.ShowBox(ee.Message);
+                Errors.writeline(ee.Message, "MSP_search patient");
+                //string result = MessageBox.Show(ee.Message, Variable.Version, 1);
+                return dt;
+            }
+        }
         internal static string get_TerminalId(string proccessorid, string hddid, string ComputerName)
         {
             string TerminalId = "";
@@ -194,7 +321,7 @@ namespace ERP
         {
             DataTable dt = new DataTable();
             // SqlConnection con = conOpen();
-            string sql = "select * from companydetail";
+            string sql = "select cd.*, sysdate from companydetail cd";
             OracleDataAdapter adap = new OracleDataAdapter(sql, clsConnection.con);
             adap.Fill(dt);
             adap.Dispose();
@@ -344,6 +471,32 @@ namespace ERP
             DataTable dt = getData(sql);
             return dt;
         }
+        internal static DataTable ConsultantIndex_opd()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                OracleCommand comm = new OracleCommand("get_ConsultantIndex_opd", clsConnection.con);
+                comm.CommandType = CommandType.StoredProcedure;
+
+                comm.Parameters.Add("retval", OracleDbType.RefCursor);
+                comm.Parameters["retval"].Direction = ParameterDirection.Output;
+
+                OracleDataAdapter adapter = new OracleDataAdapter();
+                adapter.SelectCommand = comm;
+                adapter.Fill(dt);
+                adapter.Dispose();
+                return dt;
+            }
+            catch (Exception ee)
+            {
+                Errors.writeline(ee.Message, "MSP_get_ConsultantIndex_opd");
+                string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+                string err = MyMessageBox.ShowBox("Do you want to Exit ?", Variable.Version, 2);
+                //if (err == "1") Application.Exit();
+                return dt;
+            }
+        }
         internal static DataTable PatientIndex()
         {
             string sql = "SELECT regnoalpha||'-'||regnonumeric||' '||patientname as patient,serialno  FROM admissioninfo ORDER BY Lower(patient)";
@@ -470,7 +623,12 @@ namespace ERP
             DataTable dt = getData(sql);
             return dt;
         }
-
+        internal static DataTable FacultyIndex()
+        {
+            string sql = "SELECT ID,NAME FROM FACULTY  WHERE status = 0 and ISBLOCK = 0 ORDER BY ID";
+            DataTable dt = getData(sql);
+            return dt;
+        }
         /*//string sql = @"SELECT id,fullname room,floornumber,wm_concat(regnoalpha||'-'|| regnonumeric) regno  FROM roomindex  ri 
         //                    left JOIN admissioninfo ad
         //                    ON ri.id = ad.roomid  AND dischargeyn = '0'
@@ -596,7 +754,7 @@ namespace ERP
             //DataTable dt = getData(sql);
             //return dt;*/
             string sql = @"SELECT 1 As surExist,ct.*,cts.consulshare AS consulShare ,cts.hospshare hospShare,pi.amount AS amount,pi.packagename_name,
-                         pi.package_id AS package_id FROM consultant ct left JOIN consultantsurgery  cts ON ct.id = cts.fkconsid
+                         pi.package_id AS package_id,facultyid FROM consultant ct left JOIN consultantsurgery  cts ON ct.id = cts.fkconsid
                          left JOIN packageindex pi ON pi.package_id = fkpkgid where ct.id = '" + ID + "'";
             DataTable dt = getData(sql);
             return dt;
@@ -1222,6 +1380,27 @@ namespace ERP
                 return dt;
             }
         }
+        public static DataTable GetDocTimings(string consultantId)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string sql = "SELECT id, days, start_time, end_time, status FROM doc_schedule_time WHERE consultantId = :VDocId ORDER BY ID";
+                OracleDataAdapter adapter = new OracleDataAdapter();
+                adapter.SelectCommand = new OracleCommand(sql, clsConnection.con);
+                adapter.SelectCommand.Parameters.Add("VDocId", OracleDbType.Varchar2).Value = consultantId;
+                adapter.Fill(dt);
+                adapter.Dispose();
+                return dt;
+            }
+            catch (Exception ee)
+            {
+                Errors.writeline(ee.Message, "Query_GetDocTimings");
+                string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+                return dt;
+            }
+        }
+
         public static DataTable save_docTimings(string id, string timingid, string docid, DateTime starttime, DateTime endtime)
         {
             DataTable dt = new DataTable();
@@ -1589,56 +1768,74 @@ namespace ERP
                 return dt;
             }
         }
-        public static DataTable ReceiptFilterWithPendingApr(string From, string To, string session, string VNO, string filter)
+        public static DataTable ReceiptFilterWithPendingApr(string From, string To, string Narration, string VNO, string filter)
         {
             DataTable dt = new DataTable();
             try
             {
-                //string sql = @"
-                //     SELECT v.VDate, v.VNO, narrationtitle AS Narration,
-                //   SUM(dr) AS Amount
-                //    FROM Voucherdetail v
-                //    JOIN narration n ON n.narrationcode = v.fktransactionid
-                //    WHERE v.Vtype = 'RV'
-                //      AND v.status != 1";
+                string sql = @"
+                     SELECT v.VDate, v.VNO, narrationtitle AS Narration,
+                   SUM(dr) AS Amount
+                    FROM Voucherdetail v
+                    JOIN narration n ON n.narrationcode = v.fktransactionid
+                    WHERE v.Vtype = 'RV'
+                      AND v.status != 1";
 
-                //// ✅ Apply date filter only if VNO is not given
-                //if (string.IsNullOrWhiteSpace(VNO))
-                //{
-                //    sql += @" AND TRUNC(VDate) BETWEEN TO_DATE('" + From + @"', 'dd MON yyyy') 
-                //                          AND TO_DATE('" + To + @"', 'dd MON yyyy')";
-                //}
+                // ✅ Apply date filter only if VNO is not given
+                if (string.IsNullOrWhiteSpace(VNO))
+                {
+                    sql += @" AND TRUNC(VDate) BETWEEN TO_DATE('" + From + @"', 'dd MON yyyy') 
+                                          AND TO_DATE('" + To + @"', 'dd MON yyyy')";
+                }
 
-                //// ✅ Narration filter
-                //if (Narration != "ALL")
-                //{
-                //    sql += " AND v.fktransactionid = '" + Narration + "'";
-                //}
+                // ✅ Narration filter
+                if (Narration != "ALL")
+                {
+                    sql += " AND v.fktransactionid = '" + Narration + "'";
+                }
 
-                //// ✅ VNO filter
-                //if (!string.IsNullOrWhiteSpace(VNO))
-                //{
-                //    sql += " AND v.VNO = " + VNO;
-                //}
+                // ✅ VNO filter
+                if (!string.IsNullOrWhiteSpace(VNO))
+                {
+                    sql += " AND v.VNO = " + VNO;
+                }
 
-                //// ✅ Status filter
-                //if (filter != "ALL")
-                //{
-                //    if (filter == "Pending")
-                //        sql += " AND v.status = 2";
-                //    else
-                //        sql += " AND v.status = 0";
-                //}
+                // ✅ Status filter
+                if (filter != "ALL")
+                {
+                    if (filter == "Pending")
+                        sql += " AND v.status = 2";
+                    else
+                        sql += " AND v.status = 0";
+                }
 
-                //sql += " GROUP BY v.VDate, v.VNO, narrationtitle";
+                sql += " GROUP BY v.VDate, v.VNO, narrationtitle";
 
+                OracleDataAdapter adapter = new OracleDataAdapter(sql, clsConnection.con);
+                adapter.Fill(dt);
+                adapter.Dispose();
+                return dt;
+            }
+            catch (Exception ee)
+            {
+                Errors.writeline(ee.Message, "Query_ ReceiptFilter");
+                MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+                return dt;
+            }
+        }
+        public static DataTable TellerReceiptFilterWithPendingApr(string From, string To, string Narration, string VNO, string filter)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
                 OracleCommand comm = new OracleCommand("search_voucher_teller_closing", clsConnection.con);
                 comm.CommandType = CommandType.StoredProcedure;
-                comm.Parameters.Add("VSessionId", OracleDbType.Varchar2).Value = session == "" ? DBNull.Value : (object)session;
-                comm.Parameters.Add("VFromDate", OracleDbType.Date).Value = From;
-                comm.Parameters.Add("VToDate", OracleDbType.Date).Value = To;
-                comm.Parameters.Add("VNO", OracleDbType.Varchar2).Value = VNO == null ? DBNull.Value : (object)VNO;
+                comm.Parameters.Add("VSessionId", OracleDbType.Varchar2).Value = Narration;
+                comm.Parameters.Add("VFromDate", OracleDbType.Varchar2).Value = From;
+                comm.Parameters.Add("VToDate", OracleDbType.Varchar2).Value = To;
+                comm.Parameters.Add("VNO", OracleDbType.Varchar2).Value = VNO;
                 comm.Parameters.Add("VFilter", OracleDbType.Varchar2).Value = filter;
+
                 comm.Parameters.Add("retval", OracleDbType.RefCursor);
                 comm.Parameters["retval"].Direction = ParameterDirection.Output;
 
@@ -1650,8 +1847,10 @@ namespace ERP
             }
             catch (Exception ee)
             {
-                Errors.writeline(ee.Message, "Query_search_voucher_teller_closing");
-                MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+                Errors.writeline(ee.Message, "Query_Rep_Voucher");
+                string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+
+
                 return dt;
             }
         }

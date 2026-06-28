@@ -164,6 +164,14 @@ namespace ERP
             cmb.SelectedIndex = -1;
         }
 
+        internal static void FillcmbTemplateFaculty(ComboBox cmb)
+        {
+            cmb.DataSource = Query.FacultyIndex();
+            cmb.DisplayMember = "Name";
+            cmb.ValueMember = "Id";
+            cmb.SelectedIndex = -1;
+        }
+
 
         #region workeb by Usman To show the All option
         //internal static void FillcmbTestCatagory(ComboBox cmb)

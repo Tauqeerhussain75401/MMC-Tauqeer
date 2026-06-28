@@ -76,7 +76,17 @@ namespace ERP
             incomeSummeryToolStripMenuItem.Visible = false;
             balanceSheetToolStripMenuItem.Visible = false;
             itemLedgerToolStripMenuItem.Visible = false;
+            
+            lblFY.Text = Variable.FinancialYear;
+            string findyear = "";
+            if (Variable.ServerDate.Month > 6)
+                findyear = Variable.ServerDate.Year.ToString() + "-" + (Variable.ServerDate.Year + 1).ToString();
+            else
+                findyear = (Variable.ServerDate.Year - 1).ToString() + "-" + Variable.ServerDate.Year.ToString();
+            if (Variable.FinancialYear != findyear)
+                lblFY.BackColor = Color.Red;
 
+            CheckSession(UserInfo.UserId);
         }
         private void frmMain_Shown(object sender, EventArgs e)
         {
@@ -122,6 +132,7 @@ namespace ERP
                     try
                     {
                         //clsConnection.con = clsConnection.Con();
+                        clsConnection.User = "hms";
                         clsConnection.Con();
                     }
                     catch
@@ -499,7 +510,15 @@ namespace ERP
             frm.Show();
 
         }
+        private void CheckSession(string Vuser)
+        {
+            int status = MSP.Check_LastSession(Vuser);
 
+            if (status > 0)
+            {
+                MessageBox.Show("Your previous session was still open...!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
         private void userSessionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Forms.frmUserSession frm = new Forms.frmUserSession();
@@ -867,7 +886,7 @@ namespace ERP
                 toolStripMenuItem1.Visible = false;
                 SubMainNarration.Visible = true;
                 bankAccountToolStripMenuItem.Visible = true;
-
+                MainManagement.Visible = false;
 
 
             }

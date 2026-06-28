@@ -1,5 +1,4 @@
-﻿
-namespace ERP.Forms
+﻿namespace ERP.Forms
 {
     partial class frmTimings
     {
@@ -29,167 +28,174 @@ namespace ERP.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTimings));
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.clnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnStartTime = new ERP.CalendarColumn();
-            this.clnEndTime = new ERP.CalendarColumn();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.dgvTimings = new System.Windows.Forms.DataGridView();
+            this.clnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.days = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.start_time = new ERP.TimeCalendarColumn();
+            this.end_time = new ERP.TimeCalendarColumn();
+            this.status = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.btnsave = new System.Windows.Forms.Button();
+            this.btncancel = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.calendarColumn1 = new ERP.CalendarColumn();
-            this.calendarColumn2 = new ERP.CalendarColumn();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.timeCalendarColumn1 = new ERP.TimeCalendarColumn();
+            this.timeCalendarColumn2 = new ERP.TimeCalendarColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTimings)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvTimings
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clnId,
-            this.clnDay,
-            this.clnStartTime,
-            this.clnEndTime});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 40);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(357, 150);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
+            this.dgvTimings.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dgvTimings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTimings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clnID,
+            this.days,
+            this.start_time,
+            this.end_time,
+            this.status});
+            this.dgvTimings.Location = new System.Drawing.Point(6, 68);
+            this.dgvTimings.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvTimings.MultiSelect = false;
+            this.dgvTimings.Name = "dgvTimings";
+            this.dgvTimings.RowHeadersVisible = false;
+            this.dgvTimings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvTimings.Size = new System.Drawing.Size(631, 278);
+            this.dgvTimings.TabIndex = 38;
             // 
-            // clnId
+            // clnID
             // 
-            this.clnId.DataPropertyName = "id";
-            this.clnId.HeaderText = "Id";
-            this.clnId.Name = "clnId";
-            this.clnId.ReadOnly = true;
-            this.clnId.Visible = false;
+            this.clnID.HeaderText = "ID";
+            this.clnID.Name = "clnID";
+            this.clnID.ReadOnly = true;
+            this.clnID.Visible = false;
             // 
-            // clnDay
+            // days
             // 
-            this.clnDay.DataPropertyName = "day_of_week";
-            this.clnDay.HeaderText = "Day";
-            this.clnDay.Name = "clnDay";
-            this.clnDay.ReadOnly = true;
+            this.days.HeaderText = "Days";
+            this.days.MinimumWidth = 150;
+            this.days.Name = "days";
+            this.days.Width = 150;
             // 
-            // clnStartTime
+            // start_time
             // 
-            this.clnStartTime.HeaderText = "Start Time";
-            this.clnStartTime.Name = "clnStartTime";
-            this.clnStartTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridViewCellStyle1.Format = "hh:mm tt";
+            this.start_time.DefaultCellStyle = dataGridViewCellStyle1;
+            this.start_time.HeaderText = "Start Time";
+            this.start_time.MinimumWidth = 120;
+            this.start_time.Name = "start_time";
+            this.start_time.Width = 120;
             // 
-            // clnEndTime
+            // end_time
             // 
-            this.clnEndTime.HeaderText = "End Time";
-            this.clnEndTime.Name = "clnEndTime";
-            this.clnEndTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridViewCellStyle2.Format = "hh:mm tt";
+            this.end_time.DefaultCellStyle = dataGridViewCellStyle2;
+            this.end_time.HeaderText = "End Time";
+            this.end_time.MinimumWidth = 120;
+            this.end_time.Name = "end_time";
+            this.end_time.Width = 120;
+            // 
+            // status
+            // 
+            this.status.HeaderText = "Status";
+            this.status.MinimumWidth = 80;
+            this.status.Name = "status";
+            this.status.Width = 80;
+            // 
+            // btnsave
+            // 
+            this.btnsave.Location = new System.Drawing.Point(228, 353);
+            this.btnsave.Name = "btnsave";
+            this.btnsave.Size = new System.Drawing.Size(96, 29);
+            this.btnsave.TabIndex = 39;
+            this.btnsave.Text = "Save";
+            this.btnsave.UseVisualStyleBackColor = true;
+            // 
+            // btncancel
+            // 
+            this.btncancel.Location = new System.Drawing.Point(330, 353);
+            this.btncancel.Name = "btncancel";
+            this.btncancel.Size = new System.Drawing.Size(96, 29);
+            this.btncancel.TabIndex = 40;
+            this.btncancel.Text = "Cancel";
+            this.btncancel.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(223, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(178, 29);
+            this.label1.TabIndex = 41;
+            this.label1.Text = "Doctor Timing";
             // 
             // dataGridViewTextBoxColumn1
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
+            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Visible = false;
             // 
             // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "day_of_week";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Day";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Days";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 150;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 150;
             // 
-            // dataGridViewTextBoxColumn3
+            // timeCalendarColumn1
             // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Start Time";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            dataGridViewCellStyle3.Format = "hh:mm tt";
+            this.timeCalendarColumn1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.timeCalendarColumn1.HeaderText = "Start Time";
+            this.timeCalendarColumn1.MinimumWidth = 120;
+            this.timeCalendarColumn1.Name = "timeCalendarColumn1";
+            this.timeCalendarColumn1.Width = 120;
             // 
-            // dataGridViewTextBoxColumn4
+            // timeCalendarColumn2
             // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "End Time";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // calendarColumn1
-            // 
-            this.calendarColumn1.HeaderText = "Start Time";
-            this.calendarColumn1.Name = "calendarColumn1";
-            // 
-            // calendarColumn2
-            // 
-            this.calendarColumn2.HeaderText = "End Time";
-            this.calendarColumn2.Name = "calendarColumn2";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(177, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "copy to all";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(274, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "copy";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(149, 196);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 3;
-            this.btnSave.Text = "save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            dataGridViewCellStyle4.Format = "hh:mm tt";
+            this.timeCalendarColumn2.DefaultCellStyle = dataGridViewCellStyle4;
+            this.timeCalendarColumn2.HeaderText = "End Time";
+            this.timeCalendarColumn2.MinimumWidth = 120;
+            this.timeCalendarColumn2.Name = "timeCalendarColumn2";
+            this.timeCalendarColumn2.Width = 120;
             // 
             // frmTimings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(392, 228);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.ClientSize = new System.Drawing.Size(649, 394);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btncancel);
+            this.Controls.Add(this.btnsave);
+            this.Controls.Add(this.dgvTimings);
             this.Name = "frmTimings";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Timings";
-            this.Load += new System.EventHandler(this.frmTimings_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Text = "frmTimings";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTimings)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvTimings;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnID;
+        private System.Windows.Forms.DataGridViewComboBoxColumn days;
+        private TimeCalendarColumn start_time;
+        private TimeCalendarColumn end_time;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn status;
+        private System.Windows.Forms.Button btnsave;
+        private System.Windows.Forms.Button btncancel;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private CalendarColumn calendarColumn1;
-        private CalendarColumn calendarColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clnId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clnDay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private CalendarColumn clnStartTime;
-        private CalendarColumn clnEndTime;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnSave;
+        private TimeCalendarColumn timeCalendarColumn1;
+        private TimeCalendarColumn timeCalendarColumn2;
     }
 }

@@ -11,27 +11,29 @@ namespace ERP
 {
     class clsConnection
     {
-        public static string Host = "209.209.40.85";
+        public static string Host = "192.168.2.1";
         static  List<string> IPList = new List<string>();
         public static Microsoft.Data.SqlClient.SqlConnection sqlcon;
         
         public static void Con()
         {
-            IPList.Add("localhost");
-            //IPList.Add("192.168.2.1");
+            //IPList.Add("localhost");
+            
+            IPList.Add("192.168.2.1");
             //IPList.Add("192.168.2.10");
 
             try
             {
-                string s = System.Configuration.ConfigurationManager.ConnectionStrings["OracleConnection"].ToString();
-                //string connection = System.Configuration.ConfigurationManager.ConnectionStrings["OracleConnection"].ToString().Replace("MyIP", IPList[0]).Replace("odb","orcl");
-                string connection = System.Configuration.ConfigurationManager.ConnectionStrings["OracleConnection"].ToString().Replace("localhost", IPList[0]);
+                //string s = System.Configuration.ConfigurationManager.ConnectionStrings["OracleConnection"].ToString();
+                string connection = System.Configuration.ConfigurationManager.ConnectionStrings["OracleConnection"].ToString().Replace("MyIP", IPList[0]).Replace("hms", User);
+                
+                //string connection = System.Configuration.ConfigurationManager.ConnectionStrings["OracleConnection"].ToString().Replace("localhost", IPList[0]);//.Replace("odb", "orcl"); ;
                 OpenConnection(connection);
                 Host = IPList[0];
             }
             catch 
             {
-                string connection = System.Configuration.ConfigurationManager.ConnectionStrings["OracleConnection"].ToString().Replace("MyIP", IPList[0]);
+                string connection = System.Configuration.ConfigurationManager.ConnectionStrings["OracleConnection"].ToString().Replace("MyIP", IPList[0]).Replace("hms", User);//.Replace("odb", "orcl"); ;
                 OpenConnection(connection);
                 Host = IPList[0];
             }           
@@ -57,6 +59,18 @@ namespace ERP
             }
         }
         #endregion
+        static string _User;
+        public static string User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                _User = value;
+            }
+        }
         private static void OpenConnection(string connection)
         {
             if (con == null)

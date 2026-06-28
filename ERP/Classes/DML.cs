@@ -506,6 +506,7 @@ string Vipdopd)
             decimal VpartialAmount,
             decimal Vnetbalance,
             decimal Velectricitycharges,
+            string VMRNo,
             ref string voucher)
 
         {
@@ -539,6 +540,7 @@ string Vipdopd)
             com.Parameters.Add("Vnetbalance", OracleDbType.Decimal).Value = Vnetbalance;
             com.Parameters.Add("Velectricitycharges", OracleDbType.Decimal).Value = Velectricitycharges;
             com.Parameters.Add("VlaboratoryConsultantid", OracleDbType.Varchar2).Value = VCatagoryId == "2" ? VConsultantID : null;
+            com.Parameters.Add("VMRNo", OracleDbType.Varchar2).Value = VMRNo;
             OracleParameter Retparam = com.Parameters.Add("RetVoucherNo", OracleDbType.Varchar2, 10);
 
             Retparam.Direction = ParameterDirection.Output;
@@ -578,7 +580,7 @@ string Vipdopd)
                                                string Vemail, string Vhospitalrate, string Vdegrees,
                                                string Vtimings, string Vfaculty, string Vtesttypeid,
                                                string Vhospitalshareoutdoor, string Vconsultantshareoutdoor,
-            string Vconsultantshareindoor, string Vhospitalshareindoor, string Visdeactivate, ref string RetID)
+            string Vconsultantshareindoor, string Vhospitalshareindoor, string Visdeactivate, string VfacultyId, ref string RetID)
         {
             bool Saved = false;
             OracleCommand com = new OracleCommand("consultant_add_edit", clsConnection.con);
@@ -599,12 +601,9 @@ string Vipdopd)
             com.Parameters.Add("Vhospitalshareoutdoor", OracleDbType.Varchar2).Value = Vhospitalshareoutdoor;
             com.Parameters.Add("Vconsultantshareindoor", OracleDbType.Varchar2).Value = Vconsultantshareindoor;
             com.Parameters.Add("Vhospitalshareindoor", OracleDbType.Varchar2).Value = Vhospitalshareindoor;
-
             com.Parameters.Add("Visdeactivate", OracleDbType.Varchar2).Value = Visdeactivate;
-
-
+            com.Parameters.Add("VfacultyId", OracleDbType.Varchar2).Value = VfacultyId;
             OracleParameter Retparam = com.Parameters.Add("IVRetId", OracleDbType.Varchar2, 10);
-
             Retparam.Direction = ParameterDirection.Output;
             com.ExecuteNonQuery();
             RetID = com.Parameters["IVRetId"].Value.ToString();
@@ -674,6 +673,61 @@ string Vipdopd)
 
             Saved = true;
             return Saved;
+        }
+
+        public static void SaveDocTiming(string id, string day, string consultantId, DateTime startTime, DateTime endTime, int status)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    OracleCommand cmd = new OracleCommand(
+                        "INSERT INTO doc_schedule_time (id, days, consultantId, start_time, end_time, status) " +
+                        "VALUES (doc_schedule_time_seq.NEXTVAL, :VDay, :VConsId, :VStart, :VEnd, :VStatus)",
+                        clsConnection.con);
+                    cmd.Parameters.Add("VDay", OracleDbType.Varchar2).Value = day;
+                    cmd.Parameters.Add("VConsId", OracleDbType.Varchar2).Value = consultantId;
+                    cmd.Parameters.Add("VStart", OracleDbType.Date).Value = startTime;
+                    cmd.Parameters.Add("VEnd", OracleDbType.Date).Value = endTime;
+                    cmd.Parameters.Add("VStatus", OracleDbType.Int32).Value = status;
+                    cmd.ExecuteNonQuery();
+                }
+                else
+                {
+                    OracleCommand cmd = new OracleCommand(
+                        "UPDATE doc_schedule_time SET days = :VDay, start_time = :VStart, end_time = :VEnd, status = :VStatus " +
+                        "WHERE id = :VId",
+                        clsConnection.con);
+                    cmd.Parameters.Add("VDay", OracleDbType.Varchar2).Value = day;
+                    cmd.Parameters.Add("VStart", OracleDbType.Date).Value = startTime;
+                    cmd.Parameters.Add("VEnd", OracleDbType.Date).Value = endTime;
+                    cmd.Parameters.Add("VStatus", OracleDbType.Int32).Value = status;
+                    cmd.Parameters.Add("VId", OracleDbType.Varchar2).Value = id;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ee)
+            {
+                Errors.writeline(ee.Message, "DML_SaveDocTiming");
+                string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+            }
+        }
+
+        public static void DeleteDocTiming(string id)
+        {
+            try
+            {
+                OracleCommand cmd = new OracleCommand(
+                    "DELETE FROM doc_schedule_time WHERE id = :VId",
+                    clsConnection.con);
+                cmd.Parameters.Add("VId", OracleDbType.Varchar2).Value = id;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ee)
+            {
+                Errors.writeline(ee.Message, "DML_DeleteDocTiming");
+                string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+            }
         }
 
         public static bool Change_GL_Status(string Vno, string Vtype, string Vseq, string status)

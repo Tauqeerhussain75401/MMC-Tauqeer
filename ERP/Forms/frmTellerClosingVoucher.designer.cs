@@ -43,6 +43,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grpVouDetail = new System.Windows.Forms.GroupBox();
@@ -77,10 +78,14 @@
             this.label11 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dgvDebit = new System.Windows.Forms.DataGridView();
+            this.dgvDebitClnTitleOfAccount = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvDebitClnSubAccount = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtStatus = new System.Windows.Forms.TextBox();
             this.dgvAccount = new System.Windows.Forms.DataGridView();
+            this.clnTitleofAccount = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.clnSubAccountDetail = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.txtTotalDebit = new System.Windows.Forms.TextBox();
             this.lblImage = new System.Windows.Forms.Label();
             this.pnlDate = new System.Windows.Forms.Panel();
@@ -99,11 +104,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.dgvQuery = new System.Windows.Forms.DataGridView();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VoucherNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TransNarrationQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PVNumberQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -119,6 +119,8 @@
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.picGeneralVoucherLogo = new System.Windows.Forms.PictureBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtUserSession = new System.Windows.Forms.TextBox();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -140,11 +142,8 @@
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvDebitClnVseq = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvDebitClnSno = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvDebitClnTitleOfAccount = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvDebitClnSubAccount = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgvDebitClnDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvDebitclnDebit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvDebitClnChequeNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -153,14 +152,18 @@
             this.dgvDebitClnCreditAccountId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnVseq = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sno = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnTitleofAccount = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.clnSubAccountDetail = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.clnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnCredit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnChequeNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnSlipNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnDebitAccId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VoucherNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TransNarrationQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PVNumberQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpVouDetail.SuspendLayout();
             this.grpSCC.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -464,6 +467,8 @@
             // 
             // tabJournal
             // 
+            this.tabJournal.Controls.Add(this.txtUserSession);
+            this.tabJournal.Controls.Add(this.label14);
             this.tabJournal.Controls.Add(this.textBox3);
             this.tabJournal.Controls.Add(this.txtBoxNet);
             this.tabJournal.Controls.Add(this.label16);
@@ -498,7 +503,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(652, 70);
+            this.textBox3.Location = new System.Drawing.Point(547, 70);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 23);
             this.textBox3.TabIndex = 0;
@@ -622,6 +627,21 @@
             this.dgvDebit.SelectionChanged += new System.EventHandler(this.dgvDebit_SelectionChanged);
             this.dgvDebit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvDebit_KeyDown);
             // 
+            // dgvDebitClnTitleOfAccount
+            // 
+            this.dgvDebitClnTitleOfAccount.HeaderText = "Title Of Account";
+            this.dgvDebitClnTitleOfAccount.MinimumWidth = 180;
+            this.dgvDebitClnTitleOfAccount.Name = "dgvDebitClnTitleOfAccount";
+            this.dgvDebitClnTitleOfAccount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDebitClnTitleOfAccount.Width = 180;
+            // 
+            // dgvDebitClnSubAccount
+            // 
+            this.dgvDebitClnSubAccount.HeaderText = "Sub-Account Detail";
+            this.dgvDebitClnSubAccount.MinimumWidth = 100;
+            this.dgvDebitClnSubAccount.Name = "dgvDebitClnSubAccount";
+            this.dgvDebitClnSubAccount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -639,9 +659,9 @@
             // 
             // txtStatus
             // 
-            this.txtStatus.Location = new System.Drawing.Point(791, 35);
+            this.txtStatus.Location = new System.Drawing.Point(780, 35);
             this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(42, 23);
+            this.txtStatus.Size = new System.Drawing.Size(51, 23);
             this.txtStatus.TabIndex = 304;
             this.txtStatus.Visible = false;
             // 
@@ -695,6 +715,21 @@
             this.dgvAccount.SelectionChanged += new System.EventHandler(this.dgvAccount_SelectionChanged);
             this.dgvAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvAccount_KeyDown);
             // 
+            // clnTitleofAccount
+            // 
+            this.clnTitleofAccount.HeaderText = "Title Of Account";
+            this.clnTitleofAccount.MinimumWidth = 180;
+            this.clnTitleofAccount.Name = "clnTitleofAccount";
+            this.clnTitleofAccount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.clnTitleofAccount.Width = 180;
+            // 
+            // clnSubAccountDetail
+            // 
+            this.clnSubAccountDetail.HeaderText = "Sub-Account Detail";
+            this.clnSubAccountDetail.MinimumWidth = 100;
+            this.clnSubAccountDetail.Name = "clnSubAccountDetail";
+            this.clnSubAccountDetail.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
             // txtTotalDebit
             // 
             this.txtTotalDebit.Enabled = false;
@@ -723,7 +758,7 @@
             this.pnlDate.Controls.Add(this.dtpDate);
             this.pnlDate.Controls.Add(this.label8);
             this.pnlDate.Enabled = false;
-            this.pnlDate.Location = new System.Drawing.Point(478, 35);
+            this.pnlDate.Location = new System.Drawing.Point(467, 35);
             this.pnlDate.Margin = new System.Windows.Forms.Padding(2);
             this.pnlDate.Name = "pnlDate";
             this.pnlDate.Size = new System.Drawing.Size(301, 31);
@@ -733,7 +768,7 @@
             // 
             this.dtpDate.CustomFormat = "dd-MMM-yyyy";
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDate.Location = new System.Drawing.Point(140, 4);
+            this.dtpDate.Location = new System.Drawing.Point(80, 4);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(134, 23);
             this.dtpDate.TabIndex = 1;
@@ -743,7 +778,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(26, 7);
+            this.label8.Location = new System.Drawing.Point(3, 7);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(43, 16);
@@ -815,7 +850,7 @@
             // 
             this.lblTransNarration.AutoSize = true;
             this.lblTransNarration.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransNarration.Location = new System.Drawing.Point(504, 74);
+            this.lblTransNarration.Location = new System.Drawing.Point(470, 74);
             this.lblTransNarration.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTransNarration.Name = "lblTransNarration";
             this.lblTransNarration.Size = new System.Drawing.Size(76, 16);
@@ -929,47 +964,6 @@
             this.dgvQuery.TabIndex = 53;
             this.dgvQuery.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuery_CellContentClick);
             this.dgvQuery.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuery_CellDoubleClick);
-            // 
-            // Date
-            // 
-            this.Date.HeaderText = "Date";
-            this.Date.MinimumWidth = 150;
-            this.Date.Name = "Date";
-            this.Date.ReadOnly = true;
-            this.Date.Width = 150;
-            // 
-            // VoucherNum
-            // 
-            this.VoucherNum.HeaderText = "Voucher Number";
-            this.VoucherNum.MinimumWidth = 150;
-            this.VoucherNum.Name = "VoucherNum";
-            this.VoucherNum.ReadOnly = true;
-            this.VoucherNum.Width = 150;
-            // 
-            // TransNarrationQ
-            // 
-            this.TransNarrationQ.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TransNarrationQ.HeaderText = "Narration";
-            this.TransNarrationQ.MinimumWidth = 100;
-            this.TransNarrationQ.Name = "TransNarrationQ";
-            this.TransNarrationQ.ReadOnly = true;
-            // 
-            // AmountQ
-            // 
-            this.AmountQ.HeaderText = "Amount";
-            this.AmountQ.MinimumWidth = 150;
-            this.AmountQ.Name = "AmountQ";
-            this.AmountQ.ReadOnly = true;
-            this.AmountQ.Width = 150;
-            // 
-            // PVNumberQ
-            // 
-            this.PVNumberQ.HeaderText = "PVNumberQ";
-            this.PVNumberQ.MinimumWidth = 6;
-            this.PVNumberQ.Name = "PVNumberQ";
-            this.PVNumberQ.ReadOnly = true;
-            this.PVNumberQ.Visible = false;
-            this.PVNumberQ.Width = 125;
             // 
             // groupBox2
             // 
@@ -1149,6 +1143,23 @@
             this.picGeneralVoucherLogo.TabIndex = 26;
             this.picGeneralVoucherLogo.TabStop = false;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(656, 74);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(49, 17);
+            this.label14.TabIndex = 314;
+            this.label14.Text = "Name:";
+            // 
+            // txtUserSession
+            // 
+            this.txtUserSession.Enabled = false;
+            this.txtUserSession.Location = new System.Drawing.Point(702, 71);
+            this.txtUserSession.Name = "txtUserSession";
+            this.txtUserSession.Size = new System.Drawing.Size(129, 23);
+            this.txtUserSession.TabIndex = 315;
+            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -1256,6 +1267,7 @@
             // 
             // dataGridViewTextBoxColumn11
             // 
+            this.dataGridViewTextBoxColumn11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridViewTextBoxColumn11.HeaderText = "TransNarration";
@@ -1264,10 +1276,11 @@
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             this.dataGridViewTextBoxColumn11.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.dataGridViewTextBoxColumn11.Visible = false;
-            this.dataGridViewTextBoxColumn11.Width = 125;
             // 
             // dataGridViewTextBoxColumn12
             // 
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridViewTextBoxColumn12.HeaderText = "Account";
             this.dataGridViewTextBoxColumn12.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
@@ -1360,15 +1373,6 @@
             this.dataGridViewTextBoxColumn21.Visible = false;
             this.dataGridViewTextBoxColumn21.Width = 125;
             // 
-            // dataGridViewTextBoxColumn22
-            // 
-            this.dataGridViewTextBoxColumn22.HeaderText = "PVNumberQ";
-            this.dataGridViewTextBoxColumn22.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            this.dataGridViewTextBoxColumn22.ReadOnly = true;
-            this.dataGridViewTextBoxColumn22.Visible = false;
-            this.dataGridViewTextBoxColumn22.Width = 125;
-            // 
             // dgvDebitClnVseq
             // 
             this.dgvDebitClnVseq.HeaderText = "Seq";
@@ -1386,27 +1390,11 @@
             this.dgvDebitClnSno.Name = "dgvDebitClnSno";
             this.dgvDebitClnSno.Width = 40;
             // 
-            // dgvDebitClnTitleOfAccount
-            // 
-            this.dgvDebitClnTitleOfAccount.HeaderText = "Title Of Account";
-            this.dgvDebitClnTitleOfAccount.MinimumWidth = 180;
-            this.dgvDebitClnTitleOfAccount.Name = "dgvDebitClnTitleOfAccount";
-            this.dgvDebitClnTitleOfAccount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDebitClnTitleOfAccount.Width = 180;
-            // 
-            // dgvDebitClnSubAccount
-            // 
-            this.dgvDebitClnSubAccount.HeaderText = "Sub-Account Detail";
-            this.dgvDebitClnSubAccount.MinimumWidth = 150;
-            this.dgvDebitClnSubAccount.Name = "dgvDebitClnSubAccount";
-            this.dgvDebitClnSubAccount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDebitClnSubAccount.Width = 150;
-            // 
             // dgvDebitClnDesc
             // 
             this.dgvDebitClnDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dgvDebitClnDesc.HeaderText = "Description";
-            this.dgvDebitClnDesc.MinimumWidth = 200;
+            this.dgvDebitClnDesc.MinimumWidth = 350;
             this.dgvDebitClnDesc.Name = "dgvDebitClnDesc";
             this.dgvDebitClnDesc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
@@ -1468,27 +1456,11 @@
             this.sno.Name = "sno";
             this.sno.Width = 40;
             // 
-            // clnTitleofAccount
-            // 
-            this.clnTitleofAccount.HeaderText = "Title Of Account";
-            this.clnTitleofAccount.MinimumWidth = 180;
-            this.clnTitleofAccount.Name = "clnTitleofAccount";
-            this.clnTitleofAccount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.clnTitleofAccount.Width = 180;
-            // 
-            // clnSubAccountDetail
-            // 
-            this.clnSubAccountDetail.HeaderText = "Sub-Account Detail";
-            this.clnSubAccountDetail.MinimumWidth = 150;
-            this.clnSubAccountDetail.Name = "clnSubAccountDetail";
-            this.clnSubAccountDetail.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.clnSubAccountDetail.Width = 150;
-            // 
             // clnDescription
             // 
             this.clnDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.clnDescription.HeaderText = "Description";
-            this.clnDescription.MinimumWidth = 200;
+            this.clnDescription.MinimumWidth = 350;
             this.clnDescription.Name = "clnDescription";
             this.clnDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
@@ -1532,6 +1504,56 @@
             this.clnDebitAccId.Name = "clnDebitAccId";
             this.clnDebitAccId.ReadOnly = true;
             this.clnDebitAccId.Visible = false;
+            // 
+            // Date
+            // 
+            this.Date.HeaderText = "Date";
+            this.Date.MinimumWidth = 150;
+            this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
+            this.Date.Width = 150;
+            // 
+            // VoucherNum
+            // 
+            this.VoucherNum.HeaderText = "Voucher Number";
+            this.VoucherNum.MinimumWidth = 150;
+            this.VoucherNum.Name = "VoucherNum";
+            this.VoucherNum.ReadOnly = true;
+            this.VoucherNum.Width = 150;
+            // 
+            // TransNarrationQ
+            // 
+            this.TransNarrationQ.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TransNarrationQ.HeaderText = "Narration";
+            this.TransNarrationQ.MinimumWidth = 100;
+            this.TransNarrationQ.Name = "TransNarrationQ";
+            this.TransNarrationQ.ReadOnly = true;
+            // 
+            // AmountQ
+            // 
+            this.AmountQ.HeaderText = "Amount";
+            this.AmountQ.MinimumWidth = 150;
+            this.AmountQ.Name = "AmountQ";
+            this.AmountQ.ReadOnly = true;
+            this.AmountQ.Width = 150;
+            // 
+            // PVNumberQ
+            // 
+            this.PVNumberQ.HeaderText = "PVNumberQ";
+            this.PVNumberQ.MinimumWidth = 6;
+            this.PVNumberQ.Name = "PVNumberQ";
+            this.PVNumberQ.ReadOnly = true;
+            this.PVNumberQ.Visible = false;
+            this.PVNumberQ.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            this.dataGridViewTextBoxColumn22.HeaderText = "PVNumberQ";
+            this.dataGridViewTextBoxColumn22.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            this.dataGridViewTextBoxColumn22.ReadOnly = true;
+            this.dataGridViewTextBoxColumn22.Visible = false;
+            this.dataGridViewTextBoxColumn22.Width = 125;
             // 
             // frmTellerClosingVoucher
             // 
@@ -1697,5 +1719,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clnSlipNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnDebitAccId;
+        private System.Windows.Forms.TextBox txtUserSession;
+        private System.Windows.Forms.Label label14;
     }
 }

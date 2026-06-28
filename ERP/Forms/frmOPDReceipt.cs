@@ -32,7 +32,7 @@ namespace ERP
         bool FLogIn = true;
         private string VoucherNum = null;
 
-        DataTable dtConsultant = Query.ConsultantIndex();
+        DataTable dtConsultant = Query.ConsultantIndex_opd();//hunain
         DataTable dtDependent = Query.MemberDependentIndex();
         DataTable dtDependentEmpty = new DataTable();
         DataTable dtTest = Query.TestIndex();    
@@ -62,7 +62,7 @@ namespace ERP
             {
                 txtVoucherNo.Text = "OP-" + vno;
                 VoucherNum = vno;
-                //ntxtTokenNo.Value = Convert.ToDecimal(dt.Rows[0]["tokenno"]);
+                //ntxtTokenNo.Value = Convert.ToDecimal(dt.Rows[0]["tokenno"]);//hunain
                 if (dt.Rows[0]["status"].ToString() != "0")
                 {
                     pnlControl.Enabled = false;
@@ -108,8 +108,8 @@ namespace ERP
                 txtRemarks.Text = dt.Rows[0]["Remarks"].ToString();
                 txtCreatedBy.Text = dt.Rows[0]["CreatedBy"].ToString() + " | " + ((DateTime)dt.Rows[0]["CreatedTime"]).ToString("dd-MMM-yyyy hh:mm:ss tt");
                 txtEditBy.Text = dt.Rows[0]["EditBy"].ToString() != "" ? dt.Rows[0]["EditBy"].ToString() + " | " + ((DateTime)dt.Rows[0]["EditTime"]).ToString("dd-MMM-yyyy hh:mm:ss tt") : null;
+                txtMrno.Text = dt.Rows[0]["MRno"].ToString();
 
-               
 
                 DataTable dtDetail = Query.OPDTestReceiptDetail(vno);
                 dgvExpenses.Rows.Clear();
@@ -193,7 +193,6 @@ namespace ERP
             btnFind_Click(null, null); 
             btnNew_Click(null, null);
             FillSessionBalanceAsync();
-            //FillSessionBalance();
             dtDependentEmpty = dtDependent.Copy(); 
             dtDependentEmpty.Rows.Clear(); 
             if (UserInfo.UserLevel == "Admin") 
@@ -453,7 +452,7 @@ namespace ERP
                     {
                         if (dgvExpenses.Rows.Count > 0 && (string)dgvExpenses.Rows[0].Cells[clnTest.Index].Value == "6")
                         {
-                            MessageBox.Show("This token number has already being issued. Please insert new number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("This token number has already been issued. Please insert new number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                     }
@@ -532,12 +531,17 @@ namespace ERP
                         }
 
                     }
-
-                    DML.OPDReceipt_Add_Edit(voucher, ntxtTokenNo.Value, dtpDate.Value, cmbOPDCatagory.SelectedValue.ToString(), cmbConsultant.SelectedValue, cmbPatientType.SelectedValue, cmbMembership.SelectedValue,
+                    GenerateNewMRNumber();
+                    bool newvoucher = voucher == null ? true : false;
+                    bool saved = DML.OPDReceipt_Add_Edit(voucher, ntxtTokenNo.Value, dtpDate.Value, cmbOPDCatagory.SelectedValue.ToString(), cmbConsultant.SelectedValue, cmbPatientType.SelectedValue, cmbMembership.SelectedValue,
                         cmbPatientId.SelectedValue, cmbPatientTitle.Text, cmbPatientId.Text, cmbGender.Text, txtContactNo.Text, ntxtAge.Value.ToString(), cmbAgeUnit.Text, (string)cmbReference.SelectedValue, txtRemarks.Text,
                         Decimal.Parse(lblGrossAmount.Text), ntxtDiscount.Value, Decimal.Parse(lblTotAmount.Text),
-                        "0", cmbPartial , txtpartial.Value, Decimal.Parse(txtbalance.Text),0,ref voucher);
-
+                        "0", cmbPartial , txtpartial.Value, Decimal.Parse(txtbalance.Text),0, txtMrno.Text, ref voucher);
+                    if(newvoucher && !string.IsNullOrEmpty(voucher) && saved)
+                    {
+                        DataRowView dr = (DataRowView)cmbConsultant.SelectedItem;
+                        dr["tokenno"] = (Convert.ToInt32(dr["tokenno"]) + 1);
+                    }
 
 
                     if (fkTestId.Count > 0)
@@ -714,6 +718,7 @@ namespace ERP
             cmbOPDCatagory.Focus();
             FillLastIssuedSlip(); //Tauqeer
             txtRSearch.Clear();
+            txtMrno.Text = string.Empty;
             txtContactNo.Clear();
         }
         #region Navigation
@@ -975,6 +980,7 @@ namespace ERP
             DataRowView dr = (DataRowView)cmbConsultant.SelectedItem;
             if (dr != null)
             {
+               // ntxtTokenNo.Value = Convert.ToInt32(dr["tokenno"]) + 1;
                 lblConsultantCharges.Text = dr["HospitalRate"].ToString();
                 for (int i = 0; i < dgvExpenses.Rows.Count; i++)
                 {
@@ -1458,6 +1464,7 @@ namespace ERP
                         cmbAgeUnit.Text = dr["ageunit"].ToString();
                         cmbReference.SelectedValue = dr["referenceid"].ToString();
                         txtRemarks.Text = dr["remarks"].ToString();
+                        txtMrno.Text = dr["mrno"].ToString();
                     }
                     cmbOPDCatagory.Focus();
 
@@ -1465,7 +1472,8 @@ namespace ERP
 
             }
         }
-        
+
+
         private void btnCancelAll_Click(object sender, EventArgs e)
         {
             frmAuthentication frm = new frmAuthentication();
@@ -1570,6 +1578,7 @@ namespace ERP
                         cmbAgeUnit.Text = dr["ageunit"].ToString();
                         cmbReference.SelectedValue = dr["referenceid"].ToString();
                         txtRemarks.Text = dr["remarks"].ToString();
+                        txtMrno.Text = dr["mrno"].ToString();
                     }
                     cmbOPDCatagory.Focus();
 
@@ -1729,6 +1738,42 @@ namespace ERP
             finally
             {
                 progressBar1.Visible = false;
+            }
+        }
+        private void GenerateNewMRNumber()
+        {
+            if (txtContactNo.Text != "")
+            {
+                DataTable dt = Query.GetOPDDetailsByContactNo(txtContactNo.Text);
+                if (dt.Rows.Count > 0)
+                {
+                    txtMrno.Text = dt.Rows[0]["MRNo"].ToString();
+                }
+            }
+            if (txtMrno.Text == "")
+            {
+                int currentYear = DateTime.Now.Year;
+                string yearString = currentYear.ToString();
+
+                DataTable dt = Query.GetMaxMRno();
+                int lastMrNumberForYear = 0;
+
+                if (dt.Rows.Count > 0 && dt.Rows[0][0] != DBNull.Value)
+                {
+                    string lastMrNumber = dt.Rows[0][0].ToString();
+                    if (lastMrNumber.StartsWith(yearString))
+                    {
+                        string numberPart = lastMrNumber.Substring(4);
+                        int number;
+                        if (int.TryParse(numberPart, out number))
+                        {
+                            lastMrNumberForYear = number;
+                        }
+                    }
+                }
+                int newMrNumber = lastMrNumberForYear + 1;
+                string newMrNumberString = yearString + newMrNumber.ToString("D6");
+                txtMrno.Text = newMrNumberString;
             }
         }
     }

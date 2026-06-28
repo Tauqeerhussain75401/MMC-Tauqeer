@@ -55,6 +55,7 @@
             this.receiptVoucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.journalVoucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bankReconcilationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tellerClosingVoucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bankReconcilationToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.bankToBankTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -169,13 +170,16 @@
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.chkDate = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.tellerClosingVoucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblFY = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -409,6 +413,13 @@
             this.bankReconcilationToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.bankReconcilationToolStripMenuItem.Text = "Post Voucher";
             this.bankReconcilationToolStripMenuItem.Click += new System.EventHandler(this.bankReconcilationToolStripMenuItem_Click);
+            // 
+            // tellerClosingVoucherToolStripMenuItem
+            // 
+            this.tellerClosingVoucherToolStripMenuItem.Name = "tellerClosingVoucherToolStripMenuItem";
+            this.tellerClosingVoucherToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.tellerClosingVoucherToolStripMenuItem.Text = "Teller Closing Voucher";
+            this.tellerClosingVoucherToolStripMenuItem.Click += new System.EventHandler(this.tellerClosingVoucherToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -1278,6 +1289,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.picLogo);
             this.panel1.Controls.Add(this.lblCompanyName);
@@ -1351,12 +1363,44 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "Read Dates from :";
             // 
-            // tellerClosingVoucherToolStripMenuItem
+            // groupBox2
             // 
-            this.tellerClosingVoucherToolStripMenuItem.Name = "tellerClosingVoucherToolStripMenuItem";
-            this.tellerClosingVoucherToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.tellerClosingVoucherToolStripMenuItem.Text = "Teller Closing Voucher";
-            this.tellerClosingVoucherToolStripMenuItem.Click += new System.EventHandler(this.tellerClosingVoucherToolStripMenuItem_Click);
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.lblFY);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Location = new System.Drawing.Point(1073, 617);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 80);
+            this.groupBox2.TabIndex = 270;
+            this.groupBox2.TabStop = false;
+            // 
+            // lblFY
+            // 
+            this.lblFY.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblFY.AutoSize = true;
+            this.lblFY.BackColor = System.Drawing.Color.Transparent;
+            this.lblFY.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFY.ForeColor = System.Drawing.Color.Black;
+            this.lblFY.Location = new System.Drawing.Point(36, 45);
+            this.lblFY.Name = "lblFY";
+            this.lblFY.Size = new System.Drawing.Size(124, 25);
+            this.lblFY.TabIndex = 268;
+            this.lblFY.Text = "2016-2017";
+            this.lblFY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(6, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(181, 29);
+            this.label2.TabIndex = 267;
+            this.label2.Text = "Financial Year";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmMain
             // 
@@ -1387,6 +1431,8 @@
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1537,5 +1583,8 @@
         private System.Windows.Forms.ToolStripMenuItem echoTemplateDesignerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mMCHussainiLabReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tellerClosingVoucherToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lblFY;
+        private System.Windows.Forms.Label label2;
     }
 }

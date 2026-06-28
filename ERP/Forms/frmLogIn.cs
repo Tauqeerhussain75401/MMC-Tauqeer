@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace ERP
 {
@@ -23,15 +24,19 @@ namespace ERP
         private void frmLogIn_Load(object sender, EventArgs e)
         {
             CheckApplicationOpen();
-            txtUserId.Text = "Admin";
-            txtPassword.Text = "75401";
-            
+            //txtUserId.Text = "Admin";
+            //txtPassword.Text = "75401";
+
             this.Text = "ERP Version(" + Application.ProductVersion + ")"; 
             UserInfo.UserId = "Log Out";
-            thConnecting = new Thread(Connecting);
-            thConnecting.Start();
+            //thConnecting = new Thread(Connecting);
+            //thConnecting.Start();
+            Task.Run(() => Connecting())
+                        .ContinueWith(t =>
+                        {
+                            fillcmbFY();
+                        }, TaskScheduler.FromCurrentSynchronizationContext());
 
-           
         }
 
         Thread thConnecting;
@@ -41,6 +46,7 @@ namespace ERP
         public delegate void tsslMsgDelegate(string Text);
         public delegate void txtTerminalIdDelegate(string Text);
         public delegate void progressBarDelegate(bool Visible);
+        private DataTable FinancialYear;
         public void BtnLogInEnable(bool Enable)
         {
             if (this.InvokeRequired)
@@ -75,6 +81,22 @@ namespace ERP
                 tsslMsg.Text  = Text;
             }
         }
+        private void fillcmbFY()
+        {
+            FinancialYear = new DataTable();
+            FinancialYear = Query.FinancialYear();
+            cmbFY.DataSource = FinancialYear;
+            cmbFY.DisplayMember = "FinancialYear";
+            cmbFY.ValueMember = "FinancialYear";
+
+            string findyear = "";
+            if (Variable.ServerDate.Month > 6)
+                findyear = Variable.ServerDate.Year.ToString() + "-" + (Variable.ServerDate.Year + 1).ToString();
+            else
+                findyear = (Variable.ServerDate.Year - 1).ToString() + "-" + Variable.ServerDate.Year.ToString();
+            cmbFY.Text = findyear;
+
+        }
         public void txtTerminalIdChg(string Text)
         {
             if (this.InvokeRequired)
@@ -94,6 +116,7 @@ namespace ERP
             ProgressBarVisChg(true);            
             BtnLogInEnable(false);
             tsslMsgChg("Connecting to Server...,");
+            clsConnection.User = "hms";
             clsConnection.Con();
             clsConnection.con.ClientId = UserInfo.UserId;
             ////temporary////
@@ -107,7 +130,7 @@ namespace ERP
             CompanyInfo.Cell = dt.Rows[0]["Cell"].ToString();
             CompanyInfo.Cell2Title = dt.Rows[0]["ContactPerson2"].ToString();
             CompanyInfo.Cell2 = dt.Rows[0]["Cell2"].ToString();
-
+            Variable.ServerDate = Convert.ToDateTime((DateTime)dt.Rows[0]["sysdate"]);
             ////////////////////
             //////////////////////// Getting Terminal Id
             tsslMsgChg("Getting Terminal Id...,");
@@ -141,6 +164,7 @@ namespace ERP
             ////////////////////////////////
             ProgressBarVisChg(false);
             BtnLogInEnable(true);
+            
         }
 
         static void ChangeFile(string Newfile, string Origfile, Process process)
@@ -228,7 +252,20 @@ namespace ERP
                     UserInfo.UserId = (string )dtUsers.Rows[0]["userid"];
                     UserInfo.UserName  = (string)dtUsers.Rows[0]["username"];
                     UserInfo.UserLevel = dtUsers.Rows[0]["Userlevel"].ToString();
-                    UserInfo.LogInDateTime = (DateTime)dtUsers.Rows[0]["LogIndate"];                                         
+                    UserInfo.LogInDateTime = (DateTime)dtUsers.Rows[0]["LogIndate"];
+                    Variable.FinancialYear = cmbFY.Text;
+                    Variable.FinancialYearFrom = new DateTime(Convert.ToInt16(cmbFY.Text.Substring(0, 4)), 7, 1);
+                    Variable.FinancialYearTo = new DateTime(Convert.ToInt16(cmbFY.Text.Substring(5, 4)), 6, 30);
+                    string filter = string.Format("financialyear = '{0}'", cmbFY.Text);
+                    DataRow dr = FinancialYear.Select(filter).FirstOrDefault();
+                    if (dr["CurDef"].ToString() != "Y")
+                    {
+                        clsConnection.User = "hms" + cmbFY.Text.Split('-')[1];
+
+                        clsConnection.Con();
+                        //if (clsConnection.con.State.ToString() == "Open") clsConnection.con.Close();
+                        
+                    }
                     frm.ShowDialog();                    
                 }
                 else

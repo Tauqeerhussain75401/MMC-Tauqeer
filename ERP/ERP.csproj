@@ -509,6 +509,12 @@
     <Compile Include="Forms\frmMemberInfo.designer.cs">
       <DependentUpon>frmMemberInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPatient.Designer.cs">
+      <DependentUpon>frmPatient.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmPostPV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1426,18 +1432,6 @@
       <DependentUpon>TotalSurgeries.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\TrialBalance2.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TrialBalance.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\TrialBalance2.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TrialBalance.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reports\TrialBalance_OLD.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1552,6 +1546,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMemberInfo.resx">
       <DependentUpon>frmMemberInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPatient.resx">
+      <DependentUpon>frmPatient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPostPV.resx">
       <DependentUpon>frmPostPV.cs</DependentUpon>

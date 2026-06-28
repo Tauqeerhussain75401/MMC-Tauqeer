@@ -216,6 +216,7 @@ namespace ERP
             txtEditBy.Text = "";
             txtApprovedBy.Text = "";
             dgvAccount.Rows.Clear();
+            dgvDebit.Rows.Clear();
             dtpDate.Value = SoftwareInfo.ServerDate;
         }
         void AllowNewRow(DataGridView dgv, DataGridViewComboBoxColumn dgvClnTitleOfAccount, DataGridViewTextBoxColumn dgvClnCredit)
@@ -301,7 +302,12 @@ namespace ERP
                     
                     var rows = dt.AsEnumerable().Where(r => r.Field<string>("vtype") == "RV").ToArray();
 
-                    if (rows.Count() > 0)
+                    if (rows.Count() > 0 && txtJVNum.Text == "")
+                    {
+                        MessageBox.Show("Voucher for session " + sessionid + " already created. You can search for and open the voucher from the query tab.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                     if(rows.Count() > 0)   
                         Vno = rows[0]["vno"].ToString();
 
                     voucher_details("RV", sessionid, dgvAccount, Seq, Account, Descr, dr, cr, SubAccount, Status, ChequeNo, SlipNo, clnTitleofAccount, clnCredit, clnVseq, clnSubAccountDetail, clnDescription, clnChequeNo, clnSlipNo, clnDebitAccId);
@@ -407,17 +413,23 @@ namespace ERP
                     //    return;
                     //}
                    
-                    if (vtype == "RV")
-                    {
+                   
                         
                         Seq.Add((Convert.ToInt16(dgv[dgvClnVseq.Index, i].Value) > 0 ? -1 : 0) + Convert.ToInt16(dgv[dgvClnVseq.Index, i].Value));
                         string acc = dgv[dgvClnDebitAcc.Index, i].Value == null ? "001001005001001" : (string)dgv[dgvClnDebitAcc.Index, i].Value;
                         Account.Add(acc);
                         Descr.Add((string)dgv[dgvClnDescription.Index, i].Value);// + "(sessionid:" + sessionid +")");
-                        dr.Add(Convert.ToDecimal(dgv[dgvClnCredit.Index, i].Value.ToString()));
-                        cr.Add(Convert.ToDecimal(0.00m));
-                        //SubAccount.Add(Convert.ToString(cmbBankName.SelectedValue));
-                        SubAccount.Add((string)dgv[dgvClnSubAccount.Index, i].Value);
+                        if (vtype == "RV")
+                            dr.Add(Convert.ToDecimal(dgv[dgvClnCredit.Index, i].Value.ToString()));
+                        else
+                            dr.Add(Convert.ToDecimal(0.00m));
+                        if (vtype == "RV")
+                            cr.Add(Convert.ToDecimal(0.00m));
+                        else
+                            cr.Add(Convert.ToDecimal(dgv[dgvClnCredit.Index, i].Value.ToString()));
+                    //SubAccount.Add(Convert.ToString(cmbBankName.SelectedValue));
+                    object a = dgv[dgvClnSubAccount.Index, i].Value;
+                        SubAccount.Add((string)a);
                         //Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
                         Status.Add(0);
                         string nah = Convert.ToString(dgv[dgvClnChequeNo.Index, i].Value == null ? "" : dgv[dgvClnChequeNo.Index, i].Value.ToString());
@@ -428,45 +440,54 @@ namespace ERP
                         Seq.Add(Convert.ToInt16(dgv[dgvClnVseq.Index, i].Value.ToString()));
                         Account.Add((string)dgv[dgvClnTitleOfAccount.Index, i].Value);
                         Descr.Add((string)dgv[dgvClnDescription.Index, i].Value);
-                        dr.Add(Convert.ToDecimal(0.00m));
-                        cr.Add(Convert.ToDecimal(dgv[dgvClnCredit.Index, i].Value.ToString()));
+                        
+                        if(vtype == "RV")
+                            dr.Add(Convert.ToDecimal(0.00m));
+                        else
+                            dr.Add(Convert.ToDecimal(dgv[dgvClnCredit.Index, i].Value.ToString()));
+                       
+                        if (vtype == "RV")
+                            cr.Add(Convert.ToDecimal(dgv[dgvClnCredit.Index, i].Value.ToString()));
+                        else
+                            cr.Add(Convert.ToDecimal(0.00m));
+                        
                         SubAccount.Add((string)dgv[dgvClnSubAccount.Index, i].Value);
                         //Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
                         Status.Add(0);
                         ChequeNo.Add(Convert.ToString(dgv[dgvClnChequeNo.Index, i].Value == null ? "" : dgv[dgvClnChequeNo.Index, i].Value.ToString()));
                         SlipNo.Add(Convert.ToString(dgv[dgvClnSlipNo.Index, i].Value == null ? "" : dgv[dgvClnSlipNo.Index, i].Value.ToString()));
-                    }
-                    if(vtype == "PV")
-                    {
-                        int ssq = (Convert.ToInt16(dgv[dgvClnVseq.Index, i].Value) > 0 ? -1 : 0) + Convert.ToInt16(dgv[dgvClnVseq.Index, i].Value);
-                        Seq.Add(ssq);
-                        string acc = dgv[dgvClnDebitAcc.Index, i].Value == null ? "001001005001001" : (string)dgv[dgvClnDebitAcc.Index, i].Value;
-                        Account.Add(acc);
-                        Descr.Add((string)dgv[dgvClnDescription.Index, i].Value);// + "(sessionid:" + sessionid + ")");
-                        dr.Add(Convert.ToDecimal(0.00m));
-                        cr.Add(Convert.ToDecimal(dgv[dgvClnCredit.Index, i].Value.ToString()));
-                        //SubAccount.Add(Convert.ToString(cmbBankName.SelectedValue));
-                        SubAccount.Add((string)dgv[dgvClnSubAccount.Index, i].Value);
-                        //Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
-                        Status.Add(0);
+                    
+                    //if(vtype == "PV")
+                    //{
+                    //    int ssq = (Convert.ToInt16(dgv[dgvClnVseq.Index, i].Value) > 0 ? -1 : 0) + Convert.ToInt16(dgv[dgvClnVseq.Index, i].Value);
+                    //    Seq.Add(ssq);
+                    //    string acc = dgv[dgvClnDebitAcc.Index, i].Value == null ? "001001005001001" : (string)dgv[dgvClnDebitAcc.Index, i].Value;
+                    //    Account.Add(acc);
+                    //    Descr.Add((string)dgv[dgvClnDescription.Index, i].Value);// + "(sessionid:" + sessionid + ")");
+                    //    dr.Add(Convert.ToDecimal(0.00m));
+                    //    cr.Add(Convert.ToDecimal(dgv[dgvClnCredit.Index, i].Value.ToString()));
+                    //    //SubAccount.Add(Convert.ToString(cmbBankName.SelectedValue));
+                    //    SubAccount.Add((string)dgv[dgvClnSubAccount.Index, i].Value);
+                    //    //Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
+                    //    Status.Add(0);
 
 
-                        string hello = Convert.ToString(dgv[dgvClnChequeNo.Index, i].Value == null ? "" : dgv[dgvClnChequeNo.Index, i].Value.ToString());
-                        ChequeNo.Add(hello);
-                        SlipNo.Add("");
+                    //    string hello = Convert.ToString(dgv[dgvClnChequeNo.Index, i].Value == null ? "" : dgv[dgvClnChequeNo.Index, i].Value.ToString());
+                    //    ChequeNo.Add(hello);
+                    //    SlipNo.Add("");
 
-                        Seq.Add(Convert.ToInt16(dgv[dgvClnVseq.Index, i].Value.ToString()));
-                        Account.Add((string)dgv[dgvClnTitleOfAccount.Index, i].Value);
-                        Descr.Add((string)dgv[dgvClnDescription.Index, i].Value);
-                        dr.Add(Convert.ToDecimal(dgv[dgvClnCredit.Index, i].Value.ToString()));
-                        cr.Add(Convert.ToDecimal(0.00m));
-                        SubAccount.Add((string)dgv[dgvClnSubAccount.Index, i].Value);
-                        //Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
+                    //    Seq.Add(Convert.ToInt16(dgv[dgvClnVseq.Index, i].Value.ToString()));
+                    //    Account.Add((string)dgv[dgvClnTitleOfAccount.Index, i].Value);
+                    //    Descr.Add((string)dgv[dgvClnDescription.Index, i].Value);
+                    //    dr.Add(Convert.ToDecimal(dgv[dgvClnCredit.Index, i].Value.ToString()));
+                    //    cr.Add(Convert.ToDecimal(0.00m));
+                    //    SubAccount.Add((string)dgv[dgvClnSubAccount.Index, i].Value);
+                    //    //Status.Add(Convert.ToInt16(dgvAccount[clnStatus.Index, i].Value.ToString()));
 
-                        Status.Add(0);
-                        ChequeNo.Add(Convert.ToString(dgv[dgvClnChequeNo.Index, i].Value == null ? "" : dgv[dgvClnChequeNo.Index, i].Value.ToString()));
-                        SlipNo.Add("");
-                    }
+                    //    Status.Add(0);
+                    //    ChequeNo.Add(Convert.ToString(dgv[dgvClnChequeNo.Index, i].Value == null ? "" : dgv[dgvClnChequeNo.Index, i].Value.ToString()));
+                    //    SlipNo.Add("");
+                    //}
                 }
             }
 
@@ -589,11 +610,11 @@ namespace ERP
 
                 if (!string.IsNullOrWhiteSpace(vno) && !vno.All(char.IsDigit))
                 {
-                    MessageBox.Show("Only numbers are allowed in RV No.");
+                    MessageBox.Show("Only numbers are allowed in Voucher No.");
                     return;
                 }
 
-                dtquery = Query.ReceiptFilterWithPendingApr(
+                dtquery = Query.TellerReceiptFilterWithPendingApr(
                     dtpFrom.Value.ToString("dd MMM yyyy"),
                     dtpTo.Value.ToString("dd MMM yyyy"),
                     sessionid,
@@ -653,9 +674,18 @@ namespace ERP
             if (txtJVNum.Text != "")
             {
                 string voucherNum = txtJVNum.Text;
+                string sessionid = textBox3.Text;
+                string AcountClient = "S S-001" + "(" + sessionid + ")";
                 try
                 {
-                    frmReportView.ShowBox("Voucher", Convert.ToDateTime(dtpDate.Value).ToString("dd-MMM-yyyy"), "RV", int.Parse(voucherNum).ToString("D6"), "Journal Voucher", txtEditBy.Text, txtStatus.Text);
+                    DataTable dt = Query.getVoucher_TellerClosing(sessionid, Variable.BranchCode);
+                    DataRow dr = dt.Select("vtype = 'RV'").FirstOrDefault();
+
+
+                    frmReportView.ShowBox("Voucher", Convert.ToDateTime(dtpDate.Value).ToString("dd-MMM-yyyy"), "RV", int.Parse(dr["vno"].ToString()).ToString("D6"), "Journal Voucher", txtEditBy.Text, txtStatus.Text);
+                     
+                    frmReportView.ShowBox("Voucher", Convert.ToDateTime(dtpDate.Value).ToString("dd-MMM-yyyy"), "PV", int.Parse(voucherNum).ToString("D6"), "Journal Voucher", AcountClient, txtStatus.Text);
+                 
                 }
                 catch
                 {
@@ -1362,42 +1392,79 @@ namespace ERP
         {
             
             string sessionId = textBox3.Text;
-            DataTable dt = Query.getData("select * from voucherdetail where fkclientcode = " + sessionId + "");
-            if(dt.Rows.Count > 0)
-                MessageBox.Show("Voucher for session "+sessionId+" already created. You can search for and open the voucher from the query tab.","Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
+            DataTable dt = Query.getData("select * from voucherdetail where fkclientcode = " + sessionId + " and status != 1");
+            if (dt.Rows.Count > 0)
+            {
+                MessageBox.Show("Voucher for session " + sessionId + " already created. You can search for and open the voucher from the query tab.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            dt = Query.getData("select shiftname, userid  from vu_usersession where sessionid = " + sessionId + " and status != 1");
+            string shiftname = dt.Rows[0][0].ToString();
+            txtUserSession.Text = dt.Rows[0][1].ToString();
             if (sessionId != "")
             {
                 dgvAccount.Rows.Clear();
+                
+                dt = ReportQuery.ClosingSummarySessionIPD(sessionId);
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    int index = dgvAccount.Rows.Add(null, null, dt.Rows[i]["creditacc"].ToString(), null, null, dt.Rows[i]["amount"].ToString(), null, null, null, dt.Rows[i]["debitacc"].ToString());
 
+                    dgvAccount.Rows[index].Cells[clnDescription.Index].Value = "Receipt from " + dgvAccount.Rows[index].Cells[clnTitleofAccount.Index].FormattedValue + " (" + shiftname + ")";
+                }
+                
                 dt = ReportQuery.ClosingSummarySessionWise(sessionId);
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     int index = dgvAccount.Rows.Add(null, null, dt.Rows[i]["creditacc"].ToString(), null, null, dt.Rows[i]["netamount"].ToString(), null, null, null, dt.Rows[i]["debitacc"].ToString());
 
-                    dgvAccount.Rows[index].Cells[clnDescription.Index].Value = "Receipt From " + dgvAccount.Rows[index].Cells[clnTitleofAccount.Index].FormattedValue;
+                    dgvAccount.Rows[index].Cells[clnDescription.Index].Value = "Receipt from " + dgvAccount.Rows[index].Cells[clnTitleofAccount.Index].FormattedValue + " Public" + " (" + shiftname + ")";
                 }
+
+                dt = ReportQuery.SubAddLessDetail(sessionId);
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    int index = dgvAccount.Rows.Add(null, null, dt.Rows[i]["deptAcc"].ToString(), null, null, dt.Rows[i]["amount"].ToString(), null, null, null, dt.Rows[i]["debitacc"].ToString());
+
+                    dgvAccount.Rows[index].Cells[clnDescription.Index].Value = "Receipt from " + dgvAccount.Rows[index].Cells[clnTitleofAccount.Index].FormattedValue + " " + dt.Rows[i]["patienttype"].ToString() + " (" + shiftname + ")";
+                }
+                
                 dgvAccount.Rows.Add();
+               
                 Calculate(dgvAccount, txtTotalDebit, clnCredit.Index);
 
                 dgvDebit.Rows.Clear();
 
-                DataTable dt1 = ReportQuery.SubAddLessDetail(sessionId);
-
-                for (int i = 0; i < dt1.Rows.Count; i++)
+                var result = dt.AsEnumerable()
+               .GroupBy(r => new
+               {
+                   PatientType = r.Field<string>("patienttype"),
+                   DebitAcc = r.Field<string>("debitacc"),
+                   CreditAcc = r.Field<string>("creditacc")
+               })
+               .Select(g => new
+               {
+                   g.Key.PatientType,
+                   g.Key.DebitAcc,
+                   g.Key.CreditAcc,
+                   Amount = g.Sum(x => x.Field<decimal>("amount")),
+               });
+                //dt = result.CopyToDataTable();
+                foreach (var item in result)
                 {
-                    int index = dgvDebit.Rows.Add(null, null, dt1.Rows[i]["debitacc"].ToString(), null, null, dt1.Rows[i]["Amount"].ToString(), null, null, null, dt1.Rows[i]["creditacc"].ToString());
-                    dgvDebit.Rows[index].Cells[dgvDebitClnDesc.Index].Value = "Payment For " + dt1.Rows[i]["title"].ToString();
+                    {
+                        int index = dgvDebit.Rows.Add(null, null, item.DebitAcc, null, null, item.Amount, null, null, null, item.CreditAcc);
+                        dgvDebit.Rows[index].Cells[dgvDebitClnDesc.Index].Value = "Payment for " + dgvDebit.Rows[index].Cells[dgvDebitClnTitleOfAccount.Index].FormattedValue + " (" + shiftname + ")";
+                    }
                 }
 
-                dt1 = ReportQuery.get_session_IPDrefundInfo(sessionId);
+                dt = ReportQuery.get_session_IPDrefundInfo(sessionId);
                 
-                for (int i = 0; i < dt1.Rows.Count; i++)
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    int index = dgvDebit.Rows.Add(null, null, dt1.Rows[i]["refundacc"].ToString(), null, null, dt1.Rows[i]["refundamount"].ToString(), null, null, null, dt1.Rows[i]["creditAcc"].ToString());
-                    dgvDebit.Rows[index].Cells[dgvDebitClnDesc.Index].Value = "Payment For " + dgvDebit.Rows[index].Cells[dgvDebitClnTitleOfAccount.Index].FormattedValue;
+                    int index = dgvDebit.Rows.Add(null, null, dt.Rows[i]["refundacc"].ToString(), null, null, dt.Rows[i]["refundamount"].ToString(), null, null, null, dt.Rows[i]["creditAcc"].ToString());
+                    dgvDebit.Rows[index].Cells[dgvDebitClnDesc.Index].Value = "Payment for inpatient refund" + " (" + shiftname + ")";
                 }
                 Calculate(dgvDebit, textBox1, dgvDebitclnDebit.Index);
                 dgvDebit.Rows.Add();
