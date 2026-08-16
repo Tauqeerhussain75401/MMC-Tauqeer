@@ -83,7 +83,7 @@
       <HintPath>..\..\..\..\AForge.NET Framework-2.2.5-(libs only)\Release\AForge.Video.DirectShow.dll</HintPath>
     </Reference>
     <Reference Include="Bunifu_UI_v1.5.3">
-      <HintPath>F:\Bunifu_UI_v1.5.3.dll</HintPath>
+      <HintPath>bin\Debug\Bunifu_UI_v1.5.3.dll</HintPath>
     </Reference>
     <Reference Include="ComboBoxMultiColumns, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

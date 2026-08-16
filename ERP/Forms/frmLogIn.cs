@@ -28,6 +28,7 @@ namespace ERP
                 this.Text = "ERP Version(" + Application.ProductVersion + ")";
                 UserInfo.UserId = "Log Out";
 
+                btnLogIn.Enabled = false;
                 thConnecting = new Thread(Connecting);
                 thConnecting.Start();
             }
