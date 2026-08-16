@@ -52,6 +52,8 @@
             this.FloorNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HospitalRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tb_search = new System.Windows.Forms.TextBox();
             this.grpBtns.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numHosRate)).BeginInit();
             this.grpRoomInfo.SuspendLayout();
@@ -176,6 +178,7 @@
             this.btnpreview.TabIndex = 5;
             this.btnpreview.Text = "Pre&view";
             this.btnpreview.UseVisualStyleBackColor = true;
+            this.btnpreview.Click += new System.EventHandler(this.btnpreview_Click);
             // 
             // numHosRate
             // 
@@ -314,17 +317,37 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(13, 194);
+            this.label6.Location = new System.Drawing.Point(265, 194);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(128, 13);
             this.label6.TabIndex = 15;
             this.label6.Text = "(Double Click to Retrieve)";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(15, 187);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 15);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Search :";
+            // 
+            // tb_search
+            // 
+            this.tb_search.Location = new System.Drawing.Point(73, 186);
+            this.tb_search.Name = "tb_search";
+            this.tb_search.Size = new System.Drawing.Size(176, 20);
+            this.tb_search.TabIndex = 17;
+            this.tb_search.TextChanged += new System.EventHandler(this.tb_search_TextChanged);
             // 
             // frmRoomInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(555, 519);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.tb_search);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dgvRoomDetails);
             this.Controls.Add(this.grpRoomInfo);
@@ -368,5 +391,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn FloorNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn HospitalRate;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox tb_search;
     }
 }

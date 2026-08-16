@@ -12,6 +12,7 @@ namespace ERP
 {
     public partial class PTPackages : Form
     {
+        DataTable dtQuery;
         public PTPackages()
         {
             InitializeComponent();
@@ -22,7 +23,7 @@ namespace ERP
         {
 
 
-            DataTable dtQuery = Query.PackageInfo();
+            dtQuery = Query.PackageInfo();
             for (int i = 0; i < dtQuery.Rows.Count; i++)
             {
                 dgvSearch.Rows.Add(dtQuery.Rows[i]["package_id"].ToString(),
@@ -194,6 +195,37 @@ namespace ERP
             rpt.SetParameterValue("@User", UserInfo.UserName);
             frm.rptViewer.ReportSource = rpt;
             frm.Show();
+        }
+
+        private void tb_search_TextChanged(object sender, EventArgs e)
+        {
+            if (dtQuery == null)
+            {
+                return;
+            }
+            string searchtext = tb_search.Text.Trim().ToLower();
+            dgvSearch.Rows.Clear();
+
+            foreach (DataRow row in dtQuery.Rows)
+            {
+                string id = row["package_id"]?.ToString() ?? "";
+                string title = row["packagename_name"]?.ToString() ?? "";
+                
+                if (id.ToLower().Contains(searchtext) || title.ToLower().Contains(searchtext))
+                {
+                    string amount = row["amount"]?.ToString() ?? "";
+                    bool isdeactivate = (row["isdeactivate"]?.ToString() ?? "" ) == "1" ? true : false;
+                    string createdby = row["createdby"]?.ToString() ?? "";
+                    string editby = row["editby"]?.ToString() ?? "";
+                    string createtime = row["createtime"]?.ToString() ?? "";
+                    string edittime = row["edittime"]?.ToString() ?? "";
+                    string status = row["status"]?.ToString() ?? "" ;
+                    string terminalid = row["terminalid"]?.ToString() ?? "";
+
+
+                    dgvSearch.Rows.Add(id, title, amount, isdeactivate, createdby, editby, createtime, edittime, status, terminalid);
+                }
+            }
         }
     }
 }

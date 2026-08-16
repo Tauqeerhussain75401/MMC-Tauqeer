@@ -61,7 +61,6 @@ namespace ERP.Forms
         }
         string RoomId = "";
         DataTable dtDetail;
-   
         void FillDetail()
         {
             dtDetail = Query.getData("SELECT a.*,get_roomTitle(roomid) roomname FROM admissioninfo a where regnoalpha = '" + txtRegAlpha.Text + "' and regnonumeric = '" + ntxtRegNo.Text + "'");
@@ -74,7 +73,7 @@ namespace ERP.Forms
                 dtpTime.Value = (DateTime)dtDetail.Rows[0]["admtime"];
                 txtRoom.Text = dtDetail.Rows[0]["roomname"].ToString();
                 RoomId = dtDetail.Rows[0]["roomid"].ToString();
-               // cmbPatientTitle.Text = dtDetail.Rows[0]["title"].ToString();
+                // cmbPatientTitle.Text = dtDetail.Rows[0]["title"].ToString();
                 //cmbPatientId.Text = dtDetail.Rows[0]["patientname"].ToString();
                 cmbPatientType.SelectedValue = dtDetail.Rows[0]["patienttype"];
                 cmbMembership.SelectedValue = dtDetail.Rows[0]["bmjnewno"];
@@ -102,6 +101,7 @@ namespace ERP.Forms
                 txtMobile.Text = dtDetail.Rows[0]["mobile"].ToString();
                 txtOtherContact.Text = dtDetail.Rows[0]["othercontact"].ToString();
                 txtEmail.Text = dtDetail.Rows[0]["email"].ToString();
+                txtMrno.Text = dtDetail.Rows[0]["mrno"].ToString();
 
                 lblUserName.Text = dtDetail.Rows[0]["createdby"].ToString();
                 lblUserName.Visible = true;
@@ -127,17 +127,17 @@ namespace ERP.Forms
                 {
                     //if (dtDetail.Rows[0]["dischargeyn"].ToString() == "1")
                     //{
-                        //DialogResult dr = MessageBox.Show(txtRegAlpha.Text + " - " + ntxtRegNo.Text + " Are you sure , you want to update discharge patient recorde ?", "Question...", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        //if (dr == DialogResult.Yes)
-                        //{
-                            grpBasicInfo.Enabled = true;
-                            grpContact.Enabled = true;
-                        //}
-                        //else
-                        //{
-                        //    grpBasicInfo.Enabled = false;
-                        //    grpContact.Enabled = false;
-                        //}
+                    //DialogResult dr = MessageBox.Show(txtRegAlpha.Text + " - " + ntxtRegNo.Text + " Are you sure , you want to update discharge patient recorde ?", "Question...", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    //if (dr == DialogResult.Yes)
+                    //{
+                    grpBasicInfo.Enabled = true;
+                    grpContact.Enabled = true;
+                    //}
+                    //else
+                    //{
+                    //    grpBasicInfo.Enabled = false;
+                    //    grpContact.Enabled = false;
+                    //}
                     //}
                     //else
                     //{
@@ -150,8 +150,8 @@ namespace ERP.Forms
                 {
                     if (dtDetail.Rows[0]["dischargeyn"].ToString() == "1")
                     {
-                         grpBasicInfo.Enabled = false;
-                         grpContact.Enabled = false;
+                        grpBasicInfo.Enabled = false;
+                        grpContact.Enabled = false;
                     }
                     else
                     {
@@ -167,10 +167,9 @@ namespace ERP.Forms
                     MessageBox.Show(txtRegAlpha.Text + "-" + ntxtRegNo.Text + "  this file is ready for Update !");
                 }
                 #endregion
-              
-            }          
+
+            }
         }
-       
         public void UserRights()
         {
             //cmbPatientType.Enabled = true;
@@ -181,7 +180,7 @@ namespace ERP.Forms
             //cmbReference.Enabled = true;
             //cmbPatientTitle.Enabled = true;
 
-            
+
             //cmbGender.Enabled = false;
             //ntxtAge.Enabled = false;
             //cmbAgeUnit.Enabled = false;
@@ -194,9 +193,8 @@ namespace ERP.Forms
             //txtMobile.Enabled = false;
             //txtAddress.Enabled = false;
             //txtEmail.Enabled = false;
-            
-        }
 
+        }
         private void frmAddmissionInfo_Load(object sender, EventArgs e)
         {
             CurrentDateTime();
@@ -228,8 +226,8 @@ namespace ERP.Forms
             }
             catch (Exception ex)
             {
-                    
-            }        
+
+            }
         }
         private void txtRegAlpha_KeyDown(object sender, KeyEventArgs e)
         {
@@ -238,14 +236,10 @@ namespace ERP.Forms
                 FillDetail();
             }
         }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-
-
         private void btnRoomSearch_Click(object sender, EventArgs e)
         {
             frmRoomStatus frm = new frmRoomStatus();
@@ -255,7 +249,6 @@ namespace ERP.Forms
                 RoomId = frm.roomId;
             }
         }
-
         private void cmbPatientType_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataRowView dr = (DataRowView)cmbPatientType.SelectedItem;
@@ -288,10 +281,9 @@ namespace ERP.Forms
                 }
             }
         }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (ValidationOnControls()==false) 
+            if (ValidationOnControls() == false)
             {
                 return;
             }
@@ -299,10 +291,11 @@ namespace ERP.Forms
             {
 
                 getRegno();
+                GenerateNewMRNumber();
                 DML.addmissionInfo_add_edit(txtSerialNo.Text, txtSerialNo.Text, txtRegAlpha.Text, ntxtRegNo.Text, dtpDate.Value, dtpTime.Value, RoomId, (string)cmbPatientType.SelectedValue,
                     Convert.ToString(cmbMembership.SelectedValue), cmbPatientTitle.Text, cmbPatientId.Text, txtRelation.Text, cmbRelationType.Text, ntxtAge.Text, cmbGender.Text, cmbAgeUnit.Text, (string)cmbConsultant.SelectedValue,
                     (string)cmbReference.SelectedValue, cmbReference.Text, "", txtReason.Text, "0", (string)cmbArea.SelectedValue, txtAddress.Text, txtEmergency.Text, txtMobile.Text,
-                    txtOtherContact.Text, txtEmail.Text, txtRemarks.Text, "0", "0",txtCnic.Text,cmbCnicRelation.Text,txtCNICPerson.Text);
+                    txtOtherContact.Text, txtEmail.Text, txtRemarks.Text, "0", "0", txtCnic.Text, cmbCnicRelation.Text, txtCNICPerson.Text,txtMrno.Text);
                 MessageBox.Show("Record Successfully Saved..!");
 
                 if (txtSerialNo.Text == "")
@@ -319,11 +312,10 @@ namespace ERP.Forms
                        cmbRelationType.Text);
                 }
 
-                FillDetail(); 
+                FillDetail();
                 txtRegAlpha.Focus();
             }
         }
-
         private void cmbMembership_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!FLogIn)
@@ -376,12 +368,10 @@ namespace ERP.Forms
                 cmbPatientId.SelectedIndex = -1;
             }
         }
-
         private void cmbPatientId_Validated(object sender, EventArgs e)
         {
             cmbPatientId.Text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(cmbPatientId.Text);
         }
-
         private void cmbPatientTitle_Validated(object sender, EventArgs e)
         {
             if (cmbPatientTitle.Text == "Ms." || cmbPatientTitle.Text == "Miss." || cmbPatientTitle.Text == "Mrs." || cmbPatientTitle.Text == "Baby." || cmbPatientTitle.Text == "D/O.")
@@ -389,19 +379,16 @@ namespace ERP.Forms
             else
                 cmbGender.Text = "Male";
         }
-
         private void btnNew_Click(object sender, EventArgs e)
         {
             New();
         }
-
         private void getRegno()
         {
             DataTable dt = Query.getData("SELECT * FROM Next_RegNo");
             txtRegAlpha.Text = dt.Rows[0]["regnoalpha"].ToString();
             ntxtRegNo.Text = dt.Rows[0]["regnonumeric"].ToString();
         }
-
         private void New()
         {
             DataTable dt = Query.getData("SELECT * FROM Next_RegNo");
@@ -438,13 +425,12 @@ namespace ERP.Forms
             cmbReference.Enabled = true;
 
             CurrentDateTime();
-           
+
             //basit 14-07-2020
             txtRegAlpha.Focus();
             cmbPatientType.SelectedIndex = 0;
             lblUserName.Visible = false;
         }
-
         private void CurrentDateTime()
         {
             dtpDate.Value = SoftwareInfo.ServerDate;//DateTime.Now;
@@ -464,7 +450,6 @@ namespace ERP.Forms
             PrintReport(false);
 
         }
-
         private void PrintReport(bool DirectPrint)
         {
             Reports.CrpInPAdmForm rpt = new Reports.CrpInPAdmForm();
@@ -489,19 +474,16 @@ namespace ERP.Forms
             {
                 rpt.PrintToPrinter(1, false, 1, 9999);
             }
-            
-        }
 
+        }
         private void btnShowAll_Click(object sender, EventArgs e)
         {
             FillForm(true);
         }
-
         private void btnShowLast_Click(object sender, EventArgs e)
         {
             FillForm(false);
         }
-
         private void btnPrint_Click(object sender, EventArgs e)
         {
             //Reports.CrpInPAdmForm rpt = new Reports.CrpInPAdmForm();
@@ -512,18 +494,16 @@ namespace ERP.Forms
 
             PrintReport(true);
         }
-
         private void frmAddmissionInfo_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 SendKeys.Send("{tab}");
-                
-            }
-            
-            
-        }
 
+            }
+
+
+        }
         private void txtRegAlpha_Validated(object sender, EventArgs e)
         {
             ntxtRegNo.Select(0, ntxtRegNo.Value.ToString().Length);
@@ -546,29 +526,26 @@ namespace ERP.Forms
             {
                 FillData();
             }
-           
+
 
         }
         private void ntxtRegNo_Leave(object sender, EventArgs e)
         {
-           
-        }
 
+        }
         private void dtpDate_ValueChanged(object sender, EventArgs e)
         {
 
         }
-
         private void dtpTime_ValueChanged(object sender, EventArgs e)
         {
 
         }
-
-        private bool ValidationOnControls() 
+        private bool ValidationOnControls()
         {
             if (txtRoom.Text == "")
             {
-                MessageBox.Show("Pls Select Room...!!!","",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Pls Select Room...!!!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtRoom.Focus();
                 return false;
             }
@@ -578,7 +555,7 @@ namespace ERP.Forms
                 cmbPatientId.Focus();
                 return false;
             }
-            else if(Convert.ToInt32(ntxtAge.Value)==0.0)
+            else if (Convert.ToInt32(ntxtAge.Value) == 0.0)
             {
                 MessageBox.Show("Enter Age...!!!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ntxtAge.Focus();
@@ -590,7 +567,7 @@ namespace ERP.Forms
                 cmbConsultant.Focus();
                 return false;
             }
-            else if(cmbMembership.SelectedValue==null && cmbMembership.Visible==true)
+            else if (cmbMembership.SelectedValue == null && cmbMembership.Visible == true)
             {
                 MessageBox.Show("Enter Member Id..!!!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbMembership.Focus();
@@ -614,35 +591,30 @@ namespace ERP.Forms
                 txtCnic.Focus();
                 return false;
             }
-            
-            else 
+
+            else
             {
                 return true;
             }
 
         }
-
         private void btnCurRoom_Click(object sender, EventArgs e)
         {
             frmCurRoom frm = new frmCurRoom();
             frm.Show();
         }
-
         private void label22_Click(object sender, EventArgs e)
         {
 
         }
-
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }
-
         private void txtAddress__TextChanged(object sender, EventArgs e)
         {
 
         }
-
         private void grpBasicInfo_Enter(object sender, EventArgs e)
         {
 
@@ -670,7 +642,7 @@ namespace ERP.Forms
             }
             catch (Exception ex)
             {
-                
+
             }
         }
         private void txtMobile_Leave(object sender, EventArgs e)
@@ -696,15 +668,10 @@ namespace ERP.Forms
 
             }
         }
-        //No = String.Format("{0:##########}", Convert.ToString(CellNo));
-        //No_ = String.Format("{0:### ### ###}", Convert.ToString(CellNo));
-
-        //No = "0" + Convert.ToInt64(CellNo).ToString("##########");
-        //No_ = "0" + Convert.ToInt64(CellNo).ToString("###-#######");
         DataTable dtDetail1;
         void FillData()
         {
-            if (txtEmergency.Text != "" && txtRegAlpha.Text =="" )
+            if (txtEmergency.Text != "" && txtRegAlpha.Text == "")
             {
                 dtDetail1 = Query.getData("SELECT  a.* FROM admissioninfo a where emergency='" + No + "' OR emergency='" + No_ + "'");
             }
@@ -712,25 +679,25 @@ namespace ERP.Forms
             {
                 dtDetail1 = Query.getData("SELECT  a.* FROM admissioninfo a where mobile='" + No + "' OR mobile='" + No_ + "'");
             }
-            else if (txtRegAlpha.Text.Length>0 && ntxtRegNo.Text.Length>0 && txtEmergency.Text == "")
+            else if (txtRegAlpha.Text.Length > 0 && ntxtRegNo.Text.Length > 0 && txtEmergency.Text == "")
             {
                 dtDetail1 = Query.getData("SELECT  a.* FROM admissioninfo a  left JOIN  roomindex r ON a.roomid = r.id where regnoalpha='" + txtRegAlpha.Text + "' AND regnonumeric='" + ntxtRegNo.Text + "'");
             }
-           
+
             if (dtDetail1.Rows.Count > 0)
             {
-               /// txtSerialNo.Text = dtDetail.Rows[0]["serialno"].ToString();
+                /// txtSerialNo.Text = dtDetail.Rows[0]["serialno"].ToString();
                 ///txtRegAlpha.Text = dtDetail.Rows[0]["regnoalpha"].ToString();
-               /// ntxtRegNo.Text = dtDetail.Rows[0]["regnonumeric"].ToString();
-              //// dtpDate.Value = (DateTime)dtDetail.Rows[0]["admdate"];
-              ///  dtpTime.Value = (DateTime)dtDetail.Rows[0]["admtime"];
-              ///  txtRoom.Text = dtDetail.Rows[0]["roomname"].ToString();
-               /// RoomId = dtDetail.Rows[0]["roomid"].ToString();
+                /// ntxtRegNo.Text = dtDetail.Rows[0]["regnonumeric"].ToString();
+                //// dtpDate.Value = (DateTime)dtDetail.Rows[0]["admdate"];
+                ///  dtpTime.Value = (DateTime)dtDetail.Rows[0]["admtime"];
+                ///  txtRoom.Text = dtDetail.Rows[0]["roomname"].ToString();
+                /// RoomId = dtDetail.Rows[0]["roomid"].ToString();
                 cmbPatientType.SelectedValue = dtDetail1.Rows[0]["patienttype"];
                 cmbMembership.SelectedValue = dtDetail1.Rows[0]["bmjnewno"];
                 cmbPatientTitle.Text = dtDetail1.Rows[0]["title"].ToString();
                 getPatients();
-               //cmbPatientId.Text = dtDetail.Rows[0]["patientname"].ToString();
+                //cmbPatientId.Text = dtDetail.Rows[0]["patientname"].ToString();
                 cmbGender.Text = dtDetail1.Rows[0]["gender"].ToString();
                 ntxtAge.Text = dtDetail1.Rows[0]["age"].ToString();
                 cmbAgeUnit.Text = dtDetail1.Rows[0]["ymd"].ToString();
@@ -764,10 +731,10 @@ namespace ERP.Forms
                 {
                     string room = txtRoom.Text;
                     bool contains = room.Contains("DW");
-                    if (dtDetail1.Rows[0]["dischargeyn"].ToString() == "1"  && contains == true)
+                    if (dtDetail1.Rows[0]["dischargeyn"].ToString() == "1" && contains == true)
                     {
-                         grpBasicInfo.Enabled = true;
-                         grpContact.Enabled = true;
+                        grpBasicInfo.Enabled = true;
+                        grpContact.Enabled = true;
                     }
                     else
                     {
@@ -781,7 +748,7 @@ namespace ERP.Forms
             else
             {
             }
-           
+
         }
         void getPatients()
         {
@@ -808,14 +775,13 @@ namespace ERP.Forms
             catch (Exception ex)
             {
             }
-           
-        }
 
+        }
         private void cmbPatientId_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                if (cmbPatientId.SelectedIndex>0)
+                if (cmbPatientId.SelectedIndex > 0)
                 {
                     FillpatientsData();
                 }
@@ -828,7 +794,7 @@ namespace ERP.Forms
         {
             string q = "SELECT  a.* FROM admissioninfo a where patientname='" + cmbPatientId.Text + "' AND (emergency='" + No + "' OR emergency='" + No_ + "')";
             DataTable dtDetail = Query.getData(q);
-           if (dtDetail.Rows.Count > 0)
+            if (dtDetail.Rows.Count > 0)
             {
                 /// txtSerialNo.Text = dtDetail.Rows[0]["serialno"].ToString();
                 ///txtRegAlpha.Text = dtDetail.Rows[0]["regnoalpha"].ToString();
@@ -840,7 +806,7 @@ namespace ERP.Forms
                 cmbPatientType.SelectedValue = dtDetail.Rows[0]["patienttype"];
                 cmbMembership.SelectedValue = dtDetail.Rows[0]["bmjnewno"];
                 cmbPatientTitle.Text = dtDetail.Rows[0]["title"].ToString();
-               
+
                 // cmbPatientId.Text = dtDetail.Rows[0]["patientname"].ToString();
                 cmbGender.Text = dtDetail.Rows[0]["gender"].ToString();
                 ntxtAge.Text = dtDetail.Rows[0]["age"].ToString();
@@ -887,10 +853,52 @@ namespace ERP.Forms
                 #endregion
             }
         }
-
         private void cmbRelationType_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+        private void GenerateNewMRNumber()
+        {
+
+            DataTable dtt = null;
+            if (txtCnic.Text == "00000-0000000-0" && !string.IsNullOrWhiteSpace(txtEmergency.Text))
+            {
+                dtt = Query.getData("SELECT  a.* FROM admissioninfo a where emergency='" + No + "' OR emergency='" + No_ + "'");
+            }
+            else if (!string.IsNullOrWhiteSpace(txtCnic.Text))
+            {
+                dtt = Query.getData("SELECT  a.* FROM admissioninfo a where cnic='" + txtCnic.Text + "'");
+            }
+            if (dtt.Rows.Count > 0)
+            {
+                txtMrno.Text = dtt.Rows[0]["MRNo"].ToString();
+            }
+
+            if (txtMrno.Text == "")
+            {
+                int currentYear = DateTime.Now.Year;
+                string yearString = currentYear.ToString();
+
+                DataTable dt = Query.getData("SELECT Max(MRNo) as MRno FROM  admissioninfo"); ;
+                int lastMrNumberForYear = 0;
+
+                if (dt.Rows.Count > 0 && dt.Rows[0][0] != DBNull.Value)
+                {
+                    string lastMrNumber = dt.Rows[0][0].ToString();
+                    if (lastMrNumber.StartsWith(yearString))
+                    {
+                        string numberPart = lastMrNumber.Substring(4);
+                        int number;
+                        if (int.TryParse(numberPart, out number))
+                        {
+                            lastMrNumberForYear = number;
+                        }
+                    }
+                }
+                int newMrNumber = lastMrNumberForYear + 1;
+                string newMrNumberString = yearString + newMrNumber.ToString("D5");
+                txtMrno.Text = newMrNumberString;
+            }
         }
     }
 }

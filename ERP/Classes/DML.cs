@@ -403,7 +403,16 @@ string Vipdopd)
             return Saved;
         }
 
-        public static bool docTemplate_add_edit(string Vid, string VTemplatename, string Vdocument,string IsEcho)
+        public static bool docTemplate_add_edit(string Vid, string VTemplatename, string Vdocument,string IsEcho,
+            string lvSystolic,
+            string lvDiastolic,
+            string lvSeptalThickness,
+            string leftAtrium,
+            string rightVentricle,
+            string ef,
+            string postWallThickness,
+            string aortic,
+            string aorticValveOpening)
         {
             bool Saved = false;
             OracleCommand com = new OracleCommand("docTemplate_add_edit", clsConnection.con);
@@ -414,6 +423,15 @@ string Vipdopd)
             com.Parameters.Add("VUser", OracleDbType.Varchar2).Value = UserInfo.UserId;
             com.Parameters.Add("VStatus", OracleDbType.Varchar2).Value = "0";
             com.Parameters.Add("VIsEcho", OracleDbType.Varchar2).Value = IsEcho;
+            com.Parameters.Add("p_lv_systolic", OracleDbType.Varchar2).Value = (object)lvSystolic ?? DBNull.Value;
+            com.Parameters.Add("p_lv_diastolic", OracleDbType.Varchar2).Value = (object)lvDiastolic ?? DBNull.Value;
+            com.Parameters.Add("p_lv_spetal_thickness", OracleDbType.Varchar2).Value = (object)lvSeptalThickness ?? DBNull.Value;
+            com.Parameters.Add("p_left_atrium", OracleDbType.Varchar2).Value = (object)leftAtrium ?? DBNull.Value;
+            com.Parameters.Add("p_right_ventricle", OracleDbType.Varchar2).Value = (object)rightVentricle ?? DBNull.Value;
+            com.Parameters.Add("p_ef", OracleDbType.Varchar2).Value = ef;
+            com.Parameters.Add("p_post_wall_thickness", OracleDbType.Varchar2).Value = (object)postWallThickness ?? DBNull.Value;
+            com.Parameters.Add("p_aortic", OracleDbType.Varchar2).Value = (object)aortic ?? DBNull.Value;
+            com.Parameters.Add("p_aortic_valve_opening", OracleDbType.Varchar2).Value = (object)aorticValveOpening ?? DBNull.Value;
             //OracleParameter Retparam = com.Parameters.Add("RetReportNo", OracleDbType.Varchar2, 10);
 
             //Retparam.Direction = ParameterDirection.Output;
@@ -425,13 +443,13 @@ string Vipdopd)
         public static bool addmissionInfo_add_edit(string Vadmissionid, string Vserialno, string Vregnoalpha, string Vregnonumeric, DateTime Vadmdate, DateTime Vadmtime, string Vroomid, string Vpatienttype,
             string Vbmjnewno, string Vtitle, string Vpatientname, string Vrelationname, string Vrelation, string Vage, string Vgender, string Vymd, string Vconsultantid, string Vreferenceid, string Vreferencename,
             string Vreferenceeffectdate, string Vadmittedfor, string Vcityid, string Vareaid, string Vaddress, string Vemergency, string Vmobile, string Vothercontact, string Vemail, string Vremarks,
-            string Vdischargeyn, string Vstatus, string VCNIC, string VcnicRelation, string VCNICPerson)
+            string Vdischargeyn, string Vstatus, string VCNIC, string VcnicRelation, string VCNICPerson,string Mrno)
         {
 
 
             bool Saved = false;
             /// OracleCommand com = new OracleCommand("addmissionInfo_add_edit", clsConnection.con);
-            OracleCommand com = new OracleCommand("addmissioninfo_add_edit_U", clsConnection.con);
+            OracleCommand com = new OracleCommand("addmissioninfo_add_edit_u1", clsConnection.con);
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.Add("Vadmissionid", OracleDbType.Varchar2).Value = Vadmissionid;
             com.Parameters.Add("Vserialno", OracleDbType.Varchar2).Value = Vserialno;
@@ -474,6 +492,7 @@ string Vipdopd)
             com.Parameters.Add("VcnicRelation", OracleDbType.Varchar2).Value = VcnicRelation;
             com.Parameters.Add("VCNICPerson", OracleDbType.Varchar2).Value = VCNICPerson;
             com.Parameters.Add("Vsessionid", OracleDbType.Varchar2).Value = "0";
+            com.Parameters.Add("Vmrno", OracleDbType.Varchar2).Value = Mrno;
             //OracleParameter Retparam = com.Parameters.Add("RetReportNo", OracleDbType.Varchar2, 10);
 
             //Retparam.Direction = ParameterDirection.Output;
@@ -506,11 +525,12 @@ string Vipdopd)
             decimal VpartialAmount,
             decimal Vnetbalance,
             decimal Velectricitycharges,
+            string VMRNo,
             ref string voucher)
 
         {
             bool Saved = false;
-            OracleCommand com = new OracleCommand("opdreceipt_add_edit_TEST_new", clsConnection.con);
+            OracleCommand com = new OracleCommand("opdreceipt_add_edit_test_new1", clsConnection.con);
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.Add("VReceiptNo", OracleDbType.Varchar2).Value = VReceiptNo;
             com.Parameters.Add("VtokenNo", OracleDbType.Decimal).Value = VtokenNo;
@@ -539,6 +559,7 @@ string Vipdopd)
             com.Parameters.Add("Vnetbalance", OracleDbType.Decimal).Value = Vnetbalance;
             com.Parameters.Add("Velectricitycharges", OracleDbType.Decimal).Value = Velectricitycharges;
             com.Parameters.Add("VlaboratoryConsultantid", OracleDbType.Varchar2).Value = VCatagoryId == "2" ? VConsultantID : null;
+            com.Parameters.Add("VMRNo", OracleDbType.Varchar2).Value = VMRNo;
             OracleParameter Retparam = com.Parameters.Add("RetVoucherNo", OracleDbType.Varchar2, 10);
 
             Retparam.Direction = ParameterDirection.Output;
@@ -1472,8 +1493,6 @@ string Vipdopd)
             }
         }
 
-
-
         public static bool cardiography_add_edit(
             ref int? p_id,
             DateTime vdate,
@@ -1483,19 +1502,19 @@ string Vipdopd)
             string slipNo,
             string echoNo,
             string tapeNo,
-            decimal? height,
-            decimal? weight,
+            string height,
+            string weight,
             string clinicalDiagnosis,
             string refPhysician,
-            decimal? lvSystolic,
-            decimal? lvDiastolic,
-            decimal? lvSeptalThickness,
-            decimal? leftAtrium,
-            decimal? rightVentricle,
-            decimal? ef,
-            decimal? postWallThickness,
-            decimal? aortic,
-            decimal? aorticValveOpening,
+            string lvSystolic,
+            string lvDiastolic,
+            string lvSeptalThickness,
+            string leftAtrium,
+            string rightVentricle,
+            string ef,
+            string postWallThickness,
+            string aortic,
+            string aorticValveOpening,
             string description,
             string createdBy,
             DateTime createdTime,
@@ -1525,19 +1544,19 @@ string Vipdopd)
                 com.Parameters.Add("p_slipno", OracleDbType.Varchar2).Value = slipNo;
                 com.Parameters.Add("p_echono", OracleDbType.Varchar2).Value = echoNo;
                 com.Parameters.Add("p_tapeno", OracleDbType.Varchar2).Value = tapeNo;
-                com.Parameters.Add("p_height", OracleDbType.Decimal).Value = (object)height ?? DBNull.Value;
-                com.Parameters.Add("p_weight", OracleDbType.Decimal).Value = (object)weight ?? DBNull.Value;
+                com.Parameters.Add("p_height", OracleDbType.Varchar2).Value = (object)height ?? DBNull.Value;
+                com.Parameters.Add("p_weight", OracleDbType.Varchar2).Value = (object)weight ?? DBNull.Value;
                 com.Parameters.Add("p_clinical_diagnosis", OracleDbType.Varchar2).Value = clinicalDiagnosis;
                 com.Parameters.Add("p_ref_physician", OracleDbType.Varchar2).Value = refPhysician;
-                com.Parameters.Add("p_lv_systolic", OracleDbType.Decimal).Value = (object)lvSystolic ?? DBNull.Value;
-                com.Parameters.Add("p_lv_diastolic", OracleDbType.Decimal).Value = (object)lvDiastolic ?? DBNull.Value;
-                com.Parameters.Add("p_lv_spetal_thickness", OracleDbType.Decimal).Value = (object)lvSeptalThickness ?? DBNull.Value;
-                com.Parameters.Add("p_left_atrium", OracleDbType.Decimal).Value = (object)leftAtrium ?? DBNull.Value;
-                com.Parameters.Add("p_right_ventricle", OracleDbType.Decimal).Value = (object)rightVentricle ?? DBNull.Value;
-                com.Parameters.Add("p_ef", OracleDbType.Decimal).Value = (object)ef ?? DBNull.Value;
-                com.Parameters.Add("p_post_wall_thickness", OracleDbType.Decimal).Value = (object)postWallThickness ?? DBNull.Value;
-                com.Parameters.Add("p_aortic", OracleDbType.Decimal).Value = (object)aortic ?? DBNull.Value;
-                com.Parameters.Add("p_aortic_valve_opening", OracleDbType.Decimal).Value = (object)aorticValveOpening ?? DBNull.Value;
+                com.Parameters.Add("p_lv_systolic", OracleDbType.Varchar2).Value = (object)lvSystolic ?? DBNull.Value;
+                com.Parameters.Add("p_lv_diastolic", OracleDbType.Varchar2).Value = (object)lvDiastolic ?? DBNull.Value;
+                com.Parameters.Add("p_lv_spetal_thickness", OracleDbType.Varchar2).Value = (object)lvSeptalThickness ?? DBNull.Value;
+                com.Parameters.Add("p_left_atrium", OracleDbType.Varchar2).Value = (object)leftAtrium ?? DBNull.Value;
+                com.Parameters.Add("p_right_ventricle", OracleDbType.Varchar2).Value = (object)rightVentricle ?? DBNull.Value;
+                com.Parameters.Add("p_ef", OracleDbType.Varchar2).Value = ef.ToString();
+                com.Parameters.Add("p_post_wall_thickness", OracleDbType.Varchar2).Value = (object)postWallThickness ?? DBNull.Value;
+                com.Parameters.Add("p_aortic", OracleDbType.Varchar2).Value = (object)aortic ?? DBNull.Value;
+                com.Parameters.Add("p_aortic_valve_opening", OracleDbType.Varchar2).Value = (object)aorticValveOpening ?? DBNull.Value;
                 com.Parameters.Add("p_description", OracleDbType.Clob).Value = description ?? string.Empty;
                 com.Parameters.Add("p_createdby", OracleDbType.Varchar2).Value = createdBy;
                 com.Parameters.Add("p_createdtime", OracleDbType.Date).Value = createdTime;
@@ -1554,5 +1573,61 @@ string Vipdopd)
         }
 
 
+        public static bool xRay_add_edit(
+           ref int? p_id,
+           DateTime vdate,
+           int type,
+           string patientname,
+           string age,
+           string slipNo,
+           string height,
+           string weight,
+           string clinicalDiagnosis,
+           string refPhysician,
+           string description,
+           string createdBy,
+           DateTime createdTime,
+           int status,
+           string sessionId,
+           string description1,
+           string description2
+           )
+        {
+            bool saved = false;
+
+            using (OracleCommand com = new OracleCommand("xRay_add_edit", clsConnection.con))
+            {
+                com.CommandType = CommandType.StoredProcedure;
+                OracleParameter pIdParam = new OracleParameter("p_id", OracleDbType.Int32);
+                pIdParam.Direction = ParameterDirection.InputOutput;
+                if (p_id.HasValue)
+                    pIdParam.Value = p_id.Value;
+                else
+                    pIdParam.Value = DBNull.Value;
+                com.Parameters.Add(pIdParam);
+
+                com.Parameters.Add("p_vdate", OracleDbType.Date).Value = vdate;
+                com.Parameters.Add("p_type", OracleDbType.Int32).Value = type;
+                com.Parameters.Add("p_patientName", OracleDbType.Varchar2).Value = patientname;
+                com.Parameters.Add("p_age", OracleDbType.Varchar2).Value = age;
+                com.Parameters.Add("p_slipno", OracleDbType.Varchar2).Value = slipNo;
+                com.Parameters.Add("p_height", OracleDbType.Varchar2).Value = (object)height ?? DBNull.Value;
+                com.Parameters.Add("p_weight", OracleDbType.Varchar2).Value = (object)weight ?? DBNull.Value;
+                com.Parameters.Add("p_clinical_diagnosis", OracleDbType.Varchar2).Value = clinicalDiagnosis;
+                com.Parameters.Add("p_ref_physician", OracleDbType.Varchar2).Value = refPhysician;
+                com.Parameters.Add("p_description", OracleDbType.Clob).Value = description ?? string.Empty;
+                com.Parameters.Add("p_createdby", OracleDbType.Varchar2).Value = createdBy;
+                com.Parameters.Add("p_createdtime", OracleDbType.Date).Value = createdTime;
+                com.Parameters.Add("p_status", OracleDbType.Int32).Value = status;
+                com.Parameters.Add("p_sessionid", OracleDbType.Varchar2).Value = sessionId;
+                com.Parameters.Add("p_description1", OracleDbType.Clob).Value = description1 ?? string.Empty;
+                com.Parameters.Add("p_description2", OracleDbType.Clob).Value = description2 ?? string.Empty;
+
+                com.ExecuteNonQuery();
+                saved = true;
+            }
+
+            return saved;
+        }
     }
 }

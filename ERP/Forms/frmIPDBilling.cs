@@ -336,15 +336,15 @@ namespace ERP.Forms
                     string discount = dt.Rows[0]["discount"].ToString();
                 ntxtDiscount.Value = discount == "" ? 0 : (Decimal)dt.Rows[0]["discount"];
                 txtdischargeRemrks.Text = dt.Rows[0]["remarks"].ToString();
-                ntxtDiscount.Value = (Decimal)dt.Rows[0]["totdiscount"];
+                //ntxtDiscount.Value = (Decimal)dt.Rows[0]["totdiscount"];
                 
                 RefundAmount = Convert.ToDecimal(Validation.DBNullTo(dt.Rows[0]["refundamount"], 0));
                 txtrefunded.Value = RefundAmount;
                 chkPackage.Checked = dt.Rows[0]["ispackage"].ToString() == "1" ? true : false;
-
+                ntxtTBdiscount.Value = ntxtDiscount.Value + txtdiscount2.Value + txtdiscount3.Value;
                 //FillControls.FillcmbPackageAll(cmbpackages);
 
-                
+
                 if (dt.Rows[0]["packageid"] == null)
                 {
                     if (chkPackage.Checked == true)

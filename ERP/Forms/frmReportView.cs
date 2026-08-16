@@ -96,7 +96,33 @@ namespace ERP
                     //parameters.Add(paramField);
 
                     ds = Query.Rep_Voucher(P1, P2, P3);
+                    DataTable dt = ds.Tables[0];
 
+                    DataRow dr; 
+                    string accountHead = ""; 
+                    
+                    if (P2 == "PV") 
+                    {
+                        dr = dt.Select("dr < cr").FirstOrDefault();
+                        accountHead = dr["titleofaccount"].ToString();
+                        
+                        foreach (DataRow row in dt.Select("dr < cr"))
+                        {
+                            row.Delete();
+                        }
+                    }
+                    if (P2 == "RV")
+                    {
+                        dr = dt.Select("dr > cr").FirstOrDefault();
+                        accountHead = dr["titleofaccount"].ToString();
+                        
+                        foreach (DataRow row in dt.Select("dr > cr"))
+                        {
+                            row.Delete();
+                        }
+                    }
+                    dt.AcceptChanges();
+                    
                     //
                     //---get clientExposure 10-02-2021 --- 
                     string clientexposure = "0";
@@ -107,9 +133,16 @@ namespace ERP
                         //repv.SetParameterValue("@ClientExposure", clientexposure);//get clientExposure 10-02-2021
                     }
 
-                    string  Create = ds.Tables[0].Rows[1]["createdby"].ToString();
+                    string  Create = ds.Tables[0].Rows[0]["createdby"].ToString();
                     string[] Prepared = Create.Split('|');
                     string pre = Prepared[0].ToString();
+
+                    paramField = new ParameterField();
+                    paramDiscreteValue = new ParameterDiscreteValue();
+                    paramField.Name = "@AccountHead";
+                    paramDiscreteValue.Value = accountHead;
+                    paramField.CurrentValues.Add(paramDiscreteValue);
+                    parameters.Add(paramField);
 
                     paramField = new ParameterField();
                     paramDiscreteValue = new ParameterDiscreteValue();

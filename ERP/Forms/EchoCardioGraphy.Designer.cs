@@ -29,10 +29,17 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EchoCardioGraphy));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtReportNo = new System.Windows.Forms.TextBox();
             this.tabpgDetail = new System.Windows.Forms.TabPage();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.PgDoc1 = new System.Windows.Forms.TabPage();
+            this.rtxtDoc = new System.Windows.Forms.RichTextBox();
+            this.PgDoc2 = new System.Windows.Forms.TabPage();
+            this.rtxtDoc2 = new System.Windows.Forms.RichTextBox();
+            this.PgDoc3 = new System.Windows.Forms.TabPage();
+            this.rtxtDoc3 = new System.Windows.Forms.RichTextBox();
             this.pnlControl = new System.Windows.Forms.Panel();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
@@ -47,6 +54,12 @@
             this.btnFontColor = new System.Windows.Forms.Button();
             this.btnUnderline = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.numericUpDownAorticValve = new System.Windows.Forms.TextBox();
+            this.numericUpDownAortic = new System.Windows.Forms.TextBox();
+            this.numericUpDownPWT = new System.Windows.Forms.TextBox();
+            this.numericUpDownEF = new System.Windows.Forms.TextBox();
+            this.numericUpDownRightVentricle = new System.Windows.Forms.TextBox();
+            this.numericUpDownLeftAtrium = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -54,10 +67,19 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.numericUpDownLVst = new System.Windows.Forms.TextBox();
+            this.numericUpDownLVdstolic = new System.Windows.Forms.TextBox();
+            this.numericUpDownLVstolic = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.RpatientInfo = new System.Windows.Forms.RichTextBox();
+            this.cmbTemplate = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.btnLoadTemplate = new System.Windows.Forms.Button();
+            this.txtWeight = new System.Windows.Forms.TextBox();
+            this.txtheight = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -68,39 +90,33 @@
             this.cmbIpdOpd = new System.Windows.Forms.ComboBox();
             this.txtSlipNo = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtSlipDate = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.dtpIssueDate = new System.Windows.Forms.DateTimePicker();
-            this.txtcontact = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtGender = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtAge = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtPatientName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.lblTotRecordsFetched = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label28 = new System.Windows.Forms.Label();
-            this.txtUserid = new System.Windows.Forms.TextBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.txtTdate = new System.Windows.Forms.TextBox();
-            this.txtFdate = new System.Windows.Forms.TextBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtSReceiptNo = new System.Windows.Forms.TextBox();
+            this.grpSdate = new System.Windows.Forms.GroupBox();
+            this.dtpDateTo = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.rdbDateRangeFrom = new System.Windows.Forms.RadioButton();
+            this.dtpDateFrom = new System.Windows.Forms.DateTimePicker();
+            this.rdbDateall = new System.Windows.Forms.RadioButton();
+            this.ddlType = new System.Windows.Forms.ComboBox();
+            this.label25 = new System.Windows.Forms.Label();
             this.btnFind = new System.Windows.Forms.Button();
+            this.txtSpatientName = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
             this.dgvQuery = new System.Windows.Forms.DataGridView();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.slipno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Issuedate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patientname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.echono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tapno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clinical_diagnosis = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ref_physician = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createdby = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createdtime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabDetailQuery = new System.Windows.Forms.TabControl();
             this.label22 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -110,53 +126,37 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtheight = new System.Windows.Forms.TextBox();
-            this.txtWeight = new System.Windows.Forms.TextBox();
-            this.cmbTemplate = new System.Windows.Forms.ComboBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.btnLoadTemplate = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.PgDoc1 = new System.Windows.Forms.TabPage();
-            this.rtxtDoc = new System.Windows.Forms.RichTextBox();
-            this.PgDoc2 = new System.Windows.Forms.TabPage();
-            this.rtxtDoc2 = new System.Windows.Forms.RichTextBox();
-            this.PgDoc3 = new System.Windows.Forms.TabPage();
-            this.rtxtDoc3 = new System.Windows.Forms.RichTextBox();
-            this.numericUpDownLVstolic = new System.Windows.Forms.TextBox();
-            this.numericUpDownLVdstolic = new System.Windows.Forms.TextBox();
-            this.numericUpDownLVst = new System.Windows.Forms.TextBox();
-            this.numericUpDownLeftAtrium = new System.Windows.Forms.TextBox();
-            this.numericUpDownRightVentricle = new System.Windows.Forms.TextBox();
-            this.numericUpDownEF = new System.Windows.Forms.TextBox();
-            this.numericUpDownPWT = new System.Windows.Forms.TextBox();
-            this.numericUpDownAortic = new System.Windows.Forms.TextBox();
-            this.numericUpDownAorticValve = new System.Windows.Forms.TextBox();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmbType = new System.Windows.Forms.ComboBox();
             this.tabpgDetail.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.PgDoc1.SuspendLayout();
+            this.PgDoc2.SuspendLayout();
+            this.PgDoc3.SuspendLayout();
             this.pnlControl.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.grpSdate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuery)).BeginInit();
             this.tabDetailQuery.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.PgDoc1.SuspendLayout();
-            this.PgDoc2.SuspendLayout();
-            this.PgDoc3.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtReportNo
             // 
-            this.txtReportNo.Location = new System.Drawing.Point(133, 29);
+            this.txtReportNo.Location = new System.Drawing.Point(903, 104);
             this.txtReportNo.Margin = new System.Windows.Forms.Padding(5);
             this.txtReportNo.Name = "txtReportNo";
             this.txtReportNo.ReadOnly = true;
             this.txtReportNo.Size = new System.Drawing.Size(132, 26);
             this.txtReportNo.TabIndex = 202;
+            this.txtReportNo.Visible = false;
             // 
             // tabpgDetail
             // 
+            this.tabpgDetail.AutoScroll = true;
             this.tabpgDetail.Controls.Add(this.tabControl1);
             this.tabpgDetail.Controls.Add(this.pnlControl);
             this.tabpgDetail.Controls.Add(this.btnBold);
@@ -173,10 +173,102 @@
             this.tabpgDetail.Margin = new System.Windows.Forms.Padding(5);
             this.tabpgDetail.Name = "tabpgDetail";
             this.tabpgDetail.Padding = new System.Windows.Forms.Padding(5);
-            this.tabpgDetail.Size = new System.Drawing.Size(1379, 977);
+            this.tabpgDetail.Size = new System.Drawing.Size(1090, 806);
             this.tabpgDetail.TabIndex = 0;
             this.tabpgDetail.Text = "Detail";
             this.tabpgDetail.UseVisualStyleBackColor = true;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.PgDoc1);
+            this.tabControl1.Controls.Add(this.PgDoc2);
+            this.tabControl1.Controls.Add(this.PgDoc3);
+            this.tabControl1.Location = new System.Drawing.Point(18, 419);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1051, 382);
+            this.tabControl1.TabIndex = 517;
+            // 
+            // PgDoc1
+            // 
+            this.PgDoc1.Controls.Add(this.rtxtDoc);
+            this.PgDoc1.Location = new System.Drawing.Point(4, 29);
+            this.PgDoc1.Margin = new System.Windows.Forms.Padding(4);
+            this.PgDoc1.Name = "PgDoc1";
+            this.PgDoc1.Padding = new System.Windows.Forms.Padding(4);
+            this.PgDoc1.Size = new System.Drawing.Size(1043, 349);
+            this.PgDoc1.TabIndex = 0;
+            this.PgDoc1.Text = "Document 1";
+            this.PgDoc1.UseVisualStyleBackColor = true;
+            // 
+            // rtxtDoc
+            // 
+            this.rtxtDoc.AcceptsTab = true;
+            this.rtxtDoc.AutoWordSelection = true;
+            this.rtxtDoc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtDoc.EnableAutoDragDrop = true;
+            this.rtxtDoc.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.rtxtDoc.Location = new System.Drawing.Point(4, 4);
+            this.rtxtDoc.Margin = new System.Windows.Forms.Padding(4);
+            this.rtxtDoc.Name = "rtxtDoc";
+            this.rtxtDoc.ShowSelectionMargin = true;
+            this.rtxtDoc.Size = new System.Drawing.Size(1035, 341);
+            this.rtxtDoc.TabIndex = 0;
+            this.rtxtDoc.Text = "";
+            // 
+            // PgDoc2
+            // 
+            this.PgDoc2.Controls.Add(this.rtxtDoc2);
+            this.PgDoc2.Location = new System.Drawing.Point(4, 29);
+            this.PgDoc2.Margin = new System.Windows.Forms.Padding(4);
+            this.PgDoc2.Name = "PgDoc2";
+            this.PgDoc2.Padding = new System.Windows.Forms.Padding(4);
+            this.PgDoc2.Size = new System.Drawing.Size(1043, 349);
+            this.PgDoc2.TabIndex = 1;
+            this.PgDoc2.Text = "Document 2";
+            this.PgDoc2.UseVisualStyleBackColor = true;
+            // 
+            // rtxtDoc2
+            // 
+            this.rtxtDoc2.AcceptsTab = true;
+            this.rtxtDoc2.AutoWordSelection = true;
+            this.rtxtDoc2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtDoc2.EnableAutoDragDrop = true;
+            this.rtxtDoc2.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.rtxtDoc2.Location = new System.Drawing.Point(4, 4);
+            this.rtxtDoc2.Margin = new System.Windows.Forms.Padding(4);
+            this.rtxtDoc2.Name = "rtxtDoc2";
+            this.rtxtDoc2.ShowSelectionMargin = true;
+            this.rtxtDoc2.Size = new System.Drawing.Size(1035, 341);
+            this.rtxtDoc2.TabIndex = 1;
+            this.rtxtDoc2.Text = "";
+            // 
+            // PgDoc3
+            // 
+            this.PgDoc3.Controls.Add(this.rtxtDoc3);
+            this.PgDoc3.Location = new System.Drawing.Point(4, 29);
+            this.PgDoc3.Margin = new System.Windows.Forms.Padding(4);
+            this.PgDoc3.Name = "PgDoc3";
+            this.PgDoc3.Size = new System.Drawing.Size(1043, 349);
+            this.PgDoc3.TabIndex = 2;
+            this.PgDoc3.Text = "Document 3";
+            this.PgDoc3.UseVisualStyleBackColor = true;
+            // 
+            // rtxtDoc3
+            // 
+            this.rtxtDoc3.AcceptsTab = true;
+            this.rtxtDoc3.AutoWordSelection = true;
+            this.rtxtDoc3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtDoc3.EnableAutoDragDrop = true;
+            this.rtxtDoc3.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.rtxtDoc3.Location = new System.Drawing.Point(0, 0);
+            this.rtxtDoc3.Margin = new System.Windows.Forms.Padding(4);
+            this.rtxtDoc3.Name = "rtxtDoc3";
+            this.rtxtDoc3.ShowSelectionMargin = true;
+            this.rtxtDoc3.Size = new System.Drawing.Size(1043, 349);
+            this.rtxtDoc3.TabIndex = 2;
+            this.rtxtDoc3.Text = "";
             // 
             // pnlControl
             // 
@@ -185,7 +277,7 @@
             this.pnlControl.Controls.Add(this.btnClose);
             this.pnlControl.Controls.Add(this.btnSave);
             this.pnlControl.Controls.Add(this.btnNew);
-            this.pnlControl.Location = new System.Drawing.Point(972, 372);
+            this.pnlControl.Location = new System.Drawing.Point(678, 372);
             this.pnlControl.Margin = new System.Windows.Forms.Padding(4);
             this.pnlControl.Name = "pnlControl";
             this.pnlControl.Size = new System.Drawing.Size(386, 43);
@@ -248,7 +340,7 @@
             // btnBold
             // 
             this.btnBold.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBold.Location = new System.Drawing.Point(31, 372);
+            this.btnBold.Location = new System.Drawing.Point(13, 372);
             this.btnBold.Margin = new System.Windows.Forms.Padding(4);
             this.btnBold.Name = "btnBold";
             this.btnBold.Size = new System.Drawing.Size(53, 43);
@@ -263,7 +355,7 @@
             this.btnRight.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRight.BackgroundImage")));
             this.btnRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRight.Location = new System.Drawing.Point(491, 372);
+            this.btnRight.Location = new System.Drawing.Point(426, 372);
             this.btnRight.Margin = new System.Windows.Forms.Padding(4);
             this.btnRight.Name = "btnRight";
             this.btnRight.Size = new System.Drawing.Size(53, 43);
@@ -275,7 +367,7 @@
             // btnItalic
             // 
             this.btnItalic.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnItalic.Location = new System.Drawing.Point(85, 372);
+            this.btnItalic.Location = new System.Drawing.Point(67, 372);
             this.btnItalic.Margin = new System.Windows.Forms.Padding(4);
             this.btnItalic.Name = "btnItalic";
             this.btnItalic.Size = new System.Drawing.Size(53, 43);
@@ -290,7 +382,7 @@
             this.btnCentre.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCentre.BackgroundImage")));
             this.btnCentre.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnCentre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCentre.Location = new System.Drawing.Point(438, 372);
+            this.btnCentre.Location = new System.Drawing.Point(373, 372);
             this.btnCentre.Margin = new System.Windows.Forms.Padding(4);
             this.btnCentre.Name = "btnCentre";
             this.btnCentre.Size = new System.Drawing.Size(53, 43);
@@ -304,7 +396,7 @@
             this.btnLeft.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLeft.BackgroundImage")));
             this.btnLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLeft.Location = new System.Drawing.Point(385, 372);
+            this.btnLeft.Location = new System.Drawing.Point(320, 372);
             this.btnLeft.Margin = new System.Windows.Forms.Padding(4);
             this.btnLeft.Name = "btnLeft";
             this.btnLeft.Size = new System.Drawing.Size(53, 43);
@@ -318,7 +410,7 @@
             this.btnFontStyle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFontStyle.BackgroundImage")));
             this.btnFontStyle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnFontStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFontStyle.Location = new System.Drawing.Point(310, 372);
+            this.btnFontStyle.Location = new System.Drawing.Point(245, 372);
             this.btnFontStyle.Margin = new System.Windows.Forms.Padding(4);
             this.btnFontStyle.Name = "btnFontStyle";
             this.btnFontStyle.Size = new System.Drawing.Size(53, 43);
@@ -332,7 +424,7 @@
             this.btnFontColor.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFontColor.BackgroundImage")));
             this.btnFontColor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnFontColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFontColor.Location = new System.Drawing.Point(257, 372);
+            this.btnFontColor.Location = new System.Drawing.Point(192, 372);
             this.btnFontColor.Margin = new System.Windows.Forms.Padding(4);
             this.btnFontColor.Name = "btnFontColor";
             this.btnFontColor.Size = new System.Drawing.Size(53, 43);
@@ -344,7 +436,7 @@
             // btnUnderline
             // 
             this.btnUnderline.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUnderline.Location = new System.Drawing.Point(138, 372);
+            this.btnUnderline.Location = new System.Drawing.Point(120, 372);
             this.btnUnderline.Margin = new System.Windows.Forms.Padding(4);
             this.btnUnderline.Name = "btnUnderline";
             this.btnUnderline.Size = new System.Drawing.Size(53, 43);
@@ -369,20 +461,62 @@
             this.groupBox4.Controls.Add(this.label16);
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.groupBox3);
-            this.groupBox4.Location = new System.Drawing.Point(27, 209);
+            this.groupBox4.Location = new System.Drawing.Point(13, 209);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox4.Size = new System.Drawing.Size(1331, 155);
+            this.groupBox4.Size = new System.Drawing.Size(1051, 155);
             this.groupBox4.TabIndex = 469;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Measurement in mm - Figures in bracket  indicate  normal values in mm";
+            // 
+            // numericUpDownAorticValve
+            // 
+            this.numericUpDownAorticValve.Location = new System.Drawing.Point(835, 112);
+            this.numericUpDownAorticValve.Name = "numericUpDownAorticValve";
+            this.numericUpDownAorticValve.Size = new System.Drawing.Size(95, 26);
+            this.numericUpDownAorticValve.TabIndex = 521;
+            // 
+            // numericUpDownAortic
+            // 
+            this.numericUpDownAortic.Location = new System.Drawing.Point(835, 74);
+            this.numericUpDownAortic.Name = "numericUpDownAortic";
+            this.numericUpDownAortic.Size = new System.Drawing.Size(95, 26);
+            this.numericUpDownAortic.TabIndex = 520;
+            // 
+            // numericUpDownPWT
+            // 
+            this.numericUpDownPWT.Location = new System.Drawing.Point(835, 36);
+            this.numericUpDownPWT.Name = "numericUpDownPWT";
+            this.numericUpDownPWT.Size = new System.Drawing.Size(95, 26);
+            this.numericUpDownPWT.TabIndex = 519;
+            // 
+            // numericUpDownEF
+            // 
+            this.numericUpDownEF.Location = new System.Drawing.Point(476, 109);
+            this.numericUpDownEF.Name = "numericUpDownEF";
+            this.numericUpDownEF.Size = new System.Drawing.Size(95, 26);
+            this.numericUpDownEF.TabIndex = 518;
+            // 
+            // numericUpDownRightVentricle
+            // 
+            this.numericUpDownRightVentricle.Location = new System.Drawing.Point(476, 71);
+            this.numericUpDownRightVentricle.Name = "numericUpDownRightVentricle";
+            this.numericUpDownRightVentricle.Size = new System.Drawing.Size(95, 26);
+            this.numericUpDownRightVentricle.TabIndex = 517;
+            // 
+            // numericUpDownLeftAtrium
+            // 
+            this.numericUpDownLeftAtrium.Location = new System.Drawing.Point(476, 36);
+            this.numericUpDownLeftAtrium.Name = "numericUpDownLeftAtrium";
+            this.numericUpDownLeftAtrium.Size = new System.Drawing.Size(95, 26);
+            this.numericUpDownLeftAtrium.TabIndex = 516;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(1029, 42);
+            this.label20.Location = new System.Drawing.Point(620, 115);
             this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(178, 20);
@@ -393,7 +527,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(677, 106);
+            this.label19.Location = new System.Drawing.Point(616, 78);
             this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(98, 20);
@@ -404,7 +538,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(672, 76);
+            this.label18.Location = new System.Drawing.Point(610, 42);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(207, 20);
@@ -415,7 +549,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(678, 42);
+            this.label17.Location = new System.Drawing.Point(323, 112);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(79, 20);
@@ -426,7 +560,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(323, 88);
+            this.label16.Location = new System.Drawing.Point(323, 78);
             this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(119, 20);
@@ -437,7 +571,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(323, 57);
+            this.label7.Location = new System.Drawing.Point(323, 42);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(92, 20);
@@ -452,7 +586,7 @@
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Location = new System.Drawing.Point(15, 37);
+            this.groupBox3.Location = new System.Drawing.Point(15, 27);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
@@ -460,6 +594,27 @@
             this.groupBox3.TabIndex = 467;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Left Ventricle";
+            // 
+            // numericUpDownLVst
+            // 
+            this.numericUpDownLVst.Location = new System.Drawing.Point(170, 83);
+            this.numericUpDownLVst.Name = "numericUpDownLVst";
+            this.numericUpDownLVst.Size = new System.Drawing.Size(95, 26);
+            this.numericUpDownLVst.TabIndex = 512;
+            // 
+            // numericUpDownLVdstolic
+            // 
+            this.numericUpDownLVdstolic.Location = new System.Drawing.Point(170, 50);
+            this.numericUpDownLVdstolic.Name = "numericUpDownLVdstolic";
+            this.numericUpDownLVdstolic.Size = new System.Drawing.Size(95, 26);
+            this.numericUpDownLVdstolic.TabIndex = 511;
+            // 
+            // numericUpDownLVstolic
+            // 
+            this.numericUpDownLVstolic.Location = new System.Drawing.Point(170, 19);
+            this.numericUpDownLVstolic.Name = "numericUpDownLVstolic";
+            this.numericUpDownLVstolic.Size = new System.Drawing.Size(95, 26);
+            this.numericUpDownLVstolic.TabIndex = 510;
             // 
             // label14
             // 
@@ -470,7 +625,7 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(137, 20);
             this.label14.TabIndex = 4;
-            this.label14.Text = "Spetal Thickness";
+            this.label14.Text = "Septal Thickness";
             // 
             // label8
             // 
@@ -496,6 +651,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cmbType);
+            this.groupBox1.Controls.Add(this.RpatientInfo);
             this.groupBox1.Controls.Add(this.cmbTemplate);
             this.groupBox1.Controls.Add(this.label21);
             this.groupBox1.Controls.Add(this.btnLoadTemplate);
@@ -508,37 +665,83 @@
             this.groupBox1.Controls.Add(this.txtRefPhysician);
             this.groupBox1.Controls.Add(this.txtClinicalDiagnose);
             this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.txtReportNo);
             this.groupBox1.Controls.Add(this.cmbIpdOpd);
             this.groupBox1.Controls.Add(this.txtSlipNo);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.txtSlipDate);
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.dtpIssueDate);
-            this.groupBox1.Controls.Add(this.txtcontact);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.txtGender);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtAge);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.txtPatientName);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtReportNo);
-            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(10, 9);
+            this.groupBox1.Location = new System.Drawing.Point(13, 14);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox1.Size = new System.Drawing.Size(1359, 191);
+            this.groupBox1.Size = new System.Drawing.Size(1051, 194);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Patient Info";
             // 
+            // RpatientInfo
+            // 
+            this.RpatientInfo.Location = new System.Drawing.Point(651, 16);
+            this.RpatientInfo.Name = "RpatientInfo";
+            this.RpatientInfo.Size = new System.Drawing.Size(384, 86);
+            this.RpatientInfo.TabIndex = 512;
+            this.RpatientInfo.Text = "";
+            // 
+            // cmbTemplate
+            // 
+            this.cmbTemplate.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbTemplate.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTemplate.FormattingEnabled = true;
+            this.cmbTemplate.Location = new System.Drawing.Point(655, 145);
+            this.cmbTemplate.Margin = new System.Windows.Forms.Padding(5);
+            this.cmbTemplate.Name = "cmbTemplate";
+            this.cmbTemplate.Size = new System.Drawing.Size(241, 28);
+            this.cmbTemplate.TabIndex = 509;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(501, 149);
+            this.label21.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(144, 25);
+            this.label21.TabIndex = 510;
+            this.label21.Text = "Echo Template";
+            // 
+            // btnLoadTemplate
+            // 
+            this.btnLoadTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoadTemplate.Location = new System.Drawing.Point(919, 139);
+            this.btnLoadTemplate.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLoadTemplate.Name = "btnLoadTemplate";
+            this.btnLoadTemplate.Size = new System.Drawing.Size(101, 37);
+            this.btnLoadTemplate.TabIndex = 511;
+            this.btnLoadTemplate.Text = "Load";
+            this.btnLoadTemplate.UseVisualStyleBackColor = true;
+            this.btnLoadTemplate.Click += new System.EventHandler(this.btnLoadTemplate_Click);
+            // 
+            // txtWeight
+            // 
+            this.txtWeight.Location = new System.Drawing.Point(306, 75);
+            this.txtWeight.Name = "txtWeight";
+            this.txtWeight.Size = new System.Drawing.Size(182, 26);
+            this.txtWeight.TabIndex = 508;
+            // 
+            // txtheight
+            // 
+            this.txtheight.Location = new System.Drawing.Point(101, 72);
+            this.txtheight.Name = "txtheight";
+            this.txtheight.Size = new System.Drawing.Size(104, 26);
+            this.txtheight.TabIndex = 507;
+            // 
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(757, 106);
+            this.label10.Location = new System.Drawing.Point(11, 150);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(117, 23);
@@ -549,7 +752,7 @@
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(252, 145);
+            this.label23.Location = new System.Drawing.Point(229, 78);
             this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(61, 20);
@@ -559,7 +762,7 @@
             // label11
             // 
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(5, 102);
+            this.label11.Location = new System.Drawing.Point(2, 112);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(165, 23);
@@ -570,7 +773,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(13, 146);
+            this.label24.Location = new System.Drawing.Point(20, 75);
             this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(58, 20);
@@ -579,30 +782,30 @@
             // 
             // txtRefPhysician
             // 
-            this.txtRefPhysician.Location = new System.Drawing.Point(881, 102);
+            this.txtRefPhysician.Location = new System.Drawing.Point(169, 150);
             this.txtRefPhysician.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtRefPhysician.Name = "txtRefPhysician";
-            this.txtRefPhysician.Size = new System.Drawing.Size(424, 26);
+            this.txtRefPhysician.Size = new System.Drawing.Size(319, 26);
             this.txtRefPhysician.TabIndex = 506;
             // 
             // txtClinicalDiagnose
             // 
-            this.txtClinicalDiagnose.Location = new System.Drawing.Point(175, 100);
+            this.txtClinicalDiagnose.Location = new System.Drawing.Point(168, 112);
             this.txtClinicalDiagnose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtClinicalDiagnose.Name = "txtClinicalDiagnose";
-            this.txtClinicalDiagnose.Size = new System.Drawing.Size(556, 26);
+            this.txtClinicalDiagnose.Size = new System.Drawing.Size(320, 26);
             this.txtClinicalDiagnose.TabIndex = 505;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(279, 31);
+            this.label15.Location = new System.Drawing.Point(23, 37);
             this.label15.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(79, 20);
+            this.label15.Size = new System.Drawing.Size(50, 20);
             this.label15.TabIndex = 228;
-            this.label15.Text = "IPD/OPD";
+            this.label15.Text = "Type ";
             // 
             // cmbIpdOpd
             // 
@@ -611,59 +814,41 @@
             this.cmbIpdOpd.Items.AddRange(new object[] {
             "IPD",
             "OPD"});
-            this.cmbIpdOpd.Location = new System.Drawing.Point(367, 27);
+            this.cmbIpdOpd.Location = new System.Drawing.Point(101, 32);
             this.cmbIpdOpd.Margin = new System.Windows.Forms.Padding(4);
             this.cmbIpdOpd.Name = "cmbIpdOpd";
-            this.cmbIpdOpd.Size = new System.Drawing.Size(83, 28);
+            this.cmbIpdOpd.Size = new System.Drawing.Size(104, 28);
             this.cmbIpdOpd.TabIndex = 227;
             this.cmbIpdOpd.Tag = "Lock";
             // 
             // txtSlipNo
             // 
-            this.txtSlipNo.Location = new System.Drawing.Point(511, 28);
+            this.txtSlipNo.Location = new System.Drawing.Point(306, 28);
             this.txtSlipNo.Margin = new System.Windows.Forms.Padding(5);
             this.txtSlipNo.Name = "txtSlipNo";
-            this.txtSlipNo.Size = new System.Drawing.Size(143, 26);
+            this.txtSlipNo.Size = new System.Drawing.Size(182, 26);
             this.txtSlipNo.TabIndex = 0;
             this.txtSlipNo.Tag = "Lock";
+            this.txtSlipNo.Enter += new System.EventHandler(this.txtSlipNo_Enter);
+            this.txtSlipNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSlipNo_KeyDown);
             this.txtSlipNo.Validated += new System.EventHandler(this.txtSlipNo_Validated);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(454, 32);
+            this.label9.Location = new System.Drawing.Point(229, 32);
             this.label9.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(51, 20);
             this.label9.TabIndex = 219;
             this.label9.Text = "Slip #";
             // 
-            // txtSlipDate
-            // 
-            this.txtSlipDate.Location = new System.Drawing.Point(1144, 28);
-            this.txtSlipDate.Margin = new System.Windows.Forms.Padding(5);
-            this.txtSlipDate.Name = "txtSlipDate";
-            this.txtSlipDate.ReadOnly = true;
-            this.txtSlipDate.Size = new System.Drawing.Size(161, 26);
-            this.txtSlipDate.TabIndex = 2;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(1053, 32);
-            this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 20);
-            this.label6.TabIndex = 213;
-            this.label6.Text = "Slip Date";
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(664, 32);
+            this.label13.Location = new System.Drawing.Point(507, 114);
             this.label13.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(127, 18);
@@ -674,98 +859,11 @@
             // 
             this.dtpIssueDate.CustomFormat = "dd-MMM-yyyy hh:mm tt";
             this.dtpIssueDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpIssueDate.Location = new System.Drawing.Point(809, 28);
+            this.dtpIssueDate.Location = new System.Drawing.Point(652, 110);
             this.dtpIssueDate.Margin = new System.Windows.Forms.Padding(5);
             this.dtpIssueDate.Name = "dtpIssueDate";
-            this.dtpIssueDate.Size = new System.Drawing.Size(230, 26);
+            this.dtpIssueDate.Size = new System.Drawing.Size(241, 26);
             this.dtpIssueDate.TabIndex = 1;
-            // 
-            // txtcontact
-            // 
-            this.txtcontact.Location = new System.Drawing.Point(1080, 63);
-            this.txtcontact.Margin = new System.Windows.Forms.Padding(5);
-            this.txtcontact.Name = "txtcontact";
-            this.txtcontact.Size = new System.Drawing.Size(225, 26);
-            this.txtcontact.TabIndex = 6;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(991, 67);
-            this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(67, 20);
-            this.label5.TabIndex = 209;
-            this.label5.Text = "Contact";
-            // 
-            // txtGender
-            // 
-            this.txtGender.Location = new System.Drawing.Point(822, 63);
-            this.txtGender.Margin = new System.Windows.Forms.Padding(5);
-            this.txtGender.Name = "txtGender";
-            this.txtGender.Size = new System.Drawing.Size(150, 26);
-            this.txtGender.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(738, 67);
-            this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 20);
-            this.label3.TabIndex = 207;
-            this.label3.Text = "Gender";
-            // 
-            // txtAge
-            // 
-            this.txtAge.Location = new System.Drawing.Point(586, 61);
-            this.txtAge.Margin = new System.Windows.Forms.Padding(5);
-            this.txtAge.Name = "txtAge";
-            this.txtAge.Size = new System.Drawing.Size(128, 26);
-            this.txtAge.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(528, 65);
-            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 20);
-            this.label2.TabIndex = 205;
-            this.label2.Text = "Age";
-            // 
-            // txtPatientName
-            // 
-            this.txtPatientName.Location = new System.Drawing.Point(137, 62);
-            this.txtPatientName.Margin = new System.Windows.Forms.Padding(5);
-            this.txtPatientName.Name = "txtPatientName";
-            this.txtPatientName.Size = new System.Drawing.Size(373, 26);
-            this.txtPatientName.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(4, 64);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 20);
-            this.label1.TabIndex = 203;
-            this.label1.Text = "Patient Name";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(36, 32);
-            this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 20);
-            this.label4.TabIndex = 201;
-            this.label4.Text = "Report #";
             // 
             // tabPage4
             // 
@@ -776,7 +874,7 @@
             this.tabPage4.Margin = new System.Windows.Forms.Padding(5);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(5);
-            this.tabPage4.Size = new System.Drawing.Size(1379, 833);
+            this.tabPage4.Size = new System.Drawing.Size(1090, 806);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Search";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -785,7 +883,7 @@
             // 
             this.lblTotRecordsFetched.AutoSize = true;
             this.lblTotRecordsFetched.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotRecordsFetched.Location = new System.Drawing.Point(1027, 463);
+            this.lblTotRecordsFetched.Location = new System.Drawing.Point(916, 462);
             this.lblTotRecordsFetched.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblTotRecordsFetched.Name = "lblTotRecordsFetched";
             this.lblTotRecordsFetched.Size = new System.Drawing.Size(129, 20);
@@ -794,112 +892,186 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Controls.Add(this.label28);
-            this.groupBox2.Controls.Add(this.txtUserid);
-            this.groupBox2.Controls.Add(this.label29);
-            this.groupBox2.Controls.Add(this.txtTdate);
-            this.groupBox2.Controls.Add(this.txtFdate);
-            this.groupBox2.Controls.Add(this.label30);
-            this.groupBox2.Controls.Add(this.label31);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.txtSReceiptNo);
+            this.groupBox2.Controls.Add(this.grpSdate);
+            this.groupBox2.Controls.Add(this.ddlType);
+            this.groupBox2.Controls.Add(this.label25);
             this.groupBox2.Controls.Add(this.btnFind);
+            this.groupBox2.Controls.Add(this.txtSpatientName);
+            this.groupBox2.Controls.Add(this.label28);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(9, 487);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox2.Size = new System.Drawing.Size(1291, 98);
+            this.groupBox2.Size = new System.Drawing.Size(1036, 201);
             this.groupBox2.TabIndex = 188;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Filter";
             // 
-            // textBox1
+            // label1
             // 
-            this.textBox1.Location = new System.Drawing.Point(915, 30);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(159, 26);
-            this.textBox1.TabIndex = 202;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(28, 145);
+            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(45, 20);
+            this.label1.TabIndex = 524;
+            this.label1.Text = "Type";
             // 
-            // label28
+            // txtSReceiptNo
             // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(803, 33);
-            this.label28.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(80, 20);
-            this.label28.TabIndex = 201;
-            this.label28.Text = "Receipt #";
+            this.txtSReceiptNo.Location = new System.Drawing.Point(307, 139);
+            this.txtSReceiptNo.Margin = new System.Windows.Forms.Padding(5);
+            this.txtSReceiptNo.Name = "txtSReceiptNo";
+            this.txtSReceiptNo.Size = new System.Drawing.Size(244, 26);
+            this.txtSReceiptNo.TabIndex = 522;
             // 
-            // txtUserid
+            // grpSdate
             // 
-            this.txtUserid.Location = new System.Drawing.Point(620, 30);
-            this.txtUserid.Margin = new System.Windows.Forms.Padding(5);
-            this.txtUserid.Name = "txtUserid";
-            this.txtUserid.Size = new System.Drawing.Size(159, 26);
-            this.txtUserid.TabIndex = 200;
+            this.grpSdate.Controls.Add(this.dtpDateTo);
+            this.grpSdate.Controls.Add(this.label2);
+            this.grpSdate.Controls.Add(this.rdbDateRangeFrom);
+            this.grpSdate.Controls.Add(this.dtpDateFrom);
+            this.grpSdate.Controls.Add(this.rdbDateall);
+            this.grpSdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpSdate.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.grpSdate.Location = new System.Drawing.Point(19, 48);
+            this.grpSdate.Margin = new System.Windows.Forms.Padding(4);
+            this.grpSdate.Name = "grpSdate";
+            this.grpSdate.Padding = new System.Windows.Forms.Padding(4);
+            this.grpSdate.Size = new System.Drawing.Size(532, 44);
+            this.grpSdate.TabIndex = 195;
+            this.grpSdate.TabStop = false;
+            this.grpSdate.Text = "Date";
             // 
-            // label29
+            // dtpDateTo
             // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(543, 33);
-            this.label29.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(64, 20);
-            this.label29.TabIndex = 199;
-            this.label29.Text = "Users :";
+            this.dtpDateTo.CustomFormat = "dd-MMM-yyyy";
+            this.dtpDateTo.Enabled = false;
+            this.dtpDateTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDateTo.Location = new System.Drawing.Point(379, 15);
+            this.dtpDateTo.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpDateTo.MaxDate = new System.DateTime(2060, 12, 31, 0, 0, 0, 0);
+            this.dtpDateTo.Name = "dtpDateTo";
+            this.dtpDateTo.Size = new System.Drawing.Size(145, 23);
+            this.dtpDateTo.TabIndex = 4;
+            this.dtpDateTo.Value = new System.DateTime(2026, 3, 16, 0, 0, 0, 0);
             // 
-            // txtTdate
+            // label2
             // 
-            this.txtTdate.Location = new System.Drawing.Point(360, 30);
-            this.txtTdate.Margin = new System.Windows.Forms.Padding(5);
-            this.txtTdate.Name = "txtTdate";
-            this.txtTdate.Size = new System.Drawing.Size(159, 26);
-            this.txtTdate.TabIndex = 195;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(351, 21);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(25, 17);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "To";
             // 
-            // txtFdate
+            // rdbDateRangeFrom
             // 
-            this.txtFdate.Location = new System.Drawing.Point(111, 30);
-            this.txtFdate.Margin = new System.Windows.Forms.Padding(5);
-            this.txtFdate.Name = "txtFdate";
-            this.txtFdate.Size = new System.Drawing.Size(167, 26);
-            this.txtFdate.TabIndex = 194;
+            this.rdbDateRangeFrom.AutoSize = true;
+            this.rdbDateRangeFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbDateRangeFrom.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.rdbDateRangeFrom.Location = new System.Drawing.Point(89, 17);
+            this.rdbDateRangeFrom.Margin = new System.Windows.Forms.Padding(4);
+            this.rdbDateRangeFrom.Name = "rdbDateRangeFrom";
+            this.rdbDateRangeFrom.Size = new System.Drawing.Size(107, 21);
+            this.rdbDateRangeFrom.TabIndex = 2;
+            this.rdbDateRangeFrom.Text = "Range From";
+            this.rdbDateRangeFrom.UseVisualStyleBackColor = true;
             // 
-            // label30
+            // dtpDateFrom
             // 
-            this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(288, 33);
-            this.label30.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(38, 20);
-            this.label30.TabIndex = 193;
-            this.label30.Text = "To :";
+            this.dtpDateFrom.CalendarTitleBackColor = System.Drawing.SystemColors.Highlight;
+            this.dtpDateFrom.CustomFormat = "dd-MMM-yyyy";
+            this.dtpDateFrom.Enabled = false;
+            this.dtpDateFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDateFrom.Location = new System.Drawing.Point(212, 15);
+            this.dtpDateFrom.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpDateFrom.MaxDate = new System.DateTime(2060, 12, 31, 0, 0, 0, 0);
+            this.dtpDateFrom.Name = "dtpDateFrom";
+            this.dtpDateFrom.Size = new System.Drawing.Size(131, 23);
+            this.dtpDateFrom.TabIndex = 3;
+            this.dtpDateFrom.Value = new System.DateTime(2026, 3, 16, 0, 0, 0, 0);
             // 
-            // label31
+            // rdbDateall
             // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(29, 33);
-            this.label31.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(58, 20);
-            this.label31.TabIndex = 192;
-            this.label31.Text = "From :";
+            this.rdbDateall.AutoSize = true;
+            this.rdbDateall.Checked = true;
+            this.rdbDateall.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbDateall.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.rdbDateall.Location = new System.Drawing.Point(8, 17);
+            this.rdbDateall.Margin = new System.Windows.Forms.Padding(4);
+            this.rdbDateall.Name = "rdbDateall";
+            this.rdbDateall.Size = new System.Drawing.Size(44, 21);
+            this.rdbDateall.TabIndex = 0;
+            this.rdbDateall.TabStop = true;
+            this.rdbDateall.Text = "All";
+            this.rdbDateall.UseVisualStyleBackColor = true;
+            this.rdbDateall.CheckedChanged += new System.EventHandler(this.rdbDateall_CheckedChanged);
+            // 
+            // ddlType
+            // 
+            this.ddlType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlType.FormattingEnabled = true;
+            this.ddlType.Items.AddRange(new object[] {
+            "IPD",
+            "OPD"});
+            this.ddlType.Location = new System.Drawing.Point(82, 139);
+            this.ddlType.Margin = new System.Windows.Forms.Padding(4);
+            this.ddlType.Name = "ddlType";
+            this.ddlType.Size = new System.Drawing.Size(104, 28);
+            this.ddlType.TabIndex = 523;
+            this.ddlType.Tag = "Lock";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(199, 144);
+            this.label25.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(102, 20);
+            this.label25.TabIndex = 521;
+            this.label25.Text = "Receipt No :";
             // 
             // btnFind
             // 
             this.btnFind.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFind.Location = new System.Drawing.Point(1116, 22);
+            this.btnFind.Location = new System.Drawing.Point(593, 120);
             this.btnFind.Margin = new System.Windows.Forms.Padding(5);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(113, 42);
             this.btnFind.TabIndex = 165;
             this.btnFind.Text = "&Find";
             this.btnFind.UseVisualStyleBackColor = false;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
+            // 
+            // txtSpatientName
+            // 
+            this.txtSpatientName.Location = new System.Drawing.Point(153, 101);
+            this.txtSpatientName.Margin = new System.Windows.Forms.Padding(5);
+            this.txtSpatientName.Name = "txtSpatientName";
+            this.txtSpatientName.Size = new System.Drawing.Size(398, 26);
+            this.txtSpatientName.TabIndex = 202;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(23, 107);
+            this.label28.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(120, 20);
+            this.label28.TabIndex = 201;
+            this.label28.Text = "Patient Name :";
             // 
             // dgvQuery
             // 
@@ -908,23 +1080,24 @@
             this.dgvQuery.AllowUserToOrderColumns = true;
             this.dgvQuery.AllowUserToResizeColumns = false;
             this.dgvQuery.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvQuery.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvQuery.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvQuery.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvQuery.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.type,
             this.slipno,
             this.Issuedate,
             this.patientname,
-            this.echono,
-            this.tapno,
             this.clinical_diagnosis,
-            this.ref_physician});
+            this.ref_physician,
+            this.createdby,
+            this.createdtime});
             this.dgvQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvQuery.Location = new System.Drawing.Point(5, 5);
             this.dgvQuery.Margin = new System.Windows.Forms.Padding(5);
@@ -933,9 +1106,16 @@
             this.dgvQuery.ReadOnly = true;
             this.dgvQuery.RowHeadersWidth = 30;
             this.dgvQuery.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQuery.Size = new System.Drawing.Size(1369, 452);
+            this.dgvQuery.Size = new System.Drawing.Size(1080, 452);
             this.dgvQuery.TabIndex = 164;
             this.dgvQuery.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuery_CellDoubleClick);
+            // 
+            // type
+            // 
+            this.type.HeaderText = "Type";
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
+            this.type.Width = 50;
             // 
             // slipno
             // 
@@ -943,7 +1123,6 @@
             this.slipno.MinimumWidth = 6;
             this.slipno.Name = "slipno";
             this.slipno.ReadOnly = true;
-            this.slipno.Width = 125;
             // 
             // Issuedate
             // 
@@ -951,7 +1130,7 @@
             this.Issuedate.MinimumWidth = 6;
             this.Issuedate.Name = "Issuedate";
             this.Issuedate.ReadOnly = true;
-            this.Issuedate.Width = 170;
+            this.Issuedate.Width = 120;
             // 
             // patientname
             // 
@@ -961,29 +1140,13 @@
             this.patientname.ReadOnly = true;
             this.patientname.Width = 300;
             // 
-            // echono
-            // 
-            this.echono.HeaderText = "Echo No";
-            this.echono.MinimumWidth = 6;
-            this.echono.Name = "echono";
-            this.echono.ReadOnly = true;
-            this.echono.Width = 170;
-            // 
-            // tapno
-            // 
-            this.tapno.HeaderText = "Tape No";
-            this.tapno.MinimumWidth = 6;
-            this.tapno.Name = "tapno";
-            this.tapno.ReadOnly = true;
-            this.tapno.Width = 170;
-            // 
             // clinical_diagnosis
             // 
             this.clinical_diagnosis.HeaderText = "Clinical Diagnosis";
             this.clinical_diagnosis.MinimumWidth = 6;
             this.clinical_diagnosis.Name = "clinical_diagnosis";
             this.clinical_diagnosis.ReadOnly = true;
-            this.clinical_diagnosis.Width = 200;
+            this.clinical_diagnosis.Width = 150;
             // 
             // ref_physician
             // 
@@ -991,26 +1154,42 @@
             this.ref_physician.MinimumWidth = 6;
             this.ref_physician.Name = "ref_physician";
             this.ref_physician.ReadOnly = true;
-            this.ref_physician.Width = 200;
+            this.ref_physician.Width = 150;
+            // 
+            // createdby
+            // 
+            this.createdby.HeaderText = "Createdby";
+            this.createdby.Name = "createdby";
+            this.createdby.ReadOnly = true;
+            this.createdby.Width = 150;
+            // 
+            // createdtime
+            // 
+            this.createdtime.HeaderText = "Createdtime";
+            this.createdtime.Name = "createdtime";
+            this.createdtime.ReadOnly = true;
+            this.createdtime.Width = 150;
             // 
             // tabDetailQuery
             // 
-            this.tabDetailQuery.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tabDetailQuery.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabDetailQuery.Controls.Add(this.tabpgDetail);
             this.tabDetailQuery.Controls.Add(this.tabPage4);
             this.tabDetailQuery.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabDetailQuery.Location = new System.Drawing.Point(20, 38);
+            this.tabDetailQuery.Location = new System.Drawing.Point(10, 14);
             this.tabDetailQuery.Margin = new System.Windows.Forms.Padding(5);
             this.tabDetailQuery.Name = "tabDetailQuery";
             this.tabDetailQuery.SelectedIndex = 0;
-            this.tabDetailQuery.Size = new System.Drawing.Size(1387, 1010);
+            this.tabDetailQuery.Size = new System.Drawing.Size(1098, 839);
             this.tabDetailQuery.TabIndex = 203;
             // 
             // label22
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(535, -5);
+            this.label22.Location = new System.Drawing.Point(376, 9);
             this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(286, 38);
@@ -1035,10 +1214,10 @@
             // 
             // dataGridViewTextBoxColumn3
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Format = "dd-MMM-yyyy";
-            dataGridViewCellStyle2.NullValue = null;
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Format = "dd-MMM-yyyy";
+            dataGridViewCellStyle6.NullValue = null;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewTextBoxColumn3.FillWeight = 50F;
             this.dataGridViewTextBoxColumn3.HeaderText = "Date";
             this.dataGridViewTextBoxColumn3.MinimumWidth = 110;
@@ -1079,221 +1258,44 @@
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
             this.dataGridViewTextBoxColumn7.Width = 200;
             // 
-            // txtheight
+            // dataGridViewTextBoxColumn8
             // 
-            this.txtheight.Location = new System.Drawing.Point(82, 140);
-            this.txtheight.Name = "txtheight";
-            this.txtheight.Size = new System.Drawing.Size(152, 26);
-            this.txtheight.TabIndex = 507;
+            this.dataGridViewTextBoxColumn8.HeaderText = "Createdtime";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.Width = 150;
             // 
-            // txtWeight
+            // cmbType
             // 
-            this.txtWeight.Location = new System.Drawing.Point(326, 141);
-            this.txtWeight.Name = "txtWeight";
-            this.txtWeight.Size = new System.Drawing.Size(152, 26);
-            this.txtWeight.TabIndex = 508;
-            // 
-            // cmbTemplate
-            // 
-            this.cmbTemplate.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.cmbTemplate.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTemplate.FormattingEnabled = true;
-            this.cmbTemplate.Location = new System.Drawing.Point(771, 146);
-            this.cmbTemplate.Margin = new System.Windows.Forms.Padding(5);
-            this.cmbTemplate.Name = "cmbTemplate";
-            this.cmbTemplate.Size = new System.Drawing.Size(428, 28);
-            this.cmbTemplate.TabIndex = 509;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(617, 145);
-            this.label21.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(144, 25);
-            this.label21.TabIndex = 510;
-            this.label21.Text = "Echo Template";
-            // 
-            // btnLoadTemplate
-            // 
-            this.btnLoadTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoadTemplate.Location = new System.Drawing.Point(1210, 144);
-            this.btnLoadTemplate.Margin = new System.Windows.Forms.Padding(4);
-            this.btnLoadTemplate.Name = "btnLoadTemplate";
-            this.btnLoadTemplate.Size = new System.Drawing.Size(101, 37);
-            this.btnLoadTemplate.TabIndex = 511;
-            this.btnLoadTemplate.Text = "Load";
-            this.btnLoadTemplate.UseVisualStyleBackColor = true;
-            this.btnLoadTemplate.Click += new System.EventHandler(this.btnLoadTemplate_Click);
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.PgDoc1);
-            this.tabControl1.Controls.Add(this.PgDoc2);
-            this.tabControl1.Controls.Add(this.PgDoc3);
-            this.tabControl1.Location = new System.Drawing.Point(10, 423);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1355, 546);
-            this.tabControl1.TabIndex = 517;
-            // 
-            // PgDoc1
-            // 
-            this.PgDoc1.Controls.Add(this.rtxtDoc);
-            this.PgDoc1.Location = new System.Drawing.Point(4, 29);
-            this.PgDoc1.Margin = new System.Windows.Forms.Padding(4);
-            this.PgDoc1.Name = "PgDoc1";
-            this.PgDoc1.Padding = new System.Windows.Forms.Padding(4);
-            this.PgDoc1.Size = new System.Drawing.Size(1347, 513);
-            this.PgDoc1.TabIndex = 0;
-            this.PgDoc1.Text = "Document 1";
-            this.PgDoc1.UseVisualStyleBackColor = true;
-            // 
-            // rtxtDoc
-            // 
-            this.rtxtDoc.AcceptsTab = true;
-            this.rtxtDoc.AutoWordSelection = true;
-            this.rtxtDoc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtxtDoc.EnableAutoDragDrop = true;
-            this.rtxtDoc.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.rtxtDoc.Location = new System.Drawing.Point(4, 4);
-            this.rtxtDoc.Margin = new System.Windows.Forms.Padding(4);
-            this.rtxtDoc.Name = "rtxtDoc";
-            this.rtxtDoc.ShowSelectionMargin = true;
-            this.rtxtDoc.Size = new System.Drawing.Size(1339, 501);
-            this.rtxtDoc.TabIndex = 0;
-            this.rtxtDoc.Text = "";
-            // 
-            // PgDoc2
-            // 
-            this.PgDoc2.Controls.Add(this.rtxtDoc2);
-            this.PgDoc2.Location = new System.Drawing.Point(4, 29);
-            this.PgDoc2.Margin = new System.Windows.Forms.Padding(4);
-            this.PgDoc2.Name = "PgDoc2";
-            this.PgDoc2.Padding = new System.Windows.Forms.Padding(4);
-            this.PgDoc2.Size = new System.Drawing.Size(1347, 513);
-            this.PgDoc2.TabIndex = 1;
-            this.PgDoc2.Text = "Document 2";
-            this.PgDoc2.UseVisualStyleBackColor = true;
-            // 
-            // rtxtDoc2
-            // 
-            this.rtxtDoc2.AcceptsTab = true;
-            this.rtxtDoc2.AutoWordSelection = true;
-            this.rtxtDoc2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtxtDoc2.EnableAutoDragDrop = true;
-            this.rtxtDoc2.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.rtxtDoc2.Location = new System.Drawing.Point(4, 4);
-            this.rtxtDoc2.Margin = new System.Windows.Forms.Padding(4);
-            this.rtxtDoc2.Name = "rtxtDoc2";
-            this.rtxtDoc2.ShowSelectionMargin = true;
-            this.rtxtDoc2.Size = new System.Drawing.Size(1339, 505);
-            this.rtxtDoc2.TabIndex = 1;
-            this.rtxtDoc2.Text = "";
-            // 
-            // PgDoc3
-            // 
-            this.PgDoc3.Controls.Add(this.rtxtDoc3);
-            this.PgDoc3.Location = new System.Drawing.Point(4, 29);
-            this.PgDoc3.Margin = new System.Windows.Forms.Padding(4);
-            this.PgDoc3.Name = "PgDoc3";
-            this.PgDoc3.Size = new System.Drawing.Size(1347, 513);
-            this.PgDoc3.TabIndex = 2;
-            this.PgDoc3.Text = "Document 3";
-            this.PgDoc3.UseVisualStyleBackColor = true;
-            // 
-            // rtxtDoc3
-            // 
-            this.rtxtDoc3.AcceptsTab = true;
-            this.rtxtDoc3.AutoWordSelection = true;
-            this.rtxtDoc3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtxtDoc3.EnableAutoDragDrop = true;
-            this.rtxtDoc3.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.rtxtDoc3.Location = new System.Drawing.Point(0, 0);
-            this.rtxtDoc3.Margin = new System.Windows.Forms.Padding(4);
-            this.rtxtDoc3.Name = "rtxtDoc3";
-            this.rtxtDoc3.ShowSelectionMargin = true;
-            this.rtxtDoc3.Size = new System.Drawing.Size(1347, 513);
-            this.rtxtDoc3.TabIndex = 2;
-            this.rtxtDoc3.Text = "";
-            // 
-            // numericUpDownLVstolic
-            // 
-            this.numericUpDownLVstolic.Location = new System.Drawing.Point(170, 19);
-            this.numericUpDownLVstolic.Name = "numericUpDownLVstolic";
-            this.numericUpDownLVstolic.Size = new System.Drawing.Size(95, 26);
-            this.numericUpDownLVstolic.TabIndex = 510;
-            // 
-            // numericUpDownLVdstolic
-            // 
-            this.numericUpDownLVdstolic.Location = new System.Drawing.Point(170, 50);
-            this.numericUpDownLVdstolic.Name = "numericUpDownLVdstolic";
-            this.numericUpDownLVdstolic.Size = new System.Drawing.Size(95, 26);
-            this.numericUpDownLVdstolic.TabIndex = 511;
-            // 
-            // numericUpDownLVst
-            // 
-            this.numericUpDownLVst.Location = new System.Drawing.Point(170, 83);
-            this.numericUpDownLVst.Name = "numericUpDownLVst";
-            this.numericUpDownLVst.Size = new System.Drawing.Size(95, 26);
-            this.numericUpDownLVst.TabIndex = 512;
-            // 
-            // numericUpDownLeftAtrium
-            // 
-            this.numericUpDownLeftAtrium.Location = new System.Drawing.Point(476, 51);
-            this.numericUpDownLeftAtrium.Name = "numericUpDownLeftAtrium";
-            this.numericUpDownLeftAtrium.Size = new System.Drawing.Size(95, 26);
-            this.numericUpDownLeftAtrium.TabIndex = 516;
-            // 
-            // numericUpDownRightVentricle
-            // 
-            this.numericUpDownRightVentricle.Location = new System.Drawing.Point(476, 87);
-            this.numericUpDownRightVentricle.Name = "numericUpDownRightVentricle";
-            this.numericUpDownRightVentricle.Size = new System.Drawing.Size(95, 26);
-            this.numericUpDownRightVentricle.TabIndex = 517;
-            // 
-            // numericUpDownEF
-            // 
-            this.numericUpDownEF.Location = new System.Drawing.Point(897, 39);
-            this.numericUpDownEF.Name = "numericUpDownEF";
-            this.numericUpDownEF.Size = new System.Drawing.Size(95, 26);
-            this.numericUpDownEF.TabIndex = 518;
-            // 
-            // numericUpDownPWT
-            // 
-            this.numericUpDownPWT.Location = new System.Drawing.Point(897, 70);
-            this.numericUpDownPWT.Name = "numericUpDownPWT";
-            this.numericUpDownPWT.Size = new System.Drawing.Size(95, 26);
-            this.numericUpDownPWT.TabIndex = 519;
-            // 
-            // numericUpDownAortic
-            // 
-            this.numericUpDownAortic.Location = new System.Drawing.Point(897, 102);
-            this.numericUpDownAortic.Name = "numericUpDownAortic";
-            this.numericUpDownAortic.Size = new System.Drawing.Size(95, 26);
-            this.numericUpDownAortic.TabIndex = 520;
-            // 
-            // numericUpDownAorticValve
-            // 
-            this.numericUpDownAorticValve.Location = new System.Drawing.Point(1214, 37);
-            this.numericUpDownAorticValve.Name = "numericUpDownAorticValve";
-            this.numericUpDownAorticValve.Size = new System.Drawing.Size(95, 26);
-            this.numericUpDownAorticValve.TabIndex = 521;
+            this.cmbType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Items.AddRange(new object[] {
+            "Adult",
+            "Child"});
+            this.cmbType.Location = new System.Drawing.Point(496, 72);
+            this.cmbType.Margin = new System.Windows.Forms.Padding(5);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(140, 28);
+            this.cmbType.TabIndex = 513;
             // 
             // EchoCardioGraphy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1420, 1055);
+            this.AutoScroll = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(1122, 862);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.tabDetailQuery);
             this.Name = "EchoCardioGraphy";
             this.Text = "EchoCardioGraphy";
             this.Load += new System.EventHandler(this.EchoCardioGraphy_Load);
             this.tabpgDetail.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.PgDoc1.ResumeLayout(false);
+            this.PgDoc2.ResumeLayout(false);
+            this.PgDoc3.ResumeLayout(false);
             this.pnlControl.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -1305,12 +1307,10 @@
             this.tabPage4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.grpSdate.ResumeLayout(false);
+            this.grpSdate.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuery)).EndInit();
             this.tabDetailQuery.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.PgDoc1.ResumeLayout(false);
-            this.PgDoc2.ResumeLayout(false);
-            this.PgDoc3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1326,28 +1326,11 @@
         private System.Windows.Forms.ComboBox cmbIpdOpd;
         private System.Windows.Forms.TextBox txtSlipNo;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtSlipDate;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtcontact;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtGender;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtAge;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtPatientName;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Label lblTotRecordsFetched;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtSpatientName;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.TextBox txtUserid;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.TextBox txtTdate;
-        private System.Windows.Forms.TextBox txtFdate;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Button btnFind;
         private System.Windows.Forms.DataGridView dgvQuery;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
@@ -1387,13 +1370,6 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.DateTimePicker dtpIssueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn slipno;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Issuedate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn patientname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn echono;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tapno;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clinical_diagnosis;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ref_physician;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
@@ -1418,5 +1394,26 @@
         private System.Windows.Forms.TextBox numericUpDownPWT;
         private System.Windows.Forms.TextBox numericUpDownAortic;
         private System.Windows.Forms.TextBox numericUpDownAorticValve;
+        private System.Windows.Forms.TextBox txtSReceiptNo;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.RichTextBox RpatientInfo;
+        private System.Windows.Forms.GroupBox grpSdate;
+        private System.Windows.Forms.DateTimePicker dtpDateTo;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton rdbDateRangeFrom;
+        private System.Windows.Forms.DateTimePicker dtpDateFrom;
+        private System.Windows.Forms.RadioButton rdbDateall;
+        private System.Windows.Forms.DataGridViewTextBoxColumn type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn slipno;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Issuedate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn patientname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clinical_diagnosis;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ref_physician;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createdby;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createdtime;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox ddlType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.ComboBox cmbType;
     }
 }

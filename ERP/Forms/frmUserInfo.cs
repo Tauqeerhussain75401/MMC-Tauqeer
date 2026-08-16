@@ -42,7 +42,7 @@ namespace ERP
             {
                 //cmbCatagory.SelectedValue = dt.Rows[0]["TesttypeId"].ToString();
                 txtUserid.Text = dt.Rows[0]["userid"].ToString();
-                tb_search.Text = dt.Rows[0]["username"].ToString();
+                txt_username.Text = dt.Rows[0]["username"].ToString();
                 cmbUserLevel.Text = dt.Rows[0]["userlevel"].ToString();
                 chkLock.Checked = dt.Rows[0]["islock"].ToString() == "1" ? true : false;
                 chkMultiLogin.Checked = dt.Rows[0]["multilogin"].ToString() == "1" ? true : false;
@@ -117,7 +117,7 @@ namespace ERP
                 MessageBox.Show("You can not create userid as Admin");
                 return;
             }
-            else if (tb_search.Text == "") 
+            else if (txt_username.Text == "") 
             {
                  MessageBox.Show("Enter User Name");
                  this.Focus();
@@ -140,7 +140,7 @@ namespace ERP
             }           
             else if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                DML.userinfo_add_edit(txtUserid.Text, tb_search.Text,txtpass.Text, (string)cmbUserLevel.SelectedValue,chkLock.Checked?"1":"0",chkMultiLogin.Checked?"1":"0","0");
+                DML.userinfo_add_edit(txtUserid.Text, txt_username.Text,txtpass.Text, (string)cmbUserLevel.SelectedValue,chkLock.Checked?"1":"0",chkMultiLogin.Checked?"1":"0","0");
                 MessageBox.Show("Record Successfully Saved..!");
             }
         }
@@ -176,6 +176,16 @@ namespace ERP
                     dgvUserDetails.Rows.Add(id, title, rate, isLock, isMultiLogin);
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmReportView frm = new frmReportView();
+            Reports.UsersList rpt = new Reports.UsersList();
+            rpt.SetDataSource(dtQuery);
+            frm.rptViewer.ReportSource = rpt;
+            frm.Show();
+            
         }
     }
 }

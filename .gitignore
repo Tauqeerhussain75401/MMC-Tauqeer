@@ -1,21 +1,12 @@
-<<<<<<< HEAD
-/.vs
-/VersionUpdater/obj
-/VersionUpdater/obj
-/.vs
-/.vs
-/ERP/obj/x86/Debug
-/ERP/bin/Debug
-/.vs/ERP
-/ERP/obj/x86
-/ERP/obj
-/ERP/obj/x86/Debug
-=======
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+# This .gitignore file is for a Visual Studio C# solution.
 ################################################################################
 
-/.vs
->>>>>>> Tauqeer_New
-/.vs
-/ERP
+.vs/
+**/bin/
+**/obj/
+*.user
+*.suo
+*.cache
+UpgradeLog.htm
+UpgradeLog2.htm

@@ -163,6 +163,13 @@ namespace ERP
             cmb.ValueMember = "Id";
             cmb.SelectedIndex = -1;
         }
+        internal static void FillcmbTemplateIndexXRay(ComboBox cmb)
+        {
+            cmb.DataSource = Query.TemplateIndexXRay();
+            cmb.DisplayMember = "TemplateName";
+            cmb.ValueMember = "Id";
+            cmb.SelectedIndex = -1;
+        }
 
 
         #region workeb by Usman To show the All option

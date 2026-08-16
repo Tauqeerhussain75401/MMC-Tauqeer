@@ -21,6 +21,8 @@ namespace ERP.Forms
         private void EchoTemplateDesigner_Load(object sender, EventArgs e)
         {
             SelectionFont = rtxtDoc.SelectionFont;
+            rtxtDoc.Multiline = true;
+            rtxtDoc.ScrollBars = RichTextBoxScrollBars.Vertical;
         }
 
         Font SelectionFont;
@@ -142,6 +144,18 @@ namespace ERP.Forms
             rtxtDoc.SelectionAlignment = HorizontalAlignment.Right;
             rtxtDoc.Focus();
         }
+
+        string StripTrailingZeros(object value)
+        {
+            if (value == DBNull.Value || value == null) return "0";
+
+            string s = value.ToString();
+            if (s.Contains("."))
+            {
+                s = s.TrimEnd('0').TrimEnd('.');
+            }
+            return string.IsNullOrEmpty(s) ? "0" : s;
+        }
         void LoadTemplate()
         {
             string Id = (string)cmbTemplate.SelectedValue;
@@ -152,8 +166,18 @@ namespace ERP.Forms
                 DataRow row = dt.Rows[0];
                 txtNewTemplate.Text = row["templatename"].ToString();
                 rtxtDoc.Rtf = row["templatedoc"].ToString();
+                numericUpDownLVstolic.Text = row["lv_systolic"].ToString();
+                numericUpDownLVdstolic.Text = row["lv_diastolic"].ToString();
+                numericUpDownLVst.Text = row["lv_spetal_thickness"].ToString();
+                numericUpDownLeftAtrium.Text = row["left_atrium"].ToString();
+                numericUpDownRightVentricle.Text = row["right_ventricle"].ToString();
+                numericUpDownEF.Text = row["ef"].ToString();
+                numericUpDownPWT.Text = row["post_wall_thickness"].ToString();
+                numericUpDownAortic.Text = row["aortic"].ToString();
+                numericUpDownAorticValve.Text = row["aortic_valve_opening"].ToString();
             }
         }
+
         private void btnLoadTemplate_Click(object sender, EventArgs e)
         {
             LoadTemplate();
@@ -167,6 +191,17 @@ namespace ERP.Forms
         private void btnNew_Click(object sender, EventArgs e)
         {
             cmbTemplate.SelectedIndex = -1;
+            txtNewTemplate.Text = string.Empty;
+            numericUpDownLVstolic.Text = string.Empty;
+            numericUpDownLVdstolic.Text = string.Empty;
+            numericUpDownLVst.Text = string.Empty;
+            numericUpDownLeftAtrium.Text = string.Empty;
+            numericUpDownRightVentricle.Text = string.Empty;
+            numericUpDownEF.Text = string.Empty;
+            numericUpDownPWT.Text = string.Empty;
+            numericUpDownAortic.Text = string.Empty;
+            numericUpDownAorticValve.Text = string.Empty;
+
             LoadTemplate();
         }
 
@@ -175,7 +210,17 @@ namespace ERP.Forms
             if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 string Id = (string)cmbTemplate.SelectedValue;
-                DML.docTemplate_add_edit(Id, txtNewTemplate.Text, rtxtDoc.Rtf,"1");
+                DML.docTemplate_add_edit(Id, txtNewTemplate.Text, rtxtDoc.Rtf,"1",
+                numericUpDownLVstolic.Text,
+                numericUpDownLVdstolic.Text,
+                numericUpDownLVst.Text,
+                numericUpDownLeftAtrium.Text,
+                numericUpDownRightVentricle.Text,
+                numericUpDownEF.Text,
+                numericUpDownPWT.Text,
+                numericUpDownAortic.Text,
+                numericUpDownAorticValve.Text
+                    );
                 MessageBox.Show("Record Successfully Saved..!");
                 FillControls.FillcmbTemplateIndexEcho(cmbTemplate);
 

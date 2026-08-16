@@ -93,6 +93,22 @@ namespace ERP
             dtpDateTo.Value = DateTime.Now;
             dtpCreatedByDateFrom.Value = DateTime.Now;
             dtpCreatedByDateTo.Value = DateTime.Now;
+
+            if (UserInfo.UserLevel == "Echo")
+            {
+                rdbCategoryAll.Enabled = false;
+                rdbCategoryIndi.Checked = true;
+                cmbCategory.SelectedValue = "14";
+                cmbCategory.Enabled = false;
+            }
+
+            if (UserInfo.UserLevel == "XRay")
+            {
+                rdbCategoryAll.Enabled = false;
+                rdbCategoryIndi.Checked = true;
+                cmbCategory.SelectedValue = "4";
+                cmbCategory.Enabled = false;
+            }
         }
 
         private void rdbDateall_CheckedChanged(object sender, EventArgs e)
@@ -634,6 +650,37 @@ namespace ERP
             //    rpt.PrintToPrinter(1, true, 1, 9999);
             //    Query.Execute("update opdreceipt set noofprint = nvl(noofprint,0) + 1 where receiptno = '" + voucher + "'");
             //}
+        }
+        private int clickedRowIndex = -1;
+        private void dgvQuery_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            clickedRowIndex = e.RowIndex;
+            dgvQuery.Rows[e.RowIndex].Selected = true;
+            dgvQuery.CurrentCell = dgvQuery.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+            if (e.Button == MouseButtons.Right)   // change Right to Left
+            {
+                contextMenuStrip1.Show(Cursor.Position);
+            }
+        }
+
+        private void copyVoucherNoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (clickedRowIndex < 0) return;
+
+            string voucherNo = dgvQuery.Rows[clickedRowIndex].Cells[clnVoucherNum.Index].Value?.ToString();
+
+            if (!string.IsNullOrWhiteSpace(voucherNo))
+            {
+                Clipboard.SetText(voucherNo);
+            }
+        }
+
+        private void rdbDateRangeFrom_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

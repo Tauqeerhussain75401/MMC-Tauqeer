@@ -58,7 +58,6 @@ namespace ERP.Forms
             dtQuery = Query.IPDReceiptQuery(filter);
             dgvQuery.AutoGenerateColumns = false;
             dgvQuery.DataSource = dtQuery;
-            
             dgvQuery.Columns[clnVoucherNum.Index].DataPropertyName = "receiptno";
             dgvQuery.Columns[clnDate.Index].DataPropertyName = "receiptdate";
             dgvQuery.Columns[clnOPDCatagory.Index].DataPropertyName = "CatagoryTitle";
@@ -94,6 +93,21 @@ namespace ERP.Forms
                 groupBox3.Enabled = false;
                 groupBox4.Enabled = false;
                 groupBox5.Enabled = false;
+            }
+              if (UserInfo.UserLevel == "Echo")
+            {
+                rdbCategoryAll.Enabled = false;
+                rdbCategoryIndi.Checked = true;
+                cmbCategory.SelectedValue = "14";
+                cmbCategory.Enabled = false;
+            }
+
+            if (UserInfo.UserLevel == "XRay")
+            {
+                rdbCategoryAll.Enabled = false;
+                rdbCategoryIndi.Checked = true;
+                cmbCategory.SelectedValue = "4";
+                cmbCategory.Enabled = false;
             }
             dtpDateFrom.Value = DateTime.Now;
             dtpDateTo.Value = DateTime.Now;
@@ -299,6 +313,31 @@ namespace ERP.Forms
                 return false;
             }
         }
+        private int clickedRowIndex = -1;
+        private void dgvQuery_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
+            clickedRowIndex = e.RowIndex;
+            dgvQuery.Rows[e.RowIndex].Selected = true;
+            dgvQuery.CurrentCell = dgvQuery.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+            if (e.Button == MouseButtons.Right)   // change Right to Left
+            {
+                contextMenuStrip1.Show(Cursor.Position);
+            }
+        }
+
+        private void copyReceiptNoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (clickedRowIndex < 0) return;
+
+            string voucherNo = dgvQuery.Rows[clickedRowIndex].Cells[clnVoucherNum.Index].Value?.ToString();
+
+            if (!string.IsNullOrWhiteSpace(voucherNo))
+            {
+                Clipboard.SetText(voucherNo);
+            }
+        }
     }
 }

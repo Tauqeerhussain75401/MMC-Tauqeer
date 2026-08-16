@@ -227,7 +227,7 @@ namespace ERP
         }
         internal static DataTable getMemberIndex(string name, string contact, string cnic)
         {
-            String Sql = " Select * From Member where status=0";
+            String Sql = " Select * From v_member where status=0";
             if (name != "")
             {
                 Sql += " and lower(name) like '%" + name.ToLower() + "%'";
@@ -263,16 +263,16 @@ namespace ERP
         internal static DataTable getMemberDetail(string Id, string bmjCard, string Filter)
         {
 
-            String Sql = " Select * From Member where  id = '" + Id + "' ";
+            String Sql = " Select * From v_member where  id = '" + Id + "' ";
             if (Filter == "BMJ")
-                Sql = " Select * From Member where newno = '" + bmjCard + "'";
+                Sql = " Select * From v_member where newno = '" + bmjCard + "'";
             DataTable dt = getData(Sql);
             return dt;
         }
         public static DataTable getmemberdependent(string bmjcardno)
         {
             DataTable dt = new DataTable();
-            String Sql = "Select * From MemberDependent where newno='" + bmjcardno + "' and status!=1";
+            String Sql = "Select * From v_memberdependent where newno='" + bmjcardno + "' and status!=1";
             OracleDataAdapter adp = new OracleDataAdapter(Sql, clsConnection.con);
             adp.Fill(dt);
             return dt;
@@ -393,6 +393,25 @@ namespace ERP
             DataTable dt = getData(sql);
             return dt;
         }
+
+        internal static DataTable GetMRNO(string ContactNo, string PatientName)
+        {
+            string sql = "select * from OPDReceipt where contactno = '" + ContactNo + "' and patientname = '" + PatientName + "' and status = 0";
+            DataTable dt = getData(sql);
+            return dt;
+        }
+        internal static DataTable GetOPDDetailsByContactNo(string VContactno)
+        {
+            string sql = "select * from OPDReceipt where contactno = '" + VContactno + "'";
+            DataTable dt = getData(sql);
+            return dt;
+        }
+        internal static DataTable GetMaxMRno()
+        {
+            string sql = "SELECT Max(MRNo) as MRno FROM  opdreceipt";
+            DataTable dt = getData(sql);
+            return dt;
+        }
         internal static DataTable TemplateIndex()
         {
             string sql = "";
@@ -418,6 +437,21 @@ namespace ERP
             else
             {
                 sql = "SELECT id,templatename FROM DocTemplate where isecho =1 and lower(userid) = lower('" + UserInfo.UserId + "') ORDER BY templatename ";
+            }
+
+            DataTable dt = getData(sql);
+            return dt;
+        }
+        internal static DataTable TemplateIndexXRay()
+        {
+            string sql = "";
+            if (UserInfo.UserLevel == "Admin")
+            {
+                sql = "SELECT id,templatename FROM DocTemplate  WHERE isecho =2  ORDER BY templatename ";
+            }
+            else
+            {
+                sql = "SELECT id,templatename FROM DocTemplate where isecho =2 and lower(userid) = lower('" + UserInfo.UserId + "') ORDER BY templatename ";
             }
 
             DataTable dt = getData(sql);
@@ -526,7 +560,7 @@ namespace ERP
         {
             string Filter = filter.Count() > 0 ? string.Join(" ", filter) : "";
             //string sql = "SELECT receiptno,tokenNo, vdate, get_OPDcatagory(catagoryid) CatagoryTitle, Get_consultantName(consultantid) ConsultantName, get_PatientType(patienttype) patienttype, memberid, patientid, patienttitle, patientname, gender, contactno, age, ageunit,grossamount,discount, netamount, createdby, createdtime, editby, edittime,status,noofprint FROM OPDReceipt where  status = 0 " + Filter + "  order by ReceiptNo desc";
-            string sql = "SELECT receiptno,tokenNo, vdate, get_OPDcatagory(catagoryid) CatagoryTitle, Get_consultantName(consultantid) ConsultantName,get_PatientType(patienttype) patienttype, memberid, patientid, patienttitle, patientname, gender, contactno, age,ageunit,grossamount,discount, netamount, createdby, createdtime, editby, edittime,status,noofprint,consultantid FROM OPDReceipt pr where status = 0 " + Filter + "UNION ALL SELECT op.receiptno,tokenNo, pr.vdate, get_OPDcatagory(catagoryid) CatagoryTitle, Get_consultantName(consultantid) ConsultantName,get_PatientType(patienttype) patienttype, memberid, patientid, patienttitle, patientname, gender, contactno, age,ageunit,grossamount,discount, pr.partialamount, op.createdby, op.createdtime, op.editby, op.edittime,op.status,noofprint,consultantid FROM partialreceipt pr left JOIN opdreceipt op ON op.receiptno = pr.receiptno where op.status = 0 " + Filter + " ORDER by ReceiptNo desc";
+            string sql = "SELECT receiptno,tokenNo, vdate, get_OPDcatagory(catagoryid) CatagoryTitle, Get_consultantName(consultantid) ConsultantName,get_PatientType(patienttype) patienttype, memberid, patientid, patienttitle, patienttitle||''||patientname AS patientname, gender, contactno, age,ageunit,grossamount,discount, netamount, createdby, createdtime, editby, edittime,status,noofprint,consultantid FROM OPDReceipt pr where status = 0 " + Filter + "UNION ALL SELECT op.receiptno,tokenNo, pr.vdate, get_OPDcatagory(catagoryid) CatagoryTitle, Get_consultantName(consultantid) ConsultantName,get_PatientType(patienttype) patienttype, memberid, patientid, patienttitle, patientname, gender, contactno, age,ageunit,grossamount,discount, pr.partialamount, op.createdby, op.createdtime, op.editby, op.edittime,op.status,noofprint,consultantid FROM partialreceipt pr left JOIN opdreceipt op ON op.receiptno = pr.receiptno where op.status = 0 " + Filter + " ORDER by ReceiptNo desc";
             DataTable dt = getData(sql);
             return dt;
         }
@@ -535,7 +569,7 @@ namespace ERP
             string Filter = filter.Count() > 0 ? string.Join(" ", filter) : "";
             string sql = @"SELECT adm.serialno,receiptno,receiptdate,get_opdcatagory(testtypeid) AS CatagoryTitle,get_testtitle(testid) AS test, Get_consultantName(inp.consultantid) AS  
                             ConsultantName,get_PatientType(patienttype) patienttype, bmjnewno,
-                            regnoalpha||'-'||regnonumeric AS  patientid,patientname, gender,
+                            regnoalpha||'-'||regnonumeric AS  patientid,title||''||patientname AS patientname, gender,
                             emergency,ymd,charges,inp.createdby, inp.createdtime, inp.editby, 
                             inp.edittime,inp.status,inp.isprinted  FROM admissioninfo adm
                             left JOIN inptestcharges inp
@@ -949,7 +983,7 @@ namespace ERP
         internal static DataTable BillDetail(string AddmissionId)
         {
             DataTable dt;
-            string sql = @"SELECT admiss.regnoalpha,admiss.regnonumeric,dischargeyn,dischargesessionid,ipd.*,ipd.zakatadddate AS zakatadddatenew from ipdbilling ipd
+            string sql = @"SELECT admiss.regnoalpha,admiss.regnonumeric,ipdbillid,dischargeyn,dischargesessionid,ipd.*,ipd.zakatadddate AS zakatadddatenew from ipdbilling ipd
                             INNER JOIN admissioninfo admiss ON  admiss.admissionid = ipd.admissionid 
                             where ipd.admissionid = '" + AddmissionId + "'";
 
@@ -1007,7 +1041,7 @@ namespace ERP
         }
         internal static DataTable IPDAdmissioninfo(string serialno)
         {
-            string sql = @"SELECT testid,receiptdate,patientname,ymd,age,gender,mobile,title FROM inptestcharges left JOIN  admissioninfo ON inptestcharges.serialno=admissioninfo.serialno  WHERE testtypeid='5' AND inptestcharges.receiptno='" + serialno + "'";
+            string sql = @"SELECT *   FROM admissioninfo adm left JOIN inptestcharges inp ON inp.serialno  =adm.serialno AND adm.status=0 where  inp.status=0  and receiptno='" + serialno + "'";
             DataTable dt = getData(sql);
             return dt;
         }
@@ -1994,6 +2028,12 @@ namespace ERP
         internal static DataTable surgeryAll()
         {
             string sql = "SELECT pi.*,'' AS consulshare,'' AS hospshare,0 AS SCheck FROM packageindex pi";
+            DataTable dt = getData(sql);
+            return dt;
+        }
+        internal static DataTable ConsultantFacultyAll()
+        {
+            string sql = "SELECT distinct faculty FROM consultant";
             DataTable dt = getData(sql);
             return dt;
         }

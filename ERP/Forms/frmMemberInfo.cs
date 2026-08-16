@@ -24,7 +24,7 @@ namespace ERP
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 dgvMember.Rows.Add(dt.Rows[i]["id"].ToString(), dt.Rows[i]["newno"].ToString(), dt.Rows[i]["membershipnumber"].ToString(), dt.Rows[i]["title"].ToString(), dt.Rows[i]["name"].ToString(), dt.Rows[i]["father"].ToString(),
-                    dt.Rows[i]["contact"].ToString(), dt.Rows[i]["caste"].ToString(), dt.Rows[i]["cnic"].ToString(), dt.Rows[i]["voternumber"].ToString());
+                    dt.Rows[i]["contact"].ToString(), dt.Rows[i]["caste"].ToString(), dt.Rows[i]["cnic"].ToString(), dt.Rows[i]["voternumber"].ToString(), dt.Rows[i]["is_vote_eligible"]);
             }
         }
         private void FillDetail(string Filter)
@@ -43,6 +43,7 @@ namespace ERP
                 txtComputerId.Text = dt.Rows[0]["id"].ToString();
                 chkActive.Checked = dt.Rows[0]["isdeactivate"].ToString() == "0" ? true : false;
                 chkPaidByZakat.Checked = dt.Rows[0]["paidbyzakat"].ToString() == "0" ? false  : true ;
+                chkVoteEligibility.Checked = dt.Rows[0]["is_vote_eligible"].ToString() == "0" ? false : true;
                 cmbReferenceName.SelectedValue = dt.Rows[0]["referenceid"].ToString();
                 cmbTitle.Text = dt.Rows[0]["title"].ToString();
                 txtMemberName.Text = dt.Rows[0]["name"].ToString();

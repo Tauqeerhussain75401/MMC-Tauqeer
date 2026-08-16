@@ -711,16 +711,16 @@ namespace ERP
             #region Trial Balance
             else if (Reportname == "Trial Balance")
             {
-                Reports.TrialBalance1 rpt = new Reports.TrialBalance1();
-                DataSet ds = new DataSet();
-                //DataTable dt = Query.Rep_TrialBalanceERP(dtpFDate.Value.ToString("dd-MMM-yyyy"), dtpTDate.Value.ToString("dd-MMM-yyyy"));
+                //Reports.TrialBalance rpt = new Reports.TrialBalance();
+                //DataSet ds = new DataSet();
+                ////DataTable dt = Query.Rep_TrialBalanceERP(dtpFDate.Value.ToString("dd-MMM-yyyy"), dtpTDate.Value.ToString("dd-MMM-yyyy"));
+                ////rpt.SetDataSource(dt);
+                //DataTable dt = ReportQuery.getTrailBalance(Convert.ToString(dtpFDate.Value), Convert.ToString(dtpTDate.Value));
                 //rpt.SetDataSource(dt);
-                DataTable dt = ReportQuery.getTrailBalance(Convert.ToString(dtpFDate.Value), Convert.ToString(dtpTDate.Value));
-                rpt.SetDataSource(dt);
-                rpt.SetParameterValue("@From", dtpFDate.Value.ToString("dd-MMM-yyyy"));
-                rpt.SetParameterValue("@To", dtpTDate.Value.ToString("dd-MMM-yyyy"));
-                rpt.SetParameterValue("@Company_Name", CompanyInfo.CompanyName);
-                frm.rptViewer.ReportSource = rpt;
+                //rpt.SetParameterValue("@From", dtpFDate.Value.ToString("dd-MMM-yyyy"));
+                //rpt.SetParameterValue("@To", dtpTDate.Value.ToString("dd-MMM-yyyy"));
+                //rpt.SetParameterValue("@Company_Name", CompanyInfo.CompanyName);
+                //frm.rptViewer.ReportSource = rpt;
 
             }
             #endregion
@@ -864,7 +864,7 @@ namespace ERP
                 DataTable dt = new DataTable();
                 string fundType = cmbFundType.Text;
                 Reports.OPD_FundUtilization rpt = new Reports.OPD_FundUtilization();
-                dt = ReportQuery.OPD_FundUtilization(dtpFDate.Value, dtpTDate.Value);
+                dt = ReportQuery.OPD_FundUtilization(dtpFDate.Value, dtpTDate.Value, cmbgender.Text);
 
                 DataTable filteredDt = dt.Clone();
                 foreach (DataRow row in dt.Rows)
@@ -879,6 +879,7 @@ namespace ERP
                     newRow["ZF"] = row["ZF"];
                     newRow["SPD"] = row["SPD"];
                     newRow["Bmj"] = row["Bmj"];
+                    newRow["contactno"] = row["contactno"];
 
                     if (fundType == "All")
                     {
@@ -912,6 +913,7 @@ namespace ERP
                 rpt.SetParameterValue("@User", UserInfo.UserName);
                 rpt.SetParameterValue("@ReportHeader", Reportname);
                 rpt.SetParameterValue("@Type", fundType);
+                rpt.SetParameterValue("@Gender", cmbgender.Text);
                 frm.rptViewer.ReportSource = rpt;
             }
             else if (Reportname == "IPD Fund Utilization Report")
@@ -919,7 +921,7 @@ namespace ERP
                 DataTable dt = new DataTable();
                 string fundType = cmbFundType.Text;
                 Reports.IPD_FundUtilization rpt = new Reports.IPD_FundUtilization();
-                dt = ReportQuery.IPD_FundUtilization(dtpFDate.Value, dtpTDate.Value);
+                dt = ReportQuery.IPD_FundUtilization(dtpFDate.Value, dtpTDate.Value, cmbgender.Text);
 
                 DataTable filteredDt = dt.Clone();
                 foreach (DataRow row in dt.Rows)
@@ -934,6 +936,7 @@ namespace ERP
                     newRow["ZF"] = row["ZF"];
                     newRow["SPD"] = row["SPD"];
                     newRow["Bmj"] = row["Bmj"];
+                    newRow["contactno"] = row["contactno"];
 
                     if (fundType == "All")
                     {
@@ -967,6 +970,7 @@ namespace ERP
                 rpt.SetParameterValue("@User", UserInfo.UserName);
                 rpt.SetParameterValue("@ReportHeader", Reportname);
                 rpt.SetParameterValue("@Type", fundType);
+                rpt.SetParameterValue("@Gender", fundType);
                 frm.rptViewer.ReportSource = rpt;
             }
             else if(Reportname == "OPD Cash In Hand")
@@ -1577,11 +1581,11 @@ namespace ERP
             }
             else if (Reportname == "OPD Fund Utilization Report")
             {
-                ManageControls(new Control[] { grpDateRange, grpAllFundType });
+                ManageControls(new Control[] { grpDateRange, grpAllFundType, grpGender });
             }
             else if (Reportname == "IPD Fund Utilization Report")
             {
-                ManageControls(new Control[] { grpDateRange, grpAllFundType });
+                ManageControls(new Control[] { grpDateRange, grpAllFundType, grpGender });
             }
             else if (Reportname == "OPD Cash In Hand")
             {

@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ERP</RootNamespace>
     <AssemblyName>ERP</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -683,6 +683,18 @@
     <Compile Include="Forms\UltrasoundReportDesigner.Designer.cs">
       <DependentUpon>UltrasoundReportDesigner.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\XRayReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\XRayReport.Designer.cs">
+      <DependentUpon>XRayReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\XRayTemplateDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\XRayTemplateDesigner.Designer.cs">
+      <DependentUpon>XRayTemplateDesigner.cs</DependentUpon>
+    </Compile>
     <Compile Include="NumericTextbox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -767,6 +779,36 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\XRayReport.cs">
+      <DependentUpon>XRayReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\ReferenceIndex.cs">
+      <DependentUpon>ReferenceIndex.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\ConsultantIndex.cs">
+      <DependentUpon>ConsultantIndex.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\RoomIndex.cs">
+      <DependentUpon>RoomIndex.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\UsersList.cs">
+      <DependentUpon>UsersList.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Reports\CrpInPAdvRcpt1.cs">
       <DependentUpon>CrpInPAdvRcpt1.rpt</DependentUpon>
@@ -1258,18 +1300,6 @@
       <DependentUpon>TotalSurgeries.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\TrialBalance2.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TrialBalance.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\TrialBalance2.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TrialBalance.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reports\TrialBalance_OLD.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1533,6 +1563,12 @@
     <EmbeddedResource Include="Forms\UltrasoundReportDesigner.resx">
       <DependentUpon>UltrasoundReportDesigner.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\XRayReport.resx">
+      <DependentUpon>XRayReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\XRayTemplateDesigner.resx">
+      <DependentUpon>XRayTemplateDesigner.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NumericTextbox.resx">
       <DependentUpon>NumericTextbox.cs</DependentUpon>
     </EmbeddedResource>
@@ -1588,6 +1624,26 @@
     <EmbeddedResource Include="Reports\ConsultantWiseDetail.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ConsultantWiseDetail.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\XRayReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>XRayReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReferenceIndex.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReferenceIndex.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ConsultantIndex.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ConsultantIndex.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\RoomIndex.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RoomIndex.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\UsersList.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>UsersList.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\CrpInPAdvRcpt1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

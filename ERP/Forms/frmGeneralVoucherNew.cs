@@ -44,7 +44,7 @@ namespace ERP
                     );
             }
         }
-       public void FillDetail(string Vno)
+        public void FillDetail(string Vno)
         {
             SupportDocuments = new FrmSupportDocuments();
             SupportDocuments.doucmentname = "JV.tiff";
@@ -223,7 +223,7 @@ namespace ERP
                 if (File.Exists("JV.tiff")) File.Delete("JV.tiff");
                 FillNarration();
                 //dtpDate.Value = null;
-               /// if (UserInfo.UserId == "Admin") pnlDate.Enabled = true;
+                /// if (UserInfo.UserId == "Admin") pnlDate.Enabled = true;
                 pnlDate.Enabled = true;
                 dtClients = Query.ClientIndex();
 
@@ -234,6 +234,8 @@ namespace ERP
                 FLogIn = false;
                 this.Text = Variable.Version;
                 btnNew_Click(null, null);
+
+                Variable._FanancialYear = "2024-2025";
 
                 Variable.flags = Animate.AW_ACTIVATE | Animate.AW_CENTER;
                 Animate.AnimateWindow(this.Handle, Variable.animationTime, Variable.flags);
@@ -432,7 +434,7 @@ namespace ERP
         {
             picDoucments.Enabled = false;
             SDImage = picDoucments.Image;
-            picDoucments.Image =Properties.Resources.loading;
+            picDoucments.Image = Properties.Resources.loading;
             backgroundWorker1.RunWorkerAsync();
             picDoucments.Enabled = true;
             DocumentChanged = "0";
@@ -444,8 +446,8 @@ namespace ERP
             string doc = "";
             this.Invoke(new Function(delegate ()
             {
-        // doc = lblDoucmentNo.Text;
-        doc = Documentid;
+                // doc = lblDoucmentNo.Text;
+                doc = Documentid;
             }));
             SupportDocuments.LockItem = false;
             if (doc != "0") SupportDocuments.LockItem = true;
@@ -475,13 +477,15 @@ namespace ERP
             if (!FLogIn && Convert.ToString(cmbTransCode.SelectedValue) == "CLS-0001")
             {
                 //BETWEEN '01 Jul " + Variable.FinancialYear.Split('-').GetValue(0).ToString() + @"' AND 
+                string year = Variable._FanancialYear.Split('-').GetValue(1).ToString();
                 dgvAccount.Rows.Clear();
+
                 string sql = @"SELECT get_accountitle(fkaccountid) AS title,fkaccountid,
                                             CASE WHEN Sum(cr-dr) > 0 THEN Sum(cr-dr) ELSE 0 END AS dr,
                                             CASE WHEN Sum(cr-dr) < 0 THEN Abs(Sum(cr-dr)) ELSE 0 END AS cr
                                             FROM voucherdetail
                                             WHERE REGEXP_LIKE(fkaccountid, '^(004|005)') AND Trunc(vdate) <=
-                                            '30 Jun " + Variable._FanancialYear.Split('-').GetValue(1).ToString() + @"' AND status = 0
+                                            '30 Jun " + year + @"' AND status = 0
                                             HAVING Sum(cr-dr) <> 0
                                             GROUP BY fkaccountid
                                             ORDER BY fkaccountid";
@@ -496,7 +500,7 @@ namespace ERP
                     {
                         if (i < dt.Rows.Count)
                         {
-                            dgvAccount.Rows.Add("0"/*OddNumber.ToString()*/, dt.Rows[i][1].ToString(), "Transfer from Unappropriated Profit/Loss Account (" + Variable._FanancialYear + ")", Convert.ToDecimal(dt.Rows[i][2]).ToString("F2"), Convert.ToDecimal(dt.Rows[i][3]).ToString("F2"), null, "0");
+                            dgvAccount.Rows.Add("0"/*OddNumber.ToString()*/, dt.Rows[i][1].ToString(), "Transfer from Unappropriated Profit/Loss Account (" + Variable.FinancialYear + ")", Convert.ToDecimal(dt.Rows[i][2]).ToString("F2"), Convert.ToDecimal(dt.Rows[i][3]).ToString("F2"), null, "0");
                             OddNumber = OddNumber + 2;
                         }
                         else
@@ -507,6 +511,40 @@ namespace ERP
                     }
                     txtTotalDebit.Text = dgvAccount.Rows.Cast<DataGridViewRow>().Sum(s => Convert.ToDecimal(s.Cells[clnDebit.Index].Value)).ToString("F2");
                     txtTotalCredit.Text = dgvAccount.Rows.Cast<DataGridViewRow>().Sum(s => Convert.ToDecimal(s.Cells[clnCredit.Index].Value)).ToString("F2");
+
+
+                    //string sql = @"SELECT get_accountitle(fkaccountid) AS title,fkaccountid,
+                    //                            CASE WHEN Sum(cr-dr) > 0 THEN Sum(cr-dr) ELSE 0 END AS dr,
+                    //                            CASE WHEN Sum(cr-dr) < 0 THEN Abs(Sum(cr-dr)) ELSE 0 END AS cr
+                    //                            FROM voucherdetail
+                    //                            WHERE REGEXP_LIKE(fkaccountid, '^(004|005)') AND Trunc(vdate) <=
+                    //                            '30 Jun " + year  + @"' AND status = 0
+                    //                            HAVING Sum(cr-dr) <> 0
+                    //                            GROUP BY fkaccountid
+                    //                            ORDER BY fkaccountid";
+                    //DataTable dt = new DataTable();
+                    //dt = Query.MasterQueryEC(sql);
+                    //if (dt.Rows.Count > 0)
+                    //{
+                    //    int EvenNumber = 2;
+                    //    int OddNumber = 1;
+                    //    int j = -1;
+                    //    for (int i = 0; i < dt.Rows.Count * 2; i++)
+                    //    {
+                    //        if (i < dt.Rows.Count)
+                    //        {
+                    //            dgvAccount.Rows.Add("0"/*OddNumber.ToString()*/, dt.Rows[i][1].ToString(), "Transfer from Unappropriated Profit/Loss Account (" + Variable._FanancialYear + ")", Convert.ToDecimal(dt.Rows[i][2]).ToString("F2"), Convert.ToDecimal(dt.Rows[i][3]).ToString("F2"), null, "0");
+                    //            OddNumber = OddNumber + 2;
+                    //        }
+                    //        else
+                    //        {
+                    //            dgvAccount.Rows.Insert(j += 2, "0"/*EvenNumber.ToString()*/, "003003001001001", "Transfer to " + dt.Rows[i - dt.Rows.Count][0].ToString(), Convert.ToDecimal(dt.Rows[i - dt.Rows.Count][2]) > 0 ? "0.00" : Convert.ToDecimal(dt.Rows[i - dt.Rows.Count][3]).ToString("F2"), Convert.ToDecimal(dt.Rows[i - dt.Rows.Count][3]) > 0 ? "0.00" : Convert.ToDecimal(dt.Rows[i - dt.Rows.Count][2]).ToString("F2"), null, "0");
+                    //            EvenNumber = EvenNumber + 2;
+                    //        }
+                    //    }
+                    //    txtTotalDebit.Text = dgvAccount.Rows.Cast<DataGridViewRow>().Sum(s => Convert.ToDecimal(s.Cells[clnDebit.Index].Value)).ToString("F2");
+                    //    txtTotalCredit.Text = dgvAccount.Rows.Cast<DataGridViewRow>().Sum(s => Convert.ToDecimal(s.Cells[clnCredit.Index].Value)).ToString("F2");
+                    //}
                 }
             }
         }

@@ -22,13 +22,19 @@ namespace ERP
         }
         private void frmLogIn_Load(object sender, EventArgs e)
         {
+            try
+            {
                 CheckApplicationOpen();
-                this.Text = "ERP Version(" + Application.ProductVersion + ")"; 
+                this.Text = "ERP Version(" + Application.ProductVersion + ")";
                 UserInfo.UserId = "Log Out";
+
                 thConnecting = new Thread(Connecting);
                 thConnecting.Start();
-
-           
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.ToString());
+            }
         }
 
         Thread thConnecting;
@@ -42,7 +48,7 @@ namespace ERP
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(new BtnLogInEnableDelegate(BtnLogInEnable),Enable );
+                this.Invoke(new BtnLogInEnableDelegate(BtnLogInEnable), Enable);
             }
             else
             {
@@ -57,8 +63,8 @@ namespace ERP
             }
             else
             {
-                progressBar1.Visible  = Visible;
-                  
+                progressBar1.Visible = Visible;
+
             }
         }
         public void tsslMsgChg(string Text)
@@ -69,7 +75,7 @@ namespace ERP
             }
             else
             {
-                tsslMsg.Text  = Text;
+                tsslMsg.Text = Text;
             }
         }
         public void txtTerminalIdChg(string Text)
@@ -88,56 +94,58 @@ namespace ERP
 
         void Connecting()
         {
-            ProgressBarVisChg(true);            
-            BtnLogInEnable(false);
-            tsslMsgChg("Connecting to Server...,");
-            clsConnection.Con();
-            clsConnection.con.ClientId = UserInfo.UserId;
-            ////temporary////
-            tsslMsgChg("Getting Organization Information...,");
-            DataTable dt = Query.get_CompanyInfo();
-            CompanyInfo.CompanyName = dt.Rows[0]["CompanyName"].ToString();
-            CompanyInfo.UrCompanyName = dt.Rows[0]["UrCompanyName"].ToString();
-            CompanyInfo.Address = dt.Rows[0]["Address"].ToString();
-            CompanyInfo.ContactHead = dt.Rows[0]["ContactHead"].ToString();
-            CompanyInfo.CellTitle = dt.Rows[0]["ContactPerson"].ToString();
-            CompanyInfo.Cell = dt.Rows[0]["Cell"].ToString();
-            CompanyInfo.Cell2Title = dt.Rows[0]["ContactPerson2"].ToString();
-            CompanyInfo.Cell2 = dt.Rows[0]["Cell2"].ToString();
+            try
+            {
+                ProgressBarVisChg(true);
+                BtnLogInEnable(false);
+                tsslMsgChg("Connecting to Server...,");
+                clsConnection.Con();
+                clsConnection.con.ClientId = UserInfo.UserId;
+                ////temporary////
+                tsslMsgChg("Getting Organization Information...,");
+                DataTable dt = Query.get_CompanyInfo();
+                CompanyInfo.CompanyName = dt.Rows[0]["CompanyName"].ToString();
+                CompanyInfo.UrCompanyName = dt.Rows[0]["UrCompanyName"].ToString();
+                CompanyInfo.Address = dt.Rows[0]["Address"].ToString();
+                CompanyInfo.ContactHead = dt.Rows[0]["ContactHead"].ToString();
+                CompanyInfo.CellTitle = dt.Rows[0]["ContactPerson"].ToString();
+                CompanyInfo.Cell = dt.Rows[0]["Cell"].ToString();
+                CompanyInfo.Cell2Title = dt.Rows[0]["ContactPerson2"].ToString();
+                CompanyInfo.Cell2 = dt.Rows[0]["Cell2"].ToString();
+                tsslMsgChg("Getting Terminal Id...,");
+                string ProcessorId = HardwareInfo.GetProcessorId();
+                string HDDSerialNo = "";
+                string ComputerName = HardwareInfo.GetComputerName();
+                string MacAddress = HardwareInfo.GetMACAddress();
+                string TerminalId = Query.get_TerminalId(ProcessorId, HDDSerialNo, ComputerName);
+                if (CompanyInfo.CompanyName == "MEMON MEDICAL COMPLEX")
+                {
+                    SoftwareInfo.Terminal = "MMC-" + TerminalId;
+                }
+                else
+                {
+                    SoftwareInfo.Terminal = "BEH-" + TerminalId;
+                }
 
-            ////////////////////
-            //////////////////////// Getting Terminal Id
-            tsslMsgChg("Getting Terminal Id...,");
-            string ProcessorId = HardwareInfo.GetProcessorId();
-            string HDDSerialNo = "";// HardwareInfo.GetHDDSerialNo();
-            string ComputerName = HardwareInfo.GetComputerName();
-            string MacAddress = HardwareInfo.GetMACAddress();
-            string TerminalId = Query.get_TerminalId(ProcessorId, HDDSerialNo, ComputerName);
-            if (CompanyInfo.CompanyName == "MEMON MEDICAL COMPLEX")
-            {
-                SoftwareInfo.Terminal = "MMC-" + TerminalId;
+                txtTerminalIdChg(SoftwareInfo.Terminal);
+                tsslMsgChg("Check Updates...,");
+                DataTable dtVersion = Query.getData("select version from softwareupdates where version != '" + Application.ProductVersion + "'");
+                if (dtVersion.Rows.Count > 0)
+                {
+                    tsslMsgChg("Downloading Updates...,");
+                    GetFile();
+                }
+                tsslMsgChg("ready");
+                ProgressBarVisChg(false);
+                BtnLogInEnable(true);
             }
-            else
+            catch (Exception ex)
             {
-                SoftwareInfo.Terminal = "BEH-" + TerminalId;
+                WriteLog("Connecting Error: " + ex.ToString());
+                tsslMsgChg("Error while connecting");
+                ProgressBarVisChg(false);
+                BtnLogInEnable(true);
             }
-            
-            txtTerminalIdChg(SoftwareInfo.Terminal);
-            tsslMsgChg("Check Updates...,");
-            DataTable dtVersion = Query.getData("select version from softwareupdates where version != '" + Application.ProductVersion + "'");
-            if (dtVersion.Rows.Count > 0)
-            {
-                tsslMsgChg("Downloading Updates...,");
-                //MessageBox.Show("Please update software this version are different " + Application.ProductVersion + "'");
-                GetFile();
-                //Thread th;
-                //th = new Thread(GetFile);
-                //th.Start();
-            }
-            tsslMsgChg("ready");
-            ////////////////////////////////
-            ProgressBarVisChg(false);
-            BtnLogInEnable(true);
         }
 
         static void ChangeFile(string Newfile, string Origfile, Process process)
@@ -148,30 +156,30 @@ namespace ERP
         {
             try
             {
-                if (!Directory.Exists(Application.StartupPath + "\\UpdateFiles"))
-                        {
-                            Directory.CreateDirectory(Application.StartupPath + "\\UpdateFiles");
+                //if (!Directory.Exists(Application.StartupPath + "\\UpdateFiles"))
+                //        {
+                //            Directory.CreateDirectory(Application.StartupPath + "\\UpdateFiles");
 
-                        }
-                 Query.getUpdateFile(Application.ProductVersion, Application.StartupPath + "\\UpdateFiles\\ERP.exe");
+                //        }
+                // Query.getUpdateFile(Application.ProductVersion, Application.StartupPath + "\\UpdateFiles\\ERP.exe");
 
-                    VersionUpdater.Program prog = new VersionUpdater.Program();
-                    VersionUpdater.Program.ChangeFile(Application.StartupPath + "\\UpdateFiles\\ERP.exe", Application.StartupPath + "\\ERP.exe", Process.GetCurrentProcess());
-                    Application.Restart();    
+                //    VersionUpdater.Program prog = new VersionUpdater.Program();
+                //    VersionUpdater.Program.ChangeFile(Application.StartupPath + "\\UpdateFiles\\ERP.exe", Application.StartupPath + "\\ERP.exe", Process.GetCurrentProcess());
+                //    Application.Restart();    
             }
             catch (Exception)
             {
                 try
                 {
-                                      
+
                 }
                 catch
                 {
                 }
             }
-            
+
         }
-        
+
         private static void CheckApplicationOpen()
         {
             Process currentProcess = Process.GetCurrentProcess();
@@ -205,60 +213,66 @@ namespace ERP
         }
         private void btnLogIn_Click(object sender, EventArgs e)
         {
- 
-            ////////////////////////////
-
             progressBar1.Visible = true;
-            Cursor.Current = Cursors.WaitCursor;  
+            Cursor.Current = Cursors.WaitCursor;
             DataTable dtUsers = Query.UserDetail(txtUserId.Text);
             if (dtUsers.Rows.Count > 0)
             {
                 if (dtUsers.Rows[0]["islock"].ToString() == "1")
                 {
-                    MessageBox.Show("Your Account is locked..!");  
+                    MessageBox.Show("Your Account is locked..!");
                     return;
                 }
                 if (dtUsers.Rows[0]["Password"].ToString() == txtPassword.Text)
                 {
                     frmMain frm = new frmMain();
                     frm.Owner = this;
-                    UserInfo.UserId = (string )dtUsers.Rows[0]["userid"];
-                    UserInfo.UserName  = (string)dtUsers.Rows[0]["username"];
+                    UserInfo.UserId = (string)dtUsers.Rows[0]["userid"];
+                    UserInfo.UserName = (string)dtUsers.Rows[0]["username"];
                     UserInfo.UserLevel = dtUsers.Rows[0]["Userlevel"].ToString();
-                    UserInfo.LogInDateTime = (DateTime)dtUsers.Rows[0]["LogIndate"];                                         
-                    frm.ShowDialog();                    
+                    UserInfo.LogInDateTime = (DateTime)dtUsers.Rows[0]["LogIndate"];
+                    frm.ShowDialog();
                 }
                 else
-                    MessageBox.Show("Invalid Password..!");  
+                    MessageBox.Show("Invalid Password..!");
             }
             else
                 MessageBox.Show("Invalid User ID..!");
-            progressBar1.Visible = false ;
-            Cursor.Current = Cursors.Default;          
+            progressBar1.Visible = false;
+            Cursor.Current = Cursors.Default;
         }
 
         private void frmLogIn_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys .Enter )
+            if (e.KeyCode == Keys.Enter)
             {
-                SendKeys.Send("{tab}");  
+                SendKeys.Send("{tab}");
             }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
-               
+
         }
 
-        
+        public static void WriteLog(string message)
+        {
+            try
+            {
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log.txt");
 
-        
+                using (StreamWriter writer = new StreamWriter(path, true))
+                {
+                    writer.WriteLine("Date: " + DateTime.Now.ToString());
+                    writer.WriteLine("Message: " + message);
+                    writer.WriteLine("--------------------------------------------------");
+                }
+            }
+            catch
+            {
 
-
-
-
-
-       
+            }
+        }
     }
 }

@@ -88,41 +88,11 @@ namespace ERP.Forms
         {
             if (dgvSession.CurrentRow.Index  != -1)
             {
-                if (UserInfo.UserLevel == "In-Patient"|| UserInfo.UserLevel == "Receptionist|In-Patient")
+                if (UserInfo.UserLevel == "In-Patient"|| UserInfo.UserLevel == "Receptionist|In-Patient" || UserInfo.UserLevel == "Admin")
                 {
-                    //frmReportView frm = new frmReportView();
-                    //Reports.CrpDlyCshStat rpt = new Reports.CrpDlyCshStat();
-                    //DataSet ds = ReportQuery.ClosingSummaryInpatientSessionWise((string)dgvSession.CurrentRow.Cells[clnSessionId.Index].Value);
-                    //ds.Tables[0].TableName = "DtExpVoucher";
-                    //ds.Tables[1].TableName = "DtDlyStatLog";
-                    ////   ds.Tables[2].TableName = "ReportQueryAccountBalance";
-                    //
-                    //rpt.SetDataSource(ds);
-                    //rpt.Subreports[0].SetDataSource(ds.Tables[1]);
-                    //
-                    //
-                    //rpt.SetParameterValue("pDateFrom", (string)dgvSession.CurrentRow.Cells[clnFrom.Index].Value);
-                    //rpt.SetParameterValue("pDateTo",   (string)dgvSession.CurrentRow.Cells[clnTo.Index].Value);
-                    //rpt.SetParameterValue("pUser", UserInfo.UserName);
-                    //rpt.SetParameterValue("pHeading", "Daily Cash Summary");
-                    //rpt.SetParameterValue("pReportId", 2);
-                    //rpt.SetParameterValue("pCreditCardAmount", "2");
-                    //rpt.SetParameterValue("pChequeAmount", "2");
-                    //rpt.SetParameterValue("pNetInPatient", "2");
-                    //rpt.SetParameterValue("pNetOutPatient", "2");
-                    
-                    //frm.rptViewer.ReportSource = rpt;
-                    //frm.Show();
-
-                    //frmReportView rptview = new frmReportView();
-                    //rptview.rptViewer.ReportSource = rpt;
-                    //rptview.Show();
                     Reports.dailyCashStatement daily = new Reports.dailyCashStatement();
                     DataTable DTBMJ = ReportQuery.rep_dailycashstatament_userwise((string)dgvSession.CurrentRow.Cells[clnSessionId.Index].Value);
-
-
                     daily.SetDataSource(DTBMJ);
-
                     daily.SetParameterValue("@User", UserInfo.UserId);
                     daily.SetParameterValue("@FDate", (string)dgvSession.CurrentRow.Cells[clnFrom.Index].Value);
                     daily.SetParameterValue("@ToDate",(string)dgvSession.CurrentRow.Cells[clnTo.Index].Value);
@@ -134,7 +104,7 @@ namespace ERP.Forms
                     frmReportView rptview = new frmReportView();
                     rptview.rptViewer.ReportSource = daily;
                     rptview.Show();
-                    if (UserInfo.UserLevel == "Receptionist|In-Patient")
+                    if (UserInfo.UserLevel == "Receptionist|In-Patient" || UserInfo.UserLevel == "Admin")
                     {
                         frmReportView frm = new frmReportView();
                         Reports.OPDClosingSummary rpt = new Reports.OPDClosingSummary();
@@ -152,14 +122,9 @@ namespace ERP.Forms
                         rpt.SetParameterValue("@SessionUser", UserInfo.UserLevel == "Admin" ? cmbUser.SelectedValue.ToString() : UserInfo.UserId);
                         rpt.SetParameterValue("@SessionStart", (string)dgvSession.CurrentRow.Cells[clnFrom.Index].Value);
                         rpt.SetParameterValue("@SessionEnd", (string)dgvSession.CurrentRow.Cells[clnTo.Index].Value);
-
                         frm.rptViewer.ReportSource = rpt;
                         frm.Show();
                     }
-
-
-                   
-
                 }
                 else
                 {
@@ -179,12 +144,9 @@ namespace ERP.Forms
                     rpt.SetParameterValue("@SessionUser", UserInfo.UserLevel == "Admin" ? cmbUser.SelectedValue.ToString() : UserInfo.UserId);
                     rpt.SetParameterValue("@SessionStart", (string)dgvSession.CurrentRow.Cells[clnFrom.Index].Value);
                     rpt.SetParameterValue("@SessionEnd", (string)dgvSession.CurrentRow.Cells[clnTo.Index].Value);
-
                     frm.rptViewer.ReportSource = rpt;
                     frm.Show();
                 }
-
-
             }
         }
     }

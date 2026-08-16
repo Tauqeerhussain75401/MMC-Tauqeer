@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grpSdate = new System.Windows.Forms.GroupBox();
             this.dtpDateTo = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
@@ -88,19 +89,11 @@
             this.rdbCreatedByDateRange = new System.Windows.Forms.RadioButton();
             this.rdbCreadtedByDateAll = new System.Windows.Forms.RadioButton();
             this.dgvQuery = new System.Windows.Forms.DataGridView();
-            this.clnTokenNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnVoucherNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnOPDCatagory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnConsultant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnPatientType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnPatientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClnCreatedby = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnEditby = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label17 = new System.Windows.Forms.Label();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnAllReceipt = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyVoucherNoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -111,6 +104,16 @@
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnTokenNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnVoucherNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnOPDCatagory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnConsultant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnPatientType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnPatientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClnCreatedby = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnEditby = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpSdate.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -122,6 +125,7 @@
             this.groupBox9.SuspendLayout();
             this.groupBox10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuery)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpSdate
@@ -179,6 +183,7 @@
             this.rdbDateRangeFrom.TabIndex = 2;
             this.rdbDateRangeFrom.Text = "Range From";
             this.rdbDateRangeFrom.UseVisualStyleBackColor = true;
+            this.rdbDateRangeFrom.CheckedChanged += new System.EventHandler(this.rdbDateRangeFrom_CheckedChanged);
             // 
             // dtpDateFrom
             // 
@@ -876,98 +881,7 @@
             this.dgvQuery.Size = new System.Drawing.Size(1038, 370);
             this.dgvQuery.TabIndex = 165;
             this.dgvQuery.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuery_CellContentClick);
-            // 
-            // clnTokenNo
-            // 
-            this.clnTokenNo.HeaderText = "Token No";
-            this.clnTokenNo.MinimumWidth = 6;
-            this.clnTokenNo.Name = "clnTokenNo";
-            this.clnTokenNo.ReadOnly = true;
-            this.clnTokenNo.Width = 125;
-            // 
-            // clnVoucherNum
-            // 
-            this.clnVoucherNum.HeaderText = "Voucher #";
-            this.clnVoucherNum.MinimumWidth = 6;
-            this.clnVoucherNum.Name = "clnVoucherNum";
-            this.clnVoucherNum.ReadOnly = true;
-            this.clnVoucherNum.Width = 125;
-            // 
-            // clnDate
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Format = "dd-MMM-yyyy";
-            dataGridViewCellStyle2.NullValue = null;
-            this.clnDate.DefaultCellStyle = dataGridViewCellStyle2;
-            this.clnDate.FillWeight = 50F;
-            this.clnDate.HeaderText = "Date";
-            this.clnDate.MinimumWidth = 110;
-            this.clnDate.Name = "clnDate";
-            this.clnDate.ReadOnly = true;
-            this.clnDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.clnDate.Width = 110;
-            // 
-            // clnOPDCatagory
-            // 
-            this.clnOPDCatagory.HeaderText = "Catagory";
-            this.clnOPDCatagory.MinimumWidth = 6;
-            this.clnOPDCatagory.Name = "clnOPDCatagory";
-            this.clnOPDCatagory.ReadOnly = true;
-            this.clnOPDCatagory.Width = 125;
-            // 
-            // clnConsultant
-            // 
-            this.clnConsultant.HeaderText = "Consultant";
-            this.clnConsultant.MinimumWidth = 6;
-            this.clnConsultant.Name = "clnConsultant";
-            this.clnConsultant.ReadOnly = true;
-            this.clnConsultant.Width = 125;
-            // 
-            // clnPatientType
-            // 
-            this.clnPatientType.HeaderText = "Patient Type";
-            this.clnPatientType.MinimumWidth = 6;
-            this.clnPatientType.Name = "clnPatientType";
-            this.clnPatientType.ReadOnly = true;
-            this.clnPatientType.Width = 125;
-            // 
-            // clnPatientName
-            // 
-            this.clnPatientName.HeaderText = "PatientName";
-            this.clnPatientName.MinimumWidth = 6;
-            this.clnPatientName.Name = "clnPatientName";
-            this.clnPatientName.ReadOnly = true;
-            this.clnPatientName.Width = 125;
-            // 
-            // clnAmount
-            // 
-            this.clnAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = null;
-            this.clnAmount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.clnAmount.FillWeight = 50F;
-            this.clnAmount.HeaderText = "Amount";
-            this.clnAmount.MinimumWidth = 120;
-            this.clnAmount.Name = "clnAmount";
-            this.clnAmount.ReadOnly = true;
-            this.clnAmount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // ClnCreatedby
-            // 
-            this.ClnCreatedby.HeaderText = "Created By";
-            this.ClnCreatedby.MinimumWidth = 180;
-            this.ClnCreatedby.Name = "ClnCreatedby";
-            this.ClnCreatedby.ReadOnly = true;
-            this.ClnCreatedby.Width = 180;
-            // 
-            // clnEditby
-            // 
-            this.clnEditby.HeaderText = "Edit By";
-            this.clnEditby.MinimumWidth = 180;
-            this.clnEditby.Name = "clnEditby";
-            this.clnEditby.ReadOnly = true;
-            this.clnEditby.Width = 180;
+            this.dgvQuery.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvQuery_CellMouseUp);
             // 
             // label17
             // 
@@ -1003,6 +917,21 @@
             this.btnAllReceipt.Text = "&Print All Receipt";
             this.btnAllReceipt.UseVisualStyleBackColor = true;
             this.btnAllReceipt.Click += new System.EventHandler(this.btnAllReceipt_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyVoucherNoToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(194, 28);
+            // 
+            // copyVoucherNoToolStripMenuItem
+            // 
+            this.copyVoucherNoToolStripMenuItem.Name = "copyVoucherNoToolStripMenuItem";
+            this.copyVoucherNoToolStripMenuItem.Size = new System.Drawing.Size(193, 24);
+            this.copyVoucherNoToolStripMenuItem.Text = "Copy Voucher No";
+            this.copyVoucherNoToolStripMenuItem.Click += new System.EventHandler(this.copyVoucherNoToolStripMenuItem_Click);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -1096,6 +1025,98 @@
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
             this.dataGridViewTextBoxColumn10.Width = 180;
             // 
+            // clnTokenNo
+            // 
+            this.clnTokenNo.HeaderText = "Token No";
+            this.clnTokenNo.MinimumWidth = 6;
+            this.clnTokenNo.Name = "clnTokenNo";
+            this.clnTokenNo.ReadOnly = true;
+            this.clnTokenNo.Width = 115;
+            // 
+            // clnVoucherNum
+            // 
+            this.clnVoucherNum.HeaderText = "Voucher #";
+            this.clnVoucherNum.MinimumWidth = 6;
+            this.clnVoucherNum.Name = "clnVoucherNum";
+            this.clnVoucherNum.ReadOnly = true;
+            this.clnVoucherNum.Width = 115;
+            // 
+            // clnDate
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Format = "dd-MMM-yyyy";
+            dataGridViewCellStyle2.NullValue = null;
+            this.clnDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.clnDate.FillWeight = 50F;
+            this.clnDate.HeaderText = "Date";
+            this.clnDate.MinimumWidth = 110;
+            this.clnDate.Name = "clnDate";
+            this.clnDate.ReadOnly = true;
+            this.clnDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.clnDate.Width = 110;
+            // 
+            // clnOPDCatagory
+            // 
+            this.clnOPDCatagory.HeaderText = "Catagory";
+            this.clnOPDCatagory.MinimumWidth = 6;
+            this.clnOPDCatagory.Name = "clnOPDCatagory";
+            this.clnOPDCatagory.ReadOnly = true;
+            this.clnOPDCatagory.Width = 125;
+            // 
+            // clnConsultant
+            // 
+            this.clnConsultant.HeaderText = "Consultant";
+            this.clnConsultant.MinimumWidth = 6;
+            this.clnConsultant.Name = "clnConsultant";
+            this.clnConsultant.ReadOnly = true;
+            this.clnConsultant.Width = 125;
+            // 
+            // clnPatientType
+            // 
+            this.clnPatientType.HeaderText = "Patient Type";
+            this.clnPatientType.MinimumWidth = 6;
+            this.clnPatientType.Name = "clnPatientType";
+            this.clnPatientType.ReadOnly = true;
+            this.clnPatientType.Width = 125;
+            // 
+            // clnPatientName
+            // 
+            this.clnPatientName.HeaderText = "PatientName";
+            this.clnPatientName.MinimumWidth = 6;
+            this.clnPatientName.Name = "clnPatientName";
+            this.clnPatientName.ReadOnly = true;
+            this.clnPatientName.Width = 135;
+            // 
+            // clnAmount
+            // 
+            this.clnAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = null;
+            this.clnAmount.DefaultCellStyle = dataGridViewCellStyle3;
+            this.clnAmount.FillWeight = 50F;
+            this.clnAmount.HeaderText = "Amount";
+            this.clnAmount.MinimumWidth = 120;
+            this.clnAmount.Name = "clnAmount";
+            this.clnAmount.ReadOnly = true;
+            this.clnAmount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // ClnCreatedby
+            // 
+            this.ClnCreatedby.HeaderText = "Created By";
+            this.ClnCreatedby.MinimumWidth = 180;
+            this.ClnCreatedby.Name = "ClnCreatedby";
+            this.ClnCreatedby.ReadOnly = true;
+            this.ClnCreatedby.Width = 180;
+            // 
+            // clnEditby
+            // 
+            this.clnEditby.HeaderText = "Edit By";
+            this.clnEditby.MinimumWidth = 180;
+            this.clnEditby.Name = "clnEditby";
+            this.clnEditby.ReadOnly = true;
+            this.clnEditby.Width = 180;
+            // 
             // ReceiptSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -1152,6 +1173,7 @@
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuery)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1224,6 +1246,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Button btnAllReceipt;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnTokenNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnVoucherNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnDate;
@@ -1234,8 +1259,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clnAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClnCreatedby;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnEditby;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.Button btnAllReceipt;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem copyVoucherNoToolStripMenuItem;
     }
 }

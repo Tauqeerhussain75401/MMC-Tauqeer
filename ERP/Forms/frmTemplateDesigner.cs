@@ -171,7 +171,7 @@ namespace ERP.Forms
             if (MessageBox.Show("Are you sure?" + Environment.NewLine + "You want to save this...!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 string Id = (string)cmbTemplate.SelectedValue;
-                DML.docTemplate_add_edit(Id, txtNewTemplate.Text, rtxtDoc.Rtf,"0");
+                DML.docTemplate_add_edit(Id, txtNewTemplate.Text, rtxtDoc.Rtf,"0",null,null,null,null,null,null,null,null,null);
                 MessageBox.Show("Record Successfully Saved..!");
                 FillControls.FillcmbTemplateIndex(cmbTemplate);
 

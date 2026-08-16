@@ -68,7 +68,7 @@ namespace ERP.Forms
         {
             if (e.RowIndex!=-1)
             {
-                 dtFillPatHis = Query.getData("SELECT patienttype,memberid,patienttitle,patientname,gender,contactno,age,ageunit,referenceid,remarks FROM opdreceipt WHERE status=0 and receiptno='"+dgvQuery.Rows[e.RowIndex].Cells[clnVoucherNum.Index].Value.ToString().Remove(0,3)+"'");
+                 dtFillPatHis = Query.getData("SELECT patienttype,memberid,patienttitle,patientname,gender,contactno,age,ageunit,referenceid,remarks,mrno FROM opdreceipt WHERE status=0 and receiptno='" + dgvQuery.Rows[e.RowIndex].Cells[clnVoucherNum.Index].Value.ToString().Remove(0,3)+"'");
                  if (dtFillPatHis.Rows.Count > 0) 
                 {
                     //frmOPDReceipt frm = new frmOPDReceipt();

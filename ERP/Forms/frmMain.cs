@@ -1025,17 +1025,18 @@ namespace ERP
             if (UserInfo.UserLevel == "Admin")
             {
                 eCToolStripMenuItem.Visible = true;
-                echoTemplateDesignerToolStripMenuItem.Visible = true;
+                echoTemplateDesignerToolStripMenuItem1.Visible = true;
             }
 
             if (UserInfo.UserLevel == "Echo")
             {
                 MainAccounts.Visible = false;
-
+                MainSetup.Visible = false;
                 MainReports.Visible = false;
                 MainStatistics.Visible = false;
                 Mainlaboratory.Visible = false;
 
+                xRAYToolStripMenuItem.Visible = false;
 
                 MainManagement.Visible = false;
                 SubMainReceipt.Visible = false;
@@ -1056,7 +1057,7 @@ namespace ERP
                 roomSetupToolStripMenuItem.Visible = false;
                 packageInfoToolStripMenuItem.Visible = false;
                 referenceInfoToolStripMenuItem.Visible = false;
-                MainInPatient.Visible = false;
+                
                 SubMainLabTestRemarks.Visible = false;
                 SubMainTestParameters.Visible = false;
                 menuCatagoryInfo.Visible = false;
@@ -1066,7 +1067,65 @@ namespace ERP
                 SubMainReportDesigner.Visible = false;
 
                 eCToolStripMenuItem.Visible = true;
-                echoTemplateDesignerToolStripMenuItem.Visible = true;
+                echoTemplateDesignerToolStripMenuItem1.Visible = true;
+
+                MainInPatient.Visible = true;
+                addmissionInfoToolStripMenuItem.Visible = false;
+                advanceReceiptToolStripMenuItem.Visible = false;
+                roomStatusToolStripMenuItem.Visible = false;
+                inPatientBillingToolStripMenuItem.Visible = false;
+                inPatientRefundInformationToolStripMenuItem.Visible = false;
+                birthInfoToolStripMenuItem.Visible = false;
+                inPatientSearchToolStripMenuItem.Visible = false;
+            }
+
+            if (UserInfo.UserLevel == "XRay")
+            {
+                MainAccounts.Visible = false;
+                MainSetup.Visible = false;
+                MainReports.Visible = false;
+                MainStatistics.Visible = false;
+                Mainlaboratory.Visible = false;
+
+                MainManagement.Visible = false;
+                SubMainReceipt.Visible = false;
+                SubMainbackup.Visible = false;
+                SubMainrestore.Visible = false;
+                SubMainconfiguration.Visible = false;
+                SubMaintest.Visible = false;
+                SubMainChartOfAccount.Visible = false;
+                SubMainDetailAccount.Visible = false;
+                SubMaincompanyInformation.Visible = false;
+                SubMainNarration.Visible = false;
+                SubMainConsultantInfo.Visible = false;
+                SubMainTestInformationToolStripMenuItem.Visible = false;
+                SubMainmemberInformationToolStripMenuItem.Visible = false;
+                userControlToolStripMenuItem.Visible = false;
+                securityLevelToolStripMenuItem.Visible = false;
+
+                roomSetupToolStripMenuItem.Visible = false;
+                packageInfoToolStripMenuItem.Visible = false;
+                referenceInfoToolStripMenuItem.Visible = false;
+
+                SubMainLabTestRemarks.Visible = false;
+                SubMainTestParameters.Visible = false;
+                menuCatagoryInfo.Visible = false;
+                MainUltraSound.Visible = false;
+                partialPaymentToolStripMenuItem.Visible = false;
+                bankAccountToolStripMenuItem.Visible = false;
+                SubMainReportDesigner.Visible = false;
+
+                eCToolStripMenuItem.Visible = false;
+                echoTemplateDesignerToolStripMenuItem1.Visible = true;
+
+                MainInPatient.Visible = true;
+                addmissionInfoToolStripMenuItem.Visible = false;
+                advanceReceiptToolStripMenuItem.Visible = false;
+                roomStatusToolStripMenuItem.Visible = false;
+                inPatientBillingToolStripMenuItem.Visible = false;
+                inPatientRefundInformationToolStripMenuItem.Visible = false;
+                birthInfoToolStripMenuItem.Visible = false;
+                inPatientSearchToolStripMenuItem.Visible = false;
             }
 
         }
@@ -1570,6 +1629,27 @@ namespace ERP
         private void echoTemplateDesignerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Forms.EchoTemplateDesigner frm = new Forms.EchoTemplateDesigner();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void echoTemplateDesignerToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Forms.EchoTemplateDesigner frm = new Forms.EchoTemplateDesigner();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void xRayTemplateDesignerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.XRayTemplateDesigner frm = new Forms.XRayTemplateDesigner();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void xRayReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.XRayReport frm = new Forms.XRayReport();
             frm.MdiParent = this;
             frm.Show();
         }

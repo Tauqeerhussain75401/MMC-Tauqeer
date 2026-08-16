@@ -20,6 +20,7 @@ namespace ERP
         {
             InitializeComponent();
             FillControls.FillcmbTestCatagory(cmbType);
+            FillControls.FillcmbTestCatagory(cmbType2);
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -37,9 +38,15 @@ namespace ERP
             string search = tb_search.Text.Trim().Replace("'", "'");
 
             DataView dv = new DataView(dtQuery);
-            dv.RowFilter  = $"CONVERT(ID, 'System.String') LIKE '%{search}%' OR name LIKE '%{search}%'";
+            string filter = $"CONVERT(ID, 'System.String') LIKE '%{search}%' OR name LIKE '%{search}%'";
+
+            if (!string.IsNullOrEmpty(cmbType2.Text) && cmbType2.SelectedIndex > 0)
+            {
+                filter += $" AND testtypeid = {cmbType2.SelectedValue}";
+            }
+            dv.RowFilter = filter;
             dgvDetail.DataSource = dv;
-            if (string.IsNullOrWhiteSpace(tb_search.Text))
+            if (string.IsNullOrWhiteSpace(tb_search.Text) && (string.IsNullOrWhiteSpace(cmbType2.Text) || cmbType2.SelectedIndex < 1))
             {
                 FillQuery();
             }
@@ -97,6 +104,22 @@ namespace ERP
 
         DataTable dtQuery;
         DataTable dtSurgery;
+        DataTable dtConsultantFaculty;
+
+        void consultantCategoryFill()
+        {
+            DataView view = new DataView(dtConsultantFaculty);
+            DataTable distinctTable = view.ToTable(true, "faculty");
+
+            // Add a default row at the top
+            DataRow newRow = distinctTable.NewRow();
+            newRow["faculty"] = "All";
+            distinctTable.Rows.InsertAt(newRow, 0);
+
+            cmbType2.DataSource = distinctTable;
+            cmbType2.DisplayMember = "ColumnName";
+            cmbType2.ValueMember = "ColumnName";
+        }
         void FillQuery()
         {
             if (dgvDetail.Rows.Count > 0)
@@ -104,6 +127,7 @@ namespace ERP
                 dgvDetail.AutoGenerateColumns = false;
                 dtQuery = Query.ConsultantIndexAll();
                 dtSurgery = Query.surgeryAll();
+                
                 dgvDetail.Columns[clnID.Index].DataPropertyName = "id";
                 dgvDetail.Columns[clnName.Index].DataPropertyName = "name";
                 dgvDetail.Columns[clnMobile.Index].DataPropertyName = "mobile";
@@ -117,6 +141,8 @@ namespace ERP
                 cmbConsultant.DataSource = dtQuery;
                 cmbConsultant.DisplayMember = "name";
                 cmbConsultant.ValueMember = "id";
+
+               
 
                 //cmbSurgery.DataSource = dtSurgery;
                 //cmbSurgery.DisplayMember = "packagename_name";
@@ -442,6 +468,106 @@ namespace ERP
                 dgvSurgery.Rows.Cast<DataGridViewRow>().ToList().ForEach(fe => fe.Visible = true);
         }
 
-        
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dtQuery == null)
+            {
+                return;
+            }
+            string search = tb_search.Text.Trim().Replace("'", "'");
+
+            DataView dv = new DataView(dtQuery);
+            string filter = $"testtypeid = {cmbType2.SelectedValue} ";
+            if(!string.IsNullOrWhiteSpace(search))
+            {
+                filter = $"CONVERT(ID, 'System.String') LIKE '%{search}%' OR name LIKE '%{search}%'";
+
+
+                filter += $" and testtypeid = {cmbType2.SelectedValue} ";
+            }
+                
+            
+            dv.RowFilter = filter;
+            dgvDetail.DataSource = dv;
+            if (string.IsNullOrWhiteSpace(tb_search.Text) && (string.IsNullOrWhiteSpace(cmbType2.Text) || cmbType2.SelectedIndex < 1 ))
+            {
+                dgvDetail.DataSource = dtQuery;
+                cmbConsultant.DataSource = dtQuery;
+                //FillQuery();
+            }
+        }
+
+        private void label23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void brnPrev_Click(object sender, EventArgs e)
+        {
+            //DataTable resultTable = new DataTable();
+            //resultTable.Columns.Add("ID", typeof(int));
+            //resultTable.Columns.Add("Name", typeof(string));
+            //resultTable.Columns.Add("mobile", typeof(string));
+            //resultTable.Columns.Add("hospitalrate", typeof(string));
+            //resultTable.Columns.Add("degrees", typeof(string));
+            //resultTable.Columns.Add("timings", typeof(string));
+            //resultTable.Columns.Add("faculty", typeof(string));
+            //resultTable.Columns.Add("isdeactivate", typeof(int));
+            //resultTable.Columns.Add("Title", typeof(string));
+
+            //DataTable det;
+            //if (dgvDetail.DataSource is DataView dv1)
+            //    det = dv1.ToTable();
+            //else
+            //    det = (DataTable)dgvDetail.DataSource;
+
+            //DataTable type;
+            //if (cmbType2.DataSource is DataView dv2)
+            //    type = dv2.ToTable();
+            //else
+            //    type = (DataTable)cmbType2.DataSource;
+
+
+            //var query = from t1 in det.AsEnumerable()
+            //            where !string.IsNullOrWhiteSpace(t1["testtypeid"].ToString())
+            //            join t2 in type.AsEnumerable()
+            //                 .Where(x => Convert.ToInt32(x["id"]) != 0)
+            //            on t1["testtypeid"].ToString() equals t2["id"].ToString()
+            //            select new
+            //            {
+            //                ID = Convert.ToInt32(t1["ID"]),
+            //                Name = t1["Name"].ToString(),
+            //                mobile = t1["mobile"].ToString(),
+            //                hospitalrate = Convert.ToInt32(t1["hospitalrate"]),
+            //                degrees = t1["degrees"].ToString(),
+            //                timings = t1["timings"].ToString(),
+            //                faculty = t1["faculty"].ToString(),
+            //                isdeactivate = Convert.ToInt32(t1["isdeactivate"]),
+            //                Title = t2["Title"].ToString()
+            //            };
+
+            //foreach (var row in query)
+            //{
+            //    resultTable.Rows.Add(row.ID, row.Name, row.mobile, row.hospitalrate,
+            //                         row.degrees, row.timings, row.faculty,
+            //                         row.isdeactivate, row.Title);
+            //}
+
+            
+            ////resultTable.DefaultView.Sort = "ID ASC";
+            ////resultTable = resultTable.DefaultView.ToTable();
+            
+
+            //frmReportView frm = new frmReportView();
+            //Reports.ConsultantIndex rpt = new Reports.ConsultantIndex();
+            //rpt.SetDataSource(resultTable);
+            //frm.rptViewer.ReportSource = rpt;
+            //frm.Show();
+        }
     }
 }

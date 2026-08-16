@@ -11,6 +11,7 @@ namespace ERP
 {
     public partial class frmRoomInfo : Form
     {
+        DataTable dtQuery;
         public frmRoomInfo()
         {
             
@@ -56,7 +57,7 @@ namespace ERP
         {
 
             dgvRoomDetails.Rows.Clear();
-            DataTable dtQuery = Query.RoomInfo();
+            dtQuery = Query.RoomInfo();
             for (int i = 0; i < dtQuery.Rows.Count; i++)
             {
                 dgvRoomDetails.Rows.Add(dtQuery.Rows[i]["id"].ToString(),
@@ -134,6 +135,40 @@ namespace ERP
         private void grpRoomInfo_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnpreview_Click(object sender, EventArgs e)
+        {
+            frmReportView frm = new frmReportView();
+            Reports.RoomIndex rpt = new Reports.RoomIndex();
+            rpt.SetDataSource(dtQuery);
+            frm.rptViewer.ReportSource = rpt;
+            frm.Show();
+        }
+
+        private void tb_search_TextChanged(object sender, EventArgs e)
+        {
+            if (dtQuery == null)
+            {
+                return;
+            }
+            string searchtext = tb_search.Text.Trim().ToLower();
+            dgvRoomDetails.Rows.Clear();
+
+            foreach (DataRow row in dtQuery.Rows)
+            {
+                string id = row["id"]?.ToString() ?? "";
+                string title = row["fullname"]?.ToString() ?? "";
+                string description = row["description"]?.ToString() ?? "";
+                if (id.ToLower().Contains(searchtext) || title.ToLower().Contains(searchtext) || description.ToLower().Contains(searchtext))
+                {
+                    string floornumber = row["floornumber"]?.ToString() ?? "";
+                    string charges = row["hospitalrate"]?.ToString() ?? "";
+
+
+                    dgvRoomDetails.Rows.Add(id, title, description, floornumber, charges);
+                }
+            }
         }
     }
 }

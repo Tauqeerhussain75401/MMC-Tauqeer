@@ -44,6 +44,10 @@
             this.grpReferenceInfo = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tb_search = new System.Windows.Forms.TextBox();
+            this.chkSrchRpt = new System.Windows.Forms.CheckBox();
+            this.chkSrchActv = new System.Windows.Forms.CheckBox();
             this.clnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnReport = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -177,7 +181,6 @@
             // 
             // btnPreview
             // 
-            this.btnPreview.Enabled = false;
             this.btnPreview.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPreview.Location = new System.Drawing.Point(241, 10);
             this.btnPreview.Name = "btnPreview";
@@ -186,6 +189,7 @@
             this.btnPreview.Text = "Pre&view";
             this.btnPreview.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // btnNew
             // 
@@ -241,15 +245,56 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(14, 198);
+            this.label4.Location = new System.Drawing.Point(422, 198);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(123, 13);
             this.label4.TabIndex = 255;
             this.label4.Text = "(Double Click to retrieve)";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(11, 194);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 15);
+            this.label7.TabIndex = 257;
+            this.label7.Text = "Search :";
+            // 
+            // tb_search
+            // 
+            this.tb_search.Location = new System.Drawing.Point(69, 193);
+            this.tb_search.Name = "tb_search";
+            this.tb_search.Size = new System.Drawing.Size(176, 20);
+            this.tb_search.TabIndex = 256;
+            this.tb_search.TextChanged += new System.EventHandler(this.tb_search_TextChanged);
+            // 
+            // chkSrchRpt
+            // 
+            this.chkSrchRpt.AutoSize = true;
+            this.chkSrchRpt.Location = new System.Drawing.Point(257, 196);
+            this.chkSrchRpt.Name = "chkSrchRpt";
+            this.chkSrchRpt.Size = new System.Drawing.Size(58, 17);
+            this.chkSrchRpt.TabIndex = 258;
+            this.chkSrchRpt.Text = "Report";
+            this.chkSrchRpt.UseVisualStyleBackColor = true;
+            this.chkSrchRpt.CheckedChanged += new System.EventHandler(this.chkRptActv_CheckedChanged);
+            // 
+            // chkSrchActv
+            // 
+            this.chkSrchActv.AutoSize = true;
+            this.chkSrchActv.Location = new System.Drawing.Point(320, 196);
+            this.chkSrchActv.Name = "chkSrchActv";
+            this.chkSrchActv.Size = new System.Drawing.Size(56, 17);
+            this.chkSrchActv.TabIndex = 259;
+            this.chkSrchActv.Text = "Active";
+            this.chkSrchActv.UseVisualStyleBackColor = true;
+            this.chkSrchActv.CheckedChanged += new System.EventHandler(this.chkSrchActv_CheckedChanged);
+            // 
             // clnID
             // 
             this.clnID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.clnID.DataPropertyName = "id";
             this.clnID.HeaderText = "ID";
             this.clnID.Name = "clnID";
             this.clnID.ReadOnly = true;
@@ -258,6 +303,7 @@
             // clnName
             // 
             this.clnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clnName.DataPropertyName = "name";
             this.clnName.HeaderText = "Name";
             this.clnName.Name = "clnName";
             this.clnName.ReadOnly = true;
@@ -265,6 +311,7 @@
             // clnReport
             // 
             this.clnReport.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.clnReport.DataPropertyName = "showzfheadinginreport";
             this.clnReport.HeaderText = "Report";
             this.clnReport.Name = "clnReport";
             this.clnReport.ReadOnly = true;
@@ -273,6 +320,7 @@
             // clnActive
             // 
             this.clnActive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.clnActive.DataPropertyName = "isactive";
             this.clnActive.HeaderText = "Active";
             this.clnActive.Name = "clnActive";
             this.clnActive.ReadOnly = true;
@@ -285,6 +333,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(552, 650);
+            this.Controls.Add(this.chkSrchActv);
+            this.Controls.Add(this.chkSrchRpt);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.tb_search);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.grpReferenceInfo);
@@ -320,6 +372,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox tb_search;
+        private System.Windows.Forms.CheckBox chkSrchRpt;
+        private System.Windows.Forms.CheckBox chkSrchActv;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnID;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnName;
         private System.Windows.Forms.DataGridViewCheckBoxColumn clnReport;

@@ -144,8 +144,8 @@
             this.cmbFundType = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.grpGender = new System.Windows.Forms.GroupBox();
-            this.label18 = new System.Windows.Forms.Label();
             this.cmbgender = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.grpDateRange.SuspendLayout();
             this.grpAsOn.SuspendLayout();
             this.grpAccounts.SuspendLayout();
@@ -190,11 +190,9 @@
             this.grpDateRange.Controls.Add(this.dtpTDate);
             this.grpDateRange.Controls.Add(this.dtpFDate);
             this.grpDateRange.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpDateRange.Location = new System.Drawing.Point(16, 49);
-            this.grpDateRange.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpDateRange.Location = new System.Drawing.Point(12, 40);
             this.grpDateRange.Name = "grpDateRange";
-            this.grpDateRange.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpDateRange.Size = new System.Drawing.Size(521, 70);
+            this.grpDateRange.Size = new System.Drawing.Size(391, 57);
             this.grpDateRange.TabIndex = 2;
             this.grpDateRange.TabStop = false;
             this.grpDateRange.Text = "Date Range ";
@@ -204,10 +202,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(267, 32);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(200, 26);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 20);
+            this.label1.Size = new System.Drawing.Size(31, 16);
             this.label1.TabIndex = 196;
             this.label1.Text = "To :";
             // 
@@ -215,10 +212,9 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(8, 32);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(6, 26);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(58, 20);
+            this.label7.Size = new System.Drawing.Size(45, 16);
             this.label7.TabIndex = 195;
             this.label7.Text = "From :";
             // 
@@ -226,10 +222,9 @@
             // 
             this.dtpTDate.CustomFormat = "dd-MMM-yyyy";
             this.dtpTDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTDate.Location = new System.Drawing.Point(317, 28);
-            this.dtpTDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpTDate.Location = new System.Drawing.Point(238, 23);
             this.dtpTDate.Name = "dtpTDate";
-            this.dtpTDate.Size = new System.Drawing.Size(173, 26);
+            this.dtpTDate.Size = new System.Drawing.Size(131, 22);
             this.dtpTDate.TabIndex = 194;
             this.dtpTDate.ValueChanged += new System.EventHandler(this.dtpTDate_ValueChanged);
             // 
@@ -237,10 +232,9 @@
             // 
             this.dtpFDate.CustomFormat = "dd-MMM-yyyy";
             this.dtpFDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFDate.Location = new System.Drawing.Point(76, 28);
-            this.dtpFDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFDate.Location = new System.Drawing.Point(57, 23);
             this.dtpFDate.Name = "dtpFDate";
-            this.dtpFDate.Size = new System.Drawing.Size(173, 26);
+            this.dtpFDate.Size = new System.Drawing.Size(131, 22);
             this.dtpFDate.TabIndex = 193;
             this.dtpFDate.ValueChanged += new System.EventHandler(this.dtpFDate_ValueChanged);
             // 
@@ -249,11 +243,9 @@
             this.grpAsOn.Controls.Add(this.label2);
             this.grpAsOn.Controls.Add(this.dtpAsOn);
             this.grpAsOn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpAsOn.Location = new System.Drawing.Point(16, 127);
-            this.grpAsOn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpAsOn.Location = new System.Drawing.Point(12, 103);
             this.grpAsOn.Name = "grpAsOn";
-            this.grpAsOn.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpAsOn.Size = new System.Drawing.Size(277, 70);
+            this.grpAsOn.Size = new System.Drawing.Size(208, 57);
             this.grpAsOn.TabIndex = 3;
             this.grpAsOn.TabStop = false;
             this.grpAsOn.Text = "As On ";
@@ -263,10 +255,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(8, 30);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(6, 24);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 20);
+            this.label2.Size = new System.Drawing.Size(43, 16);
             this.label2.TabIndex = 198;
             this.label2.Text = "Date :";
             // 
@@ -274,10 +265,9 @@
             // 
             this.dtpAsOn.CustomFormat = "dd-MMM-yyyy";
             this.dtpAsOn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpAsOn.Location = new System.Drawing.Point(76, 26);
-            this.dtpAsOn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpAsOn.Location = new System.Drawing.Point(57, 21);
             this.dtpAsOn.Name = "dtpAsOn";
-            this.dtpAsOn.Size = new System.Drawing.Size(173, 26);
+            this.dtpAsOn.Size = new System.Drawing.Size(131, 22);
             this.dtpAsOn.TabIndex = 197;
             // 
             // grpAccounts
@@ -288,11 +278,9 @@
             this.grpAccounts.Controls.Add(this.cmbAccount);
             this.grpAccounts.Controls.Add(this.label10);
             this.grpAccounts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpAccounts.Location = new System.Drawing.Point(957, 137);
-            this.grpAccounts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpAccounts.Location = new System.Drawing.Point(718, 111);
             this.grpAccounts.Name = "grpAccounts";
-            this.grpAccounts.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpAccounts.Size = new System.Drawing.Size(543, 103);
+            this.grpAccounts.Size = new System.Drawing.Size(407, 84);
             this.grpAccounts.TabIndex = 4;
             this.grpAccounts.TabStop = false;
             this.grpAccounts.Text = "Account ";
@@ -302,10 +290,9 @@
             // 
             this.lblbk.AutoSize = true;
             this.lblbk.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblbk.Location = new System.Drawing.Point(15, 68);
-            this.lblbk.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblbk.Location = new System.Drawing.Point(11, 55);
             this.lblbk.Name = "lblbk";
-            this.lblbk.Size = new System.Drawing.Size(104, 20);
+            this.lblbk.Size = new System.Drawing.Size(83, 16);
             this.lblbk.TabIndex = 202;
             this.lblbk.Text = "Select Bank ";
             this.lblbk.Visible = false;
@@ -315,19 +302,17 @@
             this.cmbBank.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbBank.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbBank.FormattingEnabled = true;
-            this.cmbBank.Location = new System.Drawing.Point(183, 63);
-            this.cmbBank.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbBank.Location = new System.Drawing.Point(137, 51);
             this.cmbBank.Name = "cmbBank";
-            this.cmbBank.Size = new System.Drawing.Size(343, 28);
+            this.cmbBank.Size = new System.Drawing.Size(258, 24);
             this.cmbBank.TabIndex = 201;
             this.cmbBank.Visible = false;
             // 
             // txtAccountCode
             // 
-            this.txtAccountCode.Location = new System.Drawing.Point(100, 26);
-            this.txtAccountCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAccountCode.Location = new System.Drawing.Point(75, 21);
             this.txtAccountCode.Name = "txtAccountCode";
-            this.txtAccountCode.Size = new System.Drawing.Size(73, 26);
+            this.txtAccountCode.Size = new System.Drawing.Size(56, 22);
             this.txtAccountCode.TabIndex = 200;
             this.txtAccountCode.TextChanged += new System.EventHandler(this.txtAccountCode_TextChanged);
             // 
@@ -336,10 +321,9 @@
             this.cmbAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbAccount.FormattingEnabled = true;
-            this.cmbAccount.Location = new System.Drawing.Point(183, 26);
-            this.cmbAccount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbAccount.Location = new System.Drawing.Point(137, 21);
             this.cmbAccount.Name = "cmbAccount";
-            this.cmbAccount.Size = new System.Drawing.Size(343, 28);
+            this.cmbAccount.Size = new System.Drawing.Size(258, 24);
             this.cmbAccount.TabIndex = 198;
             this.cmbAccount.Validated += new System.EventHandler(this.cmbAccount_Validated);
             // 
@@ -347,10 +331,9 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(15, 30);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(11, 24);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(80, 20);
+            this.label10.Size = new System.Drawing.Size(62, 16);
             this.label10.TabIndex = 199;
             this.label10.Text = "Account :";
             // 
@@ -360,9 +343,8 @@
             this.lblReport.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblReport.Location = new System.Drawing.Point(0, 0);
-            this.lblReport.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblReport.Name = "lblReport";
-            this.lblReport.Size = new System.Drawing.Size(1516, 46);
+            this.lblReport.Size = new System.Drawing.Size(1137, 37);
             this.lblReport.TabIndex = 196;
             this.lblReport.Tag = "Lock";
             this.lblReport.Text = "Report";
@@ -372,10 +354,9 @@
             // 
             this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Location = new System.Drawing.Point(8, 7);
-            this.btnPrint.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrint.Location = new System.Drawing.Point(6, 6);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(97, 36);
+            this.btnPrint.Size = new System.Drawing.Size(73, 29);
             this.btnPrint.TabIndex = 0;
             this.btnPrint.Tag = "";
             this.btnPrint.Text = "&Print";
@@ -387,11 +368,9 @@
             this.grpCatagory.Controls.Add(this.cmbCatagory);
             this.grpCatagory.Controls.Add(this.label4);
             this.grpCatagory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpCatagory.Location = new System.Drawing.Point(16, 282);
-            this.grpCatagory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpCatagory.Location = new System.Drawing.Point(12, 229);
             this.grpCatagory.Name = "grpCatagory";
-            this.grpCatagory.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpCatagory.Size = new System.Drawing.Size(401, 68);
+            this.grpCatagory.Size = new System.Drawing.Size(301, 55);
             this.grpCatagory.TabIndex = 5;
             this.grpCatagory.TabStop = false;
             this.grpCatagory.Text = "OPD Catagory";
@@ -402,10 +381,9 @@
             this.cmbCatagory.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbCatagory.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCatagory.FormattingEnabled = true;
-            this.cmbCatagory.Location = new System.Drawing.Point(105, 26);
-            this.cmbCatagory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbCatagory.Location = new System.Drawing.Point(79, 21);
             this.cmbCatagory.Name = "cmbCatagory";
-            this.cmbCatagory.Size = new System.Drawing.Size(280, 28);
+            this.cmbCatagory.Size = new System.Drawing.Size(211, 24);
             this.cmbCatagory.TabIndex = 200;
             this.cmbCatagory.SelectedIndexChanged += new System.EventHandler(this.cmbCatagory_SelectedIndexChanged);
             // 
@@ -413,10 +391,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(15, 30);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(11, 24);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 20);
+            this.label4.Size = new System.Drawing.Size(69, 16);
             this.label4.TabIndex = 201;
             this.label4.Text = "Catagory :";
             // 
@@ -427,11 +404,9 @@
             this.grpGroup.Controls.Add(this.rdb10Days);
             this.grpGroup.Controls.Add(this.rdb5Days);
             this.grpGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpGroup.Location = new System.Drawing.Point(16, 431);
-            this.grpGroup.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpGroup.Location = new System.Drawing.Point(12, 350);
             this.grpGroup.Name = "grpGroup";
-            this.grpGroup.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpGroup.Size = new System.Drawing.Size(416, 57);
+            this.grpGroup.Size = new System.Drawing.Size(312, 46);
             this.grpGroup.TabIndex = 7;
             this.grpGroup.TabStop = false;
             this.grpGroup.Text = "Sale\\Purchase Group";
@@ -440,10 +415,9 @@
             // rdoNone
             // 
             this.rdoNone.AutoSize = true;
-            this.rdoNone.Location = new System.Drawing.Point(327, 23);
-            this.rdoNone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdoNone.Location = new System.Drawing.Point(245, 19);
             this.rdoNone.Name = "rdoNone";
-            this.rdoNone.Size = new System.Drawing.Size(69, 24);
+            this.rdoNone.Size = new System.Drawing.Size(59, 20);
             this.rdoNone.TabIndex = 3;
             this.rdoNone.Text = "&None";
             this.rdoNone.UseVisualStyleBackColor = true;
@@ -451,10 +425,9 @@
             // rdbMonth
             // 
             this.rdbMonth.AutoSize = true;
-            this.rdbMonth.Location = new System.Drawing.Point(223, 23);
-            this.rdbMonth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbMonth.Location = new System.Drawing.Point(167, 19);
             this.rdbMonth.Name = "rdbMonth";
-            this.rdbMonth.Size = new System.Drawing.Size(88, 24);
+            this.rdbMonth.Size = new System.Drawing.Size(72, 20);
             this.rdbMonth.TabIndex = 2;
             this.rdbMonth.Text = "Monthly";
             this.rdbMonth.UseVisualStyleBackColor = true;
@@ -462,10 +435,9 @@
             // rdb10Days
             // 
             this.rdb10Days.AutoSize = true;
-            this.rdb10Days.Location = new System.Drawing.Point(112, 23);
-            this.rdb10Days.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdb10Days.Location = new System.Drawing.Point(84, 19);
             this.rdb10Days.Name = "rdb10Days";
-            this.rdb10Days.Size = new System.Drawing.Size(92, 24);
+            this.rdb10Days.Size = new System.Drawing.Size(75, 20);
             this.rdb10Days.TabIndex = 1;
             this.rdb10Days.Text = "10 Days";
             this.rdb10Days.UseVisualStyleBackColor = true;
@@ -474,10 +446,9 @@
             // 
             this.rdb5Days.AutoSize = true;
             this.rdb5Days.Checked = true;
-            this.rdb5Days.Location = new System.Drawing.Point(11, 23);
-            this.rdb5Days.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdb5Days.Location = new System.Drawing.Point(8, 19);
             this.rdb5Days.Name = "rdb5Days";
-            this.rdb5Days.Size = new System.Drawing.Size(83, 24);
+            this.rdb5Days.Size = new System.Drawing.Size(68, 20);
             this.rdb5Days.TabIndex = 0;
             this.rdb5Days.TabStop = true;
             this.rdb5Days.Text = "5 Days";
@@ -488,11 +459,9 @@
             this.grpVehicle.Controls.Add(this.cmbVehicle);
             this.grpVehicle.Controls.Add(this.label3);
             this.grpVehicle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpVehicle.Location = new System.Drawing.Point(16, 357);
-            this.grpVehicle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpVehicle.Location = new System.Drawing.Point(12, 290);
             this.grpVehicle.Name = "grpVehicle";
-            this.grpVehicle.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpVehicle.Size = new System.Drawing.Size(401, 68);
+            this.grpVehicle.Size = new System.Drawing.Size(301, 55);
             this.grpVehicle.TabIndex = 6;
             this.grpVehicle.TabStop = false;
             this.grpVehicle.Text = "Vehicle ";
@@ -503,20 +472,18 @@
             this.cmbVehicle.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbVehicle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbVehicle.FormattingEnabled = true;
-            this.cmbVehicle.Location = new System.Drawing.Point(105, 26);
-            this.cmbVehicle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbVehicle.Location = new System.Drawing.Point(79, 21);
             this.cmbVehicle.Name = "cmbVehicle";
-            this.cmbVehicle.Size = new System.Drawing.Size(280, 28);
+            this.cmbVehicle.Size = new System.Drawing.Size(211, 24);
             this.cmbVehicle.TabIndex = 200;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(15, 30);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(11, 24);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 20);
+            this.label3.Size = new System.Drawing.Size(62, 16);
             this.label3.TabIndex = 201;
             this.label3.Text = "Vehicle : ";
             // 
@@ -525,10 +492,9 @@
             this.chklstAccounts.BackColor = System.Drawing.SystemColors.Control;
             this.chklstAccounts.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.chklstAccounts.FormattingEnabled = true;
-            this.chklstAccounts.Location = new System.Drawing.Point(4, 48);
-            this.chklstAccounts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chklstAccounts.Location = new System.Drawing.Point(3, 39);
             this.chklstAccounts.Name = "chklstAccounts";
-            this.chklstAccounts.Size = new System.Drawing.Size(336, 109);
+            this.chklstAccounts.Size = new System.Drawing.Size(252, 89);
             this.chklstAccounts.TabIndex = 203;
             // 
             // grpPrintOption
@@ -536,11 +502,9 @@
             this.grpPrintOption.Controls.Add(this.rdoDirectPrint);
             this.grpPrintOption.Controls.Add(this.rdoViewReport);
             this.grpPrintOption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpPrintOption.Location = new System.Drawing.Point(793, 538);
-            this.grpPrintOption.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpPrintOption.Location = new System.Drawing.Point(595, 437);
             this.grpPrintOption.Name = "grpPrintOption";
-            this.grpPrintOption.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpPrintOption.Size = new System.Drawing.Size(344, 68);
+            this.grpPrintOption.Size = new System.Drawing.Size(258, 55);
             this.grpPrintOption.TabIndex = 1;
             this.grpPrintOption.TabStop = false;
             this.grpPrintOption.Text = "Print Option";
@@ -549,10 +513,9 @@
             // rdoDirectPrint
             // 
             this.rdoDirectPrint.AutoSize = true;
-            this.rdoDirectPrint.Location = new System.Drawing.Point(189, 27);
-            this.rdoDirectPrint.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdoDirectPrint.Location = new System.Drawing.Point(142, 22);
             this.rdoDirectPrint.Name = "rdoDirectPrint";
-            this.rdoDirectPrint.Size = new System.Drawing.Size(116, 24);
+            this.rdoDirectPrint.Size = new System.Drawing.Size(90, 20);
             this.rdoDirectPrint.TabIndex = 1;
             this.rdoDirectPrint.Text = "Direct Print";
             this.rdoDirectPrint.UseVisualStyleBackColor = true;
@@ -561,10 +524,9 @@
             // 
             this.rdoViewReport.AutoSize = true;
             this.rdoViewReport.Checked = true;
-            this.rdoViewReport.Location = new System.Drawing.Point(27, 27);
-            this.rdoViewReport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdoViewReport.Location = new System.Drawing.Point(20, 22);
             this.rdoViewReport.Name = "rdoViewReport";
-            this.rdoViewReport.Size = new System.Drawing.Size(121, 24);
+            this.rdoViewReport.Size = new System.Drawing.Size(99, 20);
             this.rdoViewReport.TabIndex = 0;
             this.rdoViewReport.TabStop = true;
             this.rdoViewReport.Text = "View Report";
@@ -577,11 +539,9 @@
             this.grpSelectedAccounts.Controls.Add(this.chkSelectAll);
             this.grpSelectedAccounts.Controls.Add(this.chklstAccounts);
             this.grpSelectedAccounts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpSelectedAccounts.Location = new System.Drawing.Point(425, 369);
-            this.grpSelectedAccounts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpSelectedAccounts.Location = new System.Drawing.Point(319, 300);
             this.grpSelectedAccounts.Name = "grpSelectedAccounts";
-            this.grpSelectedAccounts.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpSelectedAccounts.Size = new System.Drawing.Size(344, 161);
+            this.grpSelectedAccounts.Size = new System.Drawing.Size(258, 131);
             this.grpSelectedAccounts.TabIndex = 8;
             this.grpSelectedAccounts.TabStop = false;
             this.grpSelectedAccounts.Text = "Select Accounts ";
@@ -590,10 +550,9 @@
             // chkSelectAll
             // 
             this.chkSelectAll.AutoSize = true;
-            this.chkSelectAll.Location = new System.Drawing.Point(7, 21);
-            this.chkSelectAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkSelectAll.Location = new System.Drawing.Point(5, 17);
             this.chkSelectAll.Name = "chkSelectAll";
-            this.chkSelectAll.Size = new System.Drawing.Size(102, 24);
+            this.chkSelectAll.Size = new System.Drawing.Size(83, 20);
             this.chkSelectAll.TabIndex = 204;
             this.chkSelectAll.Text = "Select All";
             this.chkSelectAll.UseVisualStyleBackColor = true;
@@ -603,10 +562,9 @@
             // 
             this.btnClose.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Location = new System.Drawing.Point(113, 7);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClose.Location = new System.Drawing.Point(85, 6);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(97, 36);
+            this.btnClose.Size = new System.Drawing.Size(73, 29);
             this.btnClose.TabIndex = 206;
             this.btnClose.Tag = "";
             this.btnClose.Text = "&Close";
@@ -618,10 +576,9 @@
             this.pnlControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlControl.Controls.Add(this.btnClose);
             this.pnlControl.Controls.Add(this.btnPrint);
-            this.pnlControl.Location = new System.Drawing.Point(549, 49);
-            this.pnlControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlControl.Location = new System.Drawing.Point(412, 40);
             this.pnlControl.Name = "pnlControl";
-            this.pnlControl.Size = new System.Drawing.Size(219, 51);
+            this.pnlControl.Size = new System.Drawing.Size(165, 42);
             this.pnlControl.TabIndex = 9;
             // 
             // grpReportHeader
@@ -629,11 +586,9 @@
             this.grpReportHeader.Controls.Add(this.rdoWithoutHeader);
             this.grpReportHeader.Controls.Add(this.rdoWithHeader);
             this.grpReportHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpReportHeader.Location = new System.Drawing.Point(16, 491);
-            this.grpReportHeader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpReportHeader.Location = new System.Drawing.Point(12, 399);
             this.grpReportHeader.Name = "grpReportHeader";
-            this.grpReportHeader.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpReportHeader.Size = new System.Drawing.Size(344, 68);
+            this.grpReportHeader.Size = new System.Drawing.Size(258, 55);
             this.grpReportHeader.TabIndex = 0;
             this.grpReportHeader.TabStop = false;
             this.grpReportHeader.Text = "Report Header ";
@@ -642,10 +597,9 @@
             // rdoWithoutHeader
             // 
             this.rdoWithoutHeader.AutoSize = true;
-            this.rdoWithoutHeader.Location = new System.Drawing.Point(176, 26);
-            this.rdoWithoutHeader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdoWithoutHeader.Location = new System.Drawing.Point(132, 21);
             this.rdoWithoutHeader.Name = "rdoWithoutHeader";
-            this.rdoWithoutHeader.Size = new System.Drawing.Size(147, 24);
+            this.rdoWithoutHeader.Size = new System.Drawing.Size(119, 20);
             this.rdoWithoutHeader.TabIndex = 1;
             this.rdoWithoutHeader.Text = "Without Header";
             this.rdoWithoutHeader.UseVisualStyleBackColor = true;
@@ -655,10 +609,9 @@
             // 
             this.rdoWithHeader.AutoSize = true;
             this.rdoWithHeader.Checked = true;
-            this.rdoWithHeader.Location = new System.Drawing.Point(27, 27);
-            this.rdoWithHeader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdoWithHeader.Location = new System.Drawing.Point(20, 22);
             this.rdoWithHeader.Name = "rdoWithHeader";
-            this.rdoWithHeader.Size = new System.Drawing.Size(124, 24);
+            this.rdoWithHeader.Size = new System.Drawing.Size(101, 20);
             this.rdoWithHeader.TabIndex = 0;
             this.rdoWithHeader.TabStop = true;
             this.rdoWithHeader.Text = "With Header";
@@ -670,11 +623,9 @@
             this.grpDays.Controls.Add(this.rdb3Days2);
             this.grpDays.Controls.Add(this.rdb5Days2);
             this.grpDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpDays.Location = new System.Drawing.Point(16, 566);
-            this.grpDays.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpDays.Location = new System.Drawing.Point(12, 460);
             this.grpDays.Name = "grpDays";
-            this.grpDays.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpDays.Size = new System.Drawing.Size(335, 57);
+            this.grpDays.Size = new System.Drawing.Size(251, 46);
             this.grpDays.TabIndex = 197;
             this.grpDays.TabStop = false;
             this.grpDays.Text = "Days";
@@ -683,10 +634,9 @@
             // rdb6Days2
             // 
             this.rdb6Days2.AutoSize = true;
-            this.rdb6Days2.Location = new System.Drawing.Point(223, 23);
-            this.rdb6Days2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdb6Days2.Location = new System.Drawing.Point(167, 19);
             this.rdb6Days2.Name = "rdb6Days2";
-            this.rdb6Days2.Size = new System.Drawing.Size(83, 24);
+            this.rdb6Days2.Size = new System.Drawing.Size(68, 20);
             this.rdb6Days2.TabIndex = 2;
             this.rdb6Days2.Text = "6 Days";
             this.rdb6Days2.UseVisualStyleBackColor = true;
@@ -694,10 +644,9 @@
             // rdb3Days2
             // 
             this.rdb3Days2.AutoSize = true;
-            this.rdb3Days2.Location = new System.Drawing.Point(112, 23);
-            this.rdb3Days2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdb3Days2.Location = new System.Drawing.Point(84, 19);
             this.rdb3Days2.Name = "rdb3Days2";
-            this.rdb3Days2.Size = new System.Drawing.Size(83, 24);
+            this.rdb3Days2.Size = new System.Drawing.Size(68, 20);
             this.rdb3Days2.TabIndex = 1;
             this.rdb3Days2.Text = "3 Days";
             this.rdb3Days2.UseVisualStyleBackColor = true;
@@ -706,10 +655,9 @@
             // 
             this.rdb5Days2.AutoSize = true;
             this.rdb5Days2.Checked = true;
-            this.rdb5Days2.Location = new System.Drawing.Point(11, 23);
-            this.rdb5Days2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdb5Days2.Location = new System.Drawing.Point(8, 19);
             this.rdb5Days2.Name = "rdb5Days2";
-            this.rdb5Days2.Size = new System.Drawing.Size(83, 24);
+            this.rdb5Days2.Size = new System.Drawing.Size(68, 20);
             this.rdb5Days2.TabIndex = 0;
             this.rdb5Days2.TabStop = true;
             this.rdb5Days2.Text = "5 Days";
@@ -721,11 +669,9 @@
             this.grpConsultant.Controls.Add(this.rdbConsultantAll);
             this.grpConsultant.Controls.Add(this.cmbConsultant);
             this.grpConsultant.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpConsultant.Location = new System.Drawing.Point(16, 630);
-            this.grpConsultant.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpConsultant.Location = new System.Drawing.Point(12, 512);
             this.grpConsultant.Name = "grpConsultant";
-            this.grpConsultant.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpConsultant.Size = new System.Drawing.Size(344, 68);
+            this.grpConsultant.Size = new System.Drawing.Size(258, 55);
             this.grpConsultant.TabIndex = 202;
             this.grpConsultant.TabStop = false;
             this.grpConsultant.Text = "Consultant";
@@ -735,10 +681,9 @@
             // 
             this.rdbConsultantOne.AutoSize = true;
             this.rdbConsultantOne.Checked = true;
-            this.rdbConsultantOne.Location = new System.Drawing.Point(436, 26);
-            this.rdbConsultantOne.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbConsultantOne.Location = new System.Drawing.Point(327, 21);
             this.rdbConsultantOne.Name = "rdbConsultantOne";
-            this.rdbConsultantOne.Size = new System.Drawing.Size(77, 24);
+            this.rdbConsultantOne.Size = new System.Drawing.Size(64, 20);
             this.rdbConsultantOne.TabIndex = 4;
             this.rdbConsultantOne.TabStop = true;
             this.rdbConsultantOne.Text = "Select";
@@ -748,10 +693,9 @@
             // rdbConsultantAll
             // 
             this.rdbConsultantAll.AutoSize = true;
-            this.rdbConsultantAll.Location = new System.Drawing.Point(351, 26);
-            this.rdbConsultantAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbConsultantAll.Location = new System.Drawing.Point(263, 21);
             this.rdbConsultantAll.Name = "rdbConsultantAll";
-            this.rdbConsultantAll.Size = new System.Drawing.Size(61, 24);
+            this.rdbConsultantAll.Size = new System.Drawing.Size(49, 20);
             this.rdbConsultantAll.TabIndex = 3;
             this.rdbConsultantAll.Text = "ALL";
             this.rdbConsultantAll.UseVisualStyleBackColor = true;
@@ -763,10 +707,9 @@
             this.cmbConsultant.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbConsultant.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbConsultant.FormattingEnabled = true;
-            this.cmbConsultant.Location = new System.Drawing.Point(8, 25);
-            this.cmbConsultant.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbConsultant.Location = new System.Drawing.Point(6, 20);
             this.cmbConsultant.Name = "cmbConsultant";
-            this.cmbConsultant.Size = new System.Drawing.Size(325, 28);
+            this.cmbConsultant.Size = new System.Drawing.Size(245, 24);
             this.cmbConsultant.TabIndex = 200;
             this.cmbConsultant.SelectedIndexChanged += new System.EventHandler(this.cmbConsultant_SelectedIndexChanged);
             this.cmbConsultant.Validated += new System.EventHandler(this.cmbConsultant_Validated);
@@ -777,11 +720,9 @@
             this.grpReference.Controls.Add(this.rdbReferenceAll);
             this.grpReference.Controls.Add(this.cmbReference);
             this.grpReference.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpReference.Location = new System.Drawing.Point(16, 705);
-            this.grpReference.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpReference.Location = new System.Drawing.Point(12, 573);
             this.grpReference.Name = "grpReference";
-            this.grpReference.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpReference.Size = new System.Drawing.Size(543, 68);
+            this.grpReference.Size = new System.Drawing.Size(407, 55);
             this.grpReference.TabIndex = 203;
             this.grpReference.TabStop = false;
             this.grpReference.Text = "Reference";
@@ -791,10 +732,9 @@
             // 
             this.rdbReferenceOne.AutoSize = true;
             this.rdbReferenceOne.Checked = true;
-            this.rdbReferenceOne.Location = new System.Drawing.Point(105, 27);
-            this.rdbReferenceOne.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbReferenceOne.Location = new System.Drawing.Point(79, 22);
             this.rdbReferenceOne.Name = "rdbReferenceOne";
-            this.rdbReferenceOne.Size = new System.Drawing.Size(77, 24);
+            this.rdbReferenceOne.Size = new System.Drawing.Size(64, 20);
             this.rdbReferenceOne.TabIndex = 4;
             this.rdbReferenceOne.TabStop = true;
             this.rdbReferenceOne.Text = "Select";
@@ -803,10 +743,9 @@
             // rdbReferenceAll
             // 
             this.rdbReferenceAll.AutoSize = true;
-            this.rdbReferenceAll.Location = new System.Drawing.Point(20, 27);
-            this.rdbReferenceAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbReferenceAll.Location = new System.Drawing.Point(15, 22);
             this.rdbReferenceAll.Name = "rdbReferenceAll";
-            this.rdbReferenceAll.Size = new System.Drawing.Size(61, 24);
+            this.rdbReferenceAll.Size = new System.Drawing.Size(49, 20);
             this.rdbReferenceAll.TabIndex = 3;
             this.rdbReferenceAll.Text = "ALL";
             this.rdbReferenceAll.UseVisualStyleBackColor = true;
@@ -817,10 +756,9 @@
             this.cmbReference.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbReference.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbReference.FormattingEnabled = true;
-            this.cmbReference.Location = new System.Drawing.Point(208, 26);
-            this.cmbReference.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbReference.Location = new System.Drawing.Point(156, 21);
             this.cmbReference.Name = "cmbReference";
-            this.cmbReference.Size = new System.Drawing.Size(317, 28);
+            this.cmbReference.Size = new System.Drawing.Size(239, 24);
             this.cmbReference.TabIndex = 200;
             // 
             // grpActiveStatus
@@ -828,11 +766,9 @@
             this.grpActiveStatus.Controls.Add(this.label5);
             this.grpActiveStatus.Controls.Add(this.cmbStatus);
             this.grpActiveStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpActiveStatus.Location = new System.Drawing.Point(429, 538);
-            this.grpActiveStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpActiveStatus.Location = new System.Drawing.Point(322, 437);
             this.grpActiveStatus.Name = "grpActiveStatus";
-            this.grpActiveStatus.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpActiveStatus.Size = new System.Drawing.Size(340, 68);
+            this.grpActiveStatus.Size = new System.Drawing.Size(255, 55);
             this.grpActiveStatus.TabIndex = 2;
             this.grpActiveStatus.TabStop = false;
             this.grpActiveStatus.Text = "Active Status";
@@ -842,10 +778,9 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(8, 30);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(6, 24);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 20);
+            this.label5.Size = new System.Drawing.Size(54, 16);
             this.label5.TabIndex = 202;
             this.label5.Text = "Status : ";
             // 
@@ -859,10 +794,9 @@
             "All",
             "Active",
             "Deactive"});
-            this.cmbStatus.Location = new System.Drawing.Point(120, 26);
-            this.cmbStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbStatus.Location = new System.Drawing.Point(90, 21);
             this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(211, 28);
+            this.cmbStatus.Size = new System.Drawing.Size(159, 24);
             this.cmbStatus.TabIndex = 201;
             // 
             // grpMember
@@ -870,11 +804,9 @@
             this.grpMember.Controls.Add(this.txtMemberNo);
             this.grpMember.Controls.Add(this.label6);
             this.grpMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpMember.Location = new System.Drawing.Point(333, 127);
-            this.grpMember.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpMember.Location = new System.Drawing.Point(250, 103);
             this.grpMember.Name = "grpMember";
-            this.grpMember.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpMember.Size = new System.Drawing.Size(172, 63);
+            this.grpMember.Size = new System.Drawing.Size(129, 51);
             this.grpMember.TabIndex = 201;
             this.grpMember.TabStop = false;
             this.grpMember.Text = "Member";
@@ -882,20 +814,18 @@
             // 
             // txtMemberNo
             // 
-            this.txtMemberNo.Location = new System.Drawing.Point(56, 26);
-            this.txtMemberNo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMemberNo.Location = new System.Drawing.Point(42, 21);
             this.txtMemberNo.Name = "txtMemberNo";
-            this.txtMemberNo.Size = new System.Drawing.Size(103, 26);
+            this.txtMemberNo.Size = new System.Drawing.Size(78, 22);
             this.txtMemberNo.TabIndex = 200;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(15, 30);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(11, 24);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 20);
+            this.label6.Size = new System.Drawing.Size(25, 16);
             this.label6.TabIndex = 199;
             this.label6.Text = "Id :";
             // 
@@ -904,11 +834,9 @@
             this.grpCatagoryTest.Controls.Add(this.cmbTest);
             this.grpCatagoryTest.Controls.Add(this.label8);
             this.grpCatagoryTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpCatagoryTest.Location = new System.Drawing.Point(212, 783);
-            this.grpCatagoryTest.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpCatagoryTest.Location = new System.Drawing.Point(159, 636);
             this.grpCatagoryTest.Name = "grpCatagoryTest";
-            this.grpCatagoryTest.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpCatagoryTest.Size = new System.Drawing.Size(372, 68);
+            this.grpCatagoryTest.Size = new System.Drawing.Size(279, 55);
             this.grpCatagoryTest.TabIndex = 205;
             this.grpCatagoryTest.TabStop = false;
             this.grpCatagoryTest.Text = "OPD Catagory Test";
@@ -919,20 +847,18 @@
             this.cmbTest.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbTest.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbTest.FormattingEnabled = true;
-            this.cmbTest.Location = new System.Drawing.Point(72, 27);
-            this.cmbTest.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbTest.Location = new System.Drawing.Point(54, 22);
             this.cmbTest.Name = "cmbTest";
-            this.cmbTest.Size = new System.Drawing.Size(280, 28);
+            this.cmbTest.Size = new System.Drawing.Size(211, 24);
             this.cmbTest.TabIndex = 200;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(11, 32);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(8, 26);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(52, 20);
+            this.label8.Size = new System.Drawing.Size(41, 16);
             this.label8.TabIndex = 201;
             this.label8.Text = "Test :";
             // 
@@ -941,11 +867,9 @@
             this.grpSelected.Controls.Add(this.radioButton1);
             this.grpSelected.Controls.Add(this.radioButton2);
             this.grpSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpSelected.Location = new System.Drawing.Point(16, 783);
-            this.grpSelected.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpSelected.Location = new System.Drawing.Point(12, 636);
             this.grpSelected.Name = "grpSelected";
-            this.grpSelected.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpSelected.Size = new System.Drawing.Size(185, 68);
+            this.grpSelected.Size = new System.Drawing.Size(139, 55);
             this.grpSelected.TabIndex = 206;
             this.grpSelected.TabStop = false;
             this.grpSelected.Text = "Select";
@@ -955,10 +879,9 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(93, 26);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton1.Location = new System.Drawing.Point(70, 21);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(77, 24);
+            this.radioButton1.Size = new System.Drawing.Size(64, 20);
             this.radioButton1.TabIndex = 202;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Select";
@@ -967,10 +890,9 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(8, 26);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton2.Location = new System.Drawing.Point(6, 21);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(61, 24);
+            this.radioButton2.Size = new System.Drawing.Size(49, 20);
             this.radioButton2.TabIndex = 201;
             this.radioButton2.Text = "ALL";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -980,10 +902,9 @@
             // 
             this.rdoTestSelect.AutoSize = true;
             this.rdoTestSelect.Checked = true;
-            this.rdoTestSelect.Location = new System.Drawing.Point(1145, 550);
-            this.rdoTestSelect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdoTestSelect.Location = new System.Drawing.Point(859, 447);
             this.rdoTestSelect.Name = "rdoTestSelect";
-            this.rdoTestSelect.Size = new System.Drawing.Size(66, 20);
+            this.rdoTestSelect.Size = new System.Drawing.Size(55, 17);
             this.rdoTestSelect.TabIndex = 203;
             this.rdoTestSelect.TabStop = true;
             this.rdoTestSelect.Text = "Select";
@@ -994,10 +915,9 @@
             // 
             this.rdoTestNoSelect.AutoSize = true;
             this.rdoTestNoSelect.Checked = true;
-            this.rdoTestNoSelect.Location = new System.Drawing.Point(1243, 550);
-            this.rdoTestNoSelect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdoTestNoSelect.Location = new System.Drawing.Point(932, 447);
             this.rdoTestNoSelect.Name = "rdoTestNoSelect";
-            this.rdoTestNoSelect.Size = new System.Drawing.Size(90, 20);
+            this.rdoTestNoSelect.Size = new System.Drawing.Size(75, 17);
             this.rdoTestNoSelect.TabIndex = 204;
             this.rdoTestNoSelect.TabStop = true;
             this.rdoTestNoSelect.Text = "Not Select";
@@ -1009,11 +929,9 @@
             this.grpAllCatagory.Controls.Add(this.cmbAllCatagory);
             this.grpAllCatagory.Controls.Add(this.label9);
             this.grpAllCatagory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpAllCatagory.Location = new System.Drawing.Point(575, 705);
-            this.grpAllCatagory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpAllCatagory.Location = new System.Drawing.Point(431, 573);
             this.grpAllCatagory.Name = "grpAllCatagory";
-            this.grpAllCatagory.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpAllCatagory.Size = new System.Drawing.Size(401, 68);
+            this.grpAllCatagory.Size = new System.Drawing.Size(301, 55);
             this.grpAllCatagory.TabIndex = 202;
             this.grpAllCatagory.TabStop = false;
             this.grpAllCatagory.Text = "OPD Catagory";
@@ -1024,10 +942,9 @@
             this.cmbAllCatagory.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbAllCatagory.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbAllCatagory.FormattingEnabled = true;
-            this.cmbAllCatagory.Location = new System.Drawing.Point(105, 26);
-            this.cmbAllCatagory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbAllCatagory.Location = new System.Drawing.Point(79, 21);
             this.cmbAllCatagory.Name = "cmbAllCatagory";
-            this.cmbAllCatagory.Size = new System.Drawing.Size(280, 28);
+            this.cmbAllCatagory.Size = new System.Drawing.Size(211, 24);
             this.cmbAllCatagory.TabIndex = 200;
             this.cmbAllCatagory.Text = "ALL";
             this.cmbAllCatagory.SelectedIndexChanged += new System.EventHandler(this.cmbAllCatagory_SelectedIndexChanged_1);
@@ -1037,10 +954,9 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(15, 30);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(11, 24);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(86, 20);
+            this.label9.Size = new System.Drawing.Size(69, 16);
             this.label9.TabIndex = 201;
             this.label9.Text = "Catagory :";
             // 
@@ -1049,11 +965,9 @@
             this.grpZakatRecipient.Controls.Add(this.cmbZakatReference);
             this.grpZakatRecipient.Controls.Add(this.label11);
             this.grpZakatRecipient.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpZakatRecipient.Location = new System.Drawing.Point(567, 153);
-            this.grpZakatRecipient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpZakatRecipient.Location = new System.Drawing.Point(425, 124);
             this.grpZakatRecipient.Name = "grpZakatRecipient";
-            this.grpZakatRecipient.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpZakatRecipient.Size = new System.Drawing.Size(520, 68);
+            this.grpZakatRecipient.Size = new System.Drawing.Size(390, 55);
             this.grpZakatRecipient.TabIndex = 207;
             this.grpZakatRecipient.TabStop = false;
             this.grpZakatRecipient.Text = "Zakat Recipient";
@@ -1064,20 +978,18 @@
             this.cmbZakatReference.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbZakatReference.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbZakatReference.FormattingEnabled = true;
-            this.cmbZakatReference.Location = new System.Drawing.Point(149, 26);
-            this.cmbZakatReference.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbZakatReference.Location = new System.Drawing.Point(112, 21);
             this.cmbZakatReference.Name = "cmbZakatReference";
-            this.cmbZakatReference.Size = new System.Drawing.Size(361, 28);
+            this.cmbZakatReference.Size = new System.Drawing.Size(272, 24);
             this.cmbZakatReference.TabIndex = 200;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(15, 30);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Location = new System.Drawing.Point(11, 24);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(136, 20);
+            this.label11.Size = new System.Drawing.Size(111, 16);
             this.label11.TabIndex = 201;
             this.label11.Text = "ZakatReference :";
             // 
@@ -1087,11 +999,9 @@
             this.grpActiveUnActive.Controls.Add(this.rdoUnActive);
             this.grpActiveUnActive.Controls.Add(this.rdoActive);
             this.grpActiveUnActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpActiveUnActive.Location = new System.Drawing.Point(568, 222);
-            this.grpActiveUnActive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpActiveUnActive.Location = new System.Drawing.Point(426, 180);
             this.grpActiveUnActive.Name = "grpActiveUnActive";
-            this.grpActiveUnActive.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpActiveUnActive.Size = new System.Drawing.Size(455, 68);
+            this.grpActiveUnActive.Size = new System.Drawing.Size(341, 55);
             this.grpActiveUnActive.TabIndex = 2;
             this.grpActiveUnActive.TabStop = false;
             this.grpActiveUnActive.Text = "Active / UnActive";
@@ -1101,21 +1011,18 @@
             // 
             this.groupBox1.Controls.Add(this.chkWithFamily);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(265, 10);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Location = new System.Drawing.Point(199, 8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(165, 49);
+            this.groupBox1.Size = new System.Drawing.Size(124, 40);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
             // chkWithFamily
             // 
             this.chkWithFamily.AutoSize = true;
-            this.chkWithFamily.Location = new System.Drawing.Point(8, 16);
-            this.chkWithFamily.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkWithFamily.Location = new System.Drawing.Point(6, 13);
             this.chkWithFamily.Name = "chkWithFamily";
-            this.chkWithFamily.Size = new System.Drawing.Size(119, 24);
+            this.chkWithFamily.Size = new System.Drawing.Size(96, 20);
             this.chkWithFamily.TabIndex = 205;
             this.chkWithFamily.Text = "With Family";
             this.chkWithFamily.UseVisualStyleBackColor = true;
@@ -1123,10 +1030,9 @@
             // rdoUnActive
             // 
             this.rdoUnActive.AutoSize = true;
-            this.rdoUnActive.Location = new System.Drawing.Point(139, 27);
-            this.rdoUnActive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdoUnActive.Location = new System.Drawing.Point(104, 22);
             this.rdoUnActive.Name = "rdoUnActive";
-            this.rdoUnActive.Size = new System.Drawing.Size(97, 24);
+            this.rdoUnActive.Size = new System.Drawing.Size(80, 20);
             this.rdoUnActive.TabIndex = 1;
             this.rdoUnActive.Text = "UnActive";
             this.rdoUnActive.UseVisualStyleBackColor = true;
@@ -1135,10 +1041,9 @@
             // 
             this.rdoActive.AutoSize = true;
             this.rdoActive.Checked = true;
-            this.rdoActive.Location = new System.Drawing.Point(27, 27);
-            this.rdoActive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdoActive.Location = new System.Drawing.Point(20, 22);
             this.rdoActive.Name = "rdoActive";
-            this.rdoActive.Size = new System.Drawing.Size(76, 24);
+            this.rdoActive.Size = new System.Drawing.Size(63, 20);
             this.rdoActive.TabIndex = 0;
             this.rdoActive.TabStop = true;
             this.rdoActive.Text = "Active";
@@ -1149,11 +1054,9 @@
             this.grpBMGmember.Controls.Add(this.cmbBMGMember);
             this.grpBMGmember.Controls.Add(this.label12);
             this.grpBMGmember.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpBMGmember.Location = new System.Drawing.Point(425, 297);
-            this.grpBMGmember.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpBMGmember.Location = new System.Drawing.Point(319, 241);
             this.grpBMGmember.Name = "grpBMGmember";
-            this.grpBMGmember.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpBMGmember.Size = new System.Drawing.Size(520, 68);
+            this.grpBMGmember.Size = new System.Drawing.Size(390, 55);
             this.grpBMGmember.TabIndex = 208;
             this.grpBMGmember.TabStop = false;
             this.grpBMGmember.Text = "BMJ Member";
@@ -1164,20 +1067,18 @@
             this.cmbBMGMember.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbBMGMember.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbBMGMember.FormattingEnabled = true;
-            this.cmbBMGMember.Location = new System.Drawing.Point(149, 26);
-            this.cmbBMGMember.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbBMGMember.Location = new System.Drawing.Point(112, 21);
             this.cmbBMGMember.Name = "cmbBMGMember";
-            this.cmbBMGMember.Size = new System.Drawing.Size(361, 28);
+            this.cmbBMGMember.Size = new System.Drawing.Size(272, 24);
             this.cmbBMGMember.TabIndex = 200;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(15, 30);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Location = new System.Drawing.Point(11, 24);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(124, 20);
+            this.label12.Size = new System.Drawing.Size(97, 16);
             this.label12.TabIndex = 201;
             this.label12.Text = "BMG Member :";
             // 
@@ -1185,11 +1086,9 @@
             // 
             this.grpOnlyZakat.Controls.Add(this.chkOnlyZakat);
             this.grpOnlyZakat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpOnlyZakat.Location = new System.Drawing.Point(1009, 709);
-            this.grpOnlyZakat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpOnlyZakat.Location = new System.Drawing.Point(757, 576);
             this.grpOnlyZakat.Name = "grpOnlyZakat";
-            this.grpOnlyZakat.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpOnlyZakat.Size = new System.Drawing.Size(177, 64);
+            this.grpOnlyZakat.Size = new System.Drawing.Size(133, 52);
             this.grpOnlyZakat.TabIndex = 209;
             this.grpOnlyZakat.TabStop = false;
             this.grpOnlyZakat.Text = "Zakat Member";
@@ -1198,10 +1097,9 @@
             // chkOnlyZakat
             // 
             this.chkOnlyZakat.AutoSize = true;
-            this.chkOnlyZakat.Location = new System.Drawing.Point(8, 26);
-            this.chkOnlyZakat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkOnlyZakat.Location = new System.Drawing.Point(6, 21);
             this.chkOnlyZakat.Name = "chkOnlyZakat";
-            this.chkOnlyZakat.Size = new System.Drawing.Size(142, 24);
+            this.chkOnlyZakat.Size = new System.Drawing.Size(117, 20);
             this.chkOnlyZakat.TabIndex = 205;
             this.chkOnlyZakat.Text = "Zakat Member ";
             this.chkOnlyZakat.UseVisualStyleBackColor = true;
@@ -1211,11 +1109,9 @@
             this.grpUser.Controls.Add(this.cmbUser);
             this.grpUser.Controls.Add(this.label13);
             this.grpUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpUser.Location = new System.Drawing.Point(777, 628);
-            this.grpUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpUser.Location = new System.Drawing.Point(583, 510);
             this.grpUser.Name = "grpUser";
-            this.grpUser.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpUser.Size = new System.Drawing.Size(363, 68);
+            this.grpUser.Size = new System.Drawing.Size(272, 55);
             this.grpUser.TabIndex = 210;
             this.grpUser.TabStop = false;
             this.grpUser.Text = "User";
@@ -1226,20 +1122,18 @@
             this.cmbUser.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbUser.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbUser.FormattingEnabled = true;
-            this.cmbUser.Location = new System.Drawing.Point(71, 25);
-            this.cmbUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbUser.Location = new System.Drawing.Point(53, 20);
             this.cmbUser.Name = "cmbUser";
-            this.cmbUser.Size = new System.Drawing.Size(280, 28);
+            this.cmbUser.Size = new System.Drawing.Size(211, 24);
             this.cmbUser.TabIndex = 200;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(15, 30);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Location = new System.Drawing.Point(11, 24);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(45, 20);
+            this.label13.Size = new System.Drawing.Size(37, 16);
             this.label13.TabIndex = 201;
             this.label13.Text = "User";
             // 
@@ -1249,11 +1143,9 @@
             this.grpClients.Controls.Add(this.label16);
             this.grpClients.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpClients.ForeColor = System.Drawing.Color.Black;
-            this.grpClients.Location = new System.Drawing.Point(777, 49);
-            this.grpClients.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpClients.Location = new System.Drawing.Point(583, 40);
             this.grpClients.Name = "grpClients";
-            this.grpClients.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpClients.Size = new System.Drawing.Size(360, 70);
+            this.grpClients.Size = new System.Drawing.Size(270, 57);
             this.grpClients.TabIndex = 327;
             this.grpClients.TabStop = false;
             this.grpClients.Text = "Clients";
@@ -1263,10 +1155,9 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(8, 30);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Location = new System.Drawing.Point(6, 24);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(53, 20);
+            this.label16.Size = new System.Drawing.Size(45, 16);
             this.label16.TabIndex = 320;
             this.label16.Text = "Name";
             // 
@@ -1276,11 +1167,9 @@
             this.grpBankIndex.Controls.Add(this.lblBank);
             this.grpBankIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpBankIndex.ForeColor = System.Drawing.Color.Black;
-            this.grpBankIndex.Location = new System.Drawing.Point(381, 628);
-            this.grpBankIndex.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpBankIndex.Location = new System.Drawing.Point(286, 510);
             this.grpBankIndex.Name = "grpBankIndex";
-            this.grpBankIndex.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpBankIndex.Size = new System.Drawing.Size(384, 70);
+            this.grpBankIndex.Size = new System.Drawing.Size(288, 57);
             this.grpBankIndex.TabIndex = 326;
             this.grpBankIndex.TabStop = false;
             this.grpBankIndex.Text = "Banks";
@@ -1290,10 +1179,9 @@
             // 
             this.lblBank.AutoSize = true;
             this.lblBank.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBank.Location = new System.Drawing.Point(8, 30);
-            this.lblBank.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblBank.Location = new System.Drawing.Point(6, 24);
             this.lblBank.Name = "lblBank";
-            this.lblBank.Size = new System.Drawing.Size(53, 20);
+            this.lblBank.Size = new System.Drawing.Size(45, 16);
             this.lblBank.TabIndex = 320;
             this.lblBank.Text = "Name";
             // 
@@ -1303,11 +1191,9 @@
             this.grpPackage.Controls.Add(this.radioButton4);
             this.grpPackage.Controls.Add(this.cmbPackage);
             this.grpPackage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpPackage.Location = new System.Drawing.Point(16, 858);
-            this.grpPackage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpPackage.Location = new System.Drawing.Point(12, 697);
             this.grpPackage.Name = "grpPackage";
-            this.grpPackage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpPackage.Size = new System.Drawing.Size(344, 68);
+            this.grpPackage.Size = new System.Drawing.Size(258, 55);
             this.grpPackage.TabIndex = 328;
             this.grpPackage.TabStop = false;
             this.grpPackage.Text = "Package Name";
@@ -1317,10 +1203,9 @@
             // 
             this.radioButton3.AutoSize = true;
             this.radioButton3.Checked = true;
-            this.radioButton3.Location = new System.Drawing.Point(436, 23);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton3.Location = new System.Drawing.Point(327, 19);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(77, 24);
+            this.radioButton3.Size = new System.Drawing.Size(64, 20);
             this.radioButton3.TabIndex = 4;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "Select";
@@ -1330,10 +1215,9 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(351, 23);
-            this.radioButton4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton4.Location = new System.Drawing.Point(263, 19);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(61, 24);
+            this.radioButton4.Size = new System.Drawing.Size(49, 20);
             this.radioButton4.TabIndex = 3;
             this.radioButton4.Text = "ALL";
             this.radioButton4.UseVisualStyleBackColor = true;
@@ -1344,10 +1228,9 @@
             this.cmbPackage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbPackage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbPackage.FormattingEnabled = true;
-            this.cmbPackage.Location = new System.Drawing.Point(8, 22);
-            this.cmbPackage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbPackage.Location = new System.Drawing.Point(6, 18);
             this.cmbPackage.Name = "cmbPackage";
-            this.cmbPackage.Size = new System.Drawing.Size(317, 28);
+            this.cmbPackage.Size = new System.Drawing.Size(239, 24);
             this.cmbPackage.TabIndex = 200;
             // 
             // grpFilter
@@ -1357,11 +1240,9 @@
             this.grpFilter.Controls.Add(this.chkXray);
             this.grpFilter.Controls.Add(this.chkLab);
             this.grpFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpFilter.Location = new System.Drawing.Point(777, 383);
-            this.grpFilter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpFilter.Location = new System.Drawing.Point(583, 311);
             this.grpFilter.Name = "grpFilter";
-            this.grpFilter.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpFilter.Size = new System.Drawing.Size(480, 144);
+            this.grpFilter.Size = new System.Drawing.Size(360, 117);
             this.grpFilter.TabIndex = 329;
             this.grpFilter.TabStop = false;
             this.grpFilter.Text = "Select Columns ";
@@ -1370,10 +1251,9 @@
             // chkConsul
             // 
             this.chkConsul.AutoSize = true;
-            this.chkConsul.Location = new System.Drawing.Point(21, 116);
-            this.chkConsul.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkConsul.Location = new System.Drawing.Point(16, 94);
             this.chkConsul.Name = "chkConsul";
-            this.chkConsul.Size = new System.Drawing.Size(172, 24);
+            this.chkConsul.Size = new System.Drawing.Size(139, 20);
             this.chkConsul.TabIndex = 333;
             this.chkConsul.Text = "Consultant visits";
             this.chkConsul.UseVisualStyleBackColor = true;
@@ -1381,10 +1261,9 @@
             // chkPharma
             // 
             this.chkPharma.AutoSize = true;
-            this.chkPharma.Location = new System.Drawing.Point(21, 86);
-            this.chkPharma.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkPharma.Location = new System.Drawing.Point(16, 70);
             this.chkPharma.Name = "chkPharma";
-            this.chkPharma.Size = new System.Drawing.Size(114, 24);
+            this.chkPharma.Size = new System.Drawing.Size(96, 20);
             this.chkPharma.TabIndex = 332;
             this.chkPharma.Text = "Pharmacy";
             this.chkPharma.UseVisualStyleBackColor = true;
@@ -1392,10 +1271,9 @@
             // chkXray
             // 
             this.chkXray.AutoSize = true;
-            this.chkXray.Location = new System.Drawing.Point(21, 54);
-            this.chkXray.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkXray.Location = new System.Drawing.Point(16, 44);
             this.chkXray.Name = "chkXray";
-            this.chkXray.Size = new System.Drawing.Size(69, 24);
+            this.chkXray.Size = new System.Drawing.Size(58, 20);
             this.chkXray.TabIndex = 331;
             this.chkXray.Text = "Xray";
             this.chkXray.UseVisualStyleBackColor = true;
@@ -1403,10 +1281,9 @@
             // chkLab
             // 
             this.chkLab.AutoSize = true;
-            this.chkLab.Location = new System.Drawing.Point(21, 26);
-            this.chkLab.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkLab.Location = new System.Drawing.Point(16, 21);
             this.chkLab.Name = "chkLab";
-            this.chkLab.Size = new System.Drawing.Size(62, 24);
+            this.chkLab.Size = new System.Drawing.Size(53, 20);
             this.chkLab.TabIndex = 330;
             this.chkLab.Text = "Lab";
             this.chkLab.UseVisualStyleBackColor = true;
@@ -1416,11 +1293,9 @@
             this.grpPatien.Controls.Add(this.cmbPatient);
             this.grpPatien.Controls.Add(this.label14);
             this.grpPatien.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpPatien.Location = new System.Drawing.Point(948, 297);
-            this.grpPatien.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpPatien.Location = new System.Drawing.Point(711, 241);
             this.grpPatien.Name = "grpPatien";
-            this.grpPatien.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpPatien.Size = new System.Drawing.Size(412, 68);
+            this.grpPatien.Size = new System.Drawing.Size(309, 55);
             this.grpPatien.TabIndex = 209;
             this.grpPatien.TabStop = false;
             this.grpPatien.Text = "Select Patient";
@@ -1431,20 +1306,18 @@
             this.cmbPatient.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbPatient.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbPatient.FormattingEnabled = true;
-            this.cmbPatient.Location = new System.Drawing.Point(84, 26);
-            this.cmbPatient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbPatient.Location = new System.Drawing.Point(63, 21);
             this.cmbPatient.Name = "cmbPatient";
-            this.cmbPatient.Size = new System.Drawing.Size(319, 28);
+            this.cmbPatient.Size = new System.Drawing.Size(240, 24);
             this.cmbPatient.TabIndex = 200;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(15, 30);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Location = new System.Drawing.Point(11, 24);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(71, 20);
+            this.label14.Size = new System.Drawing.Size(55, 16);
             this.label14.TabIndex = 201;
             this.label14.Text = "Patient :";
             // 
@@ -1453,11 +1326,9 @@
             this.grpfile.Controls.Add(this.txtregno);
             this.grpfile.Controls.Add(this.grpfilerer);
             this.grpfile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpfile.Location = new System.Drawing.Point(593, 858);
-            this.grpfile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpfile.Location = new System.Drawing.Point(445, 697);
             this.grpfile.Name = "grpfile";
-            this.grpfile.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpfile.Size = new System.Drawing.Size(391, 63);
+            this.grpfile.Size = new System.Drawing.Size(293, 51);
             this.grpfile.TabIndex = 330;
             this.grpfile.TabStop = false;
             this.grpfile.Text = "File No";
@@ -1465,10 +1336,9 @@
             // 
             // txtregno
             // 
-            this.txtregno.Location = new System.Drawing.Point(153, 22);
-            this.txtregno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtregno.Location = new System.Drawing.Point(115, 18);
             this.txtregno.Name = "txtregno";
-            this.txtregno.Size = new System.Drawing.Size(221, 26);
+            this.txtregno.Size = new System.Drawing.Size(167, 22);
             this.txtregno.TabIndex = 335;
             this.txtregno.Text = "ALL";
             // 
@@ -1476,10 +1346,9 @@
             // 
             this.grpfilerer.AutoSize = true;
             this.grpfilerer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpfilerer.Location = new System.Drawing.Point(7, 30);
-            this.grpfilerer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.grpfilerer.Location = new System.Drawing.Point(5, 24);
             this.grpfilerer.Name = "grpfilerer";
-            this.grpfilerer.Size = new System.Drawing.Size(130, 20);
+            this.grpfilerer.Size = new System.Drawing.Size(104, 16);
             this.grpfilerer.TabIndex = 199;
             this.grpfilerer.Text = "Registration No ";
             // 
@@ -1488,11 +1357,9 @@
             this.grpdepartment.Controls.Add(this.comboBox1);
             this.grpdepartment.Controls.Add(this.label15);
             this.grpdepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpdepartment.Location = new System.Drawing.Point(592, 785);
-            this.grpdepartment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpdepartment.Location = new System.Drawing.Point(444, 638);
             this.grpdepartment.Name = "grpdepartment";
-            this.grpdepartment.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpdepartment.Size = new System.Drawing.Size(353, 65);
+            this.grpdepartment.Size = new System.Drawing.Size(265, 53);
             this.grpdepartment.TabIndex = 331;
             this.grpdepartment.TabStop = false;
             this.grpdepartment.Visible = false;
@@ -1502,20 +1369,18 @@
             this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(153, 23);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Location = new System.Drawing.Point(115, 19);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(191, 28);
+            this.comboBox1.Size = new System.Drawing.Size(144, 24);
             this.comboBox1.TabIndex = 200;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(7, 30);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Location = new System.Drawing.Point(5, 24);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(57, 20);
+            this.label15.Size = new System.Drawing.Size(45, 16);
             this.label15.TabIndex = 201;
             this.label15.Text = "Floor :";
             // 
@@ -1523,11 +1388,9 @@
             // 
             this.grpza.Controls.Add(this.checkBox1);
             this.grpza.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpza.Location = new System.Drawing.Point(1275, 454);
-            this.grpza.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpza.Location = new System.Drawing.Point(956, 369);
             this.grpza.Name = "grpza";
-            this.grpza.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpza.Size = new System.Drawing.Size(183, 64);
+            this.grpza.Size = new System.Drawing.Size(137, 52);
             this.grpza.TabIndex = 333;
             this.grpza.TabStop = false;
             this.grpza.Visible = false;
@@ -1535,10 +1398,9 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(16, 26);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox1.Location = new System.Drawing.Point(12, 21);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(142, 24);
+            this.checkBox1.Size = new System.Drawing.Size(117, 20);
             this.checkBox1.TabIndex = 205;
             this.checkBox1.Text = "Zakat Member ";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -1548,11 +1410,9 @@
             this.grpdate.Controls.Add(this.radioButton5);
             this.grpdate.Controls.Add(this.radioButton6);
             this.grpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpdate.Location = new System.Drawing.Point(1148, 652);
-            this.grpdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpdate.Location = new System.Drawing.Point(861, 530);
             this.grpdate.Name = "grpdate";
-            this.grpdate.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpdate.Size = new System.Drawing.Size(309, 62);
+            this.grpdate.Size = new System.Drawing.Size(232, 50);
             this.grpdate.TabIndex = 334;
             this.grpdate.TabStop = false;
             this.grpdate.Visible = false;
@@ -1561,10 +1421,9 @@
             // 
             this.radioButton5.AutoSize = true;
             this.radioButton5.Checked = true;
-            this.radioButton5.Location = new System.Drawing.Point(29, 23);
-            this.radioButton5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton5.Location = new System.Drawing.Point(22, 19);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(109, 24);
+            this.radioButton5.Size = new System.Drawing.Size(89, 20);
             this.radioButton5.TabIndex = 1;
             this.radioButton5.TabStop = true;
             this.radioButton5.Text = "Date Wise";
@@ -1573,10 +1432,9 @@
             // radioButton6
             // 
             this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(181, 25);
-            this.radioButton6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton6.Location = new System.Drawing.Point(136, 20);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(90, 24);
+            this.radioButton6.Size = new System.Drawing.Size(73, 20);
             this.radioButton6.TabIndex = 0;
             this.radioButton6.Text = "All Date";
             this.radioButton6.UseVisualStyleBackColor = true;
@@ -1591,7 +1449,7 @@
             this.cmbClients.FormattingEnabled = true;
             this.cmbClients.Location = new System.Drawing.Point(58, 21);
             this.cmbClients.Name = "cmbClients";
-            this.cmbClients.Size = new System.Drawing.Size(205, 27);
+            this.cmbClients.Size = new System.Drawing.Size(205, 23);
             this.cmbClients.TabIndex = 322;
             this.cmbClients.Tag = "UnLock";
             // 
@@ -1604,7 +1462,7 @@
             this.mcbBankIndex.FormattingEnabled = true;
             this.mcbBankIndex.Location = new System.Drawing.Point(60, 21);
             this.mcbBankIndex.Name = "mcbBankIndex";
-            this.mcbBankIndex.Size = new System.Drawing.Size(222, 27);
+            this.mcbBankIndex.Size = new System.Drawing.Size(222, 23);
             this.mcbBankIndex.TabIndex = 322;
             this.mcbBankIndex.Tag = "UnLock";
             // 
@@ -1613,11 +1471,9 @@
             this.grpAllFundType.Controls.Add(this.cmbFundType);
             this.grpAllFundType.Controls.Add(this.label17);
             this.grpAllFundType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpAllFundType.Location = new System.Drawing.Point(1032, 809);
-            this.grpAllFundType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpAllFundType.Location = new System.Drawing.Point(774, 657);
             this.grpAllFundType.Name = "grpAllFundType";
-            this.grpAllFundType.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpAllFundType.Size = new System.Drawing.Size(372, 68);
+            this.grpAllFundType.Size = new System.Drawing.Size(279, 55);
             this.grpAllFundType.TabIndex = 206;
             this.grpAllFundType.TabStop = false;
             this.grpAllFundType.Text = "Select";
@@ -1632,10 +1488,9 @@
             "All",
             "Full",
             "Partial"});
-            this.cmbFundType.Location = new System.Drawing.Point(72, 27);
-            this.cmbFundType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbFundType.Location = new System.Drawing.Point(54, 22);
             this.cmbFundType.Name = "cmbFundType";
-            this.cmbFundType.Size = new System.Drawing.Size(280, 28);
+            this.cmbFundType.Size = new System.Drawing.Size(211, 24);
             this.cmbFundType.TabIndex = 200;
             this.cmbFundType.Text = "All";
             // 
@@ -1643,10 +1498,9 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(11, 32);
-            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Location = new System.Drawing.Point(8, 26);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(45, 20);
+            this.label17.Size = new System.Drawing.Size(40, 16);
             this.label17.TabIndex = 201;
             this.label17.Text = "Type";
             // 
@@ -1655,26 +1509,13 @@
             this.grpGender.Controls.Add(this.cmbgender);
             this.grpGender.Controls.Add(this.label18);
             this.grpGender.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpGender.Location = new System.Drawing.Point(121, 205);
-            this.grpGender.Margin = new System.Windows.Forms.Padding(4);
+            this.grpGender.Location = new System.Drawing.Point(91, 167);
             this.grpGender.Name = "grpGender";
-            this.grpGender.Padding = new System.Windows.Forms.Padding(4);
-            this.grpGender.Size = new System.Drawing.Size(391, 63);
+            this.grpGender.Size = new System.Drawing.Size(293, 51);
             this.grpGender.TabIndex = 335;
             this.grpGender.TabStop = false;
             this.grpGender.Text = "Gender";
             this.grpGender.Visible = false;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(77, 26);
-            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(64, 20);
-            this.label18.TabIndex = 199;
-            this.label18.Text = "Gender";
             // 
             // cmbgender
             // 
@@ -1685,18 +1526,29 @@
             "All",
             "Male",
             "Female"});
-            this.cmbgender.Location = new System.Drawing.Point(151, 21);
-            this.cmbgender.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbgender.Location = new System.Drawing.Point(62, 17);
             this.cmbgender.Name = "cmbgender";
-            this.cmbgender.Size = new System.Drawing.Size(225, 28);
+            this.cmbgender.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.cmbgender.Size = new System.Drawing.Size(170, 24);
             this.cmbgender.TabIndex = 201;
             this.cmbgender.Text = "All";
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(7, 21);
+            this.label18.Name = "label18";
+            this.label18.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label18.Size = new System.Drawing.Size(53, 16);
+            this.label18.TabIndex = 199;
+            this.label18.Text = "Gender";
+            // 
             // frmReportParameters
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1516, 922);
+            this.ClientSize = new System.Drawing.Size(1137, 749);
             this.Controls.Add(this.grpGender);
             this.Controls.Add(this.grpAllFundType);
             this.Controls.Add(this.grpdate);
@@ -1735,7 +1587,6 @@
             this.Controls.Add(this.grpAsOn);
             this.Controls.Add(this.grpDateRange);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmReportParameters";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmReportParameters";

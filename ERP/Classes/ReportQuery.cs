@@ -195,13 +195,14 @@ namespace ERP
             adapter.Dispose();
             return dt;
         }
-        internal static DataTable OPD_FundUtilization(DateTime FDate, DateTime TDate)
+        internal static DataTable OPD_FundUtilization(DateTime FDate, DateTime TDate, string gender)
         {
             DataTable dt = new DataTable();
-            OracleCommand comm = new OracleCommand("OPD_FundUtilization", clsConnection.con);
+            OracleCommand comm = new OracleCommand("opd_fundutilization1", clsConnection.con);
             comm.CommandType = CommandType.StoredProcedure;
             comm.Parameters.Add("vfromdate", OracleDbType.Date).Value = FDate;
             comm.Parameters.Add("vtodate", OracleDbType.Date).Value = TDate;
+            comm.Parameters.Add("VGender", OracleDbType.Varchar2).Value = gender;
             comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
             OracleDataAdapter adapter = new OracleDataAdapter();
             adapter.SelectCommand = comm;// new OracleCommand(sql, Connection.Conn_ecyear);
@@ -209,13 +210,14 @@ namespace ERP
             adapter.Dispose();
             return dt;
         }
-        internal static DataTable IPD_FundUtilization(DateTime FDate, DateTime TDate)
+        internal static DataTable IPD_FundUtilization(DateTime FDate, DateTime TDate, string gender)
         {
             DataTable dt = new DataTable();
-            OracleCommand comm = new OracleCommand("IPD_FundUtilization", clsConnection.con);
+            OracleCommand comm = new OracleCommand("ipd_fundutilization1", clsConnection.con);
             comm.CommandType = CommandType.StoredProcedure;
             comm.Parameters.Add("vfromdate", OracleDbType.Date).Value = FDate;
             comm.Parameters.Add("vtodate", OracleDbType.Date).Value = TDate;
+            comm.Parameters.Add("VGender", OracleDbType.Varchar2).Value = gender;
             comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
             OracleDataAdapter adapter = new OracleDataAdapter();
             adapter.SelectCommand = comm;// new OracleCommand(sql, Connection.Conn_ecyear);
@@ -760,7 +762,7 @@ namespace ERP
         internal static DataTable GetBMJMember(string BMJMemberNo,string Active_UnActive,string Wfamily,string Vgender)
         {
             DataTable dt = new DataTable("rptMBJMember");
-            OracleCommand comm = new OracleCommand("REP_BMJMember", clsConnection.con);
+            OracleCommand comm = new OracleCommand("rep_bmjmember_n", clsConnection.con);
             comm.CommandType = CommandType.StoredProcedure;
             comm.Parameters.Add("Vbmjnumber", OracleDbType.Varchar2).Value = BMJMemberNo;
             comm.Parameters.Add("VWfamily", OracleDbType.Varchar2).Value = Wfamily;
