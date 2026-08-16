@@ -354,8 +354,8 @@ namespace ERP
                 DbCommand.Parameters.Add("VVtype", OracleDbType.Varchar2, 10).Value = VVtype;
                 DbCommand.Parameters.Add("VStatus", OracleDbType.Varchar2, 1).Value = Vstatus;
                 DbCommand.Parameters.Add("Vremarks", OracleDbType.Varchar2, 250).Value = Vremarks;
-                DbCommand.Parameters.Add("VUser", OracleDbType.Varchar2, 200).Value = Variable.UserId;
-                DbCommand.Parameters.Add("VTerminalID", OracleDbType.Varchar2, 200).Value = Variable.TerminalId;
+                DbCommand.Parameters.Add("VUser", OracleDbType.Varchar2, 200).Value = UserInfo.UserId;
+                DbCommand.Parameters.Add("VTerminalID", OracleDbType.Varchar2, 200).Value = SoftwareInfo.Terminal;
                 DbCommand.Parameters.Add("ReturnValue", OracleDbType.Varchar2, 20);
                 DbCommand.Parameters["ReturnValue"].Direction = ParameterDirection.Output;
                 DbCommand.ExecuteNonQuery();

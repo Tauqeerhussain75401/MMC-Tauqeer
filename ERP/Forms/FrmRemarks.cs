@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ERP.Forms;
 
 namespace ERP
 {
@@ -17,6 +18,32 @@ namespace ERP
         }
 
         public string SetVoucherType;
+
+        private void FrmRemarks_Load(object sender, EventArgs e)
+        {
+            switch (SetVoucherType)
+            {
+                case "BankToBank":
+                    lblHeader.Text = "Delete Bank to Bank Transfer - Enter Remarks";
+                    break;
+                case "Journal":
+                    lblHeader.Text = "Delete Journal Voucher - Enter Remarks";
+                    break;
+                case "Payment":
+                    lblHeader.Text = "Delete Payment Voucher - Enter Remarks";
+                    break;
+                case "Receipt":
+                    lblHeader.Text = "Delete Receipt Voucher - Enter Remarks";
+                    break;
+                case "PostVoucher":
+                    lblHeader.Text = "Delete Voucher - Enter Remarks";
+                    break;
+                default:
+                    lblHeader.Text = "Enter Remarks";
+                    break;
+            }
+        }
+
         private void richtxtRemarks_TextChanged(object sender, EventArgs e)
         {
             if (richtxtRemarks.Text.Length > 20)
@@ -36,6 +63,10 @@ namespace ERP
             else if (SetVoucherType == "BankToBank")
             {
                 frmBankToBank.Remarks = Type == "OK" ? richtxtRemarks.Text : "";
+            }
+            else if (SetVoucherType == "PostVoucher")
+            {
+                frmPostPV.Remarks = Type == "OK" ? richtxtRemarks.Text : "";
             }
             this.Close();
         }

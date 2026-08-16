@@ -21,6 +21,7 @@ namespace ERP.Forms
         string VNO = "";
         public bool SaveRight;
         public bool DeleteRight;
+        public static string Remarks = "";
         private void frmPostPV_Load(object sender, EventArgs e)
         {
             FillFilterNarration();
@@ -258,14 +259,29 @@ namespace ERP.Forms
         {
             //if (DeleteRight == true)
             //{
+            if (dgvQuery.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Record not Exist..!");
+                return;
+            }
             if (MessageBox.Show("Do you wan't to Delete this?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                foreach (DataGridViewRow item in dgvQuery.SelectedRows)
+                FrmRemarks frm = new FrmRemarks();
+                frm.SetVoucherType = "PostVoucher";
+                frm.ShowDialog();
+
+                if (Remarks != "")
                 {
-                    Query.MasterQueryEC("Update Voucherdetail set status = 1 where status = 2 and VNO = '" + item.Cells[VoucherNum.Index].Value.ToString() + "'");
-                    dgvQuery.Rows.Remove(item);
+                    Cursor.Current = Cursors.WaitCursor;
+                    foreach (DataGridViewRow item in dgvQuery.SelectedRows)
+                    {
+                        MSP.Change_GL_status(item.Cells[VoucherNum.Index].Value.ToString(), item.Cells[clnVtype.Index].Value.ToString(), "1", Remarks);
+                        dgvQuery.Rows.Remove(item);
+                    }
+                    Cursor.Current = Cursors.Default;
+                    MessageBox.Show("Records Successfully Deleted...!");
+                    Remarks = "";
                 }
-                MessageBox.Show("Records Successfully Deleted...!");
             }
             //}
             //else
