@@ -876,27 +876,26 @@ namespace ERP.Forms
 
             if (txtMrno.Text == "")
             {
-                int currentYear = DateTime.Now.Year;
-                string yearString = currentYear.ToString();
+                string yearMonthString = DateTime.Now.ToString("yyMM");
 
                 DataTable dt = Query.getData("SELECT Max(MRNo) as MRno FROM  admissioninfo"); ;
-                int lastMrNumberForYear = 0;
+                int lastMrNumberForMonth = 0;
 
                 if (dt.Rows.Count > 0 && dt.Rows[0][0] != DBNull.Value)
                 {
                     string lastMrNumber = dt.Rows[0][0].ToString();
-                    if (lastMrNumber.StartsWith(yearString))
+                    if (lastMrNumber.StartsWith(yearMonthString))
                     {
                         string numberPart = lastMrNumber.Substring(4);
                         int number;
                         if (int.TryParse(numberPart, out number))
                         {
-                            lastMrNumberForYear = number;
+                            lastMrNumberForMonth = number;
                         }
                     }
                 }
-                int newMrNumber = lastMrNumberForYear + 1;
-                string newMrNumberString = yearString + newMrNumber.ToString("D5");
+                int newMrNumber = lastMrNumberForMonth + 1;
+                string newMrNumberString = yearMonthString + newMrNumber.ToString("D6");
                 txtMrno.Text = newMrNumberString;
             }
         }
