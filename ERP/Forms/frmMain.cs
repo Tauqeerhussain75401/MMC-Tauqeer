@@ -767,7 +767,6 @@ namespace ERP
                 MainAccounts.Visible = false;
                 MainSetup.Visible = false;
                 MainReports.Visible = false;
-                MainStatistics.Visible = true;
                 MainUltraSound.Visible = false;
                 MainInPatient.Visible = false;
                 Mainlaboratory.Visible = false;
@@ -775,6 +774,8 @@ namespace ERP
                 SubMainrestore.Visible = false;
                 SubMainconfiguration.Visible = false;
                 SubMaintest.Visible = false;
+                MainStatistics.Visible = false;
+                xRAYToolStripMenuItem.Visible = false;
                 // SubMainReceipt.Visible = false;
 
                 receiptSearchToolStripMenuItem.Visible = false;
@@ -783,7 +784,7 @@ namespace ERP
                     MainAccounts.Visible = false;
 
                     MainReports.Visible = false;
-                    MainStatistics.Visible = true;
+                    MainStatistics.Visible = false;
                     Mainlaboratory.Visible = false;
                     MainUltraSound.Visible = false;
                     SubMainReportDesigner.Visible = false;
@@ -867,8 +868,8 @@ namespace ERP
                 toolStripMenuItem1.Visible = false;
                 SubMainNarration.Visible = true;
                 bankAccountToolStripMenuItem.Visible = true;
-
-
+                xRAYToolStripMenuItem.Visible = false;
+                MainManagement.Visible = false;
 
             }
             else if (UserInfo.UserLevel == "Laboratory")

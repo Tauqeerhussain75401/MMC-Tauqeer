@@ -434,6 +434,7 @@
             this.dgvDetail.Margin = new System.Windows.Forms.Padding(4);
             this.dgvDetail.Name = "dgvDetail";
             this.dgvDetail.ReadOnly = true;
+            this.dgvDetail.RowHeadersWidth = 51;
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SkyBlue;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
@@ -447,6 +448,7 @@
             // clnReg
             // 
             this.clnReg.HeaderText = "Reg";
+            this.clnReg.MinimumWidth = 6;
             this.clnReg.Name = "clnReg";
             this.clnReg.ReadOnly = true;
             this.clnReg.Width = 60;
@@ -457,6 +459,7 @@
             dataGridViewCellStyle1.NullValue = null;
             this.Adm_Date.DefaultCellStyle = dataGridViewCellStyle1;
             this.Adm_Date.HeaderText = "Adm Date";
+            this.Adm_Date.MinimumWidth = 6;
             this.Adm_Date.Name = "Adm_Date";
             this.Adm_Date.ReadOnly = true;
             this.Adm_Date.ToolTipText = "19/25/2019";
@@ -468,6 +471,7 @@
             dataGridViewCellStyle2.NullValue = null;
             this.Adm_Time.DefaultCellStyle = dataGridViewCellStyle2;
             this.Adm_Time.HeaderText = "Adm Time";
+            this.Adm_Time.MinimumWidth = 6;
             this.Adm_Time.Name = "Adm_Time";
             this.Adm_Time.ReadOnly = true;
             this.Adm_Time.Width = 80;
@@ -475,6 +479,7 @@
             // Bmj
             // 
             this.Bmj.HeaderText = "Bmj";
+            this.Bmj.MinimumWidth = 6;
             this.Bmj.Name = "Bmj";
             this.Bmj.ReadOnly = true;
             this.Bmj.Width = 60;
@@ -482,12 +487,15 @@
             // Title
             // 
             this.Title.HeaderText = "Title";
+            this.Title.MinimumWidth = 6;
             this.Title.Name = "Title";
             this.Title.ReadOnly = true;
+            this.Title.Width = 125;
             // 
             // Patient_Name
             // 
             this.Patient_Name.HeaderText = "Patient_Name";
+            this.Patient_Name.MinimumWidth = 6;
             this.Patient_Name.Name = "Patient_Name";
             this.Patient_Name.ReadOnly = true;
             this.Patient_Name.Width = 150;
@@ -495,6 +503,7 @@
             // Room
             // 
             this.Room.HeaderText = "Room";
+            this.Room.MinimumWidth = 6;
             this.Room.Name = "Room";
             this.Room.ReadOnly = true;
             this.Room.Width = 80;
@@ -502,6 +511,7 @@
             // ConsultantName
             // 
             this.ConsultantName.HeaderText = "ConsultantName";
+            this.ConsultantName.MinimumWidth = 6;
             this.ConsultantName.Name = "ConsultantName";
             this.ConsultantName.ReadOnly = true;
             this.ConsultantName.Width = 150;
@@ -509,80 +519,106 @@
             // clnRemarks
             // 
             this.clnRemarks.HeaderText = "Remarks";
+            this.clnRemarks.MinimumWidth = 6;
             this.clnRemarks.Name = "clnRemarks";
             this.clnRemarks.ReadOnly = true;
+            this.clnRemarks.Width = 125;
             // 
             // Relation
             // 
             this.Relation.HeaderText = "Relation";
+            this.Relation.MinimumWidth = 6;
             this.Relation.Name = "Relation";
             this.Relation.ReadOnly = true;
+            this.Relation.Width = 125;
             // 
             // Patient_Relaton
             // 
             this.Patient_Relaton.HeaderText = "Patient_Relaton";
+            this.Patient_Relaton.MinimumWidth = 6;
             this.Patient_Relaton.Name = "Patient_Relaton";
             this.Patient_Relaton.ReadOnly = true;
+            this.Patient_Relaton.Width = 125;
             // 
             // relationname
             // 
             this.relationname.HeaderText = "Relation Name";
+            this.relationname.MinimumWidth = 6;
             this.relationname.Name = "relationname";
             this.relationname.ReadOnly = true;
+            this.relationname.Width = 125;
             // 
             // age
             // 
             this.age.HeaderText = "Age";
+            this.age.MinimumWidth = 6;
             this.age.Name = "age";
             this.age.ReadOnly = true;
+            this.age.Width = 125;
             // 
             // ymd
             // 
             this.ymd.HeaderText = "YMD";
+            this.ymd.MinimumWidth = 6;
             this.ymd.Name = "ymd";
             this.ymd.ReadOnly = true;
+            this.ymd.Width = 125;
             // 
             // gender
             // 
             this.gender.HeaderText = "Gender";
+            this.gender.MinimumWidth = 6;
             this.gender.Name = "gender";
             this.gender.ReadOnly = true;
+            this.gender.Width = 125;
             // 
             // address
             // 
             this.address.HeaderText = "Address";
+            this.address.MinimumWidth = 6;
             this.address.Name = "address";
             this.address.ReadOnly = true;
+            this.address.Width = 125;
             // 
             // referencename
             // 
             this.referencename.HeaderText = "Reference Name";
+            this.referencename.MinimumWidth = 6;
             this.referencename.Name = "referencename";
             this.referencename.ReadOnly = true;
+            this.referencename.Width = 125;
             // 
             // emergency
             // 
             this.emergency.HeaderText = "Emergency";
+            this.emergency.MinimumWidth = 6;
             this.emergency.Name = "emergency";
             this.emergency.ReadOnly = true;
+            this.emergency.Width = 125;
             // 
             // createdby
             // 
             this.createdby.HeaderText = "Create User";
+            this.createdby.MinimumWidth = 6;
             this.createdby.Name = "createdby";
             this.createdby.ReadOnly = true;
+            this.createdby.Width = 125;
             // 
             // CNIC
             // 
             this.CNIC.HeaderText = "CNIC";
+            this.CNIC.MinimumWidth = 6;
             this.CNIC.Name = "CNIC";
             this.CNIC.ReadOnly = true;
+            this.CNIC.Width = 125;
             // 
             // CnicRelation
             // 
             this.CnicRelation.HeaderText = "CNIC Relation";
+            this.CnicRelation.MinimumWidth = 6;
             this.CnicRelation.Name = "CnicRelation";
             this.CnicRelation.ReadOnly = true;
+            this.CnicRelation.Width = 125;
             // 
             // panel1
             // 
@@ -1400,6 +1436,7 @@
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.HeaderText = "Reg";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Width = 50;
@@ -1410,6 +1447,7 @@
             dataGridViewCellStyle4.NullValue = null;
             this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewTextBoxColumn2.HeaderText = "Num";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             this.dataGridViewTextBoxColumn2.ToolTipText = "19/25/2019";
@@ -1421,6 +1459,7 @@
             dataGridViewCellStyle5.NullValue = null;
             this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewTextBoxColumn3.HeaderText = "Adm Date";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
             this.dataGridViewTextBoxColumn3.ToolTipText = "19/25/2019";
@@ -1432,6 +1471,7 @@
             dataGridViewCellStyle6.NullValue = null;
             this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewTextBoxColumn4.HeaderText = "Adm Time";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             this.dataGridViewTextBoxColumn4.Width = 70;
@@ -1439,6 +1479,7 @@
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.HeaderText = "Bmj";
+            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
             this.dataGridViewTextBoxColumn5.Width = 50;
@@ -1446,6 +1487,7 @@
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.HeaderText = "Title";
+            this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
             this.dataGridViewTextBoxColumn6.Width = 150;
@@ -1453,6 +1495,7 @@
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.HeaderText = "Patient_Name";
+            this.dataGridViewTextBoxColumn7.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
             this.dataGridViewTextBoxColumn7.Width = 150;
@@ -1460,6 +1503,7 @@
             // dataGridViewTextBoxColumn8
             // 
             this.dataGridViewTextBoxColumn8.HeaderText = "Room";
+            this.dataGridViewTextBoxColumn8.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.ReadOnly = true;
             this.dataGridViewTextBoxColumn8.Width = 80;
@@ -1467,6 +1511,7 @@
             // dataGridViewTextBoxColumn9
             // 
             this.dataGridViewTextBoxColumn9.HeaderText = "ConsultantName";
+            this.dataGridViewTextBoxColumn9.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             this.dataGridViewTextBoxColumn9.ReadOnly = true;
             this.dataGridViewTextBoxColumn9.Width = 150;
@@ -1474,74 +1519,98 @@
             // dataGridViewTextBoxColumn10
             // 
             this.dataGridViewTextBoxColumn10.HeaderText = "Relation";
+            this.dataGridViewTextBoxColumn10.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.dataGridViewTextBoxColumn10.Width = 125;
             // 
             // dataGridViewTextBoxColumn11
             // 
             this.dataGridViewTextBoxColumn11.HeaderText = "Patient_Relaton";
+            this.dataGridViewTextBoxColumn11.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            this.dataGridViewTextBoxColumn11.Width = 125;
             // 
             // dataGridViewTextBoxColumn12
             // 
             this.dataGridViewTextBoxColumn12.HeaderText = "Age";
+            this.dataGridViewTextBoxColumn12.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            this.dataGridViewTextBoxColumn12.Width = 125;
             // 
             // dataGridViewTextBoxColumn13
             // 
             this.dataGridViewTextBoxColumn13.HeaderText = "YMD";
+            this.dataGridViewTextBoxColumn13.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            this.dataGridViewTextBoxColumn13.Width = 125;
             // 
             // dataGridViewTextBoxColumn14
             // 
             this.dataGridViewTextBoxColumn14.HeaderText = "Gender";
+            this.dataGridViewTextBoxColumn14.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
             this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            this.dataGridViewTextBoxColumn14.Width = 125;
             // 
             // dataGridViewTextBoxColumn15
             // 
             this.dataGridViewTextBoxColumn15.HeaderText = "Address";
+            this.dataGridViewTextBoxColumn15.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
             this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            this.dataGridViewTextBoxColumn15.Width = 125;
             // 
             // dataGridViewTextBoxColumn16
             // 
             this.dataGridViewTextBoxColumn16.HeaderText = "Reference Name";
+            this.dataGridViewTextBoxColumn16.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
             this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            this.dataGridViewTextBoxColumn16.Width = 125;
             // 
             // dataGridViewTextBoxColumn17
             // 
             this.dataGridViewTextBoxColumn17.HeaderText = "Emergency";
+            this.dataGridViewTextBoxColumn17.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
             this.dataGridViewTextBoxColumn17.ReadOnly = true;
+            this.dataGridViewTextBoxColumn17.Width = 125;
             // 
             // dataGridViewTextBoxColumn18
             // 
             this.dataGridViewTextBoxColumn18.HeaderText = "User Name";
+            this.dataGridViewTextBoxColumn18.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
             this.dataGridViewTextBoxColumn18.ReadOnly = true;
+            this.dataGridViewTextBoxColumn18.Width = 125;
             // 
             // dataGridViewTextBoxColumn19
             // 
             this.dataGridViewTextBoxColumn19.HeaderText = "Create User";
+            this.dataGridViewTextBoxColumn19.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             this.dataGridViewTextBoxColumn19.ReadOnly = true;
+            this.dataGridViewTextBoxColumn19.Width = 125;
             // 
             // dataGridViewTextBoxColumn20
             // 
             this.dataGridViewTextBoxColumn20.HeaderText = "CNIC";
+            this.dataGridViewTextBoxColumn20.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
             this.dataGridViewTextBoxColumn20.ReadOnly = true;
+            this.dataGridViewTextBoxColumn20.Width = 125;
             // 
             // dataGridViewTextBoxColumn21
             // 
             this.dataGridViewTextBoxColumn21.HeaderText = "CNIC Relation";
+            this.dataGridViewTextBoxColumn21.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
             this.dataGridViewTextBoxColumn21.ReadOnly = true;
+            this.dataGridViewTextBoxColumn21.Width = 125;
             // 
             // frmAddmissionInfo
             // 
