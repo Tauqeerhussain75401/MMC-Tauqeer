@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using AForge;
 using AForge.Video ;
-using AForge.Video .DirectShow ;
+using AForge.Video.DirectShow ;
 namespace Classes
 {
     

@@ -711,16 +711,17 @@ namespace ERP
             #region Trial Balance
             else if (Reportname == "Trial Balance")
             {
-                //Reports.TrialBalance rpt = new Reports.TrialBalance();
-                //DataSet ds = new DataSet();
-                ////DataTable dt = Query.Rep_TrialBalanceERP(dtpFDate.Value.ToString("dd-MMM-yyyy"), dtpTDate.Value.ToString("dd-MMM-yyyy"));
-                ////rpt.SetDataSource(dt);
-                //DataTable dt = ReportQuery.getTrailBalance(Convert.ToString(dtpFDate.Value), Convert.ToString(dtpTDate.Value));
+                
+                Reports.TrialBalance rpt = new Reports.TrialBalance();
+                DataSet ds = new DataSet();
+                //DataTable dt = Query.Rep_TrialBalanceERP(dtpFDate.Value.ToString("dd-MMM-yyyy"), dtpTDate.Value.ToString("dd-MMM-yyyy"));
                 //rpt.SetDataSource(dt);
-                //rpt.SetParameterValue("@From", dtpFDate.Value.ToString("dd-MMM-yyyy"));
-                //rpt.SetParameterValue("@To", dtpTDate.Value.ToString("dd-MMM-yyyy"));
-                //rpt.SetParameterValue("@Company_Name", CompanyInfo.CompanyName);
-                //frm.rptViewer.ReportSource = rpt;
+                DataTable dt = ReportQuery.getTrailBalance(Convert.ToString(dtpFDate.Value), Convert.ToString(dtpTDate.Value));
+                rpt.SetDataSource(dt);
+                rpt.SetParameterValue("@From", dtpFDate.Value.ToString("dd-MMM-yyyy"));
+                rpt.SetParameterValue("@To", dtpTDate.Value.ToString("dd-MMM-yyyy"));
+                rpt.SetParameterValue("@Company_Name", CompanyInfo.CompanyName);
+                frm.rptViewer.ReportSource = rpt;
 
             }
             #endregion
