@@ -784,7 +784,7 @@ namespace ERP
                     MainAccounts.Visible = false;
 
                     MainReports.Visible = false;
-                    MainStatistics.Visible = false;
+                    MainStatistics.Visible = true;
                     Mainlaboratory.Visible = false;
                     MainUltraSound.Visible = false;
                     SubMainReportDesigner.Visible = false;
