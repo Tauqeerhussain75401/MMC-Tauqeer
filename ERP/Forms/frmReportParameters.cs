@@ -284,6 +284,23 @@ namespace ERP
 
             }
             #endregion
+            #region Categories Wise Summary
+            else if (Reportname == "Categories Wise Summary")
+            {
+                string catagoryId = cmbCatagory.SelectedIndex > 0 ? Convert.ToString(cmbCatagory.SelectedValue) : "0";
+                Reports.CategoriesWiseSummary rpt = new Reports.CategoriesWiseSummary();
+                DataTable dt = ReportQuery.CategoriesWiseSummary(dtpFDate.Value, dtpTDate.Value, catagoryId);
+                rpt.SetDataSource(dt);
+                rpt.SetParameterValue("@companyname", CompanyInfo.CompanyName);
+                rpt.SetParameterValue("@Fdate", dtpFDate.Value);
+                rpt.SetParameterValue("@Tdate", dtpTDate.Value);
+                rpt.SetParameterValue("@ServerDate", SoftwareInfo.ServerDate);
+                rpt.SetParameterValue("@User", UserInfo.UserName);
+                rpt.SetParameterValue("@Category", catagoryId == "0" ? "--All--" : cmbCatagory.Text);
+
+                frm.rptViewer.ReportSource = rpt;
+            }
+            #endregion
             #region OPD Consultant Summary
             else if (Reportname == "OPD Consultant Summary")
             {
@@ -1381,6 +1398,14 @@ namespace ERP
             {
                 ManageControls(new Control[] { grpDateRange, grpCatagory, grpGender });
                 FillControls.FillcmbTestCatagory(cmbCatagory);
+            }
+            #endregion
+            #region Categories Wise Summary
+            else if (Reportname == "Categories Wise Summary")
+            {
+                ManageControls(new Control[] { grpDateRange, grpCatagory });
+                FillControls.FillcmbTestCatagory(cmbCatagory);
+                cmbCatagory.SelectedIndex = 0;
             }
             #endregion
             #region OPD Consultant Wise Detail

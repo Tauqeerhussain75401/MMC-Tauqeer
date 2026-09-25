@@ -506,14 +506,18 @@
             // clnTokenNo
             // 
             this.clnTokenNo.HeaderText = "Token No";
+            this.clnTokenNo.MinimumWidth = 6;
             this.clnTokenNo.Name = "clnTokenNo";
             this.clnTokenNo.ReadOnly = true;
+            this.clnTokenNo.Width = 125;
             // 
             // clnVoucherNum
             // 
             this.clnVoucherNum.HeaderText = "Voucher #";
+            this.clnVoucherNum.MinimumWidth = 6;
             this.clnVoucherNum.Name = "clnVoucherNum";
             this.clnVoucherNum.ReadOnly = true;
+            this.clnVoucherNum.Width = 125;
             // 
             // clnDate
             // 
@@ -532,26 +536,34 @@
             // clnOPDCatagory
             // 
             this.clnOPDCatagory.HeaderText = "Catagory";
+            this.clnOPDCatagory.MinimumWidth = 6;
             this.clnOPDCatagory.Name = "clnOPDCatagory";
             this.clnOPDCatagory.ReadOnly = true;
+            this.clnOPDCatagory.Width = 125;
             // 
             // clnConsultant
             // 
             this.clnConsultant.HeaderText = "Consultant";
+            this.clnConsultant.MinimumWidth = 6;
             this.clnConsultant.Name = "clnConsultant";
             this.clnConsultant.ReadOnly = true;
+            this.clnConsultant.Width = 125;
             // 
             // clnPatientType
             // 
             this.clnPatientType.HeaderText = "Patient Type";
+            this.clnPatientType.MinimumWidth = 6;
             this.clnPatientType.Name = "clnPatientType";
             this.clnPatientType.ReadOnly = true;
+            this.clnPatientType.Width = 125;
             // 
             // clnPatientName
             // 
             this.clnPatientName.HeaderText = "PatientName";
+            this.clnPatientName.MinimumWidth = 6;
             this.clnPatientName.Name = "clnPatientName";
             this.clnPatientName.ReadOnly = true;
+            this.clnPatientName.Width = 125;
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -958,9 +970,11 @@
             // clnSeq
             // 
             this.clnSeq.HeaderText = "Seq";
+            this.clnSeq.MinimumWidth = 6;
             this.clnSeq.Name = "clnSeq";
             this.clnSeq.ReadOnly = true;
             this.clnSeq.Visible = false;
+            this.clnSeq.Width = 125;
             // 
             // clnTest
             // 
@@ -987,30 +1001,38 @@
             // clnStatus
             // 
             this.clnStatus.HeaderText = "Status";
+            this.clnStatus.MinimumWidth = 6;
             this.clnStatus.Name = "clnStatus";
             this.clnStatus.ReadOnly = true;
             this.clnStatus.Visible = false;
+            this.clnStatus.Width = 125;
             // 
             // clnRowId
             // 
             this.clnRowId.HeaderText = "Row Id";
+            this.clnRowId.MinimumWidth = 6;
             this.clnRowId.Name = "clnRowId";
             this.clnRowId.ReadOnly = true;
             this.clnRowId.Visible = false;
+            this.clnRowId.Width = 125;
             // 
             // clnExpCreatedBy
             // 
             this.clnExpCreatedBy.HeaderText = "Created By";
+            this.clnExpCreatedBy.MinimumWidth = 6;
             this.clnExpCreatedBy.Name = "clnExpCreatedBy";
             this.clnExpCreatedBy.ReadOnly = true;
             this.clnExpCreatedBy.Visible = false;
+            this.clnExpCreatedBy.Width = 125;
             // 
             // clnExpEditBy
             // 
             this.clnExpEditBy.HeaderText = "Edit By";
+            this.clnExpEditBy.MinimumWidth = 6;
             this.clnExpEditBy.Name = "clnExpEditBy";
             this.clnExpEditBy.ReadOnly = true;
             this.clnExpEditBy.Visible = false;
+            this.clnExpEditBy.Width = 125;
             // 
             // pnlControl
             // 
@@ -1686,6 +1708,7 @@
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dataGridViewTextBoxColumn1.Width = 125;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -1709,9 +1732,11 @@
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.HeaderText = "Edit By";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             this.dataGridViewTextBoxColumn4.Visible = false;
+            this.dataGridViewTextBoxColumn4.Width = 125;
             // 
             // dataGridViewTextBoxColumn5
             // 
@@ -1842,9 +1867,11 @@
             // calendarColumn1
             // 
             this.calendarColumn1.HeaderText = "ChequeDate";
+            this.calendarColumn1.MinimumWidth = 6;
             this.calendarColumn1.Name = "calendarColumn1";
             this.calendarColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.calendarColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.calendarColumn1.Width = 125;
             // 
             // frmOPDReceipt
             // 

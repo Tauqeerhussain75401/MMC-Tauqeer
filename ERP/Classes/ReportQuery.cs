@@ -376,6 +376,48 @@ namespace ERP
             return dt;
 
         }
+        internal static DataTable CategoriesWiseSummary(DateTime FDate, DateTime TDate, string CatagoryId)
+        {
+            // Patient count per OPD category, split by patientcatagory: groups with allowdiscount = 1 (ZAKAT, SPD) show
+            // Full (nothing paid) / Partly (part paid) discounts, hasmembership = 1 (BMJ) is deducted as a whole
+            string sql = @"WITH pc AS (
+                             SELECT id, title, hasmembership, allowdiscount,
+                                    CASE WHEN allowdiscount = 1 THEN ROW_NUMBER() OVER (PARTITION BY allowdiscount ORDER BY TO_NUMBER(id)) END discno
+                             FROM patientcatagory)
+                           SELECT category,
+                                  (SELECT title FROM pc WHERE discno = 1) d1title,
+                                  (SELECT title FROM pc WHERE discno = 2) d2title,
+                                  (SELECT MIN(title) FROM pc WHERE hasmembership = 1) mtitle,
+                                  totalpt, d1full, d1part, d1full + d1part d1total, d2full, d2part, d2full + d2part d2total,
+                                  memberpt, lesspt totalless, totalpt - lesspt netpt
+                           FROM (
+                             SELECT get_opdcatagory(rcp.catagoryid) category, COUNT(*) totalpt,
+                                    SUM(CASE WHEN pc.discno = 1 AND NVL(rcp.discount, 0) > 0 AND NVL(rcp.netamount, 0) = 0 THEN 1 ELSE 0 END) d1full,
+                                    SUM(CASE WHEN pc.discno = 1 AND NVL(rcp.discount, 0) > 0 AND NVL(rcp.netamount, 0) > 0 THEN 1 ELSE 0 END) d1part,
+                                    SUM(CASE WHEN pc.discno = 2 AND NVL(rcp.discount, 0) > 0 AND NVL(rcp.netamount, 0) = 0 THEN 1 ELSE 0 END) d2full,
+                                    SUM(CASE WHEN pc.discno = 2 AND NVL(rcp.discount, 0) > 0 AND NVL(rcp.netamount, 0) > 0 THEN 1 ELSE 0 END) d2part,
+                                    SUM(CASE WHEN pc.hasmembership = 1 THEN 1 ELSE 0 END) memberpt,
+                                    SUM(CASE WHEN pc.hasmembership = 1 OR (pc.allowdiscount = 1 AND NVL(rcp.discount, 0) > 0) THEN 1 ELSE 0 END) lesspt
+                             FROM opdreceipt rcp
+                             INNER JOIN vu_usersession ss ON ss.sessionid = rcp.sessionid
+                             LEFT JOIN pc ON pc.id = rcp.patienttype
+                             WHERE rcp.status = 0
+                               AND TRUNC(ss.sessiondate) BETWEEN TRUNC(:VFdate) AND TRUNC(:VTdate)
+                               AND (:VCatagory = '0' OR rcp.catagoryid = :VCatagory)
+                             GROUP BY rcp.catagoryid)
+                           ORDER BY category";
+            DataTable dt = new DataTable();
+            OracleCommand comm = new OracleCommand(sql, clsConnection.con);
+            comm.BindByName = true;
+            comm.Parameters.Add("VFdate", OracleDbType.Date).Value = FDate;
+            comm.Parameters.Add("VTdate", OracleDbType.Date).Value = TDate;
+            comm.Parameters.Add("VCatagory", OracleDbType.Varchar2).Value = string.IsNullOrEmpty(CatagoryId) ? "0" : CatagoryId;
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = comm;
+            adapter.Fill(dt);
+            adapter.Dispose();
+            return dt;
+        }
         internal static DataTable AddmissionForm(string RegNo)
         {
             DataTable dt = new DataTable();
