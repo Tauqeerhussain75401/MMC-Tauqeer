@@ -91,6 +91,7 @@
             this.oPDConsultantWiseDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.oPDConsultantSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.categoriesWiseSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultantLedgerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inPatientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.detailOfInPatientBillToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -166,15 +167,18 @@
             this.lblCompanyName = new System.Windows.Forms.Label();
             this.lblUrCompanyName = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblFY = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.chkDate = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -228,7 +232,7 @@
             this.menuCatagoryInfo,
             this.bankAccountToolStripMenuItem});
             this.MainSetup.Name = "MainSetup";
-            this.MainSetup.Size = new System.Drawing.Size(61, 24);
+            this.MainSetup.Size = new System.Drawing.Size(61, 26);
             this.MainSetup.Text = "Setup";
             this.MainSetup.Click += new System.EventHandler(this.MainSetup_Click);
             // 
@@ -371,7 +375,7 @@
             this.bankReconcilationToolStripMenuItem1,
             this.bankToBankTransferToolStripMenuItem});
             this.MainAccounts.Name = "MainAccounts";
-            this.MainAccounts.Size = new System.Drawing.Size(83, 24);
+            this.MainAccounts.Size = new System.Drawing.Size(83, 26);
             this.MainAccounts.Text = "Accounts";
             // 
             // paymentVoucherToolStripMenuItem
@@ -429,7 +433,7 @@
             this.receiptSearchToolStripMenuItem,
             this.partialPaymentToolStripMenuItem});
             this.MainOutPatient.Name = "MainOutPatient";
-            this.MainOutPatient.Size = new System.Drawing.Size(96, 24);
+            this.MainOutPatient.Size = new System.Drawing.Size(96, 26);
             this.MainOutPatient.Text = "Out Patient";
             // 
             // SubMainReceipt
@@ -465,7 +469,7 @@
             this.inPatientSearchToolStripMenuItem,
             this.inRecToolStripMenuItem});
             this.MainInPatient.Name = "MainInPatient";
-            this.MainInPatient.Size = new System.Drawing.Size(84, 24);
+            this.MainInPatient.Size = new System.Drawing.Size(84, 26);
             this.MainInPatient.Text = "In Patient";
             // 
             // addmissionInfoToolStripMenuItem
@@ -529,7 +533,7 @@
             this.MainManagement.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.userSessionsToolStripMenuItem});
             this.MainManagement.Name = "MainManagement";
-            this.MainManagement.Size = new System.Drawing.Size(111, 24);
+            this.MainManagement.Size = new System.Drawing.Size(111, 26);
             this.MainManagement.Text = "Management";
             // 
             // userSessionsToolStripMenuItem
@@ -544,7 +548,7 @@
             this.MainStatistics.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.currentCashStatusToolStripMenuItem});
             this.MainStatistics.Name = "MainStatistics";
-            this.MainStatistics.Size = new System.Drawing.Size(81, 24);
+            this.MainStatistics.Size = new System.Drawing.Size(81, 26);
             this.MainStatistics.Text = "Statistics";
             // 
             // currentCashStatusToolStripMenuItem
@@ -573,6 +577,7 @@
             this.oPDConsultantWiseDetailToolStripMenuItem,
             this.toolStripMenuItem1,
             this.oPDConsultantSummaryToolStripMenuItem,
+            this.categoriesWiseSummaryToolStripMenuItem,
             this.consultantLedgerToolStripMenuItem,
             this.inPatientToolStripMenuItem,
             this.oPDTestReceiptDetailToolStripMenuItem,
@@ -590,7 +595,7 @@
             this.toolStripMenuItem5,
             this.toolStripMenuItem6});
             this.MainReports.Name = "MainReports";
-            this.MainReports.Size = new System.Drawing.Size(74, 24);
+            this.MainReports.Size = new System.Drawing.Size(74, 26);
             this.MainReports.Text = "Reports";
             this.MainReports.Click += new System.EventHandler(this.MainReports_Click);
             // 
@@ -705,6 +710,13 @@
             this.oPDConsultantSummaryToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.oPDConsultantSummaryToolStripMenuItem.Text = "OPD Consultant Summary";
             this.oPDConsultantSummaryToolStripMenuItem.Click += new System.EventHandler(this.oPDConsultantSummaryToolStripMenuItem_Click);
+            // 
+            // categoriesWiseSummaryToolStripMenuItem
+            // 
+            this.categoriesWiseSummaryToolStripMenuItem.Name = "categoriesWiseSummaryToolStripMenuItem";
+            this.categoriesWiseSummaryToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
+            this.categoriesWiseSummaryToolStripMenuItem.Text = "Categories Wise Summary";
+            this.categoriesWiseSummaryToolStripMenuItem.Click += new System.EventHandler(this.categoriesWiseSummaryToolStripMenuItem_Click);
             // 
             // consultantLedgerToolStripMenuItem
             // 
@@ -1009,7 +1021,7 @@
             this.mnSoftwareAdministrator.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileLoaderToolStripMenuItem});
             this.mnSoftwareAdministrator.Name = "mnSoftwareAdministrator";
-            this.mnSoftwareAdministrator.Size = new System.Drawing.Size(177, 24);
+            this.mnSoftwareAdministrator.Size = new System.Drawing.Size(177, 26);
             this.mnSoftwareAdministrator.Text = "Software Administrator";
             this.mnSoftwareAdministrator.Visible = false;
             this.mnSoftwareAdministrator.Click += new System.EventHandler(this.mnSoftwareAdministrator_Click);
@@ -1026,7 +1038,7 @@
             this.MainUltraSound.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.reportDesignerToolStripMenuItem});
             this.MainUltraSound.Name = "MainUltraSound";
-            this.MainUltraSound.Size = new System.Drawing.Size(97, 24);
+            this.MainUltraSound.Size = new System.Drawing.Size(97, 26);
             this.MainUltraSound.Text = "UltraSound";
             // 
             // reportDesignerToolStripMenuItem
@@ -1042,7 +1054,7 @@
             this.echoTemplateDesignerToolStripMenuItem1,
             this.echoCardioGraphyToolStripMenuItem});
             this.eCToolStripMenuItem.Name = "eCToolStripMenuItem";
-            this.eCToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.eCToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
             this.eCToolStripMenuItem.Text = "Echo";
             this.eCToolStripMenuItem.Visible = false;
             // 
@@ -1066,7 +1078,7 @@
             this.xRayTemplateDesignerToolStripMenuItem,
             this.xRayReportToolStripMenuItem});
             this.xRAYToolStripMenuItem.Name = "xRAYToolStripMenuItem";
-            this.xRAYToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
+            this.xRAYToolStripMenuItem.Size = new System.Drawing.Size(62, 26);
             this.xRAYToolStripMenuItem.Text = "X-Ray";
             // 
             // xRayTemplateDesignerToolStripMenuItem
@@ -1093,7 +1105,7 @@
             this.eSSALabRegisterToolStripMenuItem,
             this.reportsToolStripMenuItem});
             this.Mainlaboratory.Name = "Mainlaboratory";
-            this.Mainlaboratory.Size = new System.Drawing.Size(95, 24);
+            this.Mainlaboratory.Size = new System.Drawing.Size(95, 26);
             this.Mainlaboratory.Text = "Laboratory";
             // 
             // labReortEntryToolStripMenuItem
@@ -1149,7 +1161,7 @@
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(72, 24);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(72, 26);
             this.logoutToolStripMenuItem.Text = "LogOut";
             this.logoutToolStripMenuItem.Visible = false;
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
@@ -1163,7 +1175,7 @@
             this.SubMainchangePassword,
             this.SubMaintest});
             this.MainsSetting.Name = "MainsSetting";
-            this.MainsSetting.Size = new System.Drawing.Size(70, 24);
+            this.MainsSetting.Size = new System.Drawing.Size(70, 26);
             this.MainsSetting.Text = "Setting";
             // 
             // SubMainbackup
@@ -1202,7 +1214,7 @@
             // existToolStripMenuItem
             // 
             this.existToolStripMenuItem.Name = "existToolStripMenuItem";
-            this.existToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
+            this.existToolStripMenuItem.Size = new System.Drawing.Size(47, 26);
             this.existToolStripMenuItem.Text = "Exit";
             this.existToolStripMenuItem.Click += new System.EventHandler(this.existToolStripMenuItem_Click);
             // 
@@ -1297,7 +1309,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.picLogo);
             this.panel1.Controls.Add(this.lblCompanyName);
@@ -1309,6 +1321,45 @@
             this.panel1.Size = new System.Drawing.Size(1800, 864);
             this.panel1.TabIndex = 17;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.lblFY);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Location = new System.Drawing.Point(1504, 778);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(255, 80);
+            this.groupBox2.TabIndex = 270;
+            this.groupBox2.TabStop = false;
+            // 
+            // lblFY
+            // 
+            this.lblFY.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblFY.AutoSize = true;
+            this.lblFY.BackColor = System.Drawing.Color.Transparent;
+            this.lblFY.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFY.ForeColor = System.Drawing.Color.Black;
+            this.lblFY.Location = new System.Drawing.Point(63, 45);
+            this.lblFY.Name = "lblFY";
+            this.lblFY.Size = new System.Drawing.Size(152, 31);
+            this.lblFY.TabIndex = 268;
+            this.lblFY.Text = "2016-2017";
+            this.lblFY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(33, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(219, 36);
+            this.label3.TabIndex = 267;
+            this.label3.Text = "Financial Year";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox1
             // 
@@ -1379,15 +1430,6 @@
             this.label1.Text = "Read Dates from :";
             this.label1.Visible = false;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 633);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 16);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "BackUp2024";
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1415,6 +1457,8 @@
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
@@ -1486,6 +1530,7 @@
         private System.Windows.Forms.ToolStripMenuItem oPDConsultantWiseDetailToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem oPDConsultantSummaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem categoriesWiseSummaryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem masterRegisterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem headRegisterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultantLedgerToolStripMenuItem;
@@ -1503,6 +1548,9 @@
         private System.Windows.Forms.ToolStripMenuItem advanceReceiptToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lblFY;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox picLogo;
         private System.Windows.Forms.ToolStripMenuItem SubMainLabTestRemarks;
@@ -1569,6 +1617,5 @@
         private System.Windows.Forms.ToolStripMenuItem xRAYToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xRayTemplateDesignerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xRayReportToolStripMenuItem;
-        private System.Windows.Forms.Label label2;
     }
 }

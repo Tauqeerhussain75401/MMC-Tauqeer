@@ -19,7 +19,9 @@ namespace ERP.Forms
         void FillQuery(string UserId)
         {
             dgvSession .Rows.Clear();
-            string q = "SELECT * from vu_usersession where userid = '" + UserId + "'  order by fromdate desc";
+            string q = "SELECT sessionid, fromdate, todate, status, sessiondate, shiftname from vu_usersession where userid = '" + UserId + "'" +
+                (!string.IsNullOrEmpty(Variable.FinancialYear) ? " and (status != 0 or (fromdate >= to_date('" + Variable.FinancialYearFrom.ToString("dd-MM-yyyy") + "','dd-mm-yyyy') and fromdate < to_date('" + Variable.FinancialYearTo.AddDays(1).ToString("dd-MM-yyyy") + "','dd-mm-yyyy')))" : "") +
+                "  order by fromdate desc";
             DataTable dt = Query.getData(q);
             for (int i = 0; i < dt.Rows.Count; i++)
             {

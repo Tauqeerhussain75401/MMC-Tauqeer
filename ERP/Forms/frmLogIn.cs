@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace ERP
 {
@@ -29,8 +30,13 @@ namespace ERP
                 UserInfo.UserId = "Log Out";
 
                 btnLogIn.Enabled = false;
-                thConnecting = new Thread(Connecting);
-                thConnecting.Start();
+                //thConnecting = new Thread(Connecting);
+                //thConnecting.Start();
+                Task.Run(() => Connecting())
+                            .ContinueWith(t =>
+                            {
+                                fillcmbFY();
+                            }, TaskScheduler.FromCurrentSynchronizationContext());
             }
             catch (Exception ex)
             {
@@ -39,6 +45,7 @@ namespace ERP
         }
 
         Thread thConnecting;
+        private DataTable FinancialYear;
         #region Cross Thread Delegate Info
 
         public delegate void BtnLogInEnableDelegate(bool Enable);
@@ -90,6 +97,22 @@ namespace ERP
                 txtTerminalId.Text = Text;
             }
         }
+        private void fillcmbFY()
+        {
+            FinancialYear = new DataTable();
+            FinancialYear = Query.FinancialYear();
+            cmbFY.DataSource = FinancialYear;
+            cmbFY.DisplayMember = "FinancialYear";
+            cmbFY.ValueMember = "FinancialYear";
+
+            string findyear = "";
+            if (Variable.ServerDate.Month > 6)
+                findyear = Variable.ServerDate.Year.ToString() + "-" + (Variable.ServerDate.Year + 1).ToString();
+            else
+                findyear = (Variable.ServerDate.Year - 1).ToString() + "-" + Variable.ServerDate.Year.ToString();
+            cmbFY.Text = findyear;
+
+        }
 
         #endregion
 
@@ -100,6 +123,7 @@ namespace ERP
                 ProgressBarVisChg(true);
                 BtnLogInEnable(false);
                 tsslMsgChg("Connecting to Server...,");
+                clsConnection.User = "hms";
                 clsConnection.Con();
                 clsConnection.con.ClientId = UserInfo.UserId;
                 ////temporary////
@@ -113,6 +137,7 @@ namespace ERP
                 CompanyInfo.Cell = dt.Rows[0]["Cell"].ToString();
                 CompanyInfo.Cell2Title = dt.Rows[0]["ContactPerson2"].ToString();
                 CompanyInfo.Cell2 = dt.Rows[0]["Cell2"].ToString();
+                Variable.ServerDate = Convert.ToDateTime((DateTime)dt.Rows[0]["sysdate"]);
                 tsslMsgChg("Getting Terminal Id...,");
                 string ProcessorId = HardwareInfo.GetProcessorId();
                 string HDDSerialNo = "";
@@ -232,6 +257,19 @@ namespace ERP
                     UserInfo.UserName = (string)dtUsers.Rows[0]["username"];
                     UserInfo.UserLevel = dtUsers.Rows[0]["Userlevel"].ToString();
                     UserInfo.LogInDateTime = (DateTime)dtUsers.Rows[0]["LogIndate"];
+                    Variable.FinancialYear = cmbFY.Text;
+                    Variable.FinancialYearFrom = new DateTime(Convert.ToInt16(cmbFY.Text.Substring(0, 4)), 7, 1);
+                    Variable.FinancialYearTo = new DateTime(Convert.ToInt16(cmbFY.Text.Substring(5, 4)), 6, 30);
+                    string filter = string.Format("financialyear = '{0}'", cmbFY.Text);
+                    DataRow dr = FinancialYear.Select(filter).FirstOrDefault();
+                    if (dr["CurDef"].ToString() != "Y")
+                    {
+                        clsConnection.User = "hms" + cmbFY.Text.Split('-')[1];
+
+                        clsConnection.Con();
+                        //if (clsConnection.con.State.ToString() == "Open") clsConnection.con.Close();
+                        
+                    }
                     frm.ShowDialog();
                 }
                 else

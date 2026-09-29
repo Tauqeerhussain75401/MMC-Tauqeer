@@ -19,13 +19,13 @@ namespace ERP
 
             try
             {
-                string connection = System.Configuration.ConfigurationManager.ConnectionStrings["OracleConnection"].ToString().Replace("MyIP", IPList[0]);
+                string connection = System.Configuration.ConfigurationManager.ConnectionStrings["OracleConnection"].ToString().Replace("MyIP", IPList[0]).Replace("hms", User);
                 OpenConnection(connection);
                 Host = IPList[0];
             }
             catch 
             {
-                string connection = System.Configuration.ConfigurationManager.ConnectionStrings["OracleConnection"].ToString().Replace("MyIP", IPList[1]);
+                string connection = System.Configuration.ConfigurationManager.ConnectionStrings["OracleConnection"].ToString().Replace("MyIP", IPList[1]).Replace("hms", User);
                 OpenConnection(connection);
                 Host = IPList[1];
             }           
@@ -44,5 +44,17 @@ namespace ERP
             con.Open();
         }
         public static OracleConnection con;
+        static string _User;
+        public static string User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                _User = value;
+            }
+        }
     }
 }

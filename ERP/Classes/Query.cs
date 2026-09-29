@@ -42,6 +42,26 @@ namespace ERP
             // Return the DataTable
             return dtQr;
         }
+        public static DataTable FinancialYear()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                OracleDataAdapter adapter = new OracleDataAdapter();
+                adapter.SelectCommand = new OracleCommand("select * from FinancialYear order by FinancialYear", clsConnection.con);
+                adapter.Fill(dt);
+                adapter.Dispose();
+                return dt;
+            }
+            catch (Exception ee)
+            {
+                Errors.writeline(ee.Message, "Query_FinancialYear");
+                string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+
+
+                return dt;
+            }
+        }
 
 
 
@@ -190,7 +210,7 @@ namespace ERP
         {
             DataTable dt = new DataTable();
             // SqlConnection con = conOpen();
-            string sql = "select * from companydetail";
+            string sql = "select cd.*, sysdate from companydetail cd";
             OracleDataAdapter adap = new OracleDataAdapter(sql, clsConnection.con);
             adap.Fill(dt);
             adap.Dispose();
@@ -402,7 +422,7 @@ namespace ERP
         }
         internal static DataTable GetOPDDetailsByContactNo(string VContactno)
         {
-            string sql = "select * from OPDReceipt where contactno = '" + VContactno + "'";
+            string sql = "select MRNo from OPDReceipt where contactno = '" + VContactno + "' and rownum = 1";
             DataTable dt = getData(sql);
             return dt;
         }
@@ -542,9 +562,9 @@ namespace ERP
         {
             string Filter = filter.Count() > 0 ? string.Join(" ", filter) : "";
             string sql = @"SELECT tokenNo,'OP-' || receiptno AS receiptno,vdate, 
-                           get_OPDcatagory(catagoryid) CatagoryTitle, 
-                           nvl(Get_consultantName(consultantid),' ') ConsultantName, 
-                           get_PatientType(patienttype) patienttype, " +
+                           (SELECT get_OPDcatagory(catagoryid) FROM dual) CatagoryTitle,
+                           nvl((SELECT Get_consultantName(consultantid) FROM dual),' ') ConsultantName,
+                           (SELECT get_PatientType(patienttype) FROM dual) patienttype, " +
                            "patientname," + 
                            "netamount + electricitycharges AS netamount, " +
                            @"createdby || '|' || To_Char(createdtime,'dd-Mon-yyyy HH:mm:ss am') AS createdby, Decode(editby, NULL, ' ', editby || '|' || To_Char(edittime,'dd-Mon-yyyy HH:mm:ss am')) AS editby,

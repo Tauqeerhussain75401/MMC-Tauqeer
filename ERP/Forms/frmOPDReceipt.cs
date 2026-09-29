@@ -22,8 +22,6 @@ namespace ERP
             InitializeComponent();
             FillControls.FillcmbTestCatagoryForOPD(new ComboBox[] { cmbOPDCatagory, cmbFilterOpdCatagory });
             FillControls.FillcmbPatientCatagory(cmbPatientType);
-            FillControls.FillcmbMember(cmbMembership);
-            FillControls.FillReferenceIndex(cmbReference);
         }
         public string PType, PBMJ, PTitle, PName, PGender, PContact, PAge, PAgeUnit, PReference, Premakrs = "";
 
@@ -38,21 +36,6 @@ namespace ERP
         DataTable dtTest = Query.TestIndex();
         #region Fill Controls
         DataTable dtQuery;
-        void FillQuery(string[] filter, bool GetAll)
-        {
-            dgvQuery.Rows.Clear();
-
-            if (GetAll) dtQuery = Query.OPDReceiptQuery(filter, (string)cmbOPDCatagory.SelectedValue == null ? "3" : (string)cmbOPDCatagory.SelectedValue);
-            for (int i = 0; i < dtQuery.Rows.Count; i++)
-            {
-                int ind = dgvQuery.Rows.Add(dtQuery.Rows[i].ItemArray);
-                if (dtQuery.Rows[i]["noofPrint"].ToString() == "0")
-                    dgvQuery.Rows[ind].DefaultCellStyle.BackColor = Color.LightGray;
-                if (dtQuery.Rows[i]["status"].ToString() != "0")
-                    dgvQuery.Rows[ind].DefaultCellStyle.BackColor = Color.Red;
-            }
-            lblTotRecordsFetched.Text = "Total Records : " + dtQuery.Rows.Count.ToString("N0");
-        }
         internal void FillReceipt(string vno)
         {
             DataTable dt = Query.OPDReceiptDetail(vno);
@@ -181,8 +164,7 @@ namespace ERP
             btnNew_Click(null, null);
             FillSessionBalanceAsync();
             //FillSessionBalance();
-            dtDependentEmpty = dtDependent.Copy();
-            dtDependentEmpty.Rows.Clear();
+            dtDependentEmpty = dtDependent.Clone();
             if (UserInfo.UserLevel == "Admin")
             {
                 btnCancelAll.Visible = true;
@@ -431,7 +413,7 @@ namespace ERP
                 DataRowView TokenStatus = (DataRowView)cmbOPDCatagory.SelectedItem;
                 if (TokenStatus["autotoken"].ToString() == "0" && TokenStatus["resforduptoken"].ToString() == "1")
                 {
-                    DataTable dt = Query.getData(@"SELECT Count(*) FROM opdreceipt opdr WHERE status = 0 AND consultantid = '" + cmbConsultant.SelectedValue.ToString() + "' AND catagoryid = '" + cmbOPDCatagory.SelectedValue.ToString() + "' AND vdate + (8/24) >= SYSDATE AND tokenno = '" + ntxtTokenNo.Value.ToString() + "'");
+                    DataTable dt = Query.getData(@"SELECT Count(*) FROM opdreceipt opdr WHERE status = 0 AND consultantid = '" + cmbConsultant.SelectedValue.ToString() + "' AND catagoryid = '" + cmbOPDCatagory.SelectedValue.ToString() + "' AND vdate >= SYSDATE - (8/24) AND tokenno = '" + ntxtTokenNo.Value.ToString() + "'");
                     if (Convert.ToInt32(dt.Rows[0][0]) > 0)
                     {
                         if (dgvExpenses.Rows.Count > 0 && (string)dgvExpenses.Rows[0].Cells[clnTest.Index].Value == "6")
@@ -560,11 +542,12 @@ namespace ERP
                 }
             }
             string FDate = txtFdate.Text, TDate = txtTdate.Text, UserId = txtUserid.Text, ReceiptNo = txtReceiptNo.Text, OPDCatagory = (string)cmbOPDCatagory.SelectedValue;
-            FillQueryAsync(new string[] { FDate != "" ? " and trunc(Vdate) >= '" + FDate + "'" : "",
-                TDate != "" ? " and trunc(Vdate) <= '" + TDate + "'" : "",
+            FillQueryAsync(new string[] { FDate != "" ? " and Vdate >= '" + FDate + "'" : "",
+                TDate != "" ? " and Vdate < to_date('" + TDate + "') + 1" : "",
                 UserId != "" ? " and createdby = '" + UserId + "'" : "",
                 ReceiptNo  != "" ? " and to_number(receiptno)  in (" + ReceiptNo.Replace(' ',',') +")" : "",
-                txtContact.Text!=""?"and contactno='"+txtContact.Text+"'":""
+                txtContact.Text!=""?"and contactno='"+txtContact.Text+"'":"",
+                !string.IsNullOrEmpty(Variable.FinancialYear) ? " and vdate >= to_date('" + Variable.FinancialYearFrom.ToString("dd-MM-yyyy") + "','dd-mm-yyyy') and vdate < to_date('" + Variable.FinancialYearTo.AddDays(1).ToString("dd-MM-yyyy") + "','dd-mm-yyyy')" : ""
             }, true);
 
         }
@@ -655,7 +638,7 @@ namespace ERP
             DataTable Lastentry = Query.getData(
                         "SELECT patientname, grossamount FROM (" +
                         " SELECT patientname, grossamount FROM opdreceipt " +
-                        " WHERE Trunc(vdate) >= Trunc(SYSDATE - 50) AND createdby = '" + UserInfo.UserId + "' " +
+                        " WHERE vdate >= Trunc(SYSDATE - 50) AND createdby = '" + UserInfo.UserId + "' " +
                         " ORDER BY TO_NUMBER(receiptno) DESC" +
                         ") WHERE ROWNUM = 1"
                     );

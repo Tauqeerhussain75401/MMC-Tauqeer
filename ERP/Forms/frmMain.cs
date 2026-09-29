@@ -76,6 +76,15 @@ namespace ERP
             incomeSummeryToolStripMenuItem.Visible = false;
             balanceSheetToolStripMenuItem.Visible = false;
             itemLedgerToolStripMenuItem.Visible = false;
+            
+            lblFY.Text = Variable.FinancialYear;
+            string findyear = "";
+            if (Variable.ServerDate.Month > 6)
+                findyear = Variable.ServerDate.Year.ToString() + "-" + (Variable.ServerDate.Year + 1).ToString();
+            else
+                findyear = (Variable.ServerDate.Year - 1).ToString() + "-" + Variable.ServerDate.Year.ToString();
+            if (Variable.FinancialYear != findyear)
+                lblFY.BackColor = Color.Red;
 
         }
         private void frmMain_Shown(object sender, EventArgs e)
@@ -122,6 +131,7 @@ namespace ERP
                     try
                     {
                         //clsConnection.con = clsConnection.Con();
+                        clsConnection.User = "hms";
                         clsConnection.Con();
                     }
                     catch
@@ -639,6 +649,14 @@ namespace ERP
             frmReportParameters frm = new frmReportParameters();
             frm.MdiParent = this;
             frm.Reportname = "OPD Consultant Summary";
+            frm.Show();
+        }
+
+        private void categoriesWiseSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.MdiParent = this;
+            frm.Reportname = "Categories Wise Summary";
             frm.Show();
         }
 
