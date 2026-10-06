@@ -258,4 +258,158 @@ namespace ERP
       base.OnValueChanged(eventargs);
     }
   }
+    public class TimeEditingControl : DateTimePicker, IDataGridViewEditingControl
+    {
+        private DataGridView _dgv;
+        private bool _valueChanged;
+        private int _rowIndex;
+
+        public TimeEditingControl()
+        {
+            Format = DateTimePickerFormat.Custom;
+            CustomFormat = "hh:mm tt";
+            ShowUpDown = true;
+        }
+
+        public object EditingControlFormattedValue
+        {
+            get { return Value; }
+            set
+            {
+                if (value == null || value == DBNull.Value)
+                {
+                    Value = DateTime.Today;
+                }
+                else if (value is DateTime)
+                {
+                    Value = (DateTime)value;
+                }
+                else
+                {
+                    DateTime parsed;
+                    if (value is string && DateTime.TryParse((string)value, out parsed))
+                        Value = parsed;
+                }
+            }
+        }
+
+        public object GetEditingControlFormattedValue(DataGridViewDataErrorContexts context)
+        {
+            return Value;
+        }
+
+        public void ApplyCellStyleToEditingControl(DataGridViewCellStyle dataGridViewCellStyle)
+        {
+            Font = dataGridViewCellStyle.Font;
+        }
+
+        public int EditingControlRowIndex
+        {
+            get { return _rowIndex; }
+            set { _rowIndex = value; }
+        }
+
+        public bool EditingControlWantsInputKey(Keys keyData, bool dataGridViewWantsInputKey)
+        {
+            switch (keyData & Keys.KeyCode)
+            {
+                case Keys.Up:
+                case Keys.Down:
+                case Keys.Left:
+                case Keys.Right:
+                case Keys.Home:
+                case Keys.End:
+                case Keys.PageUp:
+                case Keys.PageDown:
+                    return true;
+                default:
+                    return !dataGridViewWantsInputKey;
+            }
+        }
+
+        public void PrepareEditingControlForEdit(bool selectAll) { }
+
+        public bool RepositionEditingControlOnValueChange
+        {
+            get { return false; }
+        }
+
+        public DataGridView EditingControlDataGridView
+        {
+            get { return _dgv; }
+            set { _dgv = value; }
+        }
+
+        public bool EditingControlValueChanged
+        {
+            get { return _valueChanged; }
+            set { _valueChanged = value; }
+        }
+
+        public Cursor EditingPanelCursor
+        {
+            get { return base.Cursor; }
+        }
+
+        protected override void OnValueChanged(EventArgs eventargs)
+        {
+            _valueChanged = true;
+            if (_dgv != null)
+                _dgv.NotifyCurrentCellDirty(true);
+            base.OnValueChanged(eventargs);
+        }
+    }
+
+    public class TimeCalendarCell : DataGridViewTextBoxCell
+    {
+        public override Type EditType
+        {
+            get { return typeof(TimeEditingControl); }
+        }
+
+        public override Type ValueType
+        {
+            get { return typeof(DateTime); }
+        }
+
+        public override object DefaultNewRowValue
+        {
+            get { return DBNull.Value; }
+        }
+
+        public override void InitializeEditingControl(int rowIndex, object initialFormattedValue, DataGridViewCellStyle dataGridViewCellStyle)
+        {
+            base.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle);
+            TimeEditingControl ctl = DataGridView.EditingControl as TimeEditingControl;
+            if (ctl == null) return;
+            if (Value != null && Value != DBNull.Value)
+                ctl.Value = Convert.ToDateTime(Value);
+            else
+                ctl.Value = DateTime.Today;
+        }
+
+        public override object ParseFormattedValue(
+            object formattedValue,
+            DataGridViewCellStyle cellStyle,
+            System.ComponentModel.TypeConverter formattedValueTypeConverter,
+            System.ComponentModel.TypeConverter valueTypeConverter)
+        {
+            if (formattedValue == null || formattedValue == DBNull.Value)
+                return DBNull.Value;
+            if (formattedValue is DateTime)
+                return (DateTime)formattedValue;
+            DateTime parsed;
+            if (formattedValue is string && DateTime.TryParse((string)formattedValue, out parsed))
+                return parsed;
+            return base.ParseFormattedValue(formattedValue, cellStyle, formattedValueTypeConverter, valueTypeConverter);
+        }
+    }
+    public class TimeCalendarColumn : DataGridViewColumn
+    {
+        public TimeCalendarColumn()
+            : base(new TimeCalendarCell())
+        {
+            DefaultCellStyle.Format = "hh:mm tt";
+        }
+    }
 }

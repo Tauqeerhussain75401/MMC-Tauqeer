@@ -163,6 +163,14 @@ namespace ERP
             cmb.ValueMember = "Id";
             cmb.SelectedIndex = -1;
         }
+
+        internal static void FillcmbTemplateFaculty(ComboBox cmb)
+        {
+            cmb.DataSource = Query.FacultyIndex();
+            cmb.DisplayMember = "Name";
+            cmb.ValueMember = "Id";
+            cmb.SelectedIndex = -1;
+        }
         internal static void FillcmbTemplateIndexXRay(ComboBox cmb)
         {
             cmb.DataSource = Query.TemplateIndexXRay();

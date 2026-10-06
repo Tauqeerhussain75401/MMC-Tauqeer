@@ -9,8 +9,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using Oracle.DataAccess.Client;
 using System.Globalization;
-
-
+using ERP.Forms;
 
 namespace ERP
 {
@@ -21,6 +20,7 @@ namespace ERP
             InitializeComponent();
             FillControls.FillcmbTestCatagory(cmbType);
             FillControls.FillcmbTestCatagory(cmbType2);
+            FillControls.FillcmbTemplateFaculty(cmbfaculty);
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -65,7 +65,7 @@ namespace ERP
         }
         private void btnsave_Click(object sender, EventArgs e)
         {
-            if (txtConsultantName.Text == "" || numConsultantCharges.Value <= 0 || cmbType.SelectedValue == null)
+            if (txtConsultantName.Text == "" || numConsultantCharges.Value <= 0)
             {
                 MessageBox.Show("Please Enter Fields");
                 return;
@@ -86,16 +86,33 @@ namespace ERP
                 DML.consultant_add_edit(txtConsultantid.Text, txtConsultantName.Text, txtAddress.Text,
                                         txtTelephone.Text, txtFax.Text, txtMobilenumber.Text,
                                         txtEmail.Text, numConsultantCharges.Text, txtDegrees.Text, //nudHosInPatient
-                                        txtTiming.Text, txtFaculty.Text, cmbType.SelectedValue.ToString(),
+                                        txtTiming.Text, txtFaculty.Text, cmbType.SelectedValue == null ? "" : cmbType.SelectedValue.ToString(),
                                         nudHosOutPatient.Value.ToString(), nudConOutPatient.Value.ToString(),
                                         nudConInPatient.Value.ToString(), nudHosInPatient.Value.ToString(),
-                                        chkDeactivate.Checked == true ? "1" : "0", ref RetId);
+                                        chkDeactivate.Checked == true ? "1" : "0", cmbfaculty.SelectedValue == null ? "" : cmbfaculty.SelectedValue.ToString(), ref RetId);
                 DataTable dt = Query.ConsultantDetail(RetId);
                 DataRow dr = dtQuery.Select("id = '" + dt.Rows[0]["id"].ToString() + "'").FirstOrDefault();
                 if (dr != null)
                     dtQuery.Rows.Remove(dr);
                 dtQuery.ImportRow(dt.Rows[0]);
-
+                if(timingEdit)
+                {
+                    for(int i = 0; i < dtDocTimings.Rows.Count; i++)
+                    {
+                        var end_time = dtDocTimings.Rows[i]["end_time"];
+                        var start_time = dtDocTimings.Rows[i]["start_time"];
+                        var isEdit = dtDocTimings.Rows[i]["IsEdit"];
+                        if ((isEdit != DBNull.Value || !string.IsNullOrWhiteSpace(isEdit.ToString())))
+                        {
+                            if ((start_time != DBNull.Value || !string.IsNullOrWhiteSpace(start_time.ToString())) && (end_time != DBNull.Value || !string.IsNullOrWhiteSpace(end_time.ToString())))
+                                Query.save_docTimings(dtDocTimings.Rows[i]["day_id"].ToString(), dtDocTimings.Rows[i]["timing_id"] != DBNull.Value ? dtDocTimings.Rows[i]["timing_id"].ToString() : "", txtConsultantid.Text, Convert.ToDateTime(dtDocTimings.Rows[i]["start_time"]), Convert.ToDateTime(dtDocTimings.Rows[i]["end_time"]));
+                            else
+                            {
+                                MessageBox.Show("Missing start time or end time for " + dtDocTimings.Rows[i]["day_of_week"].ToString());
+                            }
+                        }
+                    }
+                }
             }
             MessageBox.Show("Record Successfully Saved..!");
             //this.FillQuery();
@@ -105,7 +122,8 @@ namespace ERP
         DataTable dtQuery;
         DataTable dtSurgery;
         DataTable dtConsultantFaculty;
-
+        DataTable dtDocTimings;
+        bool timingEdit = false;
         void consultantCategoryFill()
         {
             DataView view = new DataView(dtConsultantFaculty);
@@ -128,6 +146,7 @@ namespace ERP
                 dtQuery = Query.ConsultantIndexAll();
                 dtSurgery = Query.surgeryAll();
                 
+
                 dgvDetail.Columns[clnID.Index].DataPropertyName = "id";
                 dgvDetail.Columns[clnName.Index].DataPropertyName = "name";
                 dgvDetail.Columns[clnMobile.Index].DataPropertyName = "mobile";
@@ -158,6 +177,7 @@ namespace ERP
                 dgvDetail.AutoGenerateColumns = false;
                 dtQuery = Query.ConsultantIndexAll();
                 dtSurgery = Query.surgeryAll();
+                
                 dgvDetail.Columns[clnID.Index].DataPropertyName = "id";
                 dgvDetail.Columns[clnName.Index].DataPropertyName = "name";
                 dgvDetail.Columns[clnMobile.Index].DataPropertyName = "mobile";
@@ -220,7 +240,7 @@ namespace ERP
                 txtFaculty.Text = dt.Rows[0]["faculty"].ToString();
                 txtAddress.Text = dt.Rows[0]["address"].ToString();
                 txtMobilenumber.Text = dt.Rows[0]["mobile"].ToString();
-                txtMobilenumber.Text = dt.Rows[0]["tel"].ToString();
+               // txtMobilenumber.Text = dt.Rows[0]["tel"].ToString();
                 txtTelephone.Text = dt.Rows[0]["tel"].ToString();
                 txtFax.Text = dt.Rows[0]["fax"].ToString();
                 txtEmail.Text = dt.Rows[0]["email"].ToString();
@@ -229,8 +249,22 @@ namespace ERP
                 nudConOutPatient.Value = Convert.ToDecimal(dt.Rows[0]["consultantshareoutdoor"]);
                 nudHosInPatient.Value = Convert.ToDecimal(dt.Rows[0]["hospitalshareindoor"]);
                 nudHosOutPatient.Value = Convert.ToDecimal(dt.Rows[0]["hospitalshareoutdoor"]);
-                cmbType.SelectedValue = Convert.ToDecimal(dt.Rows[0]["testtypeid"]);
-
+                if (dt.Rows[0]["testtypeid"] != DBNull.Value)
+                {
+                    cmbType.SelectedValue = Convert.ToDecimal(dt.Rows[0]["testtypeid"]);
+                }
+                else
+                {
+                    cmbType.SelectedIndex = -1;
+                }
+                if (dt.Rows[0]["facultyid"] != DBNull.Value)
+                {
+                    cmbfaculty.SelectedValue = Convert.ToDecimal(dt.Rows[0]["facultyid"]);
+                }
+                else
+                {
+                    cmbfaculty.SelectedValue = -1; // or 0 depending on your default item
+                }
                 if (Convert.ToString(dt.Rows[0]["package_id"]) != "")
                 {
                     dt.Rows.Cast<DataRow>().ToList().ForEach(fe =>
@@ -251,24 +285,7 @@ namespace ERP
                         fe["SCheck"] = "0";
                     });
                     chkShowAllSurgery.Checked = true;
-                    //dgvSurgery.Rows.Cast<DataGridViewRow>().ToList().ForEach(fe => fe.Visible = true);
                 }
-                ////if (dt.Rows[0]["package_id"] == DBNull.Value || dt.Rows[0]["package_id"] == null || String.IsNullOrWhiteSpace(dt.Rows[0]["package_id"].ToString()))
-                ////{
-                ////    fillSurgery();
-                ////}
-                ////else
-                ////{
-                ////    dgvSurgery.AutoGenerateColumns = false;
-                ////    dgvSurgery.DataSource = dt;
-                ////    dgvSurgery.Columns[clnIdSurgery.Index].DataPropertyName = "package_id";
-                ////    dgvSurgery.Columns[clnChk.Index].DataPropertyName = "surExist";
-                ////    dgvSurgery.Columns[clnSurgeryName.Index].DataPropertyName = "packagename_name";
-                ////    dgvSurgery.Columns[clnAmount.Index].DataPropertyName = "amount";
-                ////    dgvSurgery.Columns[clnConsultantShare.Index].DataPropertyName = "consulShare";
-                ////    dgvSurgery.Columns[clnHospCharges.Index].DataPropertyName = "hospShare";
-                ////
-                ////}
             }
         }
 
@@ -276,6 +293,7 @@ namespace ERP
         {
             if (e.RowIndex > -1)
                 FillDetail(dgvDetail.Rows[e.RowIndex].Cells[clnID.Index].Value.ToString());
+         
         }
 
         private void numConsultantCharges_ValueChanged(object sender, EventArgs e)
@@ -286,6 +304,11 @@ namespace ERP
         private void btnNew_Click(object sender, EventArgs e)
         {
             Validation.Clear(this);
+        }
+
+        private void btnexit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
         string cmbshare;
         double consShare;
@@ -568,6 +591,25 @@ namespace ERP
             //rpt.SetDataSource(resultTable);
             //frm.rptViewer.ReportSource = rpt;
             //frm.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtConsultantid.Text))
+                return;
+
+            using (var f = new frmTimings(txtConsultantid.Text.Trim()))
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    // Refresh consultant info if needed
+                }
+            }
+        }
+
+        private void dgvDetail_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

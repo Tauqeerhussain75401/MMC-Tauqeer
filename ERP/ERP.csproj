@@ -599,6 +599,12 @@
     <Compile Include="Forms\frmPreLoader.Designer.cs">
       <DependentUpon>frmPreLoader.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmTimings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmTimings.Designer.cs">
+      <DependentUpon>frmTimings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmUserInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1551,6 +1557,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPreLoader.resx">
       <DependentUpon>frmPreLoader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmTimings.resx">
+      <DependentUpon>frmTimings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmUserInfo.resx">
       <DependentUpon>frmUserInfo.cs</DependentUpon>

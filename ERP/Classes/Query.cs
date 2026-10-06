@@ -495,6 +495,12 @@ namespace ERP
             DataTable dt = getData(sql);
             return dt;
         }
+        internal static DataTable FacultyIndex()
+        {
+            string sql = "SELECT ID,NAME FROM FACULTY  WHERE status = 0 and ISBLOCK = 0 ORDER BY ID";
+            DataTable dt = getData(sql);
+            return dt;
+        }
 
         //string sql = @"SELECT id,fullname room,floornumber,wm_concat(regnoalpha||'-'|| regnonumeric) regno  FROM roomindex  ri 
         //                    left JOIN admissioninfo ad
@@ -625,7 +631,7 @@ namespace ERP
             //return dt;
 
             string sql = @"SELECT 1 As surExist,ct.*,cts.consulshare AS consulShare ,cts.hospshare hospShare,pi.amount AS amount,pi.packagename_name,
-                         pi.package_id AS package_id FROM consultant ct left JOIN consultantsurgery  cts ON ct.id = cts.fkconsid
+                         pi.package_id AS package_id,facultyid FROM consultant ct left JOIN consultantsurgery  cts ON ct.id = cts.fkconsid
                          left JOIN packageindex pi ON pi.package_id = fkpkgid where ct.id = '" + ID + "'";
             DataTable dt = getData(sql);
             return dt;
@@ -1248,6 +1254,54 @@ namespace ERP
                 adapter.SelectCommand = new OracleCommand(sql, clsConnection.con);
                 adapter.Fill(dt);
                 adapter.Dispose();
+                return dt;
+            }
+            catch (Exception ee)
+            {
+                Errors.writeline(ee.Message, "Query_ PaymentFilter");
+                string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+                string err = MyMessageBox.ShowBox("Do you want to Exit ?", Variable.Version, 2);
+                //if (err == "1") Application.Exit();
+                return dt;
+            }
+        }
+        public static DataTable GetDocTimings(string consultantId)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string sql = "SELECT id, days, start_time, end_time, status FROM doc_schedule_time WHERE consultantId = :VDocId AND status = 1 ORDER BY ID";
+                OracleDataAdapter adapter = new OracleDataAdapter();
+                adapter.SelectCommand = new OracleCommand(sql, clsConnection.con);
+                adapter.SelectCommand.Parameters.Add("VDocId", OracleDbType.Varchar2).Value = consultantId;
+                adapter.Fill(dt);
+                adapter.Dispose();
+                return dt;
+            }
+            catch (Exception ee)
+            {
+                Errors.writeline(ee.Message, "Query_GetDocTimings");
+                string result = MyMessageBox.ShowBox(ee.Message, Variable.Version, 1);
+                return dt;
+            }
+        }
+
+        public static DataTable save_docTimings(string id, string timingid, string docid, DateTime starttime, DateTime endtime)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                OracleCommand comm = new OracleCommand("save_doctor_timings", clsConnection.con);
+                comm.CommandType = CommandType.StoredProcedure;
+
+                comm.Parameters.Add("VDayId", OracleDbType.Varchar2).Value = id;
+                comm.Parameters.Add("VtimingId", OracleDbType.Varchar2).Value = timingid;
+                comm.Parameters.Add("VDocId", OracleDbType.Varchar2).Value = docid;
+                comm.Parameters.Add("VStarttime", OracleDbType.TimeStamp).Value = starttime;
+                comm.Parameters.Add("VEndTime", OracleDbType.TimeStamp).Value = endtime;
+
+                comm.ExecuteNonQuery();
+
                 return dt;
             }
             catch (Exception ee)
