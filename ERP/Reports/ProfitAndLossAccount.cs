@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Accounts.Reports {
+namespace ERP.Reports {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -41,7 +41,7 @@ namespace Accounts.Reports {
         
         public override string FullResourceName {
             get {
-                return "Accounts.Reports.ProfitAndLossAccount.rpt";
+                return "ERP.Reports.ProfitAndLossAccount.rpt";
             }
             set {
                 // Do nothing

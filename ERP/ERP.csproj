@@ -792,6 +792,12 @@
       <DependentUpon>All_Patient.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ProfitAndLossAccount.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProfitAndLossAccount.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\BalanceSheet.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1661,6 +1667,10 @@
     <EmbeddedResource Include="Reports\All_Patient.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>All_Patient.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ProfitAndLossAccount.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ProfitAndLossAccount.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\BalanceSheet.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

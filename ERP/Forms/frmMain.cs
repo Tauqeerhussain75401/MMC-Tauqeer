@@ -74,7 +74,8 @@ namespace ERP
             clsConnection.con.ClientId = UserInfo.UserId;
             stockBalanceToolStripMenuItem.Visible = false;
             incomeSummeryToolStripMenuItem.Visible = false;
-            balanceSheetToolStripMenuItem.Visible = false;
+            balanceSheetToolStripMenuItem.Visible = true;
+            profitAndLossToolStripMenuItem.Visible = true;
             itemLedgerToolStripMenuItem.Visible = false;
             
             lblFY.Text = Variable.FinancialYear;
@@ -257,6 +258,14 @@ namespace ERP
         {
             frmReportParameters frm = new frmReportParameters();
             frm.Reportname = "Balance Sheet";
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void profitAndLossToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReportParameters frm = new frmReportParameters();
+            frm.Reportname = "Profit And Loss";
             frm.MdiParent = this;
             frm.Show();
         }
@@ -861,6 +870,7 @@ namespace ERP
                 trialBalanceToolStripMenuItem.Visible = true;
                 incomeSummeryToolStripMenuItem.Visible = true;
                 balanceSheetToolStripMenuItem.Visible = true;
+                profitAndLossToolStripMenuItem.Visible = true;
                 dailyAllUsersIncomeToolStripMenuItem.Visible = true;
                 memberInvoiceDetail4ToolStripMenuItem.Visible = true;
                 referenceInvoiceDetailToolStripMenuItem.Visible = true;

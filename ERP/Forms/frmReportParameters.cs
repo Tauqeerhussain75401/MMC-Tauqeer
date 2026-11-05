@@ -742,6 +742,42 @@ namespace ERP
 
             }
             #endregion
+            #region Balance Sheet
+            else if (Reportname == "Balance Sheet")
+            {
+                Reports.BalanceSheet rpt = new Reports.BalanceSheet();
+                DataSet ds = ReportQuery.Rep_BalanceSheet(dtpAsOn.Value.ToString("dd-MMM-yyyy"));
+                ds.Tables[0].TableName = "BalanceSheet";
+                ds.Tables[1].TableName = "SubBalanceSheet";
+                rpt.SetDataSource(ds);
+                rpt.Subreports[0].SetDataSource(ds.Tables[1]);
+                rpt.SetParameterValue("@RptID", "001003");
+                rpt.SetParameterValue("@dtAsOn", dtpAsOn.Value.ToString("dd-MMM-yyyy"));
+                rpt.SetParameterValue("@CurrentYear", dtpAsOn.Value.ToString("dd-MMM-yyyy"));
+                rpt.SetParameterValue("@PreviousYear", dtpAsOn.Value.AddDays(-1).ToString("dd-MMM-yyyy"));
+                rpt.SetParameterValue("@Company_Name", CompanyInfo.CompanyName);
+                rpt.SetParameterValue("@TrecHolderNo", "");
+                rpt.SetParameterValue("@CompanyAddress", CompanyInfo.Address);
+                frm.rptViewer.ReportSource = rpt;
+            }
+            #endregion
+            #region Profit And Loss
+            else if (Reportname == "Profit And Loss")
+            {
+                Reports.ProfitAndLossAccount rpt = new Reports.ProfitAndLossAccount();
+                DataSet ds = ReportQuery.Rep_ProfitAndLoss(dtpFDate.Value.ToString("dd-MMM-yyyy"), dtpTDate.Value.ToString("dd-MMM-yyyy"));
+                rpt.SetDataSource(ds);
+                rpt.SetParameterValue("@RptID", "001008");
+                rpt.SetParameterValue("@dtFrom", dtpFDate.Value.ToString("dd-MMM-yyyy"));
+                rpt.SetParameterValue("@dtTo", dtpTDate.Value.ToString("dd-MMM-yyyy"));
+                rpt.SetParameterValue("@CurrentYear", dtpTDate.Value.ToString("yyyy"));
+                rpt.SetParameterValue("@PreviousYear", Variable.FinancialYear.Length >= 9 ? Variable.FinancialYear.Substring(5, 4) : "");
+                rpt.SetParameterValue("@Company_Name", CompanyInfo.CompanyName);
+                rpt.SetParameterValue("@TrecHolderNo", "");
+                rpt.SetParameterValue("@CompanyAddress", CompanyInfo.Address);
+                frm.rptViewer.ReportSource = rpt;
+            }
+            #endregion
 
             #region consultant visit
             else if (Reportname == "In-Patient Consultant visit details")
@@ -1547,6 +1583,18 @@ namespace ERP
             {
                 ManageControls(new Control[] { grpDateRange });
 
+            }
+            #endregion
+            #region Balance Sheet
+            else if (Reportname == "Balance Sheet")
+            {
+                ManageControls(new Control[] { grpAsOn });
+            }
+            #endregion
+            #region Profit And Loss
+            else if (Reportname == "Profit And Loss")
+            {
+                ManageControls(new Control[] { grpDateRange });
             }
             #endregion
             #region consultant share details

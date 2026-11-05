@@ -82,6 +82,7 @@
             this.trialBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incomeSummeryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.balanceSheetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.profitAndLossToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailyAllUsersIncomeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.memberInvoiceDetail4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.referenceInvoiceDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -568,6 +569,7 @@
             this.trialBalanceToolStripMenuItem,
             this.incomeSummeryToolStripMenuItem,
             this.balanceSheetToolStripMenuItem,
+            this.profitAndLossToolStripMenuItem,
             this.dailyAllUsersIncomeToolStripMenuItem,
             this.memberInvoiceDetail4ToolStripMenuItem,
             this.referenceInvoiceDetailToolStripMenuItem,
@@ -647,6 +649,13 @@
             this.balanceSheetToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.balanceSheetToolStripMenuItem.Text = "Balance Sheet";
             this.balanceSheetToolStripMenuItem.Click += new System.EventHandler(this.balanceSheetToolStripMenuItem_Click);
+            // 
+            // profitAndLossToolStripMenuItem
+            // 
+            this.profitAndLossToolStripMenuItem.Name = "profitAndLossToolStripMenuItem";
+            this.profitAndLossToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
+            this.profitAndLossToolStripMenuItem.Text = "Profit And Loss";
+            this.profitAndLossToolStripMenuItem.Click += new System.EventHandler(this.profitAndLossToolStripMenuItem_Click);
             // 
             // dailyAllUsersIncomeToolStripMenuItem
             // 
@@ -1486,6 +1495,7 @@
         private System.Windows.Forms.ToolStripMenuItem incomeSummeryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trialBalanceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem balanceSheetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem profitAndLossToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bankReconcilationToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;

@@ -1105,6 +1105,38 @@ namespace ERP
 
         }
 
+        internal static DataSet Rep_BalanceSheet(string dtAsOn)
+        {
+            DataSet ds = new DataSet();
+            OracleCommand comm = new OracleCommand("rep_balancesheetnew2", clsConnection.con);
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.Add("VAsOnDate", OracleDbType.Varchar2).Value = dtAsOn;
+            comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            comm.Parameters.Add("retvalDetail", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = comm;
+            adapter.Fill(ds);
+            adapter.Dispose();
+            ds.Tables.Add(new DataTable("Logo"));
+            return ds;
+        }
+
+        internal static DataSet Rep_ProfitAndLoss(string dtFrom, string dtTo)
+        {
+            DataSet ds = new DataSet();
+            OracleCommand comm = new OracleCommand("rep_profit_loss1", clsConnection.con);
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.Add("VFrom", OracleDbType.Varchar2).Value = dtFrom;
+            comm.Parameters.Add("VTo", OracleDbType.Varchar2).Value = dtTo;
+            comm.Parameters.Add("retval", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            OracleDataAdapter adapter = new OracleDataAdapter();
+            adapter.SelectCommand = comm;
+            adapter.Fill(ds, "ProfitAndLoss");
+            adapter.Dispose();
+            ds.Tables.Add(new DataTable("Logo"));
+            return ds;
+        }
+
         internal static DataTable rep_sessionpatient(string fdate,string tdate, string regno)
         {           
             DataTable dt = new DataTable();
