@@ -876,7 +876,7 @@ namespace ERP.Forms
 
             if (txtMrno.Text == "")
             {
-                string yearMonthString = DateTime.Now.ToString("yyMM");
+                string yearMonthString = SoftwareInfo.ServerDate.ToString("yyMM");
 
                 DataTable dt = Query.getData("SELECT Max(MRNo) as MRno FROM  admissioninfo"); ;
                 int lastMrNumberForMonth = 0;

@@ -1653,7 +1653,7 @@ namespace ERP
             }
             if (txtMrno.Text == "")
             {
-                string yearMonthString = DateTime.Now.ToString("yyMM");
+                string yearMonthString = SoftwareInfo.ServerDate.ToString("yyMM");
 
                 DataTable dt = Query.GetMaxMRno();
                 int lastMrNumberForMonth = 0;
